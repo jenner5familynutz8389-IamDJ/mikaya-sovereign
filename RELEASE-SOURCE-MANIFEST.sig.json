@@ -1,0 +1,10 @@
+{
+  "schema": "sovereign.ed25519.manifest-attestation.v1",
+  "signedFilename": "RELEASE-SOURCE-MANIFEST.json",
+  "sha256": "e882eae7dd6d279c36f71d820d8c68725259ea2c7fde0e6799e2be2b0ba2eae3",
+  "signerFingerprint": "9270d9fe0490a497e223f39318209939a8739b6b5a39e5eeef3577477a6057a3",
+  "algorithm": "Ed25519",
+  "publicKeyPem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAmKbQE5vRPRzNsWSTvSjl+i2wkAXICI3YaTm20Ea7muI=\n-----END PUBLIC KEY-----\n",
+  "signatureBase64": "jNM4p0XpgRj9ZSVO0dAT2s0fa5d9gYkc1h4f+oBaP4Vp/BdgHY35XhnIV7VZUBswBv4O+ZREkdP4q/RzwDLwBA==",
+  "scope": "public user-space source manifest only; not Android AVB firmware signing"
+}
