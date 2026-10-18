@@ -1,0 +1,25 @@
+# Public source ONLY; device secrets and runtime state must never be pushed
+ledger/
+ahava/identity/
+ahava/chunks/
+ahava/manifests/
+ahava/trusted/
+ahava/*.pem
+ahava/*state*.json
+integrity/*.bundle.json
+*.pem
+*.key
+*.token
+*.jsonl
+*.log
+*.zip
+*.rar
+*.img
+*.bin
+*.age
+*.sqlite
+*.db
+*.part
+.env*
+node_modules/
+__pycache__/

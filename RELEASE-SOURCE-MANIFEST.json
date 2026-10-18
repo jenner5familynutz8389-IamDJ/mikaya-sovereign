@@ -1,0 +1,16 @@
+{
+  "schema": "sovereign.source-list.v1",
+  "status": "source-candidate-not-AVB-flashable",
+  "hashes": {
+    ".gitignore": "3f1cd71ec23701531e416ed62ddbd0f83e4c06f8d0247d8865791cdb7b8625b1",
+    "README.md": "d9289ba20710c9a2018c0fecf1761cfcec16f9a41edba06a060045ffdbcb6175",
+    "ahava/core.js": "8b8046fee8d93a64d408dc93081b33876ee208fa076cfa8daf2b6329f7647922",
+    "ahava/health-watch.py": "57a377e66a7b3f4602031fd1ca479e73b8b5969de99b237ded315861bd44785d",
+    "ahava/peer-server.js": "6bf8d436ec98d288144d9548e64e9e095cad8428c291f41d3c302c93120284ee",
+    "ahava/sync.js": "a4bfd2420e027be474c8c5b3bba43c533c715424c57b6687d6a855c1b69ebeec",
+    "docs/SECURITY.md": "05cf176a9986863c1ccdd0c49d05b7b519090428389608ae7b69deefbe325967",
+    "docs/UPSTREAM-SOURCE-MAP.md": "22789973f71ef19b3e9ba9978c60aa154a37c7b1e34860e3d049ee9ab459bd25",
+    "integrity/correction-ledger.js": "1f970d8dee568d149f7187a3a33b19977ddc3eaaa2843ef752d472cdf1e24306",
+    "integrity/signed-checkpoint.js": "0af513d8e9f63468d2b85f185e979432bf8e46cf0259b2e7a038f3847c646a26"
+  }
+}
