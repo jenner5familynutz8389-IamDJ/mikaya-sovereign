@@ -1,0 +1,16 @@
+{
+  "schema": "sovereign.self-debug.source-attestation.v1",
+  "scope": "sanitized user-space observer source and report only",
+  "algorithm": "Ed25519",
+  "files": {
+    "cortex/self_debug.py": {
+      "size": 5551,
+      "sha256": "edef77acd51b06c9679ee2dc1760fcc6456aad09de4e0fb2886063a8de346dac"
+    },
+    "docs/SELF_DEBUG_IMPLEMENTATION_2026-10-19.md": {
+      "size": 3008,
+      "sha256": "8d306e597157697a81b3516f718e94c7f019377045f6e4879e697a25ce28a37f"
+    }
+  },
+  "priorGitHead": "3d41ea0a48eed0517c9add13cdf6f09e21a9d0c6"
+}

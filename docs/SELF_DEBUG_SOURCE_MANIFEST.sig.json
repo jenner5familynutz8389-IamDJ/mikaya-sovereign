@@ -1,0 +1,10 @@
+{
+  "schema": "sovereign.ed25519.manifest-attestation.v1",
+  "signedFilename": "docs/SELF_DEBUG_SOURCE_MANIFEST.json",
+  "sha256": "76cad9c55c432cb63c3486ba4b7b6fda0b67018c9521238fe769c6a4afbbe813",
+  "signerFingerprint": "9270d9fe0490a497e223f39318209939a8739b6b5a39e5eeef3577477a6057a3",
+  "algorithm": "Ed25519",
+  "publicKeyPem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAmKbQE5vRPRzNsWSTvSjl+i2wkAXICI3YaTm20Ea7muI=\n-----END PUBLIC KEY-----\n",
+  "signatureBase64": "GhqRxfO38eoAcm9gMX/5ViSNphU+AUJJnUEkcVsTEa9+51YhbR7qwmTDFf/Ovlh7ZUt4+Vb3B3MSh4IwpGKpDw==",
+  "scope": "self-debug code only; not a signature over Android firmware"
+}
