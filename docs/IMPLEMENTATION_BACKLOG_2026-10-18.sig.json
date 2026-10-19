@@ -1,0 +1,10 @@
+{
+  "schema": "sovereign.document-attestation.v1",
+  "signedPath": "docs/IMPLEMENTATION_BACKLOG_2026-10-18.md",
+  "sha256": "e3243817e7f75c7d2ed42e561ed64ee53468b507f9f62e440fc0e20f58c6a8c2",
+  "algorithm": "Ed25519",
+  "signerFingerprint": "9270d9fe0490a497e223f39318209939a8739b6b5a39e5eeef3577477a6057a3",
+  "publicKeyPem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAmKbQE5vRPRzNsWSTvSjl+i2wkAXICI3YaTm20Ea7muI=\n-----END PUBLIC KEY-----\n",
+  "signatureBase64": "vxHJBHECDKf8dl90/zqOz70RY9vTIESvwstf1DQnmOCFXrRsr4zeLWyjdIFo1mdWWxPUgB3EKHOHsxolgX6lCA==",
+  "scope": "Public implementation backlog only; not an OEM signed boot image, kernel, or signed Git commit."
+}
