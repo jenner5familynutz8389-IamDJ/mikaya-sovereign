@@ -1,0 +1,35 @@
+{
+  "schema": "sovereign.fabric-source-attestation.signed.v1",
+  "manifest": {
+    "schema": "sovereign.fabric-source-attestation.v1",
+    "sourceBranch": "main",
+    "files": [
+      {
+        "name": "docs/FABRIC_RECOVERY_AND_SHADOW_2026-10-19.md",
+        "sha256": "0c757b83d19530c1b90c85971cd019afc3f8e045c83f929f4af0735b422cb64a",
+        "bytes": 6719
+      },
+      {
+        "name": "tools/package_fabric_snapshot.py",
+        "sha256": "2ca67b05c6dec06c9b86f2726ca5c498d43a39156b50ba71706a581f14fb7712",
+        "bytes": 3611
+      },
+      {
+        "name": "tools/patch_shadow_review_interval.py",
+        "sha256": "4b6b4479099ff551ea13d84e0241a58c5a5687907c69b48f403c0c2ef8fcd3f2",
+        "bytes": 1330
+      },
+      {
+        "name": "tools/restart_shadow_once.py",
+        "sha256": "572ad55bd6613d6001e62f03c535732a0ed1468042861ddcd1610552494fb6aa",
+        "bytes": 1619
+      }
+    ],
+    "scope": "curated public user-space source and report only, not OEM firmware"
+  },
+  "publicKeyPem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAmKbQE5vRPRzNsWSTvSjl+i2wkAXICI3YaTm20Ea7muI=\n-----END PUBLIC KEY-----\n",
+  "algorithm": "Ed25519",
+  "signerFingerprint": "9270d9fe0490a497e223f39318209939a8739b6b5a39e5eeef3577477a6057a3",
+  "manifestSha256": "1ba02beaff2116450426aec21dfc8644185c129405630df573ef45d147540983",
+  "signatureBase64": "EQsLXx6IFyDyVLdo7NIK5ikPxejG1Z95Cm85dcOF1gSPQG0SskviGUWKxCdFFMOW+DYEn6/5pQqKDwMoP4QwDQ=="
+}
