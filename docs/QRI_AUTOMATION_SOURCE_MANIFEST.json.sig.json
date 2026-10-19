@@ -1,0 +1,10 @@
+{
+  "schema": "sovereign.document-attestation.v1",
+  "signedPath": "docs/QRI_AUTOMATION_SOURCE_MANIFEST.json",
+  "sha256": "df74eb41a034171a8b6a85d355e9613b1588ccb03b2c564dde3399edca670186",
+  "algorithm": "Ed25519",
+  "signerFingerprint": "9270d9fe0490a497e223f39318209939a8739b6b5a39e5eeef3577477a6057a3",
+  "publicKeyPem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAmKbQE5vRPRzNsWSTvSjl+i2wkAXICI3YaTm20Ea7muI=\n-----END PUBLIC KEY-----\n",
+  "signatureBase64": "Srj22pVHTC/h9t62LLbdeOGeo/JCVzpj9/bKOZT70x+01UIy2FrjesCM7vFGYOxeZkPleC0UAT7ufiW0Rub7BA==",
+  "scope": "Signed, curated QRI source and Motorola checkpoint list; not Android firmware attestation."
+}

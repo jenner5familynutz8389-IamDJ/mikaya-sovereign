@@ -1,0 +1,10 @@
+{
+  "schema": "sovereign.local-document-attestation.v1",
+  "path": "docs/MOTOROLA_EVENT_AUDIT_CHECKPOINT_2900.json",
+  "sha256": "d601913d0ba94a514ac5dcfac9682a1c26b62bfe442dd310531ceccdc7375a63",
+  "signerFingerprint": "9270d9fe0490a497e223f39318209939a8739b6b5a39e5eeef3577477a6057a3",
+  "algorithm": "Ed25519",
+  "publicKeyPem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAmKbQE5vRPRzNsWSTvSjl+i2wkAXICI3YaTm20Ea7muI=\n-----END PUBLIC KEY-----\n",
+  "signatureBase64": "2xK1yqN8qeJNjPnpvktjSBVfJx0YbYuH4H4Pmm8cfU3yM/OAWX2LyYzfVZIOn0nwvpMxDSKzZFxK5zfopXFEBQ==",
+  "scope": "Fixed user-space cross-device event checkpoint; not OEM attestation"
+}

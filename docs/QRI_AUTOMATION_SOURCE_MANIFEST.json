@@ -1,0 +1,28 @@
+{
+  "schema": "sovereign.source-bundle-manifest.v1",
+  "package": "QRI safe 38-second work review and signed Motorola checkpoint",
+  "createdAtUtc": "2026-10-19T02:11:57.087Z",
+  "files": [
+    {
+      "path": "cortex/qri_orchestrator.py",
+      "sha256": "9b266ed2c59fcf861081523b78cb0fb907ec160fa9ed855fdd5a5830d57efcc0",
+      "bytes": 15225
+    },
+    {
+      "path": "docs/QRI_AUTOMATION_RUNBOOK.md",
+      "sha256": "4c325d70fe4144c3827f8b0ffd46b0c5121db797308fe5ec9c3cfebb0a59914f",
+      "bytes": 5989
+    },
+    {
+      "path": "docs/MOTOROLA_EVENT_AUDIT_CHECKPOINT_2900.json",
+      "sha256": "d601913d0ba94a514ac5dcfac9682a1c26b62bfe442dd310531ceccdc7375a63",
+      "bytes": 963
+    },
+    {
+      "path": "docs/MOTOROLA_EVENT_AUDIT_CHECKPOINT_2900.json.sig.json",
+      "sha256": "00b7f3e0b702b144b9461344df7ea2819cddc16ccb91c5ea0fc8cd9f0dc3476a",
+      "bytes": 648
+    }
+  ],
+  "safety": "User-space observer only; no firmware modification, kernel changes, remote signing or arbitrary queued command execution"
+}

@@ -1,0 +1,25 @@
+{
+  "schema": "sovereign.motorola.cross-device-checkpoint.v1",
+  "checkpoint": 2900,
+  "checkedUtc": "2026-10-19T01:59:52Z",
+  "nodeScope": "Motorola user-space mesh events recovered from F110 bridge",
+  "receiver": "FOSSiBOT authoritative secure mesh",
+  "replica": "Motorola recovered secure mesh events",
+  "verification": {
+    "recordsMatched": 2900,
+    "missing": 0,
+    "duplicates": 0,
+    "invalid": 0,
+    "outOfOrder": 0,
+    "recoveredWrapperMismatch": 0,
+    "offlineOutboxPending": 0,
+    "canonicalSha256": "55c2914fd8c6aaec7ffa4b068b749f259455e2d3a6d902c72f336e5a09a2db7f",
+    "receiverAndReplicaMatched": true,
+    "motorolaCursorCoversCheckpoint": true
+  },
+  "limitations": [
+    "No claim of capturing every Android framework, GPU, kernel, MTK sensor, SIM or modem event",
+    "Live ledgers continue changing after this frozen checkpoint",
+    "Any subsequent revision requires a new signed checkpoint; never rewrite original entries"
+  ]
+}
