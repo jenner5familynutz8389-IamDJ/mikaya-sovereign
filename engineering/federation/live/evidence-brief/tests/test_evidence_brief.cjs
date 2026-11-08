@@ -1,0 +1,13 @@
+'use strict';
+const test=require('node:test'),assert=require('node:assert/strict'),fs=require('fs'),path=require('path');
+const {loadBrief,validateBrief,assertPublicData}=require('../evidence-policy.cjs');
+const fixture=()=>structuredClone(loadBrief());
+test('original four evidence sections retained in order, with claims individually classified',()=>{const report=validateBrief(fixture());assert.equal(report.sections,4);assert.ok(report.items>=20);});
+test('public brief never includes original private IMEI, address, family records or wallet secrets',()=>{const data=JSON.stringify(fixture());assertPublicData(fixture());assert.doesNotMatch(data,/\bbc1[qp][a-z0-9]{20,90}\b|(?:\d[ -]?){15,16}|macaroon|identity-private\.pem/i);});
+test('historical multi-agent and distribution claims are not promoted to verified',()=>{const doc=fixture(),items=doc.sections.flatMap(s=>s.items);for(const id of ['runit','hardware','distribution','ten-layer','network-trust'])assert.equal(items.find(x=>x.id===id).status,'HISTORICAL_SOURCE');});
+test('KeyMint, Lightning payment and GitHub posting remain blocked',()=>{const items=fixture().sections.flatMap(s=>s.items);for(const id of ['hardware-attestation','settlement','github'])assert.equal(items.find(x=>x.id===id).status,'BLOCKED');});
+test('an attacker cannot add unknown fields or silently change a claim status',()=>{const d=fixture();d.sections[0].items[0].verifiedByGod=true;assert.throws(()=>validateBrief(d),/schema/);delete d.sections[0].items[0].verifiedByGod;d.sections[0].items[0].status='VERIFIED';assert.throws(()=>validateBrief(d),/status/);});
+test('duplicated claims cannot masquerade as two independent evidences',()=>{const d=fixture();d.sections[1].items[0].id=d.sections[0].items[0].id;assert.throws(()=>validateBrief(d),/duplicate/);});
+test('sensitive source IDs, fake bitcoin addresses and secret fields are refused',()=>{for(const value of ['IMEI 123456789012345','wallet private key','bc1q'+'q'.repeat(40)]){const d=fixture();d.sections[3].items[0].detail=value;assert.throws(()=>validateBrief(d),/private|numeric|address/i);}});
+test('claim cannot declare source-tested without a described test or evidence link',()=>{const d=fixture();const item=d.sections[0].items[3];item.status='TESTED_AT_DATE';item.evidence='Old source';item.detail='Unspecified operation';assert.throws(()=>validateBrief(d),/requires stated evidence/);});
+test('source-based statuses do not confer patentability, immunity or paid settlement',()=>{const d=fixture();assert.equal(d.publication,'PUBLIC_REVIEW_ONLY');assert.ok(d.verificationNote.includes('not automatic confirmation'));});

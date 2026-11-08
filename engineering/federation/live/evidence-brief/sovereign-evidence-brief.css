@@ -1,0 +1,38 @@
+.mi-evidence-page{--bg:#0a0c10;--surface:#111318;--border:#293044;--gold:#c8a84b;--fg:#e8eaf0;--muted:#abb1c1;--green:#65e7a2;--red:#ff9999;--blue:#83c6eb;box-sizing:border-box;min-height:100vh;background:var(--bg);color:var(--fg);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding:0 0 48px;line-height:1.55}
+.mi-evidence-page *{box-sizing:border-box}
+.mi-evidence-header{padding:38px clamp(18px,5vw,52px) 28px;background:linear-gradient(160deg,#181e27,var(--bg));border-bottom:1px solid var(--border)}
+.mi-eyebrow{color:var(--gold);text-transform:uppercase;letter-spacing:.13em;font-size:11px;font-weight:700}
+.mi-evidence-header h1{font-family:Georgia,serif;font-size:clamp(26px,4vw,40px);line-height:1.17;margin:10px 0}
+.mi-evidence-subtitle{color:var(--muted);max-width:690px}
+.mi-evidence-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.mi-evidence-meta span{font:11px ui-monospace,SFMono-Regular,Consolas,monospace;border:1px solid var(--border);border-radius:4px;padding:6px 9px;color:var(--gold)}
+.mi-evidence-warning,.mi-evidence-controls,.mi-evidence-sections,.mi-evidence-footer{max-width:940px;margin-left:auto;margin-right:auto}
+.mi-evidence-warning{padding:15px 20px;margin-top:22px;border-left:3px solid var(--gold);background:var(--surface);color:var(--muted);font-size:13px}
+.mi-evidence-warning strong{color:var(--fg)}
+.mi-evidence-controls{padding:16px 0;display:flex;align-items:center;flex-wrap:wrap;gap:12px;color:var(--muted);font-size:13px}
+.mi-evidence-controls label{font-weight:600}
+.mi-evidence-controls select{border:1px solid var(--border);background:#161a22;color:var(--fg);padding:9px 10px;border-radius:6px;min-width:200px;max-width:100%}
+.mi-evidence-controls>span{margin-left:auto;font:12px ui-monospace,monospace}
+.mi-evidence-section{border:1px solid var(--border);border-radius:10px;margin-bottom:15px;background:var(--surface);overflow:hidden}
+.mi-section-toggle,.mi-evidence-toggle{font:inherit;text-align:left;color:inherit;width:100%;display:flex;gap:10px;align-items:center;cursor:pointer;border:0}
+.mi-section-toggle{background:#171b23;padding:16px 18px;color:var(--gold);font:700 17px Georgia,serif}
+.mi-section-toggle:hover,.mi-evidence-toggle:hover{background:#20252f}
+.mi-section-count{margin-left:auto;font:11px ui-monospace,Consolas,monospace;color:var(--muted);white-space:nowrap}
+.mi-evidence-body{padding:14px}
+.mi-evidence-body>p{padding-left:10px;color:var(--muted);font-size:13px;margin:4px 0 16px}
+.mi-evidence-item{background:#0d1016;border:1px solid var(--border);border-radius:6px;margin:0 0 10px}
+.mi-evidence-toggle{background:transparent;padding:13px 15px;flex-wrap:wrap}
+.mi-chevron{font-size:21px;color:var(--gold);width:18px;flex-shrink:0;line-height:1}
+.mi-evidence-title{flex:1;min-width:210px;font-weight:600}
+.mi-evidence-status{font:700 10px ui-monospace,SFMono-Regular,monospace;border:1px solid currentColor;border-radius:4px;padding:4px 7px;white-space:nowrap}
+.mi-status-observed{color:var(--green)}.mi-status-history{color:var(--gold)}.mi-status-vision{color:var(--blue)}.mi-status-review{color:var(--blue)}.mi-status-hold{color:var(--red)}
+.mi-evidence-detail{border-top:1px solid var(--border);padding:14px 20px 18px 43px;color:var(--muted);font-size:13px}
+.mi-evidence-detail p{margin:0 0 15px}
+.mi-evidence-detail dl{margin:0;background:#131b24;border-left:3px solid #4888b2;padding:10px 13px}
+.mi-evidence-detail dt{color:var(--blue);font-weight:700;margin-bottom:4px}
+.mi-evidence-detail dd{margin:0 0 12px}
+.mi-evidence-footer{color:var(--muted);border-left:3px solid var(--gold);background:var(--surface);padding:19px 21px;font-size:13px;margin-top:24px}
+.mi-evidence-footer strong{color:var(--fg)}
+.mi-evidence-page :focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+@media(max-width:760px){.mi-evidence-warning,.mi-evidence-controls,.mi-evidence-sections,.mi-evidence-footer{margin-left:14px;margin-right:14px}.mi-evidence-body{padding:10px}.mi-evidence-detail{padding-left:20px}.mi-evidence-controls>span{margin-left:0}}
+@media(prefers-reduced-motion:reduce){.mi-evidence-page *{scroll-behavior:auto!important;transition:none!important}}
