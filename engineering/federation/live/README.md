@@ -17,3 +17,12 @@ ACT must independently pin MIKAYA's public fingerprint, verify the invitation, i
 See [Toybox public chain context](TOYBOX_PUBLIC_BRIDGE.md) and the source modules. The Toybox anchor is a **historical confirmed transaction**, not an unconfirmed mempool payment and not a proof of wallet ownership. ACT funds its own independent wallet and must never disclose seed phrases, macaroons or signing secrets.
 
 Public source submitted for owner-reviewed GitHub PR; it does not contain private Termux state, private signing certificates, account tokens, identity backups or live mesh routing configuration.
+
+## ACT onboarding, provenance and public assurance dashboard
+
+- [ACT independent peer onboarding](ACT_PUBLIC_ONBOARDING.md): separate keys, signed invite/reply, manufacturer proof and owner approval.
+- [Legacy source provenance](LEGACY_SOURCE_PROVENANCE.md): older BigSet, runit and L402 materials, their status and security holds.
+- [Public evidence brief](evidence-brief/README.md): four original sections, dated evidence categories and a React TSX component.
+- [Signed event ledger](sovereign-event-ledger.cjs): private owner-managed journal; public source and tests only.
+
+The latest F110 clean-checkout test run passed 72 federation/Toybox/ledger tests and 9 dashboard validation tests (81 total); the source is review-only.
