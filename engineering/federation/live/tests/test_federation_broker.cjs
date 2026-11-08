@@ -23,7 +23,7 @@ function save(s,value){const file=path.join(s.g,'broker-policy.json');fs.writeFi
 test('broker refuses unpinned routes, unsafe target URLs, and unauthorized scope',async t=>{
  const s=setup(t),u='http://127.0.0.1:34567/';
  assert.equal(broker.validatePolicy(policy(s,u),fed.loadNode(s.g)).testOnly,true);
- assert.throws(()=>broker.validatePolicy({...policy(s,u),downstream:{fingerprint:s.W.fingerprint,url:'http://192.168.0.172:43829/'}},fed.loadNode(s.g)),/TLS|url|transport/i);
+ assert.throws(()=>broker.validatePolicy({...policy(s,u),downstream:{fingerprint:s.W.fingerprint,url:'http://192.0.2.123:43829/'}},fed.loadNode(s.g)),/TLS|url|transport/i);
  assert.throws(()=>broker.validatePolicy({...policy(s,u),downstream:{fingerprint:'f'.repeat(64),url:u}},fed.loadNode(s.g)),/pinned|downstream/i);
  assert.throws(()=>broker.validatePolicy({...policy(s,u),allowedUpstream:{[s.P.fingerprint]:['shell.exec']}},fed.loadNode(s.g)),/capability|scope/i);
 });
