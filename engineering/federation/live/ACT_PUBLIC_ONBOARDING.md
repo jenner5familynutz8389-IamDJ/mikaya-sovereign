@@ -4,7 +4,12 @@ This procedure allows a second owner to **request** a scoped federation grant. I
 
 ## 1. Install the reviewed source and test it
 
-Clone the owner-approved MIKAYA GitHub review branch only after it has actually been pushed. Until then, GitLab draft MR !97 is the review source and GitHub source is **not yet published**. Review all source changes before running them. Node.js 22+ is required.
+The owner-approved MIKAYA GitHub **review branch is published** and independently verified. GitHub [draft PR #2](https://github.com/jenner5familynutz8389-IamDJ/mikaya-sovereign/pull/2) is the review and contribution entry point; the work is NOT merged to main. Review the source before running it. Node.js 22+ is required.
+
+```bash
+git clone --single-branch --branch review/act-omega-federation-toybox-20261108 https://github.com/jenner5familynutz8389-IamDJ/mikaya-sovereign.git mikaya-sovereign-act-review
+cd mikaya-sovereign-act-review
+```
 
 ```bash
 node --test engineering/federation/live/tests/*.cjs
@@ -55,6 +60,6 @@ ACT builds and funds ACT's own wallet, on the owner-chosen Bitcoin network. A si
 
 ## 6. Request source improvements safely
 
-ACT can fork the public GitHub repository and open a PR to the MIKAYA review branch once it has been published. Source PRs require review, tests, minimized disclosures and owner approval; they do not enroll ACT's node or modify a running device. Do not place any device private-key, transaction signing secret, Google session, legal allegation, wallet address, personal identifier or internal network route in a public issue.
+ACT can now fork [the public GitHub repository](https://github.com/jenner5familynutz8389-IamDJ/mikaya-sovereign/pull/2) and open a PR proposing changes to the MIKAYA review branch. Source PRs require review, tests, minimized disclosures and owner approval; they do not enroll ACT's node or modify a running device. Do not place any device private-key, transaction signing secret, Google session, legal allegation, wallet address, personal identifier or internal network route in a public issue.
 
-**Current evidence:** MIKAYA F110 and Motorola authenticated each other over TLS and passed 72 federation/Toybox/ledger tests in a clean GitHub checkout, plus 9 public evidence-brief tests (81 total); neither is ACT's physical node. Hardware admission and GitHub write authorization remain pending.
+**Current evidence:** MIKAYA F110 and Motorola authenticated each other over TLS and passed 72 federation/Toybox/ledger tests in a clean GitHub checkout, plus 9 public evidence-brief tests (81 total); neither is ACT's physical node. GitHub source publication and owner write authorization are verified; independent hardware admission, ACT identity, approved encrypted route and payment settlement remain pending.
