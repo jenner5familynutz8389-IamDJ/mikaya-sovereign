@@ -27,3 +27,9 @@ A restricted ACT backend can contribute **optional external compute**, **signed 
 ACT can inspect MIKAYA's [public draft PR #2](https://github.com/jenner5familynutz8389-IamDJ/mikaya-sovereign/pull/2), clone and test source independently, and propose an adapter in a fork. ACT's private repositories and MIKAYA's private Android/AHAVA repositories remain mutually isolated. A real bilateral deploy requires owner-signed scope approval and reproducible physical device attestations **from both sides**.
 
 Reproducibility: `node --test engineering/federation/live/tests/test_act_backend_compat.cjs`; `node --test engineering/federation/gitlab-20261107/tests/m2m.test.cjs`. No ACT service was mutated by this source review.
+
+## Live public MCP protocol discovery addendum (2026-11-09)
+
+Direct HTTPS requests `initialize` and `tools/list` were performed without invoking ACT tools. The public service returned HTTP 200, `serverInfo.version=68.0.0` with MCP `2025-03-26`, and 21 advertised tools. The public website independently advertises v70.0.0, while the GitHub `vesper_production` source advertises v71.3.2. These three version identifiers are not matched to a single signed binary/deployment digest.
+
+The sanitized `ACT_OMEGA_RUNTIME_DISCOVERY_20261109.json` records the 21 names and public endpoint facts. Tool discovery is **not** evidence of real computation, hardware attestation, model performance, secure routing or payment settlement. No `tools/call` was sent. ACT should provide a signed release/build digest, public worker key, and one reproducible nonpaying signed test result before admitting the backend.
