@@ -18,3 +18,12 @@ ACT can clone this review branch, test the signed federation source, independent
 Production integration requires: out-of-band owner fingerprint exchange; ACT-owned separate signing keys; independently verified hardware proof; signed invite/reply; owner-approved, short-lived capability grant; restricted mutually authenticated network route; measured signed results; and separate payment verification if funds are ever involved.
 
 Published Cloudflare/MCP discovery or a constant `TOOL_CALLED_OK` result is **not** accepted as backend execution. The private ACT side and public MIKAYA review are separate administrative domains. Nothing in this document authorizes automatic merge, remote shell, firmware modification, payments, or copying proprietary source to another owner.
+
+
+## Verified source reconciliation snapshot (November 8, 2026)
+
+The pinned GitLab main source inventory at `fc40b1cd1950a01d01835895e4f4c05457077b36` contains **623 original files**. Two owner-private GitHub review branches preserve **99** Android/OEM and **74** AHAVA/research/agent files respectively. This public ACT review now preserves **4 original M2M/watcher files** under `engineering/federation/gitlab-20261107/`, each with its original SHA-256 and 12 Node + 12 Python offline tests passing. **446 GitLab originals remain unported** for classification, secret review and duplicate review. Public ACT code in `engineering/federation/live/` is additionally reviewed and is not counted as an identical GitLab original.
+
+The complete file-by-file original-path/Git-blob reconciliation map is held **only in the private AHAVA development review**; ACT does not need access to it to inspect this repository's public, verified code. Exact duplicate GitLab blobs are identified without deleting any source. These figures describe source review coverage, not production deployment, commercial adoption, OEM firmware acceptance or payment.
+
+Current ACT backend verification is independent: `node --test engineering/federation/live/tests/test_act_backend_compat.cjs` (10 tests). Historical source gate: `node --test engineering/federation/gitlab-20261107/tests/m2m.test.cjs` (12 tests). Hardware-enrollment, owner-signed authorization, real ACT endpoint execution and wallet settlement remain **held** until ACT and MIKAYA independently establish their identities and approve a limited connection.
