@@ -9,7 +9,7 @@
 | Android 15, SELinux, boot diagnostics, SCS, OEM radio release checks | Independent private Android engineering review repo | Pinned source-only import, fail-closed release. No OEM modem firmware or verified flash. |
 | OEM firmware compatibility and flashing procedures | OEM engineering/private-first review, later curated firmware-testing repo | HOLD pending manufacturer-approved images, board/revision mapping, signatures and physical device acceptance. |
 | Documentation and evidence archives | Review the existing documentation/report repositories individually | Do not dump private case, device, health, family or wallet data to public repositories. |
-| Remaining GitLab inventory and duplicate candidates | GitLab remains the authoritative original; migrate only after source-classification and dedup | Not yet comprehensively migrated; do not claim complete 623-file coverage. |
+| Remaining GitLab inventory and duplicate candidates | GitLab remains the authoritative original; migrate only after source-classification and dedup | All 623 original GitLab paths now have a recorded migration or owner-private canonical-retention disposition; do not claim public publication for the retained 233. |
 
 ## What ACT can do today
 
@@ -20,9 +20,9 @@ Production integration requires: out-of-band owner fingerprint exchange; ACT-own
 Published Cloudflare/MCP discovery or a constant `TOOL_CALLED_OK` result is **not** accepted as backend execution. The private ACT side and public MIKAYA review are separate administrative domains. Nothing in this document authorizes automatic merge, remote shell, firmware modification, payments, or copying proprietary source to another owner.
 
 
-## Verified source reconciliation snapshot (November 8, 2026)
+## Verified source reconciliation snapshot (November 9, 2026)
 
-The pinned GitLab main source inventory at `fc40b1cd1950a01d01835895e4f4c05457077b36` contains **623 original files**. Two owner-private GitHub review branches preserve **99** Android/OEM and **74** AHAVA/research/agent files respectively. This public ACT review now preserves **4 original M2M/watcher files** under `engineering/federation/gitlab-20261107/`, each with its original SHA-256 and 12 Node + 12 Python offline tests passing. **446 GitLab originals remain unported** for classification, secret review and duplicate review. Public ACT code in `engineering/federation/live/` is additionally reviewed and is not counted as an identical GitLab original.
+The pinned GitLab main inventory at `fc40b1cd1950a01d01835895e4f4c05457077b36` contains **623 distinct original file paths**. Verified owner-review GitHub branches now carry **233** original Android/OEM/thermal sources, **146** original private AHAVA/research sources, and **11** original public federation/handoff sources, for **390 distinct migrated originals**. The other **233 originals** are deliberately retained at their canonical private GitLab source: **135** historical documents, **89** evidence artifacts, **5** inactive CI definitions and **4** GitLab root metadata files. Every path is assigned, but confidential retained contents are **not** individually cleared for public disclosure. The exact per-file Git object identity and disposition register is retained in the owner's private AHAVA review. ACT receives only curated public source and test contracts.
 
 The complete file-by-file original-path/Git-blob reconciliation map is held **only in the private AHAVA development review**; ACT does not need access to it to inspect this repository's public, verified code. Exact duplicate GitLab blobs are identified without deleting any source. These figures describe source review coverage, not production deployment, commercial adoption, OEM firmware acceptance or payment.
 
