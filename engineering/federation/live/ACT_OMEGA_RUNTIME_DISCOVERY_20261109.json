@@ -1,0 +1,9 @@
+{
+ "schema":"mikaya.act-omega.public-runtime-discovery.v1",
+ "date":"2026-11-09",
+ "git_source":{"repo":"bospaladin34-crypto/Sovereign-Manifold-V30-A.P.H.U.S-","branch":"vesper_production","advertised_version":"71.3.2"},
+ "research":{"url":"https://osf.io/2xq5z/overview","doi":"10.17605/OSF.IO/2XQ5Z"},
+ "website":{"url":"https://act-omega-net.dev/","https_reachable":true,"advertised_version":"70.0.0"},
+ "mcp":{"url":"https://mcp.act-omega-net.dev/mcp","https_reachable":true,"initialize_protocol":"2025-03-26","server_info_name":"ACT-Omega-Sovereign-Manifold-MCP","server_info_version":"68.0.0","tool_count":21,"tool_names":["aegis_autonomous_harness","aegis_cron_status","gemma4_sh4z_layer_mixer","gemma4_http206_slice","chain280_master_certification","safe_llm_gateway_interact","browser_article_operationalizer","metabolic_5w1h_harness","cloudflare_d1_vpc_shadow","gemma4_speculative_cascade","gemma4_multimodal_tower_probe","gemma4_ple_256d_surgical_router","l0_core_41module_sheaf_engine","duckdb_analytical_sql_query","lean4_formal_proof_verifier","haskell_layer15_algebra_codegen","dual_pixel_edge_hardware_governor","unified_8domain_chain280_dispatcher","vesper_arachne_ik_swarm_companion","polytope_7777d_crt_rvq_router","omegalang_v15_k19_535tops_infer"]},
+ "tool_calls_executed":false,"worker_receipt_verified":false,"hardware_attested":false,"decision":"DISCOVERY_ONLY_HOLD"
+}
