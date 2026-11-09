@@ -1,0 +1,6 @@
+#!/data/data/com.termux/files/usr/bin/sh
+set -eu
+# User-space, publicly readable MCP discovery only; zero wallet/firmware access.
+exec /data/data/com.termux/files/usr/bin/python3 \
+  /data/data/com.termux/files/home/sovereign_exec/integrations/federation/peer_watch.py \
+  watch --interval 900
