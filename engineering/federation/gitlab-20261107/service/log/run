@@ -1,0 +1,4 @@
+#!/data/data/com.termux/files/usr/bin/sh
+set -eu
+exec /data/data/com.termux/files/usr/bin/svlogd -tt \
+  /data/data/com.termux/files/home/sovereign_exec/ledger/act-omega-peer-watch-log

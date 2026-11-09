@@ -1,0 +1,32 @@
+{
+  "github_tracked_path_by_original": {
+    "engineering/federation/README.md": "engineering/federation/gitlab-20261107/originals/README.md",
+    "engineering/federation/docs/EVIDENCE_MATRIX.md": "engineering/federation/gitlab-20261107/docs/EVIDENCE_MATRIX.md",
+    "engineering/federation/m2m-gate.cjs": "engineering/federation/gitlab-20261107/m2m-gate.cjs",
+    "engineering/federation/peer_watch.py": "engineering/federation/gitlab-20261107/peer_watch.py",
+    "engineering/federation/service/log/run": "engineering/federation/gitlab-20261107/service/log/run",
+    "engineering/federation/service/run": "engineering/federation/gitlab-20261107/service/run",
+    "engineering/federation/tests/m2m.test.cjs": "engineering/federation/gitlab-20261107/tests/m2m.test.cjs",
+    "engineering/federation/tests/test_peer_watch.py": "engineering/federation/gitlab-20261107/tests/test_peer_watch.py",
+    "integrations/github_public_source/OEM_REVIEW_HANDOFF_20261027.md": "integrations/github_public_source/OEM_REVIEW_HANDOFF_20261027.md",
+    "integrations/github_public_source/test-release-verification.cjs": "integrations/github_public_source/test-release-verification.cjs",
+    "integrations/github_public_source/verify-release.js": "integrations/github_public_source/verify-release.js"
+  },
+  "gitlab_project": "iamdj1989-group/IamDJ1989-project",
+  "original_paths_sha256": {
+    "engineering/federation/README.md": "48fa47fa4a1c5eeaad59c1be63bebd86d80a260f45685522e53d992426870558",
+    "engineering/federation/docs/EVIDENCE_MATRIX.md": "78bcb1a04c8073663ece7ae3f7b850f91a299161eaebc84f57af8db23bf5a6cf",
+    "engineering/federation/m2m-gate.cjs": "8479a3b5c02c80ae949913e5191fcdd0f0b5cb35715d9d505b7f296b2b762d03",
+    "engineering/federation/peer_watch.py": "53a477b9e8af2af3c87d59f76a47e840e3735d9a2f35de483e496229a7ca7ec4",
+    "engineering/federation/service/log/run": "432b483f652186da9d375bdaebbe842d503480dd2c601c95e40cecc414e8e42d",
+    "engineering/federation/service/run": "e87ac5fe784e3355b5ddee16bb21092b83f802671fae485f34c4b27435ace549",
+    "engineering/federation/tests/m2m.test.cjs": "3ed29c62f88a9d8bb4b52bee0e2f7ebda9cde44693ff873b339c05e064d6b463",
+    "engineering/federation/tests/test_peer_watch.py": "3e643804248a349f6efe70ff9d614257b66cf1eeaba558be2f9d853aa6221d8f",
+    "integrations/github_public_source/OEM_REVIEW_HANDOFF_20261027.md": "2310e908d5ae50aaf4970720fb5baffa3a8c5d489db4b82a73c5776c9695890f",
+    "integrations/github_public_source/test-release-verification.cjs": "93d745082fa33190da0a463b028e9c79d9af0e2da252998bc481ef2510121a3c",
+    "integrations/github_public_source/verify-release.js": "5362a58f1e81e81c5c1830f6d9d7ef3d8707e42c01d68a51b5211c440a0259ff"
+  },
+  "pinned_commit": "fc40b1cd1950a01d01835895e4f4c05457077b36",
+  "schema": "mikaya.federation.legacy-gitlab-source.v1",
+  "status": "historical-API-implementation, not activated, independent ACT approval still required"
+}
