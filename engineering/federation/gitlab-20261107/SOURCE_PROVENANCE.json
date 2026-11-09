@@ -1,4 +1,17 @@
 {
+  "github_tracked_path_by_original": {
+    "engineering/federation/README.md": "engineering/federation/gitlab-20261107/originals/README.md",
+    "engineering/federation/docs/EVIDENCE_MATRIX.md": "engineering/federation/gitlab-20261107/docs/EVIDENCE_MATRIX.md",
+    "engineering/federation/m2m-gate.cjs": "engineering/federation/gitlab-20261107/m2m-gate.cjs",
+    "engineering/federation/peer_watch.py": "engineering/federation/gitlab-20261107/peer_watch.py",
+    "engineering/federation/service/log/run": "engineering/federation/gitlab-20261107/service/log/run",
+    "engineering/federation/service/run": "engineering/federation/gitlab-20261107/service/run",
+    "engineering/federation/tests/m2m.test.cjs": "engineering/federation/gitlab-20261107/tests/m2m.test.cjs",
+    "engineering/federation/tests/test_peer_watch.py": "engineering/federation/gitlab-20261107/tests/test_peer_watch.py",
+    "integrations/github_public_source/OEM_REVIEW_HANDOFF_20261027.md": "integrations/github_public_source/OEM_REVIEW_HANDOFF_20261027.md",
+    "integrations/github_public_source/test-release-verification.cjs": "integrations/github_public_source/test-release-verification.cjs",
+    "integrations/github_public_source/verify-release.js": "integrations/github_public_source/verify-release.js"
+  },
   "gitlab_project": "iamdj1989-group/IamDJ1989-project",
   "original_paths_sha256": {
     "engineering/federation/README.md": "48fa47fa4a1c5eeaad59c1be63bebd86d80a260f45685522e53d992426870558",
