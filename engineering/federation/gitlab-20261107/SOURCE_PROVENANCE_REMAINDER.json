@@ -1,0 +1,34 @@
+{
+  "original_paths": {
+    "engineering/federation/README.md": {
+      "destination": "engineering/federation/gitlab-20261107/UPSTREAM_README.md",
+      "sha256": "48fa47fa4a1c5eeaad59c1be63bebd86d80a260f45685522e53d992426870558"
+    },
+    "engineering/federation/docs/EVIDENCE_MATRIX.md": {
+      "destination": "engineering/federation/gitlab-20261107/docs/EVIDENCE_MATRIX.md",
+      "sha256": "78bcb1a04c8073663ece7ae3f7b850f91a299161eaebc84f57af8db23bf5a6cf"
+    },
+    "engineering/federation/service/log/run": {
+      "destination": "engineering/federation/gitlab-20261107/service/log/run",
+      "sha256": "432b483f652186da9d375bdaebbe842d503480dd2c601c95e40cecc414e8e42d"
+    },
+    "engineering/federation/service/run": {
+      "destination": "engineering/federation/gitlab-20261107/service/run",
+      "sha256": "e87ac5fe784e3355b5ddee16bb21092b83f802671fae485f34c4b27435ace549"
+    },
+    "integrations/github_public_source/OEM_REVIEW_HANDOFF_20261027.md": {
+      "destination": "integrations/github_public_source/OEM_REVIEW_HANDOFF_20261027.md",
+      "sha256": "2310e908d5ae50aaf4970720fb5baffa3a8c5d489db4b82a73c5776c9695890f"
+    },
+    "integrations/github_public_source/test-release-verification.cjs": {
+      "destination": "integrations/github_public_source/test-release-verification.cjs",
+      "sha256": "93d745082fa33190da0a463b028e9c79d9af0e2da252998bc481ef2510121a3c"
+    },
+    "integrations/github_public_source/verify-release.js": {
+      "destination": "integrations/github_public_source/verify-release.js",
+      "sha256": "5362a58f1e81e81c5c1830f6d9d7ef3d8707e42c01d68a51b5211c440a0259ff"
+    }
+  },
+  "source_commit": "fc40b1cd1950a01d01835895e4f4c05457077b36",
+  "status": "historical, unactivated"
+}
