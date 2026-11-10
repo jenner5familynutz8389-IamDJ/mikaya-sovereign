@@ -27,3 +27,10 @@ The pinned GitLab main inventory at `fc40b1cd1950a01d01835895e4f4c05457077b36` c
 The complete file-by-file original-path/Git-blob reconciliation map is held **only in the private AHAVA development review**; ACT does not need access to it to inspect this repository's public, verified code. Exact duplicate GitLab blobs are identified without deleting any source. These figures describe source review coverage, not production deployment, commercial adoption, OEM firmware acceptance or payment.
 
 Current ACT backend verification is independent: `node --test engineering/federation/live/tests/test_act_backend_compat.cjs` (10 tests). Historical source gate: `node --test engineering/federation/gitlab-20261107/tests/m2m.test.cjs` (12 tests). Hardware-enrollment, owner-signed authorization, real ACT endpoint execution and wallet settlement remain **held** until ACT and MIKAYA independently establish their identities and approve a limited connection.
+
+
+## F110 physical A/B source target clarified — November 10, 2026
+
+The owner-private F110 source correction [Android private review PR #7](https://github.com/jenner5familynutz8389-IamDJ/owncore-native-android/pull/7) establishes the live phone as **active slot B, inactive target A**. Direct read-only E393/UFS scatter analysis found **21 slot-A image mappings, zero enabled slot-B mappings, and four unsafe shared/non-slot write entries** (`preloader`, `preloader_backup`, `super`, `userdata`). All four are excluded from the owner-controlled target-A plan. The document's historical B inspection was a negative control, not a proposal to flash B.
+
+The original engineer supplied firmware package and tooling remain private; manufacturer correction/signatures, shared dynamic partition compatibility and physical voice/SMS/IMS acceptance are not yet proven. **No firmware flash or slot switch occurred.** Neither an ACT public backend connection nor ACT source review grants Android device, carrier or wallet permissions. Public ACT federation code remains independent of the F110 radio service.
