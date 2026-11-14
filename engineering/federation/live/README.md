@@ -4,6 +4,12 @@ Review-only public source. Independently owned Android/Linux nodes exchange boun
 
 The public source provides the local federation transport, independent one-hop test broker, ACT invitation and reply, independent attestation review, explicit owner-signed scoped grant, unsigned settlement-disabled service quote and **read-only Toybox Bitcoin mainnet anchor verification**.
 
+## Human principal and device authority
+
+Governance follows **human principal → owned device → delegated agents**. Each device has one accountable human owner, who may own multiple devices and delegate bounded work to agents through the existing signed policies and grants. Independent ACT collaborators retain their own human owners and separately managed identities and keys. Device signatures, hardware attestation and telemetry are evidence inputs; none alone is owner authorization or proof that real-world human enrollment has been verified.
+
+This clarification preserves the current schemas, peer pins, owner approval and time/capability limits. The separate existing M2M review gate keeps its buyer/seller, job/capability, payload digest, invoice payment hash, amount, expiry and one-use caveats, plus signed identity, `ownerApproval` and seller-local settlement checks; it does not turn this live transport's settlement-disabled quote into a payment facility. Historical chain observations, source hashes and tokens retain their existing limited meanings.
+
 ## Verification
 With Node.js 22+:
 ```bash
