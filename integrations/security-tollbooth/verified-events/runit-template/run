@@ -1,0 +1,10 @@
+#!/data/data/com.termux/files/usr/bin/sh
+umask 077
+PATH=/data/data/com.termux/files/usr/bin:/system/bin:/system/xbin
+export PATH
+exec /data/data/com.termux/files/usr/bin/python \
+  "$HOME/.local/share/mikaya/runtime-bridge-20261115-verified-v2/mikaya_background_bridge.py" \
+  --source "$HOME/.local/share/mikaya/runtime-bridge-20261115-verified-v2/vendor/mikaya_unified.py" \
+  --mtg-source "$HOME/.local/share/mikaya/mtg_policy.py" \
+  --verified-ledger-config "$HOME/.local/state/mikaya-runtime/verified-event-integration.json" \
+  --interval 60 --max-samples 120 --max-wall 7200 --max-attempts 4 --private-log

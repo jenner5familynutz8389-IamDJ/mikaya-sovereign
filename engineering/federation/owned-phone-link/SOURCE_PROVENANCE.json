@@ -1,0 +1,72 @@
+{
+  "schema": "mikaya.owned-phone-source-template-provenance.v1",
+  "deployment_status": "NOT_DEPLOYED_NOT_ARMED",
+  "native_originals": {
+    "owned_handoff.py": "2ad4b45e70fc799c90c96ee30d5e8b33d4f4c151ca1339d68b0e0a69e24abfd4",
+    "request_slot_a.py": "22877284374fea7d18a71b06a4d7ecc06788ae653ea775f74ca471e4eafff936",
+    "backend.py": "e65da89d002db93ec83fa5172a5d84e09fcc94cf252a746fc07b52f56eb8d2f5"
+  },
+  "template_change_scope": [
+    "Added fixed-path private owner configuration reader",
+    "Moved private node UUIDs, USB serial and exact SSH-source IPv4 from literals into validated configuration",
+    "Preserved original backend SHA and original controller/hold/lock/target/expiry/replay/worker code",
+    "No native files, pins, active requests, device settings or deployment workflows changed"
+  ],
+  "static_function_comparison": {
+    "owned_handoff.py": {
+      "unchanged_functions": [
+        "adb_bound_proxy",
+        "arm_and_launch",
+        "backend_module",
+        "fixed_runner",
+        "job_path",
+        "local_only",
+        "main",
+        "private_lock",
+        "read_job",
+        "request_digest",
+        "require",
+        "validate_request",
+        "worker"
+      ],
+      "changed_functions": [
+        "submit"
+      ]
+    },
+    "request_slot_a.py": {
+      "unchanged_functions": [
+        "write_new"
+      ],
+      "changed_functions": [
+        "main"
+      ]
+    }
+  },
+  "artifacts": [
+    {
+      "path": "README.md",
+      "bytes": 7060,
+      "sha256": "82b92af70cd7959f00935f97fee09547761fe45ca2cb40e0f355936ff1af2067"
+    },
+    {
+      "path": "handoff_config.py",
+      "bytes": 4608,
+      "sha256": "a03270f2f97c3e89469aea7afc8c455c32982d527ceea3ad7eedf2d373d6168d"
+    },
+    {
+      "path": "owned_handoff.py",
+      "bytes": 12274,
+      "sha256": "6aeb7ef4c546e394f821b73095c62e660897f1fbf0ea04073ea89a93f8591cca"
+    },
+    {
+      "path": "private-config.example.json",
+      "bytes": 309,
+      "sha256": "8b3db5a5232b026639d5e124d22a757526f0d983a8e8fea3841fb7dd06c121a3"
+    },
+    {
+      "path": "request_slot_a.py",
+      "bytes": 3356,
+      "sha256": "6979bbffa08a7d61f53916c6ac8c588386722f5a8a12a520a1307bc585d58c31"
+    }
+  ]
+}

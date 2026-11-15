@@ -1,0 +1,123 @@
+{
+  "schema": "mikaya.act-ownership-handoff-source.v1",
+  "date": "2026-11-15",
+  "scope": "Selected existing source/test bytes plus one reviewed combined security-tollbooth dependency; excludes this manifest, explanatory documents, identities, configuration and raw device state",
+  "gitlab_base": "fccfdae5893ef8e8c57149e3228f533ae8a6061e",
+  "github_recovery_ref": "1ed24c8fd79278e93b2d50123d82561f04fca8c1",
+  "executable_or_test_files": 10,
+  "files": [
+    {
+      "path": "engineering/federation/live/federation-node.cjs",
+      "bytes": 25293,
+      "sha256": "f8f96dacd65e723bef6352f83fdf5a07b918c9a888eca61959551c8badbcda09",
+      "source": "gitlab",
+      "source_ref": "fccfdae5893ef8e8c57149e3228f533ae8a6061e",
+      "source_blob": "cdcbe442faddc9b7281a5119a4127bb43ae6b5a9",
+      "last_commit_id": "b5aa271569517de0e3e3cbb0146398b495c1b881"
+    },
+    {
+      "path": "engineering/federation/live/mesh-invite.cjs",
+      "bytes": 8062,
+      "sha256": "0efca43258525eab8b5d956d979e3a29d30af2d9733f819965d2de6971ef2d25",
+      "source": "gitlab",
+      "source_ref": "fccfdae5893ef8e8c57149e3228f533ae8a6061e",
+      "source_blob": "6264299a64dd01af475133040e0e3a5ab988fb0f",
+      "last_commit_id": "89939d826f0292f13735ffd8b8f1bc077d782e60"
+    },
+    {
+      "path": "engineering/federation/live/owner-authorization.cjs",
+      "bytes": 7175,
+      "sha256": "d7dbebfe8c27056489204fb229506c0b83fd0aa9da4a475e8472437994c602bd",
+      "source": "gitlab",
+      "source_ref": "fccfdae5893ef8e8c57149e3228f533ae8a6061e",
+      "source_blob": "7bc752d263ec7300c3e47761d847cb56055ef7e3",
+      "last_commit_id": "89939d826f0292f13735ffd8b8f1bc077d782e60"
+    },
+    {
+      "path": "engineering/federation/live/attestation-gate.cjs",
+      "bytes": 11178,
+      "sha256": "89bbbeb22761fab6d6f4c9e1ba406b9420b66d925adf194abed5c5cbe16fd250",
+      "source": "gitlab",
+      "source_ref": "fccfdae5893ef8e8c57149e3228f533ae8a6061e",
+      "source_blob": "17e34d25b6ebfa3e08e086e604d186e88452c9f4",
+      "last_commit_id": "89939d826f0292f13735ffd8b8f1bc077d782e60"
+    },
+    {
+      "path": "engineering/federation/live/security-tollbooth.cjs",
+      "bytes": 9175,
+      "sha256": "f5b6bc0602c0f7623844eae40694bfb3ea9db24462fc42d05e722b661c183c29",
+      "source": "reviewed_combined_legacy_bridge_delta",
+      "source_ref": "REVIEWED_COMBINED_SOURCE_20261115",
+      "original_gitlab_source": {
+        "source": "gitlab",
+        "source_ref": "fccfdae5893ef8e8c57149e3228f533ae8a6061e",
+        "source_blob": "da73b93080349e2497ae0ed48d3ac04fa5235792",
+        "last_commit_id": "b5aa271569517de0e3e3cbb0146398b495c1b881",
+        "bytes": 8922,
+        "sha256": "5edede191da3737a4f79e89606bb8c816c7da71b8fa36a98bc8a6a2e3d91db20"
+      },
+      "scope": "Optional fifth per-server body-budget argument; existing node/broker default8192bytes unchanged; generic ceiling65536bytes"
+    },
+    {
+      "path": "engineering/federation/live/federation-broker.cjs",
+      "bytes": 14342,
+      "sha256": "5b7fe6fb91b84f737be169af19af6d2ea6a11ef11db47bce1a2ed34545edd832",
+      "source": "gitlab",
+      "source_ref": "fccfdae5893ef8e8c57149e3228f533ae8a6061e",
+      "source_blob": "c05274c7f3e2ab7366a1eb2fe9f635b790610e97",
+      "last_commit_id": "b5aa271569517de0e3e3cbb0146398b495c1b881"
+    },
+    {
+      "path": "engineering/federation/live/tests/test_mesh_invite.cjs",
+      "bytes": 5784,
+      "sha256": "969d578eb9ad3e8b5636dacd1680848d70f869335bf3b4d7d8823867ce97f27b",
+      "source": "gitlab",
+      "source_ref": "fccfdae5893ef8e8c57149e3228f533ae8a6061e",
+      "source_blob": "4abd1cdb63142bc745c073ba3d5ee197184f2714",
+      "last_commit_id": "89939d826f0292f13735ffd8b8f1bc077d782e60"
+    },
+    {
+      "path": "engineering/federation/live/tests/test_owner_authorization.cjs",
+      "bytes": 7150,
+      "sha256": "a1da520da6c1b5ad39c8e1f925a72e295712ab9be48116c2a0e6969481b399bc",
+      "source": "gitlab",
+      "source_ref": "fccfdae5893ef8e8c57149e3228f533ae8a6061e",
+      "source_blob": "a705c1113c2d85a9fda92dd6b57d820f9ba4ff2c",
+      "last_commit_id": "b5aa271569517de0e3e3cbb0146398b495c1b881"
+    },
+    {
+      "path": "engineering/federation/live/act-backend-compat.cjs",
+      "bytes": 4630,
+      "sha256": "7450c843ed6ac6afb1e511881086f435cb89e0e3b3029c9ad31472821d281a66",
+      "source": "github",
+      "source_ref": "1ed24c8fd79278e93b2d50123d82561f04fca8c1",
+      "source_blob": "d99a9c36519ed3a524ac0db33afdd1861a087eb7",
+      "gitlab_at_base": "HTTP_404_NOT_PRESENT",
+      "restored_without_source_edits": true
+    },
+    {
+      "path": "engineering/federation/live/tests/test_act_backend_compat.cjs",
+      "bytes": 4492,
+      "sha256": "8011e0fbe782947b3010d66ac691249a311045e21f602f302b9b0c83724c8619",
+      "source": "github",
+      "source_ref": "1ed24c8fd79278e93b2d50123d82561f04fca8c1",
+      "source_blob": "460424e8c7955031d5ac593a34c97dede2de75db",
+      "gitlab_at_base": "HTTP_404_NOT_PRESENT",
+      "restored_without_source_edits": true
+    }
+  ],
+  "verification": {
+    "command": "node --test tests/test_mesh_invite.cjs tests/test_owner_authorization.cjs tests/test_act_backend_compat.cjs",
+    "cwd": "engineering/federation/live",
+    "passed": 25,
+    "failed": 0,
+    "skipped": 0,
+    "fixtures_only": true,
+    "devices_network_or_real_identity_accessed": false,
+    "reviewed_combined_gate_sha256": "f5b6bc0602c0f7623844eae40694bfb3ea9db24462fc42d05e722b661c183c29",
+    "affected_tests_rerun_after_dependency_change": true
+  },
+  "live_enrollment": "HOLD_PENDING_EXTERNAL_INPUTS",
+  "unchanged_original_code_test_files": 9,
+  "reviewed_combined_dependency_files": 1
+}

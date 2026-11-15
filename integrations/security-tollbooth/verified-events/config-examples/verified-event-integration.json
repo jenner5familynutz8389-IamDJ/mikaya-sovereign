@@ -1,0 +1,6 @@
+{
+  "schema": "mikaya.verified-event-integration.v1",
+  "node_path": "/ABSOLUTE/REVIEWED/node",
+  "producer_config_path": "/ABSOLUTE/PRIVATE/device-observation.json",
+  "collector_config_path": "/ABSOLUTE/PRIVATE/verified-ledger.json"
+}

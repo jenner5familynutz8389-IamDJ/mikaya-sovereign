@@ -1,0 +1,7 @@
+{
+  "schema": "mikaya.device-observation-config.v1",
+  "node_dir": "/ABSOLUTE/PRIVATE/existing-owner-node",
+  "ledger_dir": "/ABSOLUTE/PRIVATE/signed-events",
+  "receipt_dir": "/ABSOLUTE/PRIVATE/observation-receipts",
+  "expected_fingerprint": "*INSERT-YOURS-PUBLIC-ED25519-FINGERPRINT*"
+}

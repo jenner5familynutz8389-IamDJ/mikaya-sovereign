@@ -1,0 +1,8 @@
+#!/data/data/com.termux/files/usr/bin/sh
+# Stop only this job after permanent authentication/configuration/source failures.
+# runsv invokes finish in its own service directory with its control FIFO open.
+if [ "${1:-2}" = 2 ]; then
+  : > ./down
+  printf d > ./supervise/control
+fi
+exit 0

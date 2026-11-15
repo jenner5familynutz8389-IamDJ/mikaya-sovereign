@@ -1,0 +1,7 @@
+{
+  "schema": "mikaya.owned-phone-private-config.v1",
+  "sender_node_id": "REPLACE_WITH_PRIVATE_F110_NODE_UUID",
+  "controller_node_id": "REPLACE_WITH_PRIVATE_MOTOROLA_NODE_UUID",
+  "target_usb_serial": "REPLACE_WITH_EXACT_F110_USB_SERIAL",
+  "ssh_source_address": "REPLACE_WITH_EXACT_F110_SSH_SOURCE_IPV4"
+}

@@ -1,0 +1,90 @@
+{
+  "schema": "mikaya.legacy-mesh-source-provenance.v1",
+  "base_gitlab_commit": "fccfdae5893ef8e8c57149e3228f533ae8a6061e",
+  "base_sources": {
+    "engineering/f110-runtime/SOURCE_MANIFEST.json": {
+      "bytes": 3045,
+      "sha256": "c359f3819be33218c2bb82ad68555442418f87be4ea54012650384bb86d047ec"
+    },
+    "engineering/f110-runtime/boot/mesh_bridge_secure.js": {
+      "bytes": 4878,
+      "sha256": "471ad84439c5230bca2bbae95dfab4e52eb35d05b49b4fd778a79f2d80977092"
+    },
+    "engineering/f110-runtime/boot/test_mesh_supervisor_config.py": {
+      "bytes": 683,
+      "sha256": "d3900c959fc285914408d0ba847c2b87ba9c9e68e538332c478e228489db926a"
+    },
+    "engineering/f110-runtime/supervise_mesh_secure.sh": {
+      "bytes": 491,
+      "sha256": "dad4647b131daee31ce3ab1d577f5e97032a8bb4bacaeb713d867712c18aa0a8"
+    },
+    "engineering/federation/live/mtg-policy.cjs": {
+      "bytes": 2789,
+      "sha256": "31c9c39be19a09956e80d0d7af277f8379f4a79b4682c92259f126f5f40457cf"
+    },
+    "engineering/federation/live/security-tollbooth.cjs": {
+      "bytes": 8922,
+      "sha256": "5edede191da3737a4f79e89606bb8c816c7da71b8fa36a98bc8a6a2e3d91db20"
+    }
+  },
+  "unchanged_dependency": "engineering/federation/live/mtg-policy.cjs",
+  "source_delta_only": true,
+  "native_deployment": false,
+  "source_security_scope": "Legacy HTTP recovery bridge plus its existing launcher admission/writer/durable ACK and single-owner boundary",
+  "focused_tests": {
+    "node_passed": 29,
+    "existing_python_passed": 3,
+    "passed": 32,
+    "failed": 0,
+    "skipped": 0
+  },
+  "upstream_regression": {
+    "passed": 9,
+    "failed": 0,
+    "skipped": 0,
+    "fixture": "Preserved Nov14 runtime source with only candidate gate replacement"
+  },
+  "independent_review": {
+    "status": "APPROVED_NO_REMAINING_MATERIAL_FINDING",
+    "reviewer": "legacy_bridge_review",
+    "findings_resolved": [
+      "Duplicate-only retries fence prior unacknowledged file data",
+      "Containing directory fenced before every ACK",
+      "O_NONBLOCK append prevents substituted FIFO blocking",
+      "Canonical IPv4 bind validation rejects alternate numeric notation",
+      "Existing launcher recognizes HTTP429/503 and ambiguous TCP presence without launching a competitor",
+      "Only explicit TCP ECONNREFUSED permits one foreground exec; no inner retry flood",
+      "Runtime source pins and history reconcile bridge/launcher/behavioral test together",
+      "Existing negative hardcoded-overlay health-route guard generalized without a private address literal"
+    ],
+    "bridge_sha256": "2092a548dd5919265c6e848f6b0bf0b6aa657368c142232766de821afd230515",
+    "gate_sha256": "f5b6bc0602c0f7623844eae40694bfb3ea9db24462fc42d05e722b661c183c29",
+    "test_sha256": "c0e3e49c9c6559ab68f794e49dea8e8612233097e22c26830b5a8ee130c45773",
+    "manifest_sha256": "1378f9f25427fe6ecceaf4c8d15ca4dd95cf9548ec5f818b1734a12ba1b827df",
+    "manifest_status": "APPROVED_EXACTLY_THREE_PIN_AND_APPENDED_HISTORY_UPDATES",
+    "supervisor_sha256": "adb2f95c21aae3b84d64272b20b82ca2bc3e083ab7196cd8c3df32b4a761f2bd",
+    "existing_supervisor_test_sha256": "17d4b37cb100e2c0275d95653b2d902b626cf98a3b0ece54ba071fe791254cb9",
+    "supervisor_status": "APPROVED_BOUNDED_SINGLE_EXEC_NO_COMPETING_OWNER",
+    "privacy_followup_status": "APPROVED_GENERIC_OVERLAY_NEGATIVE_GUARD_NO_PRIVATE_ADDRESS_LITERAL"
+  },
+  "private_material_exported": false,
+  "fixture_keys": "Synthetic local test token only; no native keys/configuration/receipts",
+  "source_provenance_gate": {
+    "status": "SOURCE_PROVENANCE_PASS",
+    "source_files": 33,
+    "evidence_gates": 57,
+    "historical_test_executions_metadata": 248,
+    "gate_sha256": "f3af0a80e0091f6abae25a59fc4d61fe8a8fa9bc3e8000ca05d50f8d9bd68c52",
+    "revision_verified": false,
+    "oem_firmware_verified": false,
+    "physical_device_tested": false,
+    "fixture_basis": "Complete bounded cached source/contract closure, reviewed candidates overlaid; unchanged current gate run without claimed commit binding"
+  },
+  "privacy_followup": {
+    "runtime_source_changed": false,
+    "node_or_ACT_tests_rerun": false,
+    "python_supervisor_checks_passed": 3,
+    "unchanged_source_gate": "SOURCE_PROVENANCE_PASS",
+    "prior_runtime_test_results_retained": true
+  }
+}

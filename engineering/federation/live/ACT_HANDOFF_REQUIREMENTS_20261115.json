@@ -1,0 +1,117 @@
+{
+  "schema": "mikaya.act-owner-handoff-requirements.v1",
+  "date": "2026-11-15",
+  "live_admission": "HOLD",
+  "human_principal_policy": "one accountable human per device; the same human may own multiple devices and delegate bounded agents; protocol labels do not verify a legal person",
+  "wire_schemas_changed": false,
+  "enrollment_created": false,
+  "required_external_inputs": [
+    {
+      "id": "act_identity_and_release",
+      "operator": "ACT-OMEGA",
+      "required": [
+        "ACT-owned public Ed25519 key",
+        "fingerprint independently verified out of band",
+        "actual worker release/build digest",
+        "implemented bounded protocol and capabilities"
+      ],
+      "state": "NOT_SUPPLIED_OR_ACCEPTED"
+    },
+    {
+      "id": "fresh_mutual_proof_of_key",
+      "operator": "both independent owners",
+      "required": [
+        "fresh existing signed invitation",
+        "fresh signed ACT reply",
+        "separately trusted expected fingerprints"
+      ],
+      "existing_module": "mesh-invite.cjs",
+      "enrolled_on_success": false,
+      "state": "NOT_COMPLETED_WITH_ACT"
+    },
+    {
+      "id": "independent_hardware_review",
+      "operator": "independently pinned reviewer",
+      "required": [
+        "fresh hardware challenge and actual evidence",
+        "manufacturer trust-chain validation",
+        "revocation validation",
+        "signed review bound to both peer fingerprints"
+      ],
+      "maximum_review_lifetime_ms": 300000,
+      "existing_module": "owner-authorization.cjs",
+      "state": "NOT_SUPPLIED_OR_ACCEPTED"
+    },
+    {
+      "id": "owner_scoped_authorization",
+      "operator": "MIKAYA owner in existing local controlled environment",
+      "required": [
+        "actual existing explicit owner approval",
+        "valid independent review",
+        "current enabled ACT peer",
+        "exact allowed bounded capabilities"
+      ],
+      "maximum_grant_lifetime_ms": 120000,
+      "capabilities": [
+        "compute.dot.v1",
+        "compute.sha256.v1"
+      ],
+      "paymentAuthorized": false,
+      "shellAuthorized": false,
+      "firmwareAuthorized": false,
+      "state": "NOT_ISSUED"
+    },
+    {
+      "id": "live_restricted_route_and_job",
+      "operator": "both independent owners",
+      "required": [
+        "owner-approved restricted HTTPS route",
+        "valid TLS and pinned software identities",
+        "current v2 broker scope where relay is used",
+        "fresh signed job request/result",
+        "live replay/revocation rejection acceptance"
+      ],
+      "offline_verifier": "act-backend-compat.cjs",
+      "offline_verification_grants_execution": false,
+      "state": "NOT_LIVE_ACCEPTED"
+    },
+    {
+      "id": "paid_work_if_selected",
+      "operator": "independent seller and buyer",
+      "required": [
+        "agreed real payment protocol",
+        "seller-local independent settlement implementation",
+        "amount/payee/network/expiry/caveat and replay checks"
+      ],
+      "current_paid_execution": false,
+      "state": "DISABLED_NOT_IMPLEMENTED_AS_REAL_SETTLEMENT"
+    }
+  ],
+  "runtime": {
+    "new_watchers": false,
+    "new_listeners": false,
+    "phone_settings_changed": false,
+    "private_key_or_token_exported": false,
+    "boot_operations": false
+  },
+  "transport_limits": {
+    "signed_routes": [
+      "/v1/hello",
+      "/v1/task"
+    ],
+    "max_body_bytes": 8192,
+    "live_auth_window_ms": 60000,
+    "broker_max_in_flight": 1,
+    "general_file_transfer": false,
+    "sd_to_sd_networking": false
+  },
+  "reviewed_shared_dependency": {
+    "path": "security-tollbooth.cjs",
+    "sha256": "f5b6bc0602c0f7623844eae40694bfb3ea9db24462fc42d05e722b661c183c29",
+    "change": "Optional fifth per-server body budget used by the separate legacy bridge; current ACT/node/broker default unchanged",
+    "federation_default_max_body_bytes": 8192,
+    "generic_max_body_ceiling_bytes": 65536,
+    "new_act_wire_schema": false,
+    "affected_contract_tests_passed": 25
+  }
+}

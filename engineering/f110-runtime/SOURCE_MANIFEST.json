@@ -1,0 +1,64 @@
+{
+  "schema": "sovereign.f110.private-runtime-provenance.v1",
+  "scope": "private_owner_engineering_review",
+  "captured": "2026-10-22",
+  "files": {
+    "cortex/android_ndk_thermal.c": "449a238cf53bed7355c5215f12a6224e08748d4609c12e494fe1a6220d22cf46",
+    "cortex/thermal_ndk_source.py": "28cb64d17c2798c079f18f9dc069a47fd81c76af0f5839fc45e90a584601a58f",
+    "cortex/thermal_shizuku_source.py": "a7cf9b4541d7841351733c67dc6d5bb3815bb16838b8c080ca4cc95348da46a1",
+    "cortex/resource_governor.py": "78e91cf6f3e4904272cc08af149e71e06a1b41e5f4610504b852ddf682730101",
+    "cortex/test_ndk_thermal.py": "60970f5868697f5bcbef6e08a18f8464700abb95b1f0855bee8b23d4114d52a6",
+    "cortex/test_governor_live_status.py": "754791ad4b0221aaeb917fd63b3ed5f2d49ace27dbd36e4390043b58f5d5e90d",
+    "cortex/test_governor_capacity.py": "6b05a7beb503d5e89ec1c48da7fbc3f6b99805487f5a6855a6cec01c5bc7a3c6",
+    "cortex/test_thermal_shizuku_source.py": "408d44903ac79b43e9a66ae313a4d09d7333452a07adbe65f7fef059eff11f7f",
+    "diagnostics/resource_capacity.py": "4cc1d57cbf2b5f8b17fa5a0bbf59e6d75c09bb37aeab697c5528f664fa716f72",
+    "diagnostics/test_resource_capacity.py": "6dc087d7cf816a7cd4d53812f66d0a8695eed3ca055db1d33144338652dc6a02",
+    "diagnostics/f110_live_acceptance.py": "2fc478a02608e764bbe9d28c213b0ca918f57b3369796ebf848f161797009fa1",
+    "diagnostics/test_live_acceptance.py": "315dcd7b3f53dacb673f35bc951419fd05a18921bb94c72aa000e6d6043bc649",
+    "diagnostics/thermal_sustained_acceptance.py": "0dc7ee23104b584fd8078622aafceb87e0fd653a55fe4d4db6fa362d0f54e87a",
+    "boot/mesh_bridge_secure.js": "2092a548dd5919265c6e848f6b0bf0b6aa657368c142232766de821afd230515",
+    "boot/test_mesh_bind_config.js": "6bd36d0dfcd511deb068c432ab0a0dbbaca44a078ccbb82eb4d5a20621311241",
+    "boot/test_mesh_supervisor_config.py": "17d4b37cb100e2c0275d95653b2d902b626cf98a3b0ece54ba071fe791254cb9",
+    "supervise_mesh_secure.sh": "adb2f95c21aae3b84d64272b20b82ca2bc3e083ab7196cd8c3df32b4a761f2bd",
+    "docs/QRI_THERMAL_NATIVE_COMPLETION_20261022.md": "7b3aeb8f0b4b6b678bd36c9f0a42ce233e5c9fc8f1bcffe73c2500a77063461b",
+    "docs/F110_THERMAL_NATIVE_SUSTAINED_20261022.json": "3e95499383764d5c319dc07681d5e66a46d68eada54bec803f3e3ea0208b45e1",
+    "docs/F110_LIVE_ACCEPTANCE_POST_THERMAL_20261022.json": "fdf8a70f08f64a7a61367297838a0f69ae91d3b7d7523790efc77197cf824cb8"
+  },
+  "runtime_binary_included": false,
+  "firmware_image_included": false,
+  "signing_keys_included": false,
+  "source_updates": [
+    {
+      "source": "cortex/resource_governor.py",
+      "previous_sha256": "afbc7719e25ddb8035e8b41e4915006707b38110c06042a20d5f3b4824d7b821",
+      "sha256": "78e91cf6f3e4904272cc08af149e71e06a1b41e5f4610504b852ddf682730101",
+      "source_commit": "f1adae8bc1e44b36ff5fabbb503a800777c5d5af",
+      "source_updated": "2026-10-27",
+      "reason": "Existing source correction maps Android thermal status 3 to severe and 4 to critical. Original 2026-10-22 digest retained here; no physical deployment or OEM firmware acceptance is attested."
+    },
+    {
+      "source": "boot/mesh_bridge_secure.js",
+      "previous_sha256": "471ad84439c5230bca2bbae95dfab4e52eb35d05b49b4fd778a79f2d80977092",
+      "sha256": "2092a548dd5919265c6e848f6b0bf0b6aa657368c142232766de821afd230515",
+      "review_base_commit": "fccfdae5893ef8e8c57149e3228f533ae8a6061e",
+      "source_updated": "2026-11-15",
+      "reason": "Reviewed source-only legacy bridge admission/writer/durable-ACK integration and pure bind validator export; existing wire limits preserved. Previous hashes and all prior history remain retained. No native deployment, physical acceptance or OEM firmware/signing claim is made."
+    },
+    {
+      "source": "supervise_mesh_secure.sh",
+      "previous_sha256": "dad4647b131daee31ce3ab1d577f5e97032a8bb4bacaeb713d867712c18aa0a8",
+      "sha256": "adb2f95c21aae3b84d64272b20b82ca2bc3e083ab7196cd8c3df32b4a761f2bd",
+      "review_base_commit": "fccfdae5893ef8e8c57149e3228f533ae8a6061e",
+      "source_updated": "2026-11-15",
+      "reason": "Reviewed source-only launcher integration treats HTTP responses as an existing listener, requires explicit TCP refusal before one foreground start and removes the inner retry flood. Previous hashes and all prior history remain retained. No native deployment, physical acceptance or OEM firmware/signing claim is made."
+    },
+    {
+      "source": "boot/test_mesh_supervisor_config.py",
+      "previous_sha256": "d3900c959fc285914408d0ba847c2b87ba9c9e68e538332c478e228489db926a",
+      "sha256": "17d4b37cb100e2c0275d95653b2d902b626cf98a3b0ece54ba071fe791254cb9",
+      "review_base_commit": "fccfdae5893ef8e8c57149e3228f533ae8a6061e",
+      "source_updated": "2026-11-15",
+      "reason": "Replaced the stale curl implementation-string assertion with actual HTTP503 existing-listener HOLD/no-competing-start coverage, and generalized the negative hardcoded-overlay health-route guard without retaining a private address. Previous hashes and all prior history remain retained. No native deployment, physical acceptance or OEM firmware/signing claim is made."
+    }
+  ]
+}

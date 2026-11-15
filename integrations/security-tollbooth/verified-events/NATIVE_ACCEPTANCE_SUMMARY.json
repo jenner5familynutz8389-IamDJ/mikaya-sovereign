@@ -1,0 +1,47 @@
+{
+  "schema": "mikaya.verified-events.public-native-acceptance.v2",
+  "status": "NATIVE_BACKGROUND_RECOVERY_CONFIRMED",
+  "confirmed_utc": "2026-11-15T16:58:30.096126+00:00",
+  "release_source_sha256": {
+    "bridge_sha256": "f6119d85d99e22653f70ae3dca9fd9a7f515fb78bd217bc87c71390f38445e88",
+    "collector_sha256": "40994a07f4e116cf63a15d9ad2d4c4ae5efb4cffc714c6b87420f51481b7c6a8",
+    "hook_sha256": "329c44c717f7080c1cd024322d7238f5952a9ca7c66bdfd3a08a0e3eb775f3fc"
+  },
+  "foreground_accepted_uploads": 2,
+  "foreground_dashboard_counts": [
+    321,
+    322
+  ],
+  "initial_background_accepted_uploads": 1,
+  "initial_background_received_utc": "2026-11-15T16:58:28.415Z",
+  "initial_background_dashboard_count": 323,
+  "verified_signed_chain_rows": 324,
+  "all_reported_chain_signatures_verified": true,
+  "mint_and_payment_counters_zero": true,
+  "service_niceness": 15,
+  "additional_service_created": false,
+  "original_source_and_orphan_evidence_preserved": true,
+  "ledger_or_checkpoint_reset": false,
+  "bootstrap_or_identity_rotation": false,
+  "incident_assessment": {
+    "historical_eight_second_timeout_reproduced": false,
+    "snapshot_fsync_cause_established": false,
+    "later_isolated_old_collector_seconds": 1.181936691980809,
+    "later_isolated_old_collector_temp_fsync_ms": 181.17484099999882
+  },
+  "resources": {
+    "interval_seconds": 60,
+    "max_samples": 120,
+    "max_wall_seconds": 7200,
+    "child_deadline_seconds": 8,
+    "observation_freshness_ms": 5000,
+    "thermal_policy_unchanged": true
+  },
+  "indefinite_uptime_or_cloud_availability_proven": false,
+  "active_identity_key_token_metadata_paths_uid_pid_sample_ids_raw_receipts_exported": false,
+  "hardware_or_oem_or_partner_attestation": false,
+  "payment_or_spending_authority": false,
+  "boot_or_sd_operations": false,
+  "deployment_performed_by_repository_publication": false,
+  "scope": "Dated coordinator-confirmed two foreground and initial background receipts plus full signed-chain readback. Private operation details and raw evidence remain excluded."
+}

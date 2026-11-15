@@ -1,0 +1,425 @@
+{
+  "schema": "mikaya.external-security-research-evidence.v1",
+  "captured_utc": "2026-11-15T03:57:04.072110+00:00",
+  "record_id": "openai-daybreak-overlap-20261115",
+  "requested_url": "https://share.google/Pv6WvZvyJqgM21N1t",
+  "classification": "CANDIDATE_ADAPTATION_WITH_DOCUMENTED_FEATURE_OVERLAP",
+  "copying_status": "NOT_ESTABLISHED",
+  "priority_status": "NOT_ESTABLISHED",
+  "equivalent_implementation_proven": false,
+  "runtime_integration_deployed": false,
+  "measured_upgrade_claimed": false,
+  "public_report_path": "docs/research/OPENAI_DAYBREAK_MIKAYA_COMPARISON_20261115.md",
+  "report_sha256": "2d69e9852d9d7824f9f7cca3696d173f2cc165b5dfe46137d3d090f1a4c5472b",
+  "sources": [
+    {
+      "id": "NEWS",
+      "url": "https://www.helpnetsecurity.com/2026/11/13/openai-daybreak-vulnerability-remediation-red-team-defense-factory-agents/",
+      "kind": "secondary news",
+      "displayed_published_at": "2026-11-13T09:31:07Z",
+      "capture": "sources/ARTICLE_CAPTURE.json"
+    },
+    {
+      "id": "RED_TEAM",
+      "url": "https://openai.com/daybreak/red-team/",
+      "kind": "official product description",
+      "page_date_available": false,
+      "capture": "sources/OFFICIAL_PRODUCT_PAGES.txt"
+    },
+    {
+      "id": "DEFENSE_FACTORY",
+      "url": "https://openai.com/daybreak/defense-factory/",
+      "kind": "official product description",
+      "page_date_available": false,
+      "capture": "sources/OFFICIAL_PRODUCT_PAGES.txt"
+    },
+    {
+      "id": "PROGRAM",
+      "url": "https://openai.com/daybreak/",
+      "kind": "official program overview",
+      "page_date_available": false,
+      "capture": "sources/OFFICIAL_PRODUCT_PAGES.txt"
+    },
+    {
+      "id": "AARDVARK",
+      "url": "https://openai.com/index/introducing-aardvark/",
+      "kind": "official historical article",
+      "displayed_date": "2025-10-30",
+      "displayed_update": "2026-03-06",
+      "search_index_date": "2026-11-13",
+      "date_conflict_recorded": true,
+      "capture": "sources/OFFICIAL_HISTORY_PAGES.txt"
+    },
+    {
+      "id": "CODEX_SECURITY",
+      "url": "https://openai.com/index/codex-security-now-in-research-preview/",
+      "kind": "official historical article",
+      "displayed_date": "2026-03-06",
+      "search_index_date": "2026-11-13",
+      "date_conflict_recorded": true,
+      "capture": "sources/OFFICIAL_HISTORY_PAGES.txt"
+    },
+    {
+      "id": "DAYBREAK_EXPANSION",
+      "url": "https://openai.com/index/daybreak-securing-the-world/",
+      "kind": "official historical article",
+      "displayed_date": "2026-06-22",
+      "search_index_date": "2026-11-11",
+      "date_conflict_recorded": true,
+      "capture": "sources/OFFICIAL_HISTORY_PAGES.txt"
+    }
+  ],
+  "date_interpretation": "Displayed article dates, indexed dates, Git author/committer dates, self-described receipt dates and retrieval time are separate evidence types. These captures are not independent historical timestamp certification.",
+  "retained_private_capture_digests": {
+    "sources/ARTICLE_CAPTURE.json": {
+      "sha256": "c07424ae991a7108138e3edae0011d3e4bb0ea98206e002b08eb4185f6b67a6f",
+      "bytes": 13212,
+      "public_content_exported": false
+    },
+    "sources/OFFICIAL_HISTORY_PAGES.txt": {
+      "sha256": "9058a191840d09721c8e3d359f466d75a789a33eed810d0b25dd661a096bc419",
+      "bytes": 30156,
+      "public_content_exported": false
+    },
+    "sources/OFFICIAL_PRODUCT_PAGES.txt": {
+      "sha256": "7f9106d4d703794902daa1df20da6ff3b9c9ba1cbea951aae684acbbdb5eaf17",
+      "bytes": 4394,
+      "public_content_exported": false
+    },
+    "sources/SEARCH_DATE_CONFLICT_CAPTURE.json": {
+      "sha256": "df660b4a3f4ff4a4d539e28fffc91b78e3e4708a21206f944f4a6ddbe9d9ea0b",
+      "bytes": 5145,
+      "public_content_exported": false
+    },
+    "PROJECT_EVIDENCE.json": {
+      "sha256": "5d02c90e41e2fc14a566971a7bd7a6d5a9efa753c2f8c7bee9d6c75df8ce42f1",
+      "bytes": 17386,
+      "public_content_exported": false
+    },
+    "PROJECT_EVIDENCE.md": {
+      "sha256": "fe0a50c31d7eb970fca4e1624b4305bb022f27f6ad1c9a36033595f48e5dc211",
+      "bytes": 7347,
+      "public_content_exported": false
+    }
+  },
+  "project_source_entries": [
+    {
+      "id": "OWNER_SCOPED_GRANTS",
+      "sha256": "d7dbebfe8c27056489204fb229506c0b83fd0aa9da4a475e8472437994c602bd",
+      "bytes": 7175,
+      "line_references": [
+        1,
+        15,
+        29,
+        42,
+        54
+      ],
+      "observed_source_mechanism": "Owner approval binds peer, independent signed review, capability, nonce, and short expiry; refuses shell/payment/firmware authorization.",
+      "limits": "Not general AI agent supervision or identity-proofing of a natural person.",
+      "new_runtime_execution_by_this_task": false,
+      "local_git_snapshot": {
+        "commit": "0ff8fd4eef0e1ef3be45c0beb1de9d375b1ec82d",
+        "path": "engineering/federation/live/owner-authorization.cjs",
+        "git_blob_sha1": "7bc752d263ec7300c3e47761d847cb56055ef7e3",
+        "blob_sha256": "d7dbebfe8c27056489204fb229506c0b83fd0aa9da4a475e8472437994c602bd",
+        "bytes_match_source": true,
+        "author_date": "2026-11-10T12:43:57-05:00",
+        "committer_date": "2026-11-10T12:43:57-05:00",
+        "history_is_shallow": true,
+        "first_introduction_proven": false,
+        "differs_only_in_final_newline": false
+      },
+      "repository_relative_path": "engineering/federation/live/owner-authorization.cjs",
+      "source_snapshot": "local November10 project extraction"
+    },
+    {
+      "id": "SIGNED_FEDERATION_REQUESTS",
+      "sha256": "33ea94880c74c7392535ff443b467a7df79117f2bf42993956a5add4ee7f1827",
+      "bytes": 25561,
+      "line_references": [
+        106,
+        127,
+        143,
+        177
+      ],
+      "observed_source_mechanism": "Pinned owner/node peers, route/body signatures, expiry, revocation, durable nonce/job replay protection, only bounded SHA256/dot-product capabilities.",
+      "limits": "No autonomous vulnerability discovery, exploit verification or patch synthesis.",
+      "new_runtime_execution_by_this_task": false,
+      "local_git_snapshot": {
+        "commit": "0ff8fd4eef0e1ef3be45c0beb1de9d375b1ec82d",
+        "path": "engineering/federation/live/federation-node.cjs",
+        "git_blob_sha1": "0684d5cce9e7307b3ebd627358ce61045917956e",
+        "blob_sha256": "33ea94880c74c7392535ff443b467a7df79117f2bf42993956a5add4ee7f1827",
+        "bytes_match_source": true,
+        "author_date": "2026-11-10T12:43:57-05:00",
+        "committer_date": "2026-11-10T12:43:57-05:00",
+        "history_is_shallow": true,
+        "first_introduction_proven": false,
+        "differs_only_in_final_newline": false
+      },
+      "repository_relative_path": "engineering/federation/live/federation-node.cjs",
+      "source_snapshot": "local November10 project extraction"
+    },
+    {
+      "id": "CAVEATED_M2M_CREDENTIALS",
+      "sha256": "8479a3b5c02c80ae949913e5191fcdd0f0b5cb35715d9d505b7f296b2b762d03",
+      "bytes": 9259,
+      "line_references": [
+        57,
+        63,
+        76
+      ],
+      "observed_source_mechanism": "Chained HMAC credential bound to buyer/seller/job/capability/payload/invoice/amount/expiry and one-use durable replay; independent owner and settlement dependencies.",
+      "limits": "Own first-party caveat format, not a standard BOLT11/L402 macaroon; successful authorization explicitly returns execute:false.",
+      "new_runtime_execution_by_this_task": false,
+      "repository_relative_path": "engineering/federation/m2m-gate.cjs",
+      "source_snapshot": "local November10 project extraction"
+    },
+    {
+      "id": "OWNER_SIGNED_DIGEST_LEDGER",
+      "sha256": "d34d72a79e921e9ba6e66997c7ae3ca5846f9e22e0c74d2707843b2291bfb4b0",
+      "bytes": 8709,
+      "line_references": [
+        1,
+        15,
+        50,
+        122
+      ],
+      "observed_source_mechanism": "Canonical owner Ed25519-signed sequential digest chain, strict schema, nonce and previous-hash verification, allowed event kinds.",
+      "limits": "No raw claims truth, hardware attestation or independent suffix-truncation checkpoint is established.",
+      "new_runtime_execution_by_this_task": false,
+      "local_git_snapshot": {
+        "commit": "0ff8fd4eef0e1ef3be45c0beb1de9d375b1ec82d",
+        "path": "engineering/federation/live/sovereign-event-ledger.cjs",
+        "git_blob_sha1": "3d9a22ea917c5e756458fd7c65adf5888632a0a1",
+        "blob_sha256": "56c894c87d6d7d4bb57d90e520b80f968a72a683469defc0b5e7d36c49f13c65",
+        "bytes_match_source": false,
+        "author_date": "2026-11-10T12:43:57-05:00",
+        "committer_date": "2026-11-10T12:43:57-05:00",
+        "history_is_shallow": true,
+        "first_introduction_proven": false,
+        "differs_only_in_final_newline": true
+      },
+      "repository_relative_path": "engineering/federation/live/sovereign-event-ledger.cjs",
+      "source_snapshot": "local November10 project extraction"
+    },
+    {
+      "id": "SIGNED_ARTIFACT_REVIEW_INTAKE",
+      "sha256": "a4cad59607e2896f0982c5c17d4b808836c6ed89ede563ed1a2f3aeb5e0ea6f8",
+      "bytes": 3714,
+      "line_references": [
+        1,
+        42,
+        54,
+        58
+      ],
+      "observed_source_mechanism": "Read-only bounded signed bundle review uses separate pinned owner/peer/security/test keys and existing admission gate.",
+      "limits": "Consumes supplied signed evidence; does not itself discover defects, execute unknown code, or generate patches.",
+      "new_runtime_execution_by_this_task": false,
+      "repository_relative_path": "tools/mikaya_cross_project_review.cjs",
+      "source_snapshot": "local November10 project extraction"
+    },
+    {
+      "id": "DEPENDENCY_CORRECTION_REVIEW",
+      "sha256": "85b504d121efc85a252cc9848b9afa8750030328907eae27bb933dcb56861f3c",
+      "bytes": 19726,
+      "line_references": [
+        240,
+        304,
+        314,
+        339
+      ],
+      "observed_source_mechanism": "Validates supplied bounded scanner findings from named tools, binds manifest digest, emits OWNER_REVIEW_PATCH_CANDIDATE with requires_rescan.",
+      "limits": "Scanner output remains untrusted; no autonomous patch implementation or certified scan/pass.",
+      "new_runtime_execution_by_this_task": false,
+      "repository_relative_path": "tools/mikaya_security_host_audit.py",
+      "source_snapshot": "local November10 project extraction"
+    },
+    {
+      "id": "SECURITY_RELEASE_EVIDENCE_GATE",
+      "sha256": "c140823e7cd1299711fbef18f946a42ce53052983c1b732d5042703862087535",
+      "bytes": 4992,
+      "line_references": [
+        1,
+        30,
+        74,
+        85
+      ],
+      "observed_source_mechanism": "Read-only advisory/patch provenance, carrier and OEM-acceptance metadata release gate with explicit HOLD blockers.",
+      "limits": "It checks supplied evidence metadata; not binary patch-inclusion validation, signed OEM release approval or a firmware fix.",
+      "new_runtime_execution_by_this_task": false,
+      "repository_relative_path": "tools/f110_security_release_gate.py",
+      "source_snapshot": "local November10 project extraction"
+    },
+    {
+      "id": "THERMAL_OPTIONAL_WORK_GATE",
+      "sha256": "6d41877fa3e288cf17cfab8b7b323090a001eacc0770108404aa3e7c18cad933",
+      "bytes": 4890,
+      "line_references": [
+        1,
+        22,
+        43,
+        65,
+        93
+      ],
+      "observed_source_mechanism": "Public Android NDK thermal severity controls only its own launched optional child: nice+15, moderate/unknown HOLD, resume after two cool samples.",
+      "limits": "Userspace optional-job governance, not hardware throttle replacement or an AI model capability.",
+      "new_runtime_execution_by_this_task": false,
+      "repository_relative_path": "tools/mtg_nice_policy.py",
+      "source_snapshot": "local November10 project extraction"
+    },
+    {
+      "id": "PROCESS_WIDE_ADMISSION_GATE",
+      "sha256": "5edede191da3737a4f79e89606bb8c816c7da71b8fa36a98bc8a6a2e3d91db20",
+      "bytes": 8922,
+      "line_references": [
+        1,
+        18,
+        48,
+        109
+      ],
+      "observed_source_mechanism": "One process-wide active request, global/per-IP budgets, bounded body/connection/deadlines, thermal callback and private writer leases.",
+      "limits": "This Nov12 consolidated source is not in the Nov10 shallow snapshot; runtime coverage depends on entrypoint integration.",
+      "new_runtime_execution_by_this_task": false,
+      "repository_relative_path": "engineering/federation/live/security-tollbooth.cjs",
+      "source_snapshot": "local November12 consolidated candidate"
+    },
+    {
+      "id": "MTG_ADMISSION_CALLBACK",
+      "sha256": "31c9c39be19a09956e80d0d7af277f8379f4a79b4682c92259f126f5f40457cf",
+      "bytes": 2789,
+      "line_references": [
+        1
+      ],
+      "observed_source_mechanism": "MTG-to-existing-admission callback source has an immutable remote readback receipt at GitLab commit e0f1e85a in MR103.",
+      "limits": "Source publication/staging does not prove resident production activation; publication receipt says production_activated:false.",
+      "new_runtime_execution_by_this_task": false,
+      "repository_relative_path": "engineering/federation/live/mtg-policy.cjs",
+      "source_snapshot": "November14 publication export"
+    }
+  ],
+  "git_snapshot": {
+    "commit": "0ff8fd4eef0e1ef3be45c0beb1de9d375b1ec82d",
+    "author_date": "2026-11-10T12:43:57-05:00",
+    "committer_date": "2026-11-10T12:43:57-05:00",
+    "subject": "Merge pull request #5 from jenner5familynutz8389-IamDJ/review/act-f110-slot-a-handoff-20261110",
+    "shallow": true,
+    "commit_url": "https://github.com/jenner5familynutz8389-IamDJ/mikaya-sovereign/commit/0ff8fd4eef0e1ef3be45c0beb1de9d375b1ec82d",
+    "timestamp_interpretation": "Git metadata is inspectable but editable; shallow boundary log cannot identify first introduction, trusted public posting time or authorship priority. No filesystem mtime is used as authorship evidence."
+  },
+  "historical_receipts": [
+    {
+      "sha256": "92120427ea1a78ce7c0b85e934b73f7e86b0cb1f878ccdffc266c733e8bf85b1",
+      "embedded_date": "2026-11-08",
+      "date_type": "self-described local evidence receipt, not independent timestamp",
+      "reported_tests": {
+        "sandbox_passed": 25,
+        "device_tests": 0,
+        "automatic_remediation": false
+      },
+      "hash_matches": [
+        {
+          "path": "tools/mikaya_security_host_audit.py",
+          "recorded_sha256": "fc5b5083de23b53887086a51f805a3ff1b5f0e5b447a92bd2e289117714b1c1e",
+          "current_sha256": "85b504d121efc85a252cc9848b9afa8750030328907eae27bb933dcb56861f3c",
+          "matches": false,
+          "sha256_with_one_final_newline": "fc5b5083de23b53887086a51f805a3ff1b5f0e5b447a92bd2e289117714b1c1e",
+          "matches_after_restoring_one_final_newline": true
+        },
+        {
+          "path": "tests/test_mikaya_security_host_audit.py",
+          "recorded_sha256": "0f0bdd4615e0c3141a451d5fd73f4e431edd20da94c8c2c6c699f12ac9465559",
+          "current_sha256": "6f50ffb4ba92c453ce4d44e9b11eb8fbf5f288e0dbf32214bdec6c9b7c577d3d",
+          "matches": false,
+          "sha256_with_one_final_newline": "0f0bdd4615e0c3141a451d5fd73f4e431edd20da94c8c2c6c699f12ac9465559",
+          "matches_after_restoring_one_final_newline": true
+        },
+        {
+          "path": "tests/test_mikaya_security_watch_policy.py",
+          "recorded_sha256": "d00ddaf68d420cf485f0de4d3a8c759a986d08b32f0fe3cf7a3a6a66e35dae3d",
+          "current_sha256": "d82119635780729f8d8ae43324b8cb42039e5fe1b887f5498ec51a79c8931b2e",
+          "matches": false,
+          "sha256_with_one_final_newline": "d00ddaf68d420cf485f0de4d3a8c759a986d08b32f0fe3cf7a3a6a66e35dae3d",
+          "matches_after_restoring_one_final_newline": true
+        },
+        {
+          "path": "advisories/mikaya_primary_security_watch_20261108.json",
+          "recorded_sha256": "aad027b5ae517677c3e250d6d79487b253d6faef56b218e6d0f482c0c1596948",
+          "current_sha256": "537b1eabddeb9d686296dbd53c3bcc92d24cfb1716f59e3ff2cb8abe67aef282",
+          "matches": false,
+          "sha256_with_one_final_newline": "aad027b5ae517677c3e250d6d79487b253d6faef56b218e6d0f482c0c1596948",
+          "matches_after_restoring_one_final_newline": true
+        },
+        {
+          "path": "docs/MIKAYA_SECURITY_HARDENING_IMPLEMENTATION_20261108.md",
+          "recorded_sha256": "bbbd9432cbe616e047e24fc5c4dbc409d5f30a15d6eb712583a09981b9844a0a",
+          "current_sha256": "e2ab560fb5a9f8042091b6ecead5ecfc7d72d0df17b6a427df227c486017d780",
+          "matches": false,
+          "sha256_with_one_final_newline": "bbbd9432cbe616e047e24fc5c4dbc409d5f30a15d6eb712583a09981b9844a0a",
+          "matches_after_restoring_one_final_newline": true
+        },
+        {
+          "path": "evidence/f110_historical_observation.json",
+          "recorded_sha256": "b9f4aa785eb1804b60180e96a0fcf4721c69b7d302c3ee14ff97ad4e8575e313",
+          "current_sha256": "2d78e630797df86e14732641329f07c6c53ec3b6b3d5068518d5b0e02301a8b2",
+          "matches": false,
+          "sha256_with_one_final_newline": "b9f4aa785eb1804b60180e96a0fcf4721c69b7d302c3ee14ff97ad4e8575e313",
+          "matches_after_restoring_one_final_newline": true
+        },
+        {
+          "path": "evidence/dependency_example_untrusted.json",
+          "recorded_sha256": "7897d5302d9a5c7bb19d7a342e05f5e7c579d9c290184a1142d793fe6cb9ea18",
+          "current_sha256": "a760f77863aee8001901455bbe2d9ec0344a42c20a9955f281e58495a753921d",
+          "matches": false,
+          "sha256_with_one_final_newline": "7897d5302d9a5c7bb19d7a342e05f5e7c579d9c290184a1142d793fe6cb9ea18",
+          "matches_after_restoring_one_final_newline": true
+        }
+      ],
+      "normalization_note": "All seven raw current-file digests differ from embedded receipt because these local source copies lack one final newline. Restoring exactly one final newline in memory reproduces all seven recorded digests. No source file was changed; raw and normalized values remain separate.",
+      "receipt_filename": "security_hardening_source_receipt_20261108.json"
+    },
+    {
+      "sha256": "99ebf1addb769bff211e7503b4c926ba1da233d94364d93ccacf81a55bcbf91d",
+      "date_type": "publication capture filename Nov14; commit author/committer time not independently queried by this task",
+      "recorded_commit": "e0f1e85ac070ff857f3edfa35591f6db117ea8a9",
+      "recorded_review_url": "https://gitlab.com/iamdj1989-group/IamDJ1989-project/-/merge_requests/103",
+      "receipt_filename": "PUBLICATION_RECEIPT_20261114.json"
+    }
+  ],
+  "actual_existing_scanner_allowlist": [
+    "osv-scanner",
+    "npm-audit",
+    "pip-audit",
+    "nuget-audit",
+    "cargo-audit"
+  ],
+  "daybreak_report_adapter": "NOT_IMPLEMENTED_NOT_IMPERSONATED_AS_EXISTING_SCANNER",
+  "recommended_extension_points": [
+    "tools/mikaya_security_host_audit.py:plan_dependency_corrections for an explicit review-only external finding/patch provenance adapter",
+    "tools/mikaya_cross_project_review.cjs and cross-project-admission.cjs for independently signed report/test/owner-grant intake",
+    "sovereign-event-ledger.cjs allowed observation digest kinds for dated redacted report provenance, retaining original source receipts separately",
+    "security-tollbooth.cjs admission and mtg_nice_policy.py for bounded optional jobs without new polling services"
+  ],
+  "scope_limits": [
+    "Targeted source review, not whole-project re-audit",
+    "OpenAI public descriptions compared with local project source; no OpenAI source-to-source comparison",
+    "No private report, key, token or raw device-log publication",
+    "No new scanner, plugin, recurring automation, exploitation, payment, backup, USB or boot operation"
+  ],
+  "candidate_workflow": [
+    "Bind findings and proposed patches to immutable revisions and evidence hashes",
+    "Use existing independent signed review and owner admission",
+    "Deduplicate findings and preserve evidence versions",
+    "Keep exact allowlists and schemas; add a reviewed adapter only when a real authorized tool result exists",
+    "Apply existing thermal/budget limits to optional local work",
+    "Review branch changes and relevant retest before acceptance"
+  ],
+  "follow_up_x_sources": [
+    "https://share.google/SCeBtMjkcubhdFqL0",
+    "https://share.google/bDOBrbI71CXfN3Il2",
+    "https://share.google/yB1lb7u6v9KmMYULQ",
+    "https://share.google/NDcFfI6IIVQ6wKxEb",
+    "https://share.google/QepgIitf9r40DJ7nM"
+  ],
+  "follow_up_x_status": "QUEUED_AFTER_THIS_REPORT_NOT_USED_AS_EVIDENCE"
+}
