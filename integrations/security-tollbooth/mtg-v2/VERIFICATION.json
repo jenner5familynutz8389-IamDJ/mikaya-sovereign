@@ -1,0 +1,30 @@
+{
+  "schema": "mikaya.mtg-v2.verification.v1",
+  "captured_utc": "2026-11-15T20:36:58.657185+00:00",
+  "command": "python test_mtg_v2.py",
+  "test_methods_passed": 20,
+  "failed": 0,
+  "skipped": 0,
+  "host_lifecycle_children": "real Linux process/session/signal behavior",
+  "test_thermal_inputs": "Explicitly synthetic host-only fixtures, not native measurements",
+  "native_status_or_run_acceptance": "NOT_ESTABLISHED_BY_THIS_PUBLICATION",
+  "native_fake_allow_used": false,
+  "independent_review": {
+    "reviewer": "mtg_v2_review",
+    "status": "APPROVED_NO_REMAINING_MATERIAL_SCOPED_FINDING",
+    "policy_sha256": "64230462f8a94f583f286357d2fa0ea4e1f37650a73597e473bc21016ba4423c",
+    "test_sha256": "e0f99c03ba9c4a67642274b6eb95d5874bc16385d4246db7502bfa7e1ed992c4",
+    "tests_rerun_by_reviewer": false,
+    "native_actions_by_reviewer": false
+  },
+  "resolved_fixture_failure": {
+    "cause": "Test PID files were created before their contents when interruption arrived; production ownership cleanup was already performed",
+    "resolution": "Atomic PID-marker publication and complete PID checks; production source unchanged for this fixture correction"
+  },
+  "original_source_unchanged": {
+    "bytes": 4890,
+    "sha256": "6d41877fa3e288cf17cfab8b7b323090a001eacc0770108404aa3e7c18cad933"
+  },
+  "recorded_test_log_sha256": "889ae597e2bb889537a731720124b0d70197bf93178bf68f50f4b90056ac1481",
+  "evidence_boundary": "Recorded host test outcomes and independent source review; no private logs or native operational receipts exported"
+}
