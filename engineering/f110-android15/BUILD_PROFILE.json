@@ -1,0 +1,45 @@
+{
+  "schema": "mikaya.f110.android15-platform-baseline.v1",
+  "device": {
+    "model": "F110 Pro",
+    "product_device": "F110_Pro",
+    "board": "e393_qc_f10_w_6835_v0",
+    "soc": "mt6835"
+  },
+  "android_platform": {
+    "release": "15",
+    "sdk": 35,
+    "aosp_ref": "android-15.0.0_r1",
+    "build_role": "FRAMEWORK_BASE"
+  },
+  "observed_vendor": {
+    "release": "13",
+    "sdk": 33,
+    "vndk": 33,
+    "preserve_until_replaced": true,
+    "role": "EXISTING_VENDOR_COMPATIBILITY_INPUT"
+  },
+  "desired_vendor": {
+    "release": "15",
+    "sdk": 35,
+    "role": "FUTURE_OEM_REBUILT_VENDOR",
+    "verified_bsp": false
+  },
+  "kernel": {
+    "observed_family": "android13-5.15",
+    "platform_identity": false,
+    "allow_android15_gki_previous_lineage": true
+  },
+  "release_policy": {
+    "flash_authorized": false,
+    "oem_signing_verified": false,
+    "signed_images_present": false,
+    "require_oem_board_sources": true,
+    "require_vintf_cts_vts": true
+  },
+  "sources": {
+    "aosp_manifest": "https://android.googlesource.com/platform/manifest",
+    "revision": "android-15.0.0_r1",
+    "oem_product_target": "OEM_SUPPLIED_NOT_VERIFIED"
+  }
+}

@@ -13,6 +13,7 @@ const crypto=require('node:crypto');
 const http=require('node:http');
 const https=require('node:https');
 const {URL}=require('node:url');
+const tollbooth=require('./security-tollbooth.cjs');
 const SHA=/^[0-9a-f]{64}$/;
 const NONCE=/^[0-9a-f]{32}$/;
 const NID=/^[A-Za-z0-9_-]{2,64}$/;
@@ -200,11 +201,7 @@ function verifyResponse({dir,auth,body,to,nonce,nowMs=Date.now()}){
  if(fp(pub)!==to||!signatureOk(signature,DOMAIN+'RES\n'+canonical(b),pub))fail('response signature invalid');
  return true;
 }
-function readLimited(req){return new Promise((resolve,reject)=>{
- let size=0,parts=[],failed=false;
- req.on('data',chunk=>{size+=chunk.length;if(size>MAX_INPUT){failed=true;parts=[];reject(Error('request limit exceeded'));req.destroy();}else if(!failed)parts.push(chunk);});
- req.on('end',()=>{if(!failed)resolve(Buffer.concat(parts));});req.on('error',e=>{if(!failed)reject(e);});
-});}
+function readLimited(req){return tollbooth.readLimited(req);}
 function serverHandler(dir){return async(req,res)=>{
  const send=(status,obj)=>{if(res.headersSent||res.writableEnded)return;const b=Buffer.from(canonical(obj));res.writeHead(status,{'Content-Type':'application/json','Content-Length':b.length,'Cache-Control':'no-store','X-Content-Type-Options':'nosniff'});res.end(b);};
  try{
@@ -232,10 +229,10 @@ function startServer(dir,port,host='127.0.0.1',certPath=null,keyPath=null){
  const local=host==='127.0.0.1'||host==='::1';
  if(!local&&(!certPath||!keyPath))fail('external bind requires valid TLS server certificate and key');
  let server;
- if(certPath&&keyPath){server=https.createServer({cert:safeRead(certPath),key:safeRead(keyPath),minVersion:'TLSv1.2'},serverHandler(dir));}
- else server=http.createServer(serverHandler(dir));
- server.requestTimeout=8000;server.headersTimeout=7000;server.maxHeadersCount=24;
- server.listen(port,host,()=>console.log('FEDERATION_READY '+canonical({host,port,transport:certPath?'https':'http',owner:publicMetadata(dir).owner})));
+ if(certPath&&keyPath){server=tollbooth.createServer(dir,serverHandler(dir),{cert:safeRead(certPath),key:safeRead(keyPath),minVersion:'TLSv1.2'},{host,port});}
+ else server=tollbooth.createServer(dir,serverHandler(dir),null,{host,port});
+ try{server.listen(port,host,()=>console.log('FEDERATION_READY '+canonical({host,port,transport:certPath?'https':'http',owner:publicMetadata(dir).owner})));}
+ catch(e){server.close();throw e;}
  return server;
 }
 function validateUrl(raw){

@@ -1,0 +1,14 @@
+{
+  "ro.build.version.release": "15",
+  "ro.build.version.sdk": "35",
+  "ro.product.first_api_level": "35",
+  "ro.product.device": "F110_Pro",
+  "ro.product.board": "e393_qc_f10_w_6835_v0",
+  "ro.board.platform": "mt6835",
+  "ro.vendor.build.version.release": "13",
+  "ro.vendor.build.version.sdk": "33",
+  "ro.vendor.api_level": "33",
+  "ro.vndk.version": "33",
+  "uname.release": "5.15.197-android13-8-00005-g2d8ad9139b89-ab15063902",
+  "ro.boot.verifiedbootstate": "green"
+}

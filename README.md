@@ -19,3 +19,9 @@ Only this curated source folder belongs on public GitHub. Do not add the private
 The public health-watch example substitutes localhost for the owner's private device IP. Adjust per authorized deployment.
 
 Signed user-space source is NOT an OEM-signed boot/vendor image for a locked Android device.
+
+## Reviewed source and evidence
+
+See the [current source index](docs/CURRENT_SOURCE_INDEX_20261115.md) for the reviewed runtime, collaboration, Android input-contract and research sources. Repository publication, device acceptance and external partner admission remain separate recorded states.
+
+The [public source boundary](docs/oem/PUBLIC_GITHUB_SOURCE_BOUNDARY_20261115.md) records the intentional Android HOLD when private provenance or external AOSP/OEM inputs are unavailable.
