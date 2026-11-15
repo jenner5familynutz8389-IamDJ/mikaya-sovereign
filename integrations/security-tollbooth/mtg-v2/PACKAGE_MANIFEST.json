@@ -1,0 +1,30 @@
+{
+  "schema": "mikaya.mtg-v2.public-package-manifest.v1",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 6225,
+      "sha256": "c4330136067ac680ebfe436a59923bfba04dae101e7be584792a03c1127b97e0"
+    },
+    {
+      "path": "SOURCE_PROVENANCE.json",
+      "bytes": 2264,
+      "sha256": "b0113efd5638141cce5e6f8fbae06d24c653f1b4eca41f8aeacbca782d28ebd6"
+    },
+    {
+      "path": "VERIFICATION.json",
+      "bytes": 1549,
+      "sha256": "4491902f5de727435fa959cbe2e8c37207b59ad6809e62cb9ab5263afc462884"
+    },
+    {
+      "path": "mtg_nice_policy_v2.py",
+      "bytes": 15442,
+      "sha256": "64230462f8a94f583f286357d2fa0ea4e1f37650a73597e473bc21016ba4423c"
+    },
+    {
+      "path": "test_mtg_v2.py",
+      "bytes": 14537,
+      "sha256": "e0f99c03ba9c4a67642274b6eb95d5874bc16385d4246db7502bfa7e1ed992c4"
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "schema": "mikaya.mtg-v2.source-provenance.v1",
+  "version": "mtg-v2-20261115",
+  "original_source_sha256": "6d41877fa3e288cf17cfab8b7b323090a001eacc0770108404aa3e7c18cad933",
+  "original_source_bytes": 4890,
+  "candidate_source": {
+    "bytes": 15442,
+    "sha256": "64230462f8a94f583f286357d2fa0ea4e1f37650a73597e473bc21016ba4423c",
+    "path": "mtg_nice_policy_v2.py"
+  },
+  "installation": "explicitly selected version only; no automatic global policy or adapter migration",
+  "public_interface": "Original status/run CLI and eight status JSON fields",
+  "binding_choices": {
+    "startup_hot_unknown": "Immediate HOLD75; no queued child",
+    "startup_and_resume_safe_samples": 2,
+    "sample_interval_seconds": 10,
+    "nice_floor": 15,
+    "default_total_run_wall_seconds": 21600,
+    "wall_override_environment": "MIKAYA_MTG_MAX_WALL_SECONDS",
+    "wall_override_range": [
+      1,
+      21600
+    ],
+    "measurement_total_deadline_seconds": 3,
+    "sdk34_fix": "Per measurement child only; fixed system-first loader path and removal of only exact standard Termux preload",
+    "unknown_preload": "HOLD without altering global settings"
+  },
+  "independent_review": {
+    "reviewer": "mtg_v2_review",
+    "status": "APPROVED_NO_REMAINING_MATERIAL_SCOPED_FINDING",
+    "policy_sha256": "64230462f8a94f583f286357d2fa0ea4e1f37650a73597e473bc21016ba4423c",
+    "test_sha256": "e0f99c03ba9c4a67642274b6eb95d5874bc16385d4246db7502bfa7e1ed992c4",
+    "tests_rerun_by_reviewer": false,
+    "native_actions_by_reviewer": false
+  },
+  "scope_limits": [
+    "Only attached foreground group; regrouping/daemonizing/changing ownership unsupported without the command own lifecycle",
+    "External SIGKILL and kernel-uninterruptible failures are not a sandbox guarantee; cleanup failure HOLD",
+    "Host fixtures do not establish native Android thermal acceptance"
+  ],
+  "source_publication_installs_or_migrates": false,
+  "public_export_boundary": "Generic runtime and host tests retain exact bytes; documentation/evidence summary adapted for public source publication; private native operations excluded",
+  "test_source": {
+    "path": "test_mtg_v2.py",
+    "bytes": 14537,
+    "sha256": "e0f99c03ba9c4a67642274b6eb95d5874bc16385d4246db7502bfa7e1ed992c4"
+  }
+}
