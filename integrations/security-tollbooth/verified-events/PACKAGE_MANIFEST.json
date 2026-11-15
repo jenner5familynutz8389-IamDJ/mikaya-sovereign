@@ -1,0 +1,139 @@
+{
+  "schema": "mikaya.verified-events.public-package.v2",
+  "captured_utc": "2026-11-15T17:11:35.525694+00:00",
+  "status": "PUBLIC_V2_SOURCE_READY_NATIVE_RECOVERY_RECORDED",
+  "sealed_original_manifest_sha256": "25ea69ee2a1166dca362d6b19649d1397b8ca2f7c1525812ce75c23e0ac06173",
+  "sealed_original_preserved": true,
+  "source_tests_passed": 69,
+  "publication_reran_tests": false,
+  "native_acceptance": "NATIVE_ACCEPTANCE_SUMMARY.json",
+  "publication_performs_installation_or_activation": false,
+  "private_native_operations_diagnosis_credentials_configs_receipts_exported": false,
+  "files": [
+    {
+      "path": "NATIVE_ACCEPTANCE_SUMMARY.json",
+      "bytes": 2058,
+      "sha256": "e68d6195379d7de4c6f714a573c4ff7457a1850721589eb6ef6f7d65c28562a2"
+    },
+    {
+      "path": "README.md",
+      "bytes": 13378,
+      "sha256": "0ad08b84ba30f87aa546c9133adefc5528870683209ad4deb487177a2a8fd61e"
+    },
+    {
+      "path": "SOURCE_PROVENANCE.json",
+      "bytes": 3609,
+      "sha256": "af0d65c9f7d5aad2dc07b57b0b5b4f99062c3e4d6ea36943cc2786ba742073e0"
+    },
+    {
+      "path": "VERIFICATION.json",
+      "bytes": 2293,
+      "sha256": "8a24eb2e30c4a83e95663a0a311967b0b247b41e467b638319d95b1c8bc54fe7"
+    },
+    {
+      "path": "config-examples/device-observation.json",
+      "bytes": 290,
+      "sha256": "916007678b5ce72ca02c9d3c2292a9886cd12a527ff000c22abef23f575c1045"
+    },
+    {
+      "path": "config-examples/verified-event-integration.json",
+      "bytes": 237,
+      "sha256": "0a3f153c0b66528b274a25b260ec547d4a47bc075385c647ffa61114bd90af86"
+    },
+    {
+      "path": "config-examples/verified-ledger.json",
+      "bytes": 335,
+      "sha256": "2c1936139d3b9620a28b0c5387be0474157a279f820ccb33a12e28774bb1bf81"
+    },
+    {
+      "path": "device_observation_producer.cjs",
+      "bytes": 10922,
+      "sha256": "6e48e74d0a1a448cd260e4d5383399668642000a7d8c39eb9f308fc45b4446d6"
+    },
+    {
+      "path": "ledger_event_collector.cjs",
+      "bytes": 11563,
+      "sha256": "40994a07f4e116cf63a15d9ad2d4c4ae5efb4cffc714c6b87420f51481b7c6a8"
+    },
+    {
+      "path": "mikaya_background_bridge.py",
+      "bytes": 21779,
+      "sha256": "f6119d85d99e22653f70ae3dca9fd9a7f515fb78bd217bc87c71390f38445e88"
+    },
+    {
+      "path": "runit-template/down",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "runit-template/finish",
+      "bytes": 287,
+      "sha256": "f58168599c2aedbce6ced8901779832f2067badad5bc4974914145cc9d5d3bf1"
+    },
+    {
+      "path": "runit-template/run",
+      "bytes": 614,
+      "sha256": "0d300179304d1bf4e65255e492d2d9dd886de4060e2a4fb12c368b8acb201d18"
+    },
+    {
+      "path": "tests/fixtures/ledger_event_collector.v1.cjs",
+      "bytes": 11363,
+      "sha256": "a2f59a12691b718efa7c84c593e1c0bc486db3544a0b90666f5c9557ccd7238f"
+    },
+    {
+      "path": "tests/test_background_bridge.py",
+      "bytes": 22065,
+      "sha256": "6e25d4aae164e61df9c6ceb19fe6eef5fc9db1004d969abbc5b15faebfcd9b8d"
+    },
+    {
+      "path": "tests/test_collector_snapshot_durability.cjs",
+      "bytes": 10764,
+      "sha256": "2a482386f7c348c4e4c3a2786fbbc461a1102a54b1c2fc032d911c6e51376dd2"
+    },
+    {
+      "path": "tests/test_device_observation_producer.cjs",
+      "bytes": 9277,
+      "sha256": "1f6bf7830bd119b7c5cc60997744e33f336d1a59e5e7648bea892e403ff4e809"
+    },
+    {
+      "path": "tests/test_ledger_event_collector.cjs",
+      "bytes": 7851,
+      "sha256": "1f5db1b0dda4af26bac91a4aafb5694397d6218fdc86d4c20aaa9f12ecfd5f5f"
+    },
+    {
+      "path": "tests/test_verified_event_integration.py",
+      "bytes": 15377,
+      "sha256": "59d0b6ac84c4743a6ea260421dd8ee21b6717d9ff23a027e9704908680bc2487"
+    },
+    {
+      "path": "vendor/federation-node.cjs",
+      "bytes": 25561,
+      "sha256": "33ea94880c74c7392535ff443b467a7df79117f2bf42993956a5add4ee7f1827"
+    },
+    {
+      "path": "vendor/mikaya_runtime_publish.py",
+      "bytes": 15424,
+      "sha256": "9777e4f8e7d6edc587dd858dbe6350924290ddbf7cf7dd5a37676738b18b7647"
+    },
+    {
+      "path": "vendor/mikaya_unified.py",
+      "bytes": 15441,
+      "sha256": "47ed2335f8b3741b590d76c7a2a91c416fbe93d8f215620b018576529f4cd66c"
+    },
+    {
+      "path": "vendor/mtg_nice_policy.py",
+      "bytes": 4890,
+      "sha256": "6d41877fa3e288cf17cfab8b7b323090a001eacc0770108404aa3e7c18cad933"
+    },
+    {
+      "path": "vendor/sovereign-event-ledger.cjs",
+      "bytes": 8708,
+      "sha256": "56c894c87d6d7d4bb57d90e520b80f968a72a683469defc0b5e7d36c49f13c65"
+    },
+    {
+      "path": "verified_ledger_hook.py",
+      "bytes": 12259,
+      "sha256": "329c44c717f7080c1cd024322d7238f5952a9ca7c66bdfd3a08a0e3eb775f3fc"
+    }
+  ]
+}

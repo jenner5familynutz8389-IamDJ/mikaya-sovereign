@@ -1,0 +1,88 @@
+{
+  "schema": "mikaya.verified-events.public-v2-source-provenance.v1",
+  "captured_utc": "2026-11-15T16:42:35.939976+00:00",
+  "baseline_release": "runtime-bridge-20261115-verified",
+  "native_candidate_release": "runtime-bridge-20261115-verified-v2",
+  "runtime_delta": [
+    {
+      "path": "ledger_event_collector.cjs",
+      "baseline_sha256": "a2f59a12691b718efa7c84c593e1c0bc486db3544a0b90666f5c9557ccd7238f",
+      "candidate_sha256": "40994a07f4e116cf63a15d9ad2d4c4ae5efb4cffc714c6b87420f51481b7c6a8"
+    },
+    {
+      "path": "verified_ledger_hook.py",
+      "baseline_sha256": "3ce6aa48f53e1c7ff33bb15aae8fb4642779cefa57ee5e8a34d1c83f2fa22422",
+      "candidate_sha256": "329c44c717f7080c1cd024322d7238f5952a9ca7c66bdfd3a08a0e3eb775f3fc"
+    },
+    {
+      "path": "mikaya_background_bridge.py",
+      "baseline_sha256": "0ed42568f8034e7e5a64cf4f996be72d16c5e64b8b63882e67738f0b4d8ce490",
+      "candidate_sha256": "f6119d85d99e22653f70ae3dca9fd9a7f515fb78bd217bc87c71390f38445e88"
+    },
+    {
+      "path": "runit-template/run",
+      "baseline_sha256": "eae97ae409e86f43a8c633a0f19b901d6881fbd4b696291cacf410454741de54",
+      "candidate_sha256": "0d300179304d1bf4e65255e492d2d9dd886de4060e2a4fb12c368b8acb201d18"
+    }
+  ],
+  "unchanged": [
+    {
+      "path": "device_observation_producer.cjs",
+      "sha256": "6e48e74d0a1a448cd260e4d5383399668642000a7d8c39eb9f308fc45b4446d6",
+      "byte_identical": true
+    },
+    {
+      "path": "vendor/sovereign-event-ledger.cjs",
+      "sha256": "56c894c87d6d7d4bb57d90e520b80f968a72a683469defc0b5e7d36c49f13c65",
+      "byte_identical": true
+    },
+    {
+      "path": "vendor/federation-node.cjs",
+      "sha256": "33ea94880c74c7392535ff443b467a7df79117f2bf42993956a5add4ee7f1827",
+      "byte_identical": true
+    },
+    {
+      "path": "vendor/mikaya_runtime_publish.py",
+      "sha256": "9777e4f8e7d6edc587dd858dbe6350924290ddbf7cf7dd5a37676738b18b7647",
+      "byte_identical": true
+    },
+    {
+      "path": "vendor/mikaya_unified.py",
+      "sha256": "47ed2335f8b3741b590d76c7a2a91c416fbe93d8f215620b018576529f4cd66c",
+      "byte_identical": true
+    },
+    {
+      "path": "vendor/mtg_nice_policy.py",
+      "sha256": "6d41877fa3e288cf17cfab8b7b323090a001eacc0770108404aa3e7c18cad933",
+      "byte_identical": true
+    },
+    {
+      "path": "runit-template/finish",
+      "sha256": "f58168599c2aedbce6ced8901779832f2067badad5bc4974914145cc9d5d3bf1",
+      "byte_identical": true
+    }
+  ],
+  "constraints": {
+    "child_timeout_seconds": 8,
+    "observation_freshness_ms": 5000,
+    "cadence_seconds": 60,
+    "max_samples": 120,
+    "max_wall_seconds": 7200,
+    "full_signature_verification": true,
+    "no_initialize_new_in_recovery": true,
+    "no_key_or_token_rotation": true
+  },
+  "sealed_original_manifest_sha256": "25ea69ee2a1166dca362d6b19649d1397b8ca2f7c1525812ce75c23e0ac06173",
+  "sealed_original_preserved": true,
+  "baseline_public_package_commit": "fccfdae5893ef8e8c57149e3228f533ae8a6061e",
+  "target_reconciliation_ref": "11016dbf470ae8db1d791183869997ecec2afeaf",
+  "export_scope": "Four exact runtime changes, two exact new test/fixture files and sanitized metadata; unchanged public V1 examples and vendor bytes retained.",
+  "private_native_operations_exported": false,
+  "raw_diagnosis_or_logs_exported": false,
+  "publication_performs_deployment": false,
+  "frozen_prior_fixture": {
+    "path": "tests/fixtures/ledger_event_collector.v1.cjs",
+    "sha256": "a2f59a12691b718efa7c84c593e1c0bc486db3544a0b90666f5c9557ccd7238f",
+    "source": "Published V1 collector bytes retained as a synthetic-test baseline."
+  }
+}

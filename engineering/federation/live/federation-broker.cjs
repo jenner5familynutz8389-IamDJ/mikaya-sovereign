@@ -12,6 +12,7 @@ const crypto=require('node:crypto');
 const path=require('node:path');
 const fed=require('./federation-node.cjs');
 const ownerAuth=require('./owner-authorization.cjs');
+const tollbooth=require('./security-tollbooth.cjs');
 const HEX=/^[0-9a-f]{64}$/;
 const DOMAIN='MIKAYA-INDEPENDENT-FEDERATION/1\n';
 const SCOPES=new Set(['compute.dot.v1','compute.sha256.v1']);
@@ -79,11 +80,7 @@ function validatePolicy(p,gateway,options={}){
  return p;
 }
 function policyFromFile(dir,file){const n=fed.loadNode(dir),p=JSON.parse(readFile(file));return validatePolicy(p,n,{dir});}
-function readLimited(req){return new Promise((resolve,reject)=>{
- let n=0,arr=[],bad=false;
- req.on('data',chunk=>{n+=chunk.length;if(n>8192){bad=true;arr=[];reject(Error('request body too large'));req.destroy();}else if(!bad)arr.push(chunk);});
- req.on('end',()=>{if(!bad)resolve(Buffer.concat(arr));});req.on('error',err=>{if(!bad)reject(err);});
-});}
+function readLimited(req){return tollbooth.readLimited(req);}
 function signServiceResponse(dir,to,nonce,body){const n=fed.loadNode(dir);
  const msg={schema:'mikaya.federation.response.v1',from:n.meta.fingerprint,to,inReplyTo:nonce,bodySha256:fed.sha(fed.canonical(body)),issuedAtMs:Date.now()};
  const signature=crypto.sign(null,Buffer.from(DOMAIN+'RES\n'+fed.canonical(msg)),n.privateKey).toString('base64');
@@ -108,7 +105,8 @@ function verifyRelayedResult({proof,job,gatewayPublicKey,workerPublicKey,upstrea
 }
 function startBroker({dir,policyFile,port,host='127.0.0.1',certPath=null,keyPath=null}){
  if(!Number.isSafeInteger(port)||port<1024||port>65535)throw Error('invalid broker port');
- policyFromFile(dir,policyFile);
+ const initialPolicy=policyFromFile(dir,policyFile);
+ if(initialPolicy.enabled)tollbooth.assertExternalDownstream(initialPolicy.downstream.url,[{host,port}]);
  const loopback=host==='127.0.0.1'||host==='::1';
  if(!loopback&&(!certPath||!keyPath))throw Error('remote broker requires TLS');
  if(keyPath){const st=fs.lstatSync(keyPath);if(st.isSymbolicLink()||!st.isFile()||(st.mode&0o077))throw Error('private TLS key permissions must be 0600');}
@@ -134,6 +132,8 @@ function startBroker({dir,policyFile,port,host='127.0.0.1',certPath=null,keyPath
    if(!allow||!allow.includes(envelope.body?.capability))return send(403,{error:'upstream_capability_denied'});
    try{fed.computeJob(envelope.body);}catch{return send(422,{error:'invalid_bounded_job'});}
    let work;
+   try{tollbooth.assertExternalDownstream(p.downstream.url);}
+   catch{return send(503,{error:'same_runtime_downstream_refused'});}
    try{work=await fed.clientCall({dir,url:p.downstream.url,expectedPeer:p.downstream.fingerprint,route:'/v1/task',body:envelope.body});}
    catch{return send(502,{error:'internal_worker_unavailable'});}
    const n=fed.loadNode(dir);
@@ -144,9 +144,9 @@ function startBroker({dir,policyFile,port,host='127.0.0.1',certPath=null,keyPath
    return send(200,{auth:signed,body:proof});
   }catch{return send(400,{error:'invalid_bounded_request'});}finally{running--;}
  };
- const server=certPath&&keyPath?https.createServer({cert:readFile(certPath),key:readFile(keyPath),minVersion:'TLSv1.2'},handler):http.createServer(handler);
- server.requestTimeout=8000;server.headersTimeout=7000;server.maxHeadersCount=24;
- server.listen(port,host,()=>console.log('MIKAYA_BROKER_READY '+fed.canonical({host,port,testOnly:true,externalTls:!!certPath})));
+ const server=certPath&&keyPath?tollbooth.createServer(dir,handler,{cert:readFile(certPath),key:readFile(keyPath),minVersion:'TLSv1.2'},{host,port}):tollbooth.createServer(dir,handler,null,{host,port});
+ try{server.listen(port,host,()=>console.log('MIKAYA_BROKER_READY '+fed.canonical({host,port,testOnly:true,externalTls:!!certPath})));}
+ catch(e){server.close();throw e;}
  return server;
 }
 async function callBroker({dir,url,expectedGateway,expectedWorkerPublicKey,job}){

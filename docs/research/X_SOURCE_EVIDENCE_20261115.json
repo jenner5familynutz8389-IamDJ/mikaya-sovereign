@@ -1,0 +1,814 @@
+{
+  "schema": "mikaya.x-research-comparison.v1",
+  "captured_utc": "2026-11-15T04:11:16.823216+00:00",
+  "source_order_preserved": true,
+  "sources_reviewed": 5,
+  "retrieval": "Firecrawl unsupported-site receipts retained; direct unauthenticated HTTP retrieved all five X pages; primary documents subsequently retrieved directly. No account interaction.",
+  "upstream_captures_are_snapshots_not_entire_dynamic_threads": true,
+  "preceding_daybreak_record": "https://gitlab.com/iamdj1989-group/IamDJ1989-project/-/merge_requests/108",
+  "report_sha256": "ef05f47d8254fc0e96bca867a544e9dab80e3193513c6f4fbf57c6641c093fe4",
+  "records": [
+    {
+      "order": 1,
+      "requested_url": "https://share.google/SCeBtMjkcubhdFqL0",
+      "canonical_url": "https://x.com/TheHackersNews/status/2121287163065319838",
+      "posted_at": "2026-11-13T17:00:45.000Z",
+      "author": "https://x.com/TheHackersNews",
+      "topic": "PostgreSQL CVE-2026-6460 and November12 release",
+      "status": "VENDOR_CONFIRMED_APPLICABILITY_UNKNOWN",
+      "primary_urls": [
+        "https://www.postgresql.org/support/security/CVE-2026-6460/",
+        "https://www.postgresql.org/about/news/postgresql-187-1712-1616-1520-1425-and-19-rc-2-released-3442/",
+        "https://www.postgresql.org/docs/18/release-18-7.html",
+        "https://yum.postgresql.org/news/extensions-require-minor-release/"
+      ],
+      "fixed_minors": [
+        "18.7",
+        "17.12",
+        "16.16",
+        "15.20",
+        "14.25"
+      ],
+      "cve_cvss": 8.8,
+      "release_security_fixes": 52,
+      "required_context": [
+        "Authenticated object creator, not unauthenticated root access",
+        "Rebuild C-language extensions for full protection",
+        "Check separate administration/backup clients and conditional post-update repairs",
+        "Actual service version/build/backport/extension evidence not established"
+      ]
+    },
+    {
+      "order": 2,
+      "requested_url": "https://share.google/bDOBrbI71CXfN3Il2",
+      "canonical_url": "https://x.com/DarkWebInformer/status/2121756237691756730",
+      "posted_at": "2026-11-15T00:04:42.000Z",
+      "author": "https://x.com/DarkWebInformer",
+      "topic": "Next.js CVE-2025-29927",
+      "status": "HISTORICAL_VENDOR_CONFIRMED_APPLICABILITY_UNKNOWN",
+      "original_disclosure": "2025-03-21",
+      "primary_urls": [
+        "https://github.com/vercel/next.js/security/advisories/GHSA-f82v-jwr5-mffw",
+        "https://vercel.com/blog/postmortem-on-next-js-middleware-bypass"
+      ],
+      "historical_first_fixes": [
+        "12.3.5",
+        "13.5.9",
+        "14.2.25",
+        "15.2.3"
+      ],
+      "cvss": 9.1,
+      "linked_poc_review": "Metadata/README only; hypothetical/placeholder/TBD language recorded; no behavior or maliciousness finding",
+      "required_context": [
+        "Specific self-hosted middleware authorization path matters",
+        "Historical minimum fix is not a current maintenance recommendation",
+        "Inspected React evidence component is explicitly not a standalone deployed app",
+        "No proof an affected deployment exists or is clean"
+      ]
+    },
+    {
+      "order": 3,
+      "requested_url": "https://share.google/yB1lb7u6v9KmMYULQ",
+      "canonical_url": "https://x.com/alex_verem/status/2121664969473479134",
+      "posted_at": "2026-11-14T18:02:02.000Z",
+      "author": "https://x.com/alex_verem",
+      "topic": "PaperOrchestra",
+      "status": "CANDIDATE_RESEARCH_REPORT_ADAPTATION",
+      "primary": {
+        "arxiv": "https://arxiv.org/abs/2604.05018",
+        "version_url": "https://arxiv.org/html/2604.05018v1",
+        "submitted_utc": "2026-04-06T18:00:00Z",
+        "title": "PaperOrchestra: A Multi-Agent Framework for Automated AI Research Paper Writing",
+        "authors": [
+          "Yiwen Song",
+          "Yale Song",
+          "Tomas Pfister",
+          "Jinsung Yoon"
+        ],
+        "affiliation": "All four listed as Google Cloud AI Research in the project page and pinned repository README.",
+        "paper_license": "CC BY 4.0 (arXiv entry)",
+        "project_page": "https://yiwen-song.github.io/paper_orchestra/",
+        "repository": "https://github.com/google-research/paper-orchestra",
+        "repository_created_utc": "2026-05-01T18:07:52Z",
+        "repository_head": "ca1b3fa01c2970fc7cda32d16245db38d57b3f56",
+        "repository_head_committer_date": "2026-05-17T16:25:35Z",
+        "repository_license": "Apache-2.0; LICENSE captured at pinned commit",
+        "repository_stars_at_capture": 516,
+        "repository_support_status": "README says not an officially supported Google product.",
+        "dataset": "https://huggingface.co/datasets/yiwen-song/PaperWritingBench",
+        "dataset_revision": "fbcfcafd042184ca954954b08dfcb92bd7942b51",
+        "dataset_license_metadata": "Apache-2.0",
+        "dataset_observation": "Public ungated dataset metadata/card lists datasets.zip and metadata.json; no archive or raw paper content downloaded. Code README says dataset not included in code repository; separate linked dataset now exists."
+      },
+      "system": {
+        "inputs": [
+          "Idea summary",
+          "Existing experimental log",
+          "LaTeX template",
+          "Conference guidelines"
+        ],
+        "stages": [
+          "Outline agent",
+          "Plotting agent",
+          "Literature review agent",
+          "Section writing agent",
+          "Content refinement agent"
+        ],
+        "mechanism": "Outline establishes visual/search/writing plans; plotting and literature stages run in parallel; searches discover candidates, Semantic Scholar resolves/filters metadata; writing uses provided results; AgentReview-based revision accepts score improvements with reversion on declines.",
+        "citation_limit": "Fuzzy title match ratio >70 plus year bonus validates an entity and retrievable abstract, with date filtering/deduplication. This does not prove the cited paper supports every generated claim or that visuals/numeric interpretations are correct.",
+        "source_refs": [
+          {
+            "capture": "paper/arxiv-full.txt",
+            "lines": "499-609",
+            "primary_url": "https://arxiv.org/html/2604.05018v1"
+          },
+          {
+            "capture": "paper/arxiv-full.txt",
+            "lines": "3136-3154",
+            "primary_url": "https://arxiv.org/html/2604.05018v1"
+          }
+        ]
+      },
+      "experiments": {
+        "benchmark": "PaperWritingBench: 200 previously accepted 2025 papers, 100 CVPR plus 100 ICLR; LLM reverse-engineered sparse/dense ideas and results from published PDFs. This isolates reconstruction/writing; it does not supply novel hypotheses or execute new science.",
+        "baseline_controls": "Single Agent and AI Scientist-v2; same Gemini-3.1-Pro writing backbone; main comparisons use sparse ideas and PlotOff (ground-truth extracted figures) to standardize visual inputs. AI comparison is not a broad comparison of every current research agent.",
+        "automatic_metrics": "Citation overlap and literature/technical quality; LLM reviewers/judges used, with table 2 explicitly describing acceptance as simulated.",
+        "scholarpeer_simulated_acceptance_percent": {
+          "CVPR": {
+            "paperorchestra": 84,
+            "original_human": 86
+          },
+          "ICLR": {
+            "paperorchestra": 81,
+            "original_human": 94
+          }
+        },
+        "ai_scientist_v2_reviewer_simulated_acceptance_percent": {
+          "CVPR": {
+            "paperorchestra": 48,
+            "original_human": 71
+          },
+          "ICLR": {
+            "paperorchestra": 22,
+            "original_human": 63
+          }
+        },
+        "acceptance_interpretation": "No actual conference submission/acceptance rate of the generated papers is established. Wide disagreement between reviewer frameworks limits the stronger 84/81 headline.",
+        "average_citation_count": {
+          "CVPR": {
+            "paperorchestra": 47.98,
+            "human_GT": 58.52,
+            "single_agent": 11.46,
+            "ai_scientist_v2": 14.18
+          },
+          "ICLR": {
+            "paperorchestra": 45.73,
+            "human_GT": 59.18,
+            "single_agent": 9.75,
+            "ai_scientist_v2": 13.71
+          }
+        },
+        "human_study": {
+          "researchers": 11,
+          "sampled_papers": 40,
+          "papers_per_venue": 20,
+          "unique_pairs": 120,
+          "paired_evaluations": 180,
+          "blinded": true,
+          "literature_review_percent_win_tie_loss": {
+            "versus_human_GT": [
+              19,
+              24,
+              57
+            ],
+            "versus_single_agent": [
+              73,
+              22,
+              5
+            ],
+            "versus_ai_scientist_v2": [
+              67,
+              17,
+              17
+            ]
+          },
+          "overall_quality_percent_win_tie_loss": {
+            "versus_human_GT": [
+              5,
+              14,
+              81
+            ],
+            "versus_single_agent": [
+              57,
+              24,
+              19
+            ],
+            "versus_ai_scientist_v2": [
+              50,
+              14,
+              36
+            ]
+          },
+          "rounding_note": "Figure 3 rounded percentages can total 101%; retain published rounded values without manufacturing counts.",
+          "headline_interpretation": "50\u201368 are percentage-point win-minus-loss margins for literature quality vs AI baselines, not 50\u201368% absolute win rates or gains vs humans. 43% is literature win+tie (19+24) vs human; human original wins overall 81% vs 5% PaperOrchestra wins and 14% ties.",
+          "figure_source": "https://arxiv.org/html/2604.05018v1/content/figures/human_eval_bar.png"
+        },
+        "latency": {
+          "reported_mean_minutes": 39.6,
+          "sample": 10,
+          "venues": "5 CVPR + 5 ICLR",
+          "procedure": "Single worker; highest and lowest execution times removed before mean",
+          "estimated_llm_calls_per_paper": "60\u201370",
+          "limit": "Not a 200-paper untrimmed timing mean or device-local performance estimate."
+        },
+        "source_refs": [
+          {
+            "capture": "paper/arxiv-full.txt",
+            "lines": "435-497",
+            "primary_url": "https://arxiv.org/html/2604.05018v1"
+          },
+          {
+            "capture": "paper/arxiv-full.txt",
+            "lines": "612-642",
+            "primary_url": "https://arxiv.org/html/2604.05018v1"
+          },
+          {
+            "capture": "paper/arxiv-full.txt",
+            "lines": "646-854",
+            "primary_url": "https://arxiv.org/html/2604.05018v1"
+          },
+          {
+            "capture": "paper/arxiv-full.txt",
+            "lines": "976-1035",
+            "primary_url": "https://arxiv.org/html/2604.05018v1"
+          },
+          {
+            "capture": "paper/arxiv-full.txt",
+            "lines": "1221-1297",
+            "primary_url": "https://arxiv.org/html/2604.05018v1"
+          },
+          {
+            "capture": "paper/arxiv-full.txt",
+            "lines": "1861-1912",
+            "primary_url": "https://arxiv.org/html/2604.05018v1"
+          },
+          {
+            "capture": "paper/arxiv-full.txt",
+            "lines": "3193-3228",
+            "primary_url": "https://arxiv.org/html/2604.05018v1"
+          }
+        ]
+      },
+      "limitations": [
+        "Generated figures can hallucinate; external PaperBanana limits direct control and the authors propose future targeted factual verification.",
+        "Anonymizing existing published inputs and anti-leakage prompts reduce some leakage paths but do not eliminate pretraining contamination; unpublished raw materials are suggested for future evaluation.",
+        "Human accountability remains required for accuracy, originality and validity; intended as assistive drafting rather than an independent author.",
+        "Literature-review human/LLM correlations are weak: Pearson 0.0868 (Gemini) and 0.2764 (GPT-5), compared with overall-quality 0.5672/0.6458.",
+        "Reference existence validation is not evidentiary entailment or an independent reproducibility check.",
+        "Appendix refinement prompt says to ignore demands for missing experiments and never explicitly state a limitation, explaining this as anti-score-gaming. Do not transfer that disclosure-suppressing prompt to MIKAYA evidence reports; missing evidence and limits must remain visible."
+      ]
+    },
+    {
+      "order": 4,
+      "requested_url": "https://share.google/NDcFfI6IIVQ6wKxEb",
+      "canonical_url": "https://x.com/akshay_pachaar/status/2121248029743497225",
+      "posted_at": "2026-11-13T14:25:15.000Z",
+      "author": "https://x.com/akshay_pachaar",
+      "topic": "Reverse Engineer Anything",
+      "status": "CANDIDATE_BOUNDED_EXTERNAL_ANALYSIS_REPORT_INTAKE",
+      "repository_metadata": {
+        "full_name": "morluto/rea",
+        "html_url": "https://github.com/morluto/rea",
+        "description": "Reverse engineer anything with agents, from app behavior down to native binaries.",
+        "created_at": "2026-04-14T00:51:32Z",
+        "updated_at": "2026-11-15T04:02:04Z",
+        "pushed_at": "2026-11-15T03:44:38Z",
+        "stargazers_count": 460155,
+        "forks_count": 112771,
+        "default_branch": "main",
+        "archived": false,
+        "disabled": false,
+        "license": {
+          "key": "mit",
+          "name": "MIT License",
+          "spdx_id": "MIT",
+          "url": "https://api.github.com/licenses/mit",
+          "node_id": "MDc6TGljZW5zZTEz"
+        }
+      },
+      "current_commit": {
+        "sha": "2e1e6593f266b859d2f0fc858d51ed2f280b6849",
+        "url": "https://github.com/morluto/rea/commit/2e1e6593f266b859d2f0fc858d51ed2f280b6849",
+        "author_date": "2026-11-15T02:24:25Z",
+        "committer_date": "2026-11-15T02:24:25Z",
+        "github_signature_verified": true,
+        "meaning": "GitHub reports a valid commit signature. This is not proof that the code is safe, every statement is correct, or a temporal-priority finding."
+      },
+      "primary_doc_urls": {
+        "README.md": "https://github.com/morluto/rea/blob/2e1e6593f266b859d2f0fc858d51ed2f280b6849/README.md",
+        "LICENSE": "https://github.com/morluto/rea/blob/2e1e6593f266b859d2f0fc858d51ed2f280b6849/LICENSE",
+        "docs/reference/mcp-contracts.md": "https://github.com/morluto/rea/blob/2e1e6593f266b859d2f0fc858d51ed2f280b6849/docs/reference/mcp-contracts.md",
+        "docs/getting-started/cli.md": "https://github.com/morluto/rea/blob/2e1e6593f266b859d2f0fc858d51ed2f280b6849/docs/getting-started/cli.md",
+        "THIRD_PARTY_NOTICES.md": "https://github.com/morluto/rea/blob/2e1e6593f266b859d2f0fc858d51ed2f280b6849/THIRD_PARTY_NOTICES.md"
+      },
+      "claims_audit": [
+        {
+          "claim": "450k+ stars",
+          "status": "Supported as a current approximate total, not independently verified for the post date",
+          "evidence": "GitHub REST repository API reports 460155 stargazers at 2026-11-15T04:02:59Z, about two days after the post."
+        },
+        {
+          "claim": "in just a month",
+          "status": "UNVERIFIED",
+          "evidence": "Repository created_at is 2026-04-14T00:51:32Z, about seven months before the post. Creation time is not a star-growth series; no dated stargazer history was retrieved, so neither gaining 450k during the latest month nor its exact total on Nov13 is established."
+        },
+        {
+          "claim": "100% open-source",
+          "status": "Qualified",
+          "evidence": "GitHub API detects MIT and the pinned LICENSE grants MIT terms for REA. README says REA-authored code is MIT, third-party material retains its licenses, and commercial providers such as IDA, Hopper and JEB require separate lawful licenses. The complete analysis stack is not thereby all open source or cost-free."
+        },
+        {
+          "claim": "MCP server connecting a coding agent to reverse-engineering tools",
+          "status": "Supported by primary project documentation; not executed or validated here",
+          "evidence": "README describes local MCP and CLI workflows, native providers, static JavaScript/.NET inspection and many target-dependent adapters. Returned observations include evidence and limitations. Native deep analysis requires compatible engines; runtime capture runs or interacts with a target under user permissions."
+        },
+        {
+          "claim": "Reverse engineer anything / explain features down to binary",
+          "status": "Promotional breadth, not a verified universal capability",
+          "evidence": "README lists target formats, prerequisites, provider and host limits. Static metadata and partial inventories do not establish full behavioral equivalence, recovered source, or correct reimplementation. MCP docs explicitly preserve unknowns and distinguish partial/exhausted inventory from absence of matches."
+        }
+      ],
+      "documented_architecture": {
+        "README": "MCP/CLI bridge for locally supplied targets with existing providers and evidence/limitation outputs; static analysis and effectful runtime/device workflows differ. Setup edits agent registrations and installs workflow instructions only if a user runs it; no setup was run.",
+        "mcp_contracts_lines_17_47": "Canonical Evidence appears as text and structuredContent with normalized_result, evidence_id, raw_result, analysis_profile and retained bundle linkage. Missing retained references are rejected.",
+        "mcp_contracts_lines_97_100": "Source coverage and retained-page coverage differ; unknown/unavailable collections remain unknown, and exhausted partial inventories do not show no matches elsewhere.",
+        "cli_lines_795_835": "Evidence retains identity, locations, observations, inferences and unresolved findings; bundle import has process-local validation. compare operates on supplied Evidence IDs/pairs and does not read artifact contents; compare-artifacts is distinct. Existing destinations are preserved without explicit overwrite.",
+        "validation_limit": "These are documented contracts at the pinned commit, not an independent code audit, runtime demonstration, performance measurement or certification."
+      }
+    },
+    {
+      "order": 5,
+      "requested_url": "https://share.google/QepgIitf9r40DJ7nM",
+      "canonical_url": "https://x.com/antigravity/status/2121327669534933025",
+      "posted_at": "2026-11-13T19:41:43.000Z",
+      "author": "https://x.com/antigravity",
+      "topic": "Google Antigravity Dynamic Workflows",
+      "status": "CANDIDATE_ADAPTATION_NO_SERVICE_INSTALLED_NO_BENCHMARK",
+      "primary_url": "https://antigravity.google/docs/dynamic-workflows",
+      "confirmed_documentation": [
+        "The /run-workflow command produces a Python orchestration script with named phases",
+        "parallel(items,fn) returns results in item order; if an item fails other items are canceled",
+        "pipeline(items,fn) runs items sequentially",
+        "Subagent results are checked against JSON Schema; agents work in separate conversations",
+        "Supports reusable saved scripts, one-shot and persistent conversations, and isolated branch/workspace modes",
+        "Script approval follows existing permission preset; child agents retain their own permissions",
+        "Docs list Google AI Pro and Ultra access; included Python or configurablePython3.8+ fallback"
+      ],
+      "interpretation_limits": [
+        "Scripted control flow does not make model judgments or outputs deterministic",
+        "Cancellation is not rollback of effects already applied",
+        "Separate conversations reduce main-context clutter but do not prove lower total token cost or phone heat",
+        "These docs do not establish supported Android Termux installation or account entitlement",
+        "No saved workflow is authority to add endpoints, bypass owner grants or repeat state mutations"
+      ],
+      "project_reuse": [
+        "Keep owner authorization, independent signed review, admission and thermal gates",
+        "Bind generated workflow revision and inputs to a scoped existing grant before any execution",
+        "Use typed handoffs containing immutable evidence and artifact references",
+        "Parallel read-only analysis or isolated worktrees; serialize canonical state mutation",
+        "Retain durable checkpoints, bounded retry/time budgets and source attribution"
+      ]
+    }
+  ],
+  "project_evidence": {
+    "scope": "Static relevant source manifests and explanatory source only; no active deployment inventory, DB connection, live target scan or device readback. Absence in these files does not establish global absence.",
+    "git_metadata": "No .git repository at this source root; HEAD not established. Content hashes below identify inspected snapshots.",
+    "files": [
+      {
+        "relative_path": "AGENTS.md",
+        "bytes": 1168,
+        "sha256": "461ee0ba1600905864e08e47c57c2551c26bd23f0e39309416419aefd6f25c2e"
+      },
+      {
+        "relative_path": "integrations/cursor-agent-sdk/package.json",
+        "bytes": 478,
+        "sha256": "ec0b98a2f52f7c579a4fd85ed8cc8a27d4ff80860bf47269f5a721f98782c4f8"
+      },
+      {
+        "relative_path": "engineering/federation/live/evidence-brief/README.md",
+        "bytes": 1930,
+        "sha256": "fb66983b1e3da98dd151b85d453258cf6c7c11e22fe2f4914eee170e0869121e"
+      },
+      {
+        "relative_path": "engineering/worldmonitor-integration/Dockerfile.app",
+        "bytes": 1255,
+        "sha256": "c1e6c8caab49e19c9742c11d186020df9e82ae9d143aaf761e982b330cbc826c"
+      },
+      {
+        "relative_path": "engineering/worldmonitor-integration/docker-compose.mikaya.yml",
+        "bytes": 4072,
+        "sha256": "7ccbf68c6aedeeb449314f992a4c8888d304c9548efc6f69115812066b1980fe"
+      },
+      {
+        "relative_path": "engineering/research-runtime/Dockerfile",
+        "bytes": 639,
+        "sha256": "cf28db50479f421a68ba90b3dbe03835ec0f99051160772ecd73eb7971f255b7"
+      }
+    ],
+    "governance_inventory_sha256": "5d02c90e41e2fc14a566971a7bd7a6d5a9efa753c2f8c7bee9d6c75df8ce42f1"
+  },
+  "policy_change": {
+    "kind": "two clauses appended to existing mirrored owner-selected workflow contract",
+    "runtime_modified": false,
+    "existing_clauses_preserved": true,
+    "existing_session_authorization_preserved": true,
+    "append_sha256": "c398a757a16f3cf0c7bc61e1c280fb9c9ee8a5fa60dbbe11314b6052c601d0a0",
+    "merge_or_activation_claimed": false
+  },
+  "copying_status": "NOT_ESTABLISHED",
+  "priority_status": "NOT_ESTABLISHED",
+  "no_external_tool_or_adapter_installed": true,
+  "no_exploit_or_live_target_test": true,
+  "no_device_backup_or_boot_action": true,
+  "measured_performance_or_security_upgrade_claimed": false,
+  "private_capture_and_report_digests": {
+    "FIRECRAWL_ACCESS_RECEIPTS.json": {
+      "bytes": 4763,
+      "sha256": "47d7ff554eb1c2b45773728174ebcbfd411f57c441dfefe23175d9597b74d1ab"
+    },
+    "PAPERORCHESTRA_ASSESSMENT_20261115.md": {
+      "bytes": 4164,
+      "sha256": "af9a84cff3c0c674a8f7c12fd9fe896dd9f2f5fc3562ae0eb69e0f7141092064"
+    },
+    "POST_1.json": {
+      "bytes": 8574,
+      "sha256": "2916cf5d5960ee9cdccd87ce86624f55ba779d6f28eff3a886388248ac2397df"
+    },
+    "POST_2.json": {
+      "bytes": 9360,
+      "sha256": "6ead9066819e61421f770a520d72d01febc47eb0c02f5aea79fee8d6ec6e6c2d"
+    },
+    "POST_3.json": {
+      "bytes": 12650,
+      "sha256": "df99093c54a6e2441b51481e71214f039812595bdf266e279cd6aa49ba087503"
+    },
+    "POST_4.json": {
+      "bytes": 8445,
+      "sha256": "d65c1c508cf0745eb41a579ab5f9e13fa0df5c86b62537de69ecdd0002d2ae6e"
+    },
+    "POST_5.json": {
+      "bytes": 8401,
+      "sha256": "0e7f68777cfe33a9660ed21fd5011f819ae4cc86850f1a395f298654e9ef4e50"
+    },
+    "REA_ASSESSMENT_20261115.md": {
+      "bytes": 3182,
+      "sha256": "91460ea59e495449f6b4303e4bd5cea0f72da62e99411eaddb2831dd2c540a36"
+    },
+    "REPORT.md": {
+      "bytes": 16217,
+      "sha256": "ef05f47d8254fc0e96bca867a544e9dab80e3193513c6f4fbf57c6641c093fe4"
+    },
+    "RESOLVED_LINKS.json": {
+      "bytes": 24570,
+      "sha256": "d3289b190dcfcbcc54a764ae8e62d615a1ac67b1996a6f0f58be2d790abba0dd"
+    },
+    "WORKFLOW_CONTRACT_APPEND.md": {
+      "bytes": 979,
+      "sha256": "c398a757a16f3cf0c7bc61e1c280fb9c9ee8a5fa60dbbe11314b6052c601d0a0"
+    },
+    "X_SECURITY_ADVISORIES_20261115.md": {
+      "bytes": 14748,
+      "sha256": "a70267f86339350d670a4c11ad2d5062797b1db154a93212ea819d14a646af36"
+    },
+    "antigravity/DOC_CAPTURE.html": {
+      "bytes": 176012,
+      "sha256": "69030773d7a4f8112c7d6ecefc309c290020330e27c1ff2f3edb475a4f202be7"
+    },
+    "antigravity/DOC_CAPTURE.json": {
+      "bytes": 41021,
+      "sha256": "87c441e086851fd8eec3de26d1bca5a3c5a17ba5da0a5f38eb66237d9529736d"
+    },
+    "antigravity/DOC_CAPTURE.txt": {
+      "bytes": 21590,
+      "sha256": "87daea44c68b56a45ba740e8969dc756210a4a9c77b12a6d7e0207f6331948b9"
+    },
+    "antigravity/FINDINGS.json": {
+      "bytes": 2365,
+      "sha256": "8e5f0e6b69740d49c402724e199f812cad0fe1fd750bba14d81d09458e455425"
+    },
+    "link-1-public-response.html": {
+      "bytes": 139056,
+      "sha256": "2a1d02ded1228d5adb836d959f8530a51f76225073adc72bc0c41b0c43aad6a7"
+    },
+    "link-2-public-response.html": {
+      "bytes": 137728,
+      "sha256": "9a8a5e1ee246f8a25d77534600d61f1733906813f596804446977bc2e35fec08"
+    },
+    "link-3-public-response.html": {
+      "bytes": 158507,
+      "sha256": "9ad089ffb7feec8348c79d2e96e918cd5a8f408a38feb0a8190cc710f7ad5d81"
+    },
+    "link-4-public-response.html": {
+      "bytes": 138660,
+      "sha256": "256a663f573cbfa45827976d94893b9af058a08b655837c74b5162b81c5aa4c0"
+    },
+    "link-5-public-response.html": {
+      "bytes": 142093,
+      "sha256": "11160ba24207918b078332b2977feb69714611691a08287e7ecd64804941d59e"
+    },
+    "paper-rea/CAPTURE_MANIFEST.json": {
+      "bytes": 8441,
+      "sha256": "c23ed410ff3dc07e347b8d632c06d3ab141d8c280b0a8cff9c4199ee0a93f6fc"
+    },
+    "paper-rea/paper/PAPERORCHESTRA_RESEARCH.json": {
+      "bytes": 14581,
+      "sha256": "7c30298c509a0d58764b913578eb0a417529ff20102719b93229b7c9956a39cf"
+    },
+    "paper-rea/paper/PAPERORCHESTRA_RESEARCH.md": {
+      "bytes": 3962,
+      "sha256": "db4c3ac54c4f833e48c58df40ead241d28ed2be980b9879e3c74aa3109706263"
+    },
+    "paper-rea/paper/arxiv-full.html": {
+      "bytes": 818118,
+      "sha256": "d466d3200eb887e4f2f43d501351ca4fe171e2ec60a50ffb751edb2d5ce0bc31"
+    },
+    "paper-rea/paper/arxiv-full.meta.json": {
+      "bytes": 1092,
+      "sha256": "7fa6f76aa7865f41fabeee5fa88d740c5d0e024f6cf45ef1c04144547020bdc0"
+    },
+    "paper-rea/paper/arxiv-full.txt": {
+      "bytes": 145033,
+      "sha256": "7954f7744c320d763601902dcc89724c0fc228e7a1f8cde9cb8dfcb150c00e3e"
+    },
+    "paper-rea/paper/code-head.json": {
+      "bytes": 6036,
+      "sha256": "5d73d58f0069763d71ca1d3fe72144af2444bbd3805d9fb6979c11f2fd9a14d8"
+    },
+    "paper-rea/paper/code-head.meta.json": {
+      "bytes": 2230,
+      "sha256": "58917c5b6b6463c11b67d8378a6f50ea1ed0c5fb100ef7b0fdd3c2b8f54000c2"
+    },
+    "paper-rea/paper/code-license-pinned.md": {
+      "bytes": 11357,
+      "sha256": "58d1e17ffe5109a7ae296caafcadfdbe6a7d176f0bc4ab01e12a689b0499d8bd"
+    },
+    "paper-rea/paper/code-license-pinned.meta.json": {
+      "bytes": 1647,
+      "sha256": "d2d603362824ebf13be8af85159ffaeb6ef2f7c818918ee551660593b143d353"
+    },
+    "paper-rea/paper/code-readme-pinned.md": {
+      "bytes": 4967,
+      "sha256": "6d48d5b964cb09e8362541a7c5c0df800e8b179636415299a66abc562863a795"
+    },
+    "paper-rea/paper/code-readme-pinned.meta.json": {
+      "bytes": 1649,
+      "sha256": "38d0b7a6d6abedf60f2b5e180718186cf92e05303243aa38ef279ba09a537f11"
+    },
+    "paper-rea/paper/code-readme.md": {
+      "bytes": 4967,
+      "sha256": "6d48d5b964cb09e8362541a7c5c0df800e8b179636415299a66abc562863a795"
+    },
+    "paper-rea/paper/code-readme.meta.json": {
+      "bytes": 1577,
+      "sha256": "987e498f250abde6d7d9d679d451ffa05def917cc8651224b1f19f14c781a98f"
+    },
+    "paper-rea/paper/code-repo.json": {
+      "bytes": 7330,
+      "sha256": "499978de7211ae463aa20ff97e070b3519b4c3fc84166f792c123b9513a4a543"
+    },
+    "paper-rea/paper/code-repo.meta.json": {
+      "bytes": 2210,
+      "sha256": "6bcf21298077e94f4db7a1429407fcf0afa7b5e8d078fbd8647845586c7552e4"
+    },
+    "paper-rea/paper/dataset-metadata.json": {
+      "bytes": 1708,
+      "sha256": "53ec631e938667e1331c0f477a1a9f2023be4f1a486c2178d019b6f3fc9e0e56"
+    },
+    "paper-rea/paper/dataset-metadata.meta.json": {
+      "bytes": 1642,
+      "sha256": "746568ff92c6db0c4459a25e97195df1fca463407dc581d2603d619231ee055d"
+    },
+    "paper-rea/paper/dataset-readme.md": {
+      "bytes": 1613,
+      "sha256": "6ef8d0760c686d49df8243124823d5ac456aba09849d2957217b63b74ed75706"
+    },
+    "paper-rea/paper/dataset-readme.meta.json": {
+      "bytes": 1934,
+      "sha256": "a4f06cc2f6d861461852dc1aa0e1d0ee30e39ddaa3c1bafc9f0a318226203e8d"
+    },
+    "paper-rea/paper/human-eval-bar.meta.json": {
+      "bytes": 1046,
+      "sha256": "e17aca160f527fed8a8738c92d1a9ef462dfa565769707a724788cee1a0cf19b"
+    },
+    "paper-rea/paper/human-eval-bar.png": {
+      "bytes": 207217,
+      "sha256": "a777b410036717c2c0f7d03203d33b8c7546a2e8a124a85e9b6279f5cf810ecd"
+    },
+    "paper-rea/paper/newsletter-short.html": {
+      "bytes": 102655,
+      "sha256": "ae15bd26fbbd8cf0b30462dc1a03a384d88807f65f1eab56a914287f68cee980"
+    },
+    "paper-rea/paper/newsletter-short.meta.json": {
+      "bytes": 1365,
+      "sha256": "56ec38ec2bf372958d49662c4102b7220dd4fc20a5ecfef1ead6c1392e86aeab"
+    },
+    "paper-rea/paper/paper-short.html": {
+      "bytes": 40717,
+      "sha256": "80ce7d6252fc99260a4df97ccf57a0304f1fa4a86f3b06a2bd108a626f96cf51"
+    },
+    "paper-rea/paper/paper-short.meta.json": {
+      "bytes": 1092,
+      "sha256": "a43a3045e8b8998317007a3623bf3fcd40634647f3b2335dd200bb03b6d7993e"
+    },
+    "paper-rea/paper/paper-short.txt": {
+      "bytes": 4567,
+      "sha256": "3035fbef859de202095febffad312537e8750c6a908c2d2d727731314d038c2b"
+    },
+    "paper-rea/paper/project.html": {
+      "bytes": 23243,
+      "sha256": "21c4109b8b9a81ae82692df6d46db28dc9787adc560f69ee1c06bfe199cf7060"
+    },
+    "paper-rea/paper/project.meta.json": {
+      "bytes": 1267,
+      "sha256": "bc747a96577b5991257b5d1e8904b88ab36a8803f411e9c7675215d82e45c2cd"
+    },
+    "paper-rea/paper/project.txt": {
+      "bytes": 5591,
+      "sha256": "00796be4ede8fa32183ddeb5dca5e4e3027dcde67abf9bef79b0c16926736676"
+    },
+    "paper-rea/rea/CAPTURES.json": {
+      "bytes": 6799,
+      "sha256": "e1c61fd9bd80895e8641a1132856d8abe7c154c97bd4272493eb8b96f561a68d"
+    },
+    "paper-rea/rea/LICENSE": {
+      "bytes": 1064,
+      "sha256": "798f9e4d18e49b30bf2f12696c8ced73dc4e1413da375a333d01281543a1ea8b"
+    },
+    "paper-rea/rea/README.md": {
+      "bytes": 33147,
+      "sha256": "c69fd9ddafdd824cc0626cab47edf491018a7b3e175c516abd35e83b045c687a"
+    },
+    "paper-rea/rea/REA_RESEARCH.json": {
+      "bytes": 11461,
+      "sha256": "a6adcc3f09ada1ac47028d927b205a8c65aedaf079284f233aeba2f5757a6cc2"
+    },
+    "paper-rea/rea/REA_RESEARCH.md": {
+      "bytes": 2980,
+      "sha256": "72bfc5bef6db83876729e16ab92a67d2aeb1837d526465596a46b39da8fa9431"
+    },
+    "paper-rea/rea/github-head-commit.json": {
+      "bytes": 42956,
+      "sha256": "7afec98be90c27d165c914fb9ed48aad0a8f79cb2b210181706b97202a384efb"
+    },
+    "paper-rea/rea/github-license.json": {
+      "bytes": 2307,
+      "sha256": "c4a88df525e3f774f39fb8b6b84bee23981b441fcef7231cbda84c4104402557"
+    },
+    "paper-rea/rea/github-readme.json": {
+      "bytes": 46390,
+      "sha256": "bda8659774f7267326c70abbc292291a02fc8da2170803093a1700ca861a750d"
+    },
+    "paper-rea/rea/github-repository.json": {
+      "bytes": 5199,
+      "sha256": "b9581acf9775205af13d90babb7c5783456087ad1c6ec4682bc97d2f23b41395"
+    },
+    "paper-rea/rea/pinned-LICENSE": {
+      "bytes": 1064,
+      "sha256": "798f9e4d18e49b30bf2f12696c8ced73dc4e1413da375a333d01281543a1ea8b"
+    },
+    "paper-rea/rea/pinned-README.md": {
+      "bytes": 33147,
+      "sha256": "c69fd9ddafdd824cc0626cab47edf491018a7b3e175c516abd35e83b045c687a"
+    },
+    "paper-rea/rea/pinned-THIRD_PARTY_NOTICES.md": {
+      "bytes": 27546,
+      "sha256": "451c79668b69ec00d36fb370e84da029231fa71af2b35447678f577329db3116"
+    },
+    "paper-rea/rea/pinned-docs_getting-started_cli.md": {
+      "bytes": 87846,
+      "sha256": "488e6f9cf4113606f1567e67a117fb6d88f3f9e643e2f1c329016a99f0fe1dc8"
+    },
+    "paper-rea/rea/pinned-docs_reference_mcp-contracts.md": {
+      "bytes": 162331,
+      "sha256": "dc76b7a1835984664f2020e83b3ce3d2f14d54a3ecdb0a3d592602cb317a371d"
+    },
+    "paper-rea/rea/tco-resolved.html": {
+      "bytes": 465103,
+      "sha256": "528d605d4ffcf032023b30a02ff24c2b2fa0efbd32d040c3a12008a1588c9da8"
+    },
+    "security/FETCH_MANIFEST.json": {
+      "bytes": 6450,
+      "sha256": "7dcb04c06ee463d2d8b42ba1a31eb4b06607a364c833932677b3eccdad37d3fd"
+    },
+    "security/PROJECT_EVIDENCE_MANIFEST.json": {
+      "bytes": 2175,
+      "sha256": "63a2a35f2b7ccaa14f90861e71a53a318ed78eaaedf25901d89b43f3e2d69df5"
+    },
+    "security/SOURCES_1_2_REVIEW.md": {
+      "bytes": 14546,
+      "sha256": "7ea8aee8754dcce21241213d4d4d8228955360fb0c9ee625591378fc339b4f01"
+    },
+    "security/next_blog.html": {
+      "bytes": 642277,
+      "sha256": "d243c6e3df4fbe343e4639aa147459d20a715761b6a82beb1c4765924b604720"
+    },
+    "security/next_ghsa.html": {
+      "bytes": 145180,
+      "sha256": "d7e7e2dda74c480879329d182d2366b3b3fcaaefdef6e67f5d5a470a46a3dc08"
+    },
+    "security/next_ghsa.txt": {
+      "bytes": 4805,
+      "sha256": "c4f5eeeb1c91120aaeaad20118fc0a8b23c77167d16d24e6e9798ec66f98dcde"
+    },
+    "security/next_poc_repo_README.md": {
+      "bytes": 8537,
+      "sha256": "d0a80afd0911f2d031feb598a4849c7956c77d786f5bcdfdd8c4085ca2640876"
+    },
+    "security/next_poc_repo_metadata.json": {
+      "bytes": 6108,
+      "sha256": "e90033547e613b1a4b3cc3a87ed3dbedb6944528256505387ee36799d7e29644"
+    },
+    "security/next_poc_repo_readme.json": {
+      "bytes": 12672,
+      "sha256": "522e2e59075a8a60c4e2cf0db01f1f357aad605fefed2d9deaa725281aa2928b"
+    },
+    "security/next_vercel_blog.html": {
+      "bytes": 642277,
+      "sha256": "d243c6e3df4fbe343e4639aa147459d20a715761b6a82beb1c4765924b604720"
+    },
+    "security/next_vercel_blog.txt": {
+      "bytes": 9763,
+      "sha256": "b1e3fc17bbaf4e63510115882a439ee3304ea88b836ec7a034cab3f26182733d"
+    },
+    "security/postgres_cve_2026_6460.html": {
+      "bytes": 8935,
+      "sha256": "7828d64b19b51754a7797634d2863db41be3b04760d838d79885ddaacc9add8d"
+    },
+    "security/postgres_cve_2026_6460.txt": {
+      "bytes": 1710,
+      "sha256": "f6502e7233598867d63a8e327cc35f6fe35c257a0f1838235c8636969676d1cb"
+    },
+    "security/postgres_extensions_rpm.html": {
+      "bytes": 13645,
+      "sha256": "c382a93c6566f5c87ec8d19294ec201c88596fdcc0c1f3444dcaef32d7ebf70c"
+    },
+    "security/postgres_extensions_rpm.txt": {
+      "bytes": 3799,
+      "sha256": "bed85e89513d47f9c36ec80f53a35bfe0cc56b7974511df95911a1eb86e0dfde"
+    },
+    "security/postgres_release_18_7.html": {
+      "bytes": 113024,
+      "sha256": "4619c5203803e7919a3139306a69a54032ec7bd3637b9cc5755a659ca1791955"
+    },
+    "security/postgres_release_18_7.txt": {
+      "bytes": 56695,
+      "sha256": "bfc39a3dbf15884866f0c69f68f5c3feb9cb76551234b0f1e57cd95870b5bf88"
+    },
+    "security/postgres_release_news.html": {
+      "bytes": 40530,
+      "sha256": "a9b4dab483dcf02567d682eb7a200c4cb8ae0d5d22d4cc542c523d8505239f39"
+    },
+    "security/postgres_release_news.txt": {
+      "bytes": 17340,
+      "sha256": "f18280c3f01c3542e956bfecee290a1eb8172392298673277b78fa16630af07f"
+    },
+    "security/postgres_researcher.html": {
+      "bytes": 247629,
+      "sha256": "b2ee8cc332393a0300906ac74ea4c02dac5cabb5b2cddde01d60312f56d94cb5"
+    },
+    "security/postgres_researcher.txt": {
+      "bytes": 36618,
+      "sha256": "480be9792d8fd5692c638f332c3cd51647a660189db69c4a41227b5b90d9f663"
+    },
+    "security/postgres_security.html": {
+      "bytes": 107774,
+      "sha256": "488a74940789b611d7bf186e41dee868addf3a9fc682e8005f46a482f436a6cd"
+    },
+    "security/postgres_security.txt": {
+      "bytes": 33522,
+      "sha256": "7d6b1e221bfb994aa3eb885674b7f79dffaca4178da2a5962d4bdbdb4be3b7d4"
+    },
+    "security/postgres_thn_article.html": {
+      "bytes": 170792,
+      "sha256": "024de857e3d546c8b4c23c4aa6d5724a1abb461adbebcf068d1c3edf205746d8"
+    },
+    "security/postgres_thn_article.txt": {
+      "bytes": 10360,
+      "sha256": "82a19ef514f0fb03111a509e8d8f340182a32230b66a9db2264a5beed0f4a7af"
+    },
+    "security/postgres_versioning.html": {
+      "bytes": 12736,
+      "sha256": "060e662377772eea88da1b630698a29dc015d3747609135182c348ca848b97c4"
+    },
+    "security/postgres_versioning.txt": {
+      "bytes": 4282,
+      "sha256": "4a36d02efdc72148dcfe3887dcbb8b19808a0166e416323702f14d38bf6a78b7"
+    }
+  },
+  "remaining_work": [
+    "Actual deployed PostgreSQL/Next version and configuration evidence if these components are present",
+    "Any tool integration requires a reviewed adapter preserving current schemas/authority",
+    "Representative comparison before a candidate is called a measured upgrade",
+    "Publication and merge/activation states tracked separately"
+  ]
+}

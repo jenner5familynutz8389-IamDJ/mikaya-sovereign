@@ -1,0 +1,43 @@
+{
+  "schema": "mikaya.verified-events.public-v2-verification.v1",
+  "captured_utc": "2026-11-15T16:42:35.939976+00:00",
+  "combined_validation_exit_code": 0,
+  "node_tests_passed": 28,
+  "python_tests_passed": 41,
+  "total_passed": 69,
+  "failed": 0,
+  "skipped": 0,
+  "commands": [
+    "node --test tests/test_ledger_event_collector.cjs tests/test_device_observation_producer.cjs tests/test_collector_snapshot_durability.cjs",
+    "python -m unittest discover -s tests -p 'test_*.py' -v",
+    "python -m py_compile mikaya_background_bridge.py verified_ledger_hook.py"
+  ],
+  "new_evidence": [
+    "Real321-row valid Ed25519 chain:0disposable-file fsyncs, committed projection-file\u2192rename\u2192directory barriers retained",
+    "Frozen prior source hashes verify and deterministically shows321unnecessary snapshot fsyncs",
+    "Snapshot-write exception leaves source/checkpoint byte-identical, cleans own lock and permits retry",
+    "Actual owned-child SIGKILL at snapshot row20 preserves source/checkpoint, retains orphan lock, and subsequent collection refuses conservatively"
+  ],
+  "independent_review": {
+    "agent": "userspace_evidence",
+    "scope": "Authored/froze new tests independently; runtime delta review requested",
+    "status": "APPROVED_EXACT_RUNTIME_AND_GUARDED_QUARANTINE"
+  },
+  "native_benchmark": {
+    "old_collector_elapsed_seconds": 1.181936691980809,
+    "old_snapshot_fsync_ms": 181.17484099999882,
+    "native_eight_second_timeout_reproduced": false,
+    "later_stale_source_failure_expected": true
+  },
+  "native_v2_acceptance": "TWO_FOREGROUND_PLUS_INITIAL_BACKGROUND_ACCEPTED",
+  "service_recovered": true,
+  "source_checkpoint_or_ledger_reset": false,
+  "native_acceptance_summary": "NATIVE_ACCEPTANCE_SUMMARY.json",
+  "raw_logs_exported": false,
+  "publication_reran_unchanged_tests": false,
+  "scope_note": "Completed sealed-source checks on identical runtime/test bytes. Later native recovery is a separate coordinator result; historical timeout causality and indefinite service availability are not proved.",
+  "retained_source_test_log_sha256": {
+    "NODE_TEST_RESULTS.log": "b7f9e6bc8927f6fb40957ad5527d501b0eba35a3939085aa0842394f97b474ca",
+    "PYTHON_TEST_RESULTS.log": "6226727b933180191471b7de0410414e9f13008041fe55e1528d635ed124776f"
+  }
+}

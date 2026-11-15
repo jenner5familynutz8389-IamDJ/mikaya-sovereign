@@ -1,26 +1,23 @@
 # ACT-Omega independent mesh onboarding — public protocol
 
+> Current source handoff (November 15, 2026): use [ACT_HANDOFF_CURRENT_20261115.md](ACT_HANDOFF_CURRENT_20261115.md) and its pinned manifest. The review-branch/PR pointers below describe the older setup; they do not describe current repository merge state or live ACT enrollment.
+
 This procedure allows a second owner to **request** a scoped federation grant. It does not automatically create a VPN link, wallet, administrative access, hardware attestation or permission to execute arbitrary code.
 
-## 1. Install the reviewed source and test it
+## 1. Use the current source handoff and test it
 
-The owner-approved MIKAYA GitHub **review branch is published** and independently verified. GitHub [draft PR #2](https://github.com/jenner5familynutz8389-IamDJ/mikaya-sovereign/pull/2) is the review and contribution entry point; the work is NOT merged to main. Review the source before running it. Node.js 22+ is required.
+Use the reviewed [current handoff](ACT_HANDOFF_CURRENT_20261115.md), its immutable source references and `ACT_HANDOFF_SOURCE_MANIFEST_20261115.json`. It identifies the current GitLab base and the unchanged verifier/test recovered from published GitHub source. Review the selected source before running it. Node.js 22+ is required. From the checkout or selected source bundle root:
 
-```bash
-git clone --single-branch --branch review/act-omega-federation-toybox-20261108 https://github.com/jenner5familynutz8389-IamDJ/mikaya-sovereign.git mikaya-sovereign-act-review
-cd mikaya-sovereign-act-review
+```sh
+cd engineering/federation/live
+node --test tests/test_mesh_invite.cjs tests/test_owner_authorization.cjs tests/test_act_backend_compat.cjs
 ```
 
-```bash
-node --test engineering/federation/live/tests/*.cjs
-node engineering/federation/live/toybox-mempool-bridge.cjs inspect
-```
-
-The Bitcoin Toybox observer is public, read-only and checks a **historical confirmed mainnet transaction**. It is not the ACT wallet's address, balance, Lightning payment or custody authorization.
+The recorded local run passed 25 focused tests using synthetic fixture keys. The selected source handoff does not include the separate Toybox observer and does not require it for enrollment-contract checks. Historical Bitcoin observations are not ACT identity, permission or payment evidence.
 
 ## 2. Establish an ACT-owned signing identity
 
-ACT creates a unique signing identity on an ACT-controlled computer. **Do not reuse MIKAYA or Motorola key files.** Run inside the approved source directory:
+ACT uses its own signing identity on an ACT-controlled computer. Reuse an existing reviewed ACT identity; the following `init` command is only for first setup into a new directory. **Do not reuse MIKAYA or Motorola key files.** Run inside the approved source directory:
 
 ```bash
 cd engineering/federation/live
@@ -50,7 +47,7 @@ This validates software signatures, not hardware-root identity. It returns `enro
 
 ## 4. Complete independent hardware and network authorization
 
-Manufacturer-backed KeyMint/YubiKey certificate evidence must be challenged and reviewed against trusted roots, revocation and device-owner policy. A separately trusted reviewer must sign the result. The MIKAYA owner must independently approve a short-lived, capability-limited grant. The v2 broker enforces these two signed grants; production ACT access is currently **HOLD**.
+Manufacturer-backed KeyMint/YubiKey certificate evidence must be challenged and reviewed against trusted roots, revocation and device-owner policy. A separately trusted reviewer must sign the result. The MIKAYA owner must independently approve a short-lived, capability-limited grant. The v2 broker enforces these two independent signatures; production ACT access is currently **HOLD**.
 
 For remote routing, both owners choose and authorize a restricted encrypted overlay endpoint, such as a single-device Tailscale share, with TLS hostname and pinned peer identity. Neither a repository checkout nor a GitHub OAuth session authorizes network routing. Limit outbound and inbound capabilities to approved compute; never expose Android debugging, shell, modem/OTA endpoints, wallet software, raw logs or device storage.
 
@@ -60,6 +57,6 @@ ACT builds and funds ACT's own wallet, on the owner-chosen Bitcoin network. A si
 
 ## 6. Request source improvements safely
 
-ACT can now fork [the public GitHub repository](https://github.com/jenner5familynutz8389-IamDJ/mikaya-sovereign/pull/2) and open a PR proposing changes to the MIKAYA review branch. Source PRs require review, tests, minimized disclosures and owner approval; they do not enroll ACT's node or modify a running device. Do not place any device private-key, transaction signing secret, Google session, legal allegation, wallet address, personal identifier or internal network route in a public issue.
+Use the owner-approved repository contribution workflow for the relevant source revision: a PR on GitHub or an MR on GitLab. The current handoff distinguishes published source from the still-blocked GitHub update; a prepared bundle does not grant repository access. Source PRs require review, tests, minimized disclosures and owner approval; they do not enroll ACT's node or modify a running device. Do not place any device private-key, transaction signing secret, Google session, legal allegation, wallet address, personal identifier or internal network route in a public issue.
 
-**Current evidence:** MIKAYA F110 and Motorola authenticated each other over TLS and passed 72 federation/Toybox/ledger tests in a clean GitHub checkout, plus 9 public evidence-brief tests (81 total); neither is ACT's physical node. GitHub source publication and owner write authorization are verified; independent hardware admission, ACT identity, approved encrypted route and payment settlement remain pending.
+**Dated evidence:** The older device report records MIKAYA F110/Motorola mutual TLS and 72 federation/Toybox/ledger tests plus 9 public evidence-brief tests. Those are MIKAYA's phones, not an ACT node, and were not rerun for this source handoff. The current selected-source run passed 25 tests. External ACT hardware/owner admission and live bilateral acceptance remain HOLD; current GitHub update access is a separate delivery blocker, not a claim that prior public source is unpublished.

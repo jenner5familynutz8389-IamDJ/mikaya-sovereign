@@ -1,0 +1,8 @@
+{
+  "schema": "mikaya.verified-ledger-config.v1",
+  "ledger_dir": "/ABSOLUTE/PRIVATE/signed-events",
+  "public_key_path": "/ABSOLUTE/PRIVATE/existing-owner-node/identity-public.pem",
+  "expected_fingerprint": "*INSERT-YOURS-PUBLIC-ED25519-FINGERPRINT*",
+  "state_dir": "/ABSOLUTE/PRIVATE/verified-projection",
+  "max_age_ms": 300000
+}

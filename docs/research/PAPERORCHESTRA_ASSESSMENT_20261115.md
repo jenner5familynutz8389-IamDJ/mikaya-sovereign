@@ -1,0 +1,20 @@
+# Source 3 — PaperOrchestra
+
+The November 14 X post summarizes an existing research paper, not a new November release. [arXiv v1](https://arxiv.org/html/2604.05018v1) was submitted April 6, 2026. The four authors are Yiwen Song, Yale Song, Tomas Pfister and Jinsung Yoon; the project page and pinned code README identify all four with Google Cloud AI Research. [Code](https://github.com/google-research/paper-orchestra) is public under Apache-2.0 at inspected HEAD `ca1b3fa01c2970fc7cda32d16245db38d57b3f56` (May 17). Its README says it is not an officially supported Google product. The paper is CC BY 4.0; the separate public Hugging Face dataset card declares Apache-2.0. No repository or dataset was installed or run.
+
+The framework turns supplied idea summaries and experiment logs into LaTeX with outline, literature, plot, writing and refinement stages. It does not run the scientific experiments. Its benchmark reconstructs 200 already accepted 2025 papers (100 CVPR, 100 ICLR), using LLM-extracted ideas/results from those published papers. Main comparisons use sparse summaries and **PlotOff**, with extracted ground-truth figures, so the strongest headline comparison does not validate generated visuals in every output.
+
+The 84%/81% values are **simulated ScholarPeer reviewer acceptance**, against 86%/94% for the original human papers. A second automated reviewer gives 48%/22%, against 71%/63%. Neither figure is a real conference acceptance rate for generated papers. The citation-count summary is faithful: roughly 46–48 for PaperOrchestra, 59 human, 10–14 AI baselines. Matching a citation to a Semantic Scholar entity validates existence, not every associated claim.
+
+Human evaluation used 11 researchers, 40 sampled papers and 180 evaluations over 120 unique pairs. Literature review win/tie/loss against human papers was 19%/24%/57%, hence the reported 43% win-or-tie. Against the two AI baselines, literature wins were 73% and 67%; the 50–68 headline refers to **win-minus-loss margins in percentage points**. For full-paper quality, human originals won 81%, PaperOrchestra 5%, with 14% ties. The mean 39.6-minute latency came from only ten papers, dropping the fastest and slowest run before averaging, and involved about 60–70 model calls.
+
+The paper acknowledges figure hallucination, remaining human quality gaps and possible pretraining contamination. Automated literature judgments correlate weakly with human preferences. Its refinement appendix also contains a directive to avoid explicitly stating limitations, justified as preventing score gaming; that prompt should not be adopted for MIKAYA evidence writing, which must disclose missing evidence. Humans remain responsible for factual accuracy, originality and validity.
+
+MIKAYA relevance is a potential **review-only evidence-report adapter**, using the existing signed bundle intake and a claim-to-source registry, not a replacement core. The existing project evidence inventory shows owner-scoped grants, signed digest provenance, bounded admission and thermal optional-work controls that could govern any later owner-approved integration. Signed evidence would establish origin and integrity, not truth. Existing code has not been shown to generate papers, and no integration has been made. External API latency/cost/privacy and device suitability remain untested.
+
+No distinctive source-code/expression match, access evidence or causal evidence establishes copying or priority. General agent separation and review are architectural overlap only. The X reply's other short link resolves to the author's newsletter homepage, not another technical source.
+
+Captures, their HTTP metadata, the inspected human-evaluation figure and the machine-readable claim mapping are retained in this directory; `PAPERORCHESTRA_RESEARCH.json` identifies primary URLs, pinned revisions, exact reported values, source-text line references and reused MIKAYA source-inventory records.
+
+
+Public bundle note: raw HTTP captures and source manifests described above are retained separately; the companion X-source evidence index records their digests. No external tool was installed or run.
