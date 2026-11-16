@@ -1,0 +1,135 @@
+{
+  "schema": "mikaya.f110.public-repair-summary.v1",
+  "record_date": "2026-11-16",
+  "publication_kind": "sanitized engineering summary; private device receipts retained separately",
+  "device_family": "FOSSiBOT F110 Pro",
+  "status": "CANDIDATES_BUILT_NOT_APPLIED",
+  "live_native_observation": {
+    "running_slot": "b",
+    "verified_boot_state": "green",
+    "bootloader_locked": true,
+    "android_boot_completed": true,
+    "identity_matched_expected_target": true,
+    "controller": "Motorola USB ADB",
+    "USB_data_role_correction": "F110 host/source -> device/sink",
+    "protected_storage_read_or_write_access_established": false
+  },
+  "failed_boot": {
+    "observed_log": [
+      "verity-fec: 254:2: FEC: recursion too deep",
+      "verity: 254:2: metadata block 191350 is corrupted",
+      "Restarting system with command 'dm-verity device corrupted'"
+    ],
+    "A_selection_and_reboot_accepted": true,
+    "subsequent_running_slot": "b",
+    "data_backing_label": "254:2",
+    "absolute_hash_device_block": 191350,
+    "failed_mapper_table_recovered": false,
+    "partition_identity_conclusive": false,
+    "first_corrupting_write_time_established": false,
+    "exploit_or_backdoor_established": false
+  },
+  "shared_storage": {
+    "all_seven_A_sizes_match_signed_incremental_OLD": true,
+    "all_seven_B_sizes_match_signed_incremental_NEW": true,
+    "physical_A_B_extents_overlap": true,
+    "all_seven_captured_B_verity_configurations_match_OEM": true,
+    "captured_snapshot_state": "none",
+    "captured_current_backing": "linear",
+    "complete_live_partition_byte_integrity_proven": false,
+    "interpretation": "stale OLD A view over updated shared storage is consistent with failure; exact failed mapper is missing"
+  },
+  "OTA_reference": {
+    "metadata_signature_result": "Verified OK under current system OTA certificate",
+    "retained_metadata_file_sha256": "95ad3477496c96290a7903aa794150b4537a519081b445fe23fb5c1bf36d5edf",
+    "payload_operation_data_present": false,
+    "signed_target_timestamp_utc": "2026-06-02T12:33:40Z"
+  },
+  "native_static_component_build": {
+    "verified_components": 21,
+    "component_names": [
+      "boot",
+      "connsys_bt",
+      "dpm",
+      "dtbo",
+      "gz",
+      "init_boot",
+      "lk",
+      "logo",
+      "mcf_ota",
+      "mcupm",
+      "md1img",
+      "pi_img",
+      "scp",
+      "spmfw",
+      "sspm",
+      "tee",
+      "vbmeta",
+      "vbmeta_system",
+      "vbmeta_vendor",
+      "vcp",
+      "vendor_boot"
+    ],
+    "bundle_bytes": 289381803,
+    "bundle_sha256": "faa5c4df53a43a030ca119fbd89496f6344935ac177d168f1f38600b784cb595",
+    "target_hashes_authenticated": true,
+    "persisted_members_rehashed": true,
+    "applied": false,
+    "full_repair_package": false
+  },
+  "native_LP_candidate_validation": {
+    "parser": "AOSP lpdump -s 0",
+    "exit_code": 0,
+    "A_data_names_present": true,
+    "image_bytes": 405504,
+    "image_sha256": "8d0d0b84ac780d9b17b9fd88d8356aa0624e0eb509abc6c1f941e64b76482289",
+    "geometry_provenance": "OEM reference, not fresh raw live readback",
+    "dynamic_partition_data_bytes": 0,
+    "other_metadata_slots": "zero/invalid in inspection artifact",
+    "whole_image_must_not_be_flashed": true,
+    "applied": false,
+    "phone_boot_tested": false
+  },
+  "capability_limit": {
+    "native_command_shell_uid": 2000,
+    "kernel_root_established": false,
+    "super_and_boot_a_read_and_read_write_open": "denied",
+    "stock_DA_acceptance_verified": false
+  },
+  "acceptance": {
+    "image_repair_complete": false,
+    "A_boot_proven": false,
+    "IMS_functional_acceptance_complete": false,
+    "OEM_submission_sent": false
+  },
+  "remaining": [
+    "validated data-retaining privileged/OEM service transport",
+    "fresh geometry/all metadata primary-backup and boot-component readback",
+    "complete logical data/tree/FEC and boot dependency verification",
+    "bounded apply transaction plus exact readback preserving userdata, B and third metadata slot",
+    "actual A boot locked/green, owner unlock and development file access",
+    "separate carrier IMS/calling/SMS acceptance"
+  ],
+  "privacy": {
+    "raw_device_receipts_included": false,
+    "device_identifiers_included": false,
+    "network_addresses_included": false,
+    "keys_credentials_or_email_included": false,
+    "firmware_or_inspection_images_included": false,
+    "personal_telemetry_included": false
+  },
+  "OEM_debug_and_DA_reference": {
+    "production_delegated_boot_key_sha1": "9d808b0995768d0677fccb1efcddb7cf9e153d99",
+    "normal_boot_key_matches_production_delegate": true,
+    "boot_debug_key_sha1": "cdbb77177f731920bbe0a0f94f84d9038ae0617d",
+    "boot_debug_trusted_root_route_established": false,
+    "boot_debug_booted_or_flashed": false,
+    "OEM_DA_container_hash_verified_natively": true,
+    "declared_DA_signature_tail_bytes": 256,
+    "declared_DA_signature_tails_all_zero": true,
+    "DA_accepted_or_authenticated": false,
+    "DA_storage_readback_observed": false,
+    "root_normal_and_debug_AVB_self_signatures_valid": true,
+    "complete_image_payload_or_native_partition_readback_verified": false
+  }
+}
