@@ -4,6 +4,8 @@ This index connects the reviewed collaboration source and the latest dated resea
 
 ## Current engineering source
 
+The latest device repair record is the [November 16 boot-integrity findings](oem/F110_BOOT_INTEGRITY_FINDINGS_20261116.md) and its [sanitized machine-readable evidence](oem/F110_BOOT_INTEGRITY_EVIDENCE_20261116.json). Native reference-image and parser checks have passed; the candidates are not applied, and actual A boot and IMS acceptance remain unproven.
+
 | Source | What it covers | Acceptance boundary |
 |---|---|---|
 | [Verified event integration](https://github.com/jenner5familynutz8389-IamDJ/mikaya-sovereign/blob/main/integrations/security-tollbooth/verified-events/README.md) | Signed local observation projection, bounded publishing, retry/persistence behavior and dated verification. | Package tests and bounded observation/upload evidence do not establish hardware attestation, payments or complete device repair. |
