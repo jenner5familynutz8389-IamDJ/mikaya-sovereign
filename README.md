@@ -22,6 +22,8 @@ Signed user-space source is NOT an OEM-signed boot/vendor image for a locked And
 
 ## Reviewed source and evidence
 
+The [mobile-edge review update](engineering/federation/mobile-edge/README.md) adds an owner-local signed evidence interface, a combined launcher using the existing node, stricter ACT ingress checks, and verified AHAVA resume. Its local-fixture evidence is separate from the historical two-phone results above; installation and live ACT admission remain pending.
+
 See the [current source index](docs/CURRENT_SOURCE_INDEX_20261115.md) for the reviewed runtime, collaboration, Android input-contract and research sources. Repository publication, device acceptance and external partner admission remain separate recorded states.
 
 The [public source boundary](docs/oem/PUBLIC_GITHUB_SOURCE_BOUNDARY_20261115.md) records the intentional Android HOLD when private provenance or external AOSP/OEM inputs are unavailable.

@@ -1,19 +1,22 @@
 'use strict';
 /* AHAVA peer reconciliation: signed encrypted content only, idempotent retry. */
-const fs=require('fs'),path=require('path'),http=require('http');
-const core=require('./core');
+const fs=require('fs'),path=require('path'),http=require('http'),net=require('net');
+const defaultCore=require('./core');
+const MAX_RESPONSE=250000;
+// Import is inert. Credentials, timers and network work begin only when the
+// owner explicitly creates/starts a synchronizer (the existing CLI does so).
+function createSynchronizer({core=defaultCore,target=process.env.AHAVA_PEER_URL,request:customRequest,log=console.log,logError=console.error}={}){
 const ROOT=core.DIR,STATE=path.join(ROOT,'sync-state.json');
-const token=fs.readFileSync(path.join(process.env.HOME,'sovereign_exec','ledger','.mesh_token'),'utf8').trim();
-if(!/^[a-f0-9]{64}$/i.test(token))throw Error('Missing mesh key');
-const target=process.env.AHAVA_PEER_URL;
 if(!target)throw Error('AHAVA_PEER_URL required for synchronization');
 const peer=new URL(target),host=peer.hostname;
 const a=host.split('.').map(Number);
-const tailnet=a.length===4&&a[0]===100&&a[1]>=64&&a[1]<=127;
-if(peer.protocol!=='http:'||!(tailnet||host==='127.0.0.1'||host==='localhost'))throw Error('Peer must be on private tailnet or loopback');
-const MAX_RESPONSE=250000;
+const tailnet=net.isIP(host)===4&&a[0]===100&&a[1]>=64&&a[1]<=127;
+if(peer.protocol!=='http:'||peer.username||peer.password||peer.search||peer.hash||!(tailnet||host==='127.0.0.1'||host==='localhost'))throw Error('Peer must be on private tailnet or loopback');
+if(customRequest!==undefined&&typeof customRequest!=='function')throw Error('Invalid transport');
+let token;
+if(!customRequest){token=fs.readFileSync(path.join(path.dirname(ROOT),'ledger','.mesh_token'),'utf8').trim();if(!/^[a-f0-9]{64}$/i.test(token))throw Error('Missing mesh key');}
 const save=x=>{const tmp=STATE+'.tmp';fs.writeFileSync(tmp,JSON.stringify(x)+'\n',{mode:0o600});fs.renameSync(tmp,STATE);};
-function request(method,endpoint,data){
+function httpRequest(method,endpoint,data){
  return new Promise((resolve,reject)=>{
   const payload=data===undefined?null:JSON.stringify(data);
   const req=http.request({hostname:peer.hostname,port:Number(peer.port||43824),
@@ -28,8 +31,11 @@ function request(method,endpoint,data){
   if(payload)req.end(payload);else req.end();
  });
 }
+const request=customRequest||httpRequest;
+const checkedId=id=>{if(typeof id!=='string'||!/^[a-f0-9]{64}$/.test(id))throw Error('bad content identifier');return id;};
 const readLocal=id=>JSON.parse(fs.readFileSync(path.join(ROOT,'manifests',id+'.json'),'utf8'));
 async function push(id){
+ checkedId(id);
  const m=readLocal(id);
  for(const ch of m.chunks){
   const file=fs.readFileSync(path.join(ROOT,'chunks',ch.id+'.bin'));
@@ -41,16 +47,16 @@ async function push(id){
  return id;
 }
 async function pull(id){
+ checkedId(id);
  const data=await request('GET','/ahava/manifest/'+id);
  if(data.id!==id)throw Error('remote manifest id mismatch');
- const m=data.manifest,chunks=[];
- if(!Array.isArray(m?.chunks))throw Error('missing chunk list');
- for(const ch of m.chunks){
+ const download=core.prepareDownload(id,data.manifest);
+ for(const ch of download.missing){
   const r=await request('GET','/ahava/chunk/'+ch.id);
   if(r.id!==ch.id)throw Error('remote chunk id mismatch');
-  chunks.push({id:r.id,base64:r.data});
+  download.acceptChunk(ch.index,r.data);
  }
- const imported=core.importPack({schema:'ahava.replication.v1',id,manifest:m,chunks});
+ const imported=download.complete();
  if(imported.id!==id)throw Error('import mismatch');
  return id;
 }
@@ -64,13 +70,20 @@ async function cycle(){
  for(const id of toPush)pushed.push(await push(id));
  for(const id of toPull)pulled.push(await pull(id));
  const state={ok:true,node:core.NODE,peer:host,lastSuccess:new Date().toISOString(),sent:pushed,received:pulled,localCount:core.list().length,remoteCount:other.size};
- save(state);console.log(JSON.stringify(state));return state;
+ save(state);log(JSON.stringify(state));return state;
 }
 async function once(){
  try{await cycle();return true;}
  catch(e){let previous={};try{previous=JSON.parse(fs.readFileSync(STATE,'utf8'));}catch{}
    const state={...previous,ok:false,node:core.NODE,peer:host,lastError:e.message.slice(0,170),lastAttempt:new Date().toISOString()};
-   save(state);console.error('AHAVA_SYNC_RETRY',state.lastError);return false;}
+   save(state);logError('AHAVA_SYNC_RETRY',state.lastError);return false;}
 }
-if(process.argv.includes('--once'))once().then(ok=>{if(!ok)process.exitCode=2;});
-else{async function loop(){await once();setTimeout(loop,60000);}loop();}
+return {push,pull,cycle,once};
+}
+module.exports={createSynchronizer};
+if(require.main===module){
+ try{const sync=createSynchronizer();
+  if(process.argv.includes('--once'))sync.once().then(ok=>{if(!ok)process.exitCode=2;});
+  else{async function loop(){await sync.once();setTimeout(loop,60000);}loop();}
+ }catch(e){console.error('AHAVA_SYNC_HOLD',e.message);process.exitCode=2;}
+}

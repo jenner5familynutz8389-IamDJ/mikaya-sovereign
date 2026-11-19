@@ -59,3 +59,16 @@ test('broker v2 HOLD requires no ACT certificate or reviewer root merely for a d
  const x=fixture(t),p=x.policy();p.enabled=false;p.allowedUpstream={};p.authorization=null;
  const valid=broker.validatePolicy(p,fed.loadNode(x.m),{dir:x.m,nowMs:x.now});assert.equal(valid.enabled,false);
 });
+
+test('forwarding re-verifies ACT grant expiry and reviewer signature at the current clock',t=>{
+ const x=fixture(t),p=x.policy(),file=path.join(x.m,'broker-policy.json');
+ fs.writeFileSync(file,JSON.stringify(p),{mode:0o600});
+ const input={dir:x.m,policyFile:file,expectedPolicy:p,peerFingerprint:x.A.meta.fingerprint,capability:'compute.dot.v1'};
+ assert.equal(broker.authorizeForwarding(input).enabled,true);
+ t.mock.method(Date,'now',()=>x.now+70000);
+ assert.throws(()=>broker.authorizeForwarding(input),/expired|expiry|time/);
+ t.mock.restoreAll();
+ const changed={...p,authorization:{...p.authorization,securityReport:{...p.authorization.securityReport,signature:'invalid'}}};
+ fs.writeFileSync(file,JSON.stringify(changed));
+ assert.throws(()=>broker.authorizeForwarding({...input,expectedPolicy:changed}),/signature|digest|report/);
+});

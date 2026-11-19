@@ -1,0 +1,8 @@
+{
+  "schema": "mikaya.mobile-edge.local-gateway.v1",
+  "nodeDir": "/ABSOLUTE/PRIVATE/existing-owner-node",
+  "expectedFingerprint": "REPLACE_WITH_EXISTING_PUBLIC_ED25519_FINGERPRINT",
+  "collectorConfigFile": "/ABSOLUTE/PRIVATE/existing-verified-ledger.json",
+  "port": 4188,
+  "nodePort": 43829
+}
