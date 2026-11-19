@@ -1,7 +1,8 @@
 'use strict';
 const test=require('node:test'),assert=require('node:assert/strict');
 const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),crypto=require('node:crypto');
-const {createNativeMtgPolicy}=require('../native-mtg.cjs');
+const childProcess=require('node:child_process');
+const {createNativeMtgPolicy,nativeExecutionEnvironment}=require('../native-mtg.cjs');
 const sha=raw=>crypto.createHash('sha256').update(raw).digest('hex');
 const quote=s=>"'"+s.replace(/'/g,"'\\''")+"'";
 const safeStatus={name:'Synthetic native MTG fixture',android_thermal_severity:0,decision_for_optional_jobs:'ALLOW',
@@ -20,6 +21,36 @@ function fixture(t){
  t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
  return {root,command,policyFile,commandBytes,policyBytes,observation,executions,profile,
   samples:()=>fs.existsSync(executions)?fs.readFileSync(executions,'utf8').trim().split('\n').length:0};
+}
+
+const TERMUX_PREFIX='/data/data/com.termux/files/usr';
+const TERMUX_EXEC=TERMUX_PREFIX+'/lib/libtermux-exec.so';
+function environmentValue(t,name,value){
+ const existed=Object.hasOwn(process.env,name),previous=process.env[name];
+ t.after(()=>{if(existed)process.env[name]=previous;else delete process.env[name];});
+ if(value===undefined)delete process.env[name];else process.env[name]=value;
+}
+function termuxFixture(t){
+ const f=fixture(t),library=path.join(f.root,'installed-termux-exec.so');
+ const libraryBytes=Buffer.from('Synthetic installed Termux loader fixture; never executed.\n');
+ fs.writeFileSync(library,libraryBytes,{mode:0o600});
+ const realpathSync=fs.realpathSync,lstatSync=fs.lstatSync,openSync=fs.openSync;
+ // Redirect only the fixed production path. All descriptor, permission, size,
+ // stable-read and digest checks still inspect a real private fixture file.
+ t.mock.method(fs,'realpathSync',function(file,...args){
+  if(file!==TERMUX_EXEC)return realpathSync.call(fs,file,...args);
+  const resolved=realpathSync.call(fs,library,...args);
+  return resolved===library?TERMUX_EXEC:resolved;
+ });
+ t.mock.method(fs,'lstatSync',function(file,...args){return lstatSync.call(fs,file===TERMUX_EXEC?library:file,...args);});
+ t.mock.method(fs,'openSync',function(file,...args){return openSync.call(fs,file===TERMUX_EXEC?library:file,...args);});
+ const calls=[];
+ t.mock.method(childProcess,'spawnSync',(command,args,options)=>{
+  calls.push({command,args,options});
+  return {status:0,signal:null,stdout:JSON.stringify(safeStatus)+'\n',stderr:''};
+ });
+ environmentValue(t,'LD_PRELOAD',TERMUX_EXEC);
+ return {...f,library,libraryBytes,calls,profile:{...f.profile,termuxExecSha256:sha(libraryBytes)}};
 }
 
 test('explicit native profile has a closed schema and no execution or clock overrides',t=>{
@@ -104,4 +135,83 @@ test('native unsafe status, missed sampling windows and clock rollback retain le
 
 test('omitting the native profile preserves unavailable-default HOLD rather than allowing work',()=>{
  const allow=createNativeMtgPolicy();assert.equal(typeof allow,'function');assert.equal(allow(),false);
+});
+
+test('pinned Termux loader retains exact bounded status options and a closed child environment',t=>{
+ const f=termuxFixture(t);let now=0;t.mock.method(performance,'now',()=>now);
+ environmentValue(t,'MIKAYA_TEST_PARENT_SECRET','must-not-reach-child');
+ environmentValue(t,'NODE_OPTIONS','--require=/unreviewed-parent-module');
+ environmentValue(t,'LD_LIBRARY_PATH','/unreviewed-parent-library-path');
+ const base={HOME:os.homedir(),PREFIX:TERMUX_PREFIX,PATH:TERMUX_PREFIX+'/bin',LANG:'C.UTF-8'};
+ const expectedEnv={...base,LD_PRELOAD:TERMUX_EXEC};
+ assert.deepEqual(nativeExecutionEnvironment(f.profile),expectedEnv);
+ assert.deepEqual(nativeExecutionEnvironment(),base,'unconfigured callers must not inherit preload');
+ const {termuxExecSha256,...legacy}=f.profile;
+ assert.deepEqual(nativeExecutionEnvironment(legacy),base);
+ const allow=createNativeMtgPolicy(f.profile);assert.equal(f.calls.length,0,'construction must not execute');
+ assert.equal(allow(),false);now=10000;assert.equal(allow(),true);assert.equal(f.calls.length,2);
+ for(const call of f.calls){
+  assert.equal(call.command,f.command);assert.deepEqual(call.args,['status']);
+  assert.deepEqual(call.options,{encoding:'utf8',shell:false,timeout:1000,maxBuffer:4096,killSignal:'SIGKILL',
+   stdio:['ignore','pipe','pipe'],env:expectedEnv});
+  for(const name of ['MIKAYA_TEST_PARENT_SECRET','NODE_OPTIONS','LD_LIBRARY_PATH'])
+   assert.equal(Object.hasOwn(call.options.env,name),false,name);
+ }
+ assert.equal(f.samples(),0,'the synthetic loader is never passed to a real child process');
+});
+
+test('Termux profile rejects missing, wrong or additional parent preload libraries before execution',t=>{
+ const f=termuxFixture(t);
+ for(const value of [undefined,'','/unreviewed/libtermux-exec.so',TERMUX_EXEC+' /another.so',
+  TERMUX_EXEC+':/another.so',TERMUX_EXEC+' '+TERMUX_EXEC]){
+  if(value===undefined)delete process.env.LD_PRELOAD;else process.env.LD_PRELOAD=value;
+  assert.throws(()=>createNativeMtgPolicy(f.profile),/native_mtg_source_hold/,String(value));
+  assert.equal(f.calls.length,0);
+ }
+ process.env.LD_PRELOAD=TERMUX_EXEC;
+ assert.equal(typeof createNativeMtgPolicy(f.profile),'function');
+ assert.equal(f.calls.length,0);
+});
+
+test('Termux library hash or private-mode changes immediately cancel ALLOW and restart cooldown',t=>{
+ const f=termuxFixture(t);let now=0;t.mock.method(performance,'now',()=>now);
+ const allow=createNativeMtgPolicy(f.profile);
+ assert.equal(allow(),false);now=10000;assert.equal(allow(),true);
+ for(const kind of ['hash','permissions']){
+  const before=f.calls.length;
+  if(kind==='hash')fs.appendFileSync(f.library,'changed loader bytes\n');
+  else fs.chmodSync(f.library,0o640);
+  now++;assert.equal(allow(),false,kind);assert.equal(f.calls.length,before,'unsafe loader must not spawn');
+  assert.throws(()=>nativeExecutionEnvironment(f.profile),/native_mtg_source_hold/,kind);
+  if(kind==='hash')fs.writeFileSync(f.library,f.libraryBytes);else fs.chmodSync(f.library,0o600);
+  now++;assert.equal(allow(),false,'restoration needs a new first sample');assert.equal(f.calls.length,before+1);
+  now+=10000;assert.equal(allow(),true);assert.equal(f.calls.length,before+2);
+ }
+});
+
+test('changing the parent loader after ALLOW cannot retain cached native permission',t=>{
+ const f=termuxFixture(t);let now=0;t.mock.method(performance,'now',()=>now);
+ const allow=createNativeMtgPolicy(f.profile);
+ assert.equal(allow(),false);now=10000;assert.equal(allow(),true);assert.equal(f.calls.length,2);
+ process.env.LD_PRELOAD=TERMUX_EXEC+':/another.so';
+ now++;assert.equal(allow(),false);assert.equal(f.calls.length,2);
+ process.env.LD_PRELOAD=TERMUX_EXEC;
+ now++;assert.equal(allow(),false);assert.equal(f.calls.length,3);
+ now+=10000;assert.equal(allow(),true);assert.equal(f.calls.length,4);
+});
+
+test('Termux profiles permit only the optional digest, never an environment, library path or execution override',t=>{
+ const f=fixture(t);
+ for(const termuxExecSha256 of [undefined,null,false,0,'','a'.repeat(63),'A'.repeat(64),'g'.repeat(64)]){
+  const profile={...f.profile,termuxExecSha256};
+  assert.throws(()=>createNativeMtgPolicy(profile),/invalid_native_mtg_profile/);
+  assert.throws(()=>nativeExecutionEnvironment(profile),/invalid_native_mtg_profile/);
+ }
+ for(const extra of [{env:{LD_PRELOAD:TERMUX_EXEC}},{LD_PRELOAD:TERMUX_EXEC},{termuxExecPath:TERMUX_EXEC},
+  {libraryPath:TERMUX_EXEC},{execute:()=>safeStatus},{now:()=>0},{commandArgs:['status']}]){
+  const profile={...f.profile,termuxExecSha256:'a'.repeat(64),...extra};
+  assert.throws(()=>createNativeMtgPolicy(profile),/invalid_native_mtg_profile/);
+  assert.throws(()=>nativeExecutionEnvironment(profile),/invalid_native_mtg_profile/);
+ }
+ assert.equal(f.samples(),0);
 });

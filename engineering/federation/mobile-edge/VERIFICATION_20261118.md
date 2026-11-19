@@ -1,6 +1,6 @@
 # Verification of mobile-edge source changes
 
-Prepared November 18, 2026, America/New_York. Environment for the tests below: isolated Linux workspace, **Node.js v24.22.1**. Target code remains Node.js 22+. This report separates source tests from native-device acceptance. No ACT hardware, external ACT runtime, installed ACT APK or wireless ADB test was performed.
+Prepared November 18, 2026, America/New_York. Environment for the final tests below: isolated Linux workspace, **Node.js v24.22.3**. Target code remains Node.js 22+. This report separates source tests from native-device acceptance. No ACT hardware, external ACT runtime, installed ACT APK or wireless ADB test was performed.
 
 Base: `jenner5familynutz8389-IamDJ/mikaya-sovereign` commit `81a0ff62c6e8f3a5963ae5b29b7d849346a6950a`. Review branch: `review/mobile-edge-gateway-hardening-20261118`.
 
@@ -8,15 +8,15 @@ Base: `jenner5familynutz8389-IamDJ/mikaya-sovereign` commit `81a0ff62c6e8f3a5963
 
 | Command | Tests | Passed | Failed | Skipped |
 | --- | ---: | ---: | ---: | ---: |
-| `node --test engineering/federation/live/tests/*.cjs engineering/federation/live/evidence-brief/tests/*.cjs engineering/federation/mobile-edge/tests/*.cjs tests/test_ahava_resume.cjs` | 160 | 160 | 0 | 0 |
+| `node --test engineering/federation/live/tests/*.cjs engineering/federation/live/evidence-brief/tests/*.cjs engineering/federation/mobile-edge/tests/*.cjs tests/test_ahava_resume.cjs` | 181 | 181 | 0 | 0 |
 | `node --test integrations/security-tollbooth/verified-events/tests/*.cjs` | 28 | 28 | 0 | 0 |
 
-Total: **188 passed, zero failed, zero skipped**. The current run includes the pinned native-MTG adapter and separate Motorola producer. The earlier review commit `76929634f9ba62fa125de0c1777b75c5c694d2ad` passed 130 + 28 tests before those additions. These are local-fixture results, separate from phone acceptance counts. The AHAVA portion uses mocked transport with actual encryption/signature verification. Federation, broker and gateway tests use ephemeral loopback sockets; independent broker workers use separate child processes. Broker interface discovery is an explicit test-only loopback stub because this workspace denies `os.networkInterfaces`; production interface-discovery behavior was not bypassed.
+Total: **209 passed, zero failed, zero skipped**. The current run includes the pinned native-MTG adapter, Play Termux execution support, separate Motorola producer and bounded observe-and-read helper. The earlier review commit `76929634f9ba62fa125de0c1777b75c5c694d2ad` passed 130 + 28 tests before those additions; `c56f931fb7277c3db224bf951a0eab0a03eb1161` passed 160 + 28 before the Play Termux and helper additions. These are local-fixture results, separate from phone acceptance counts. The AHAVA portion uses mocked transport with actual encryption/signature verification. Federation, broker and gateway tests use ephemeral loopback sockets; independent broker workers use separate child processes. Broker interface discovery is an explicit test-only loopback stub because this workspace denies `os.networkInterfaces`; production interface-discovery behavior was not bypassed.
 
 Run-log SHA256 values (timings and ephemeral ports are run-specific):
 
-- `mobile-federation-tests-native-rollout.log`: `379b2690b06fbd9debedcb351121d5a9273c3a864acd0a3dca5d1a1c5247ef3c`
-- `existing-native-verifier-tests-native-mtg.log`: `9270f4aaf55ba90bbac204d280505bc0ccb8f97fbc0cd6c3b9354d73adb340b3`
+- `mobile-federation-tests-native-final.log`: `11449f3d6e8854d12ed10f02cba022e78e29e9d022071031ba8061c4e0e6a672`
+- `existing-native-verifier-tests-native-final.log`: `b68bb803d883c4b24d10c324031b9b011e6522e1ec3c415d8868ea05a384a3ed`
 
 `git diff --check` passed. No GitHub Actions or GitLab CI run was initiated by these local commands.
 
@@ -34,7 +34,11 @@ Gateway tests cover signed read/response verification; unchanged independent nod
 
 Native-MTG tests exercise the exact four-field profile, pre-lease source validation, private file and hash failures, immutable configuration, cooldown reset after changed source, and real CLI startup in both standalone and combined modes. They run a synthetic native-status wrapper and wait through the actual ten-second cooldown; they do not supply a CLI bypass or prove physical thermal behavior.
 
+Five additional loader cases exercise the sole optional `termuxExecSha256` field, exact fixed parent/child preload path, complete child-environment whitelist, library digest/permission changes, cooldown reset, and rejection of arbitrary environment/library/execution fields. Tests redirect the fixed production library path to a private fixture; they do not modify `/data` or load the phone's binary in the workspace.
+
 Twenty separate Motorola producer tests cover its fixed model/board/release and MOTOROLA/API34/aarch64 metadata, existing owner-key and journal preservation, genuine Ed25519 verification through the unchanged collector, owner-policy changes, clocks and rollback, idempotency, signed nonce replay, duplicate digest ambiguity, receipts, corruption, locks, append conflicts, durability recovery, limits and strict CLI bootstrap. Both dedicated first-install directories must be absent; normal operation never initializes missing history. Actual property reads on a phone are a separate acceptance step.
+
+Sixteen observe-and-read tests exercise both fixed producer APIs and actual gateway signatures with explicitly synthetic property reads, refresh of a stale source without relaxing max age, separate helper/listener cooldowns, existing-state/config/owner binding, preserved locks, changed thermal/configuration/policy conditions, one-attempt timeout handling, retained evidence after a final HOLD, and rejection of an authentic same-owner response from another ledger. The helper has no initialization, recovery or arbitrary command interface.
 
 The existing 28 native verifier/producer tests independently confirm the preserved pinned-verifier, durability and observation contracts. The original F110 producer remains SHA-256 `6e48e74d0a1a448cd260e4d5383399668642000a7d8c39eb9f308fc45b4446d6`. Its probes and the vendored verifier sources/pins are unchanged; the Motorola implementation is a separate module and schema.
 

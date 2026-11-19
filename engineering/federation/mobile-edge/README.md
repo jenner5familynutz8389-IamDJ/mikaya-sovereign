@@ -12,6 +12,7 @@
 | `local-evidence-gateway.cjs` | Adds an owner-signed, replay-resistant read interface on IPv4 loopback port **4188**. The optional combined launcher runs it with the existing node in the same process and under the same lease/admission budget. |
 | `native-mtg.cjs` | Optionally selects an existing native MTG wrapper and policy through exact private paths and SHA-256 pins, retaining the original thermal observations and cooldown. |
 | `motorola-observation-producer.cjs` | Adds a separate fixed Motorola observation profile using its existing owner identity and a new, explicitly initialized signed ledger. The original F110 producer and vendor sources remain unchanged. |
+| `observe-and-read.cjs` | Performs one bounded, thermally admitted native observation followed by an authenticated gateway read tied to that same source. It never initializes or repairs state. |
 
 Existing 64 KiB AHAVA chunks remain in AHAVA's own protocol. The signed federation and mobile read interface retain the **8,192-byte request budget**. No AHAVA mesh token, private key, device ledger or settlement authority is shared with ACT. Push still uses its existing protocol; the bandwidth improvement applies to resumed **pulls**.
 
@@ -66,9 +67,27 @@ For a deliberate future change requiring simultaneous federation service, `serve
 
 ### Pinned existing native MTG
 
-The optional `nativeMtg` object has exactly four fields: `command`, `commandSha256`, `policyFile` and `policySha256`. Paths select preexisting owner-reviewed native files; each digest must match its exact current bytes. Files must be canonical, regular, single-link, owner-private and owned by the runtime UID; the wrapper must be executable. Confirm that the wrapper invokes the selected policy. The profile does not install or change either file and permits no injected command runner, clock or fabricated ALLOW setting. Omitting it retains the original default native paths.
+The optional `nativeMtg` object requires `command`, `commandSha256`, `policyFile` and `policySha256`. Paths select preexisting owner-reviewed native files; each digest must match its exact current bytes. Files must be canonical, regular, single-link, owner-private and owned by the runtime UID; the wrapper must be executable. Confirm that the wrapper invokes the selected policy. The profile does not install or change either file and permits no injected command runner, clock or fabricated ALLOW setting. Omitting it retains the original default native paths.
 
 The adapter validates the profile before lease acquisition and rechecks its source pins on every admission. A source failure produces HOLD and resets cooldown. The original gate still requires two actual severity 0/1 readings 10–20 seconds apart in the listener process; unknown/unsafe readings HOLD. The first safe request can therefore be refused until the second reading. Separate shell status calls do not seed the listener's sample history. Battery charging is not a substitute for these observations.
+
+For Play Store Termux, the only additional allowed field is `termuxExecSha256`. It pins the existing fixed path `/data/data/com.termux/files/usr/lib/libtermux-exec.so`; configuration cannot choose another library or supply environment variables. The owner launcher must verify that library before starting Node and set `LD_PRELOAD` to exactly that path. The adapter requires that exact parent value and validates the library again before native execution. Its child environment contains only HOME, PREFIX, PATH, LANG and this pinned loader when explicitly selected. A changed library or parent value cancels permission and restarts cooldown.
+
+This uses the existing execution support documented by [Play Termux](https://github.com/termux-play-store/termux-exec/blob/main/README.md). On the actual Motorola, removing it reproduced an `env`/Python permission failure; retaining it in both parent and child restored the real native thermal-status command. No package content or permission change is part of this adaptation. The F110's four-field profile remains supported.
+
+## One bounded observation and signed read
+
+An idle evidence source becomes stale after 60 seconds. Use the separate owner-local helper when a new observation is intended:
+
+```sh
+node engineering/federation/mobile-edge/observe-and-read.cjs \
+  --gateway-config /ABSOLUTE/PRIVATE/mobile-gateway.json \
+  --observation-config /ABSOLUTE/PRIVATE/existing-observation.json
+```
+
+Use the verified owner launcher on Play Termux so the pinned execution library is present before Node starts. The helper binds both configurations to the same current owner, source ledger and already initialized private checkpoint. It warms the signed gateway read, waits 10.8 seconds, requires two safe native readings, then invokes only the fixed device-specific producer once with an eight-second deadline. Its final authenticated response must match the source row, receipt and exact projection bytes.
+
+`VERIFIED_LOCAL_OBSERVATION` means that bounded operation succeeded. HOLD preserves any producer receipt and observation that were already written; it does not retry, remove locks, reset a ledger, start a service or weaken freshness. This command appends an actual local observation. The gateway's ordinary `read` command remains a read of existing evidence. Neither command installs a periodic producer or grants ACT access, compute, transfer or payment authority.
 
 ## Charging, ADB and remote access
 
