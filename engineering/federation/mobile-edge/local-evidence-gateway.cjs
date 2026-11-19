@@ -6,6 +6,7 @@ const http=require('node:http');
 const fed=require('../live/federation-node.cjs');
 const tollbooth=require('../live/security-tollbooth.cjs');
 const {createMtgPolicy}=require('../live/mtg-policy.cjs');
+const {createNativeMtgPolicy}=require('./native-mtg.cjs');
 const collector=require('../../../integrations/security-tollbooth/verified-events/ledger_event_collector.cjs');
 const DOMAIN='MIKAYA-MOBILE-EDGE-LOCAL-READ/1\n';
 const ROUTE='/v1/mobile/evidence',PORT=4188,WINDOW_MS=60000,MAX_NONCES=256;
@@ -190,14 +191,16 @@ async function main(args){
  if(args.length!==3||!['serve','serve-with-node','read'].includes(args[0])||args[1]!=='--config')fail('usage: serve|serve-with-node|read --config ABSOLUTE_PRIVATE_JSON');
  const c=privateJson(args[2]);
  const fields=['schema','nodeDir','expectedFingerprint','collectorConfigFile','port'];
- if((!exact(c,fields)&&!exact(c,[...fields,'nodePort']))||c.schema!=='mikaya.mobile-edge.local-gateway.v1'||!Number.isInteger(c.port)||c.port<1024||c.port>65535)fail('invalid_local_gateway_config');
+ const optional=['nodePort','nativeMtg'].filter(key=>plain(c)&&Object.hasOwn(c,key));
+ if(!exact(c,[...fields,...optional])||c.schema!=='mikaya.mobile-edge.local-gateway.v1'||!Number.isInteger(c.port)||c.port<1024||c.port>65535)fail('invalid_local_gateway_config');
+ const allowWork=createNativeMtgPolicy(c.nativeMtg);
  if(args[0]==='read'){console.log(fed.canonical(await readLocalGateway({dir:c.nodeDir,expectedFingerprint:c.expectedFingerprint,port:c.port})));return;}
  if(args[0]==='serve-with-node'){
-  const runtime=await startOwnedRuntime({dir:c.nodeDir,expectedFingerprint:c.expectedFingerprint,collectorConfig:privateJson(c.collectorConfigFile),port:c.port,nodePort:c.nodePort});
+  const runtime=await startOwnedRuntime({dir:c.nodeDir,expectedFingerprint:c.expectedFingerprint,collectorConfig:privateJson(c.collectorConfigFile),port:c.port,nodePort:c.nodePort,allowWork});
   let stopping=false;const stop=()=>{if(!stopping){stopping=true;runtime.close().catch(()=>{process.exitCode=2;});}};
   process.once('SIGTERM',stop);process.once('SIGINT',stop);return;
  }
- const server=startLocalGateway({dir:c.nodeDir,expectedFingerprint:c.expectedFingerprint,collectorConfig:privateJson(c.collectorConfigFile),port:c.port});
+ const server=startLocalGateway({dir:c.nodeDir,expectedFingerprint:c.expectedFingerprint,collectorConfig:privateJson(c.collectorConfigFile),port:c.port,allowWork});
  let stopping=false;const stop=()=>{if(!stopping){stopping=true;server.close();}};
  process.once('SIGTERM',stop);process.once('SIGINT',stop);
  server.once('close',()=>{process.removeListener('SIGTERM',stop);process.removeListener('SIGINT',stop);});
