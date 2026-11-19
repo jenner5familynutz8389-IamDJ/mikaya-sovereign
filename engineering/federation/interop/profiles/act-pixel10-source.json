@@ -1,0 +1,23 @@
+{
+  "schema": "mikaya.interop.expected-runtime-profile.v1",
+  "id": "act-pixel10-source",
+  "label": "ACT Pixel 10 native worker source reference - not an admission policy",
+  "purpose": "source-hardware-reference",
+  "sourceDeclaredOnly": true,
+  "sources": [
+    {
+      "url": "https://github.com/bospaladin34-crypto/Omega_standalone_developments/blob/623dc555382cafeda8328f57e6d61ff3f71ffed3/11_omega_edge_workers/rust_p10_worker/Cargo.toml",
+      "description": "Declared Tensor G5 ARMv9 worker target"
+    },
+    {
+      "url": "https://github.com/bospaladin34-crypto/Omega_standalone_developments/blob/623dc555382cafeda8328f57e6d61ff3f71ffed3/11_omega_edge_workers/rust_p10_worker/Deploy-And-Run-Pixel10Worker.ps1",
+      "description": "Published compile flags do not prove runtime CPU support"
+    }
+  ],
+  "checks": [
+    { "id": "model-marker", "fact": "android.model", "operator": "contains", "expected": "Pixel 10", "required": true },
+    { "id": "soc-marker", "fact": "android.soc", "operator": "contains", "expected": "Tensor G5", "required": true },
+    { "id": "process-architecture", "fact": "runtime.arch", "operator": "eq", "expected": "arm64", "required": true },
+    { "id": "optimized-instruction-markers", "fact": "cpu.features", "operator": "includesAll", "expected": ["neon", "dotprod", "i8mm"], "required": true }
+  ]
+}

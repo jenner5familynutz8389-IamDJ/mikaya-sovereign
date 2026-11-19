@@ -1,0 +1,23 @@
+{
+  "schema": "mikaya.interop.expected-runtime-profile.v1",
+  "id": "act-windows-host-source",
+  "label": "ACT Windows reference host source markers - not an admission policy",
+  "purpose": "source-hardware-reference",
+  "sourceDeclaredOnly": true,
+  "sources": [
+    {
+      "url": "https://github.com/bospaladin34-crypto/Sovereign-Manifold-V30-A.P.H.U.S-/blob/c90c1491d51e2dd691d976105cf816b74bedc17b/README.md",
+      "description": "Published Windows Intel and NVIDIA reference host claims"
+    },
+    {
+      "url": "https://github.com/bospaladin34-crypto/Omega_standalone_developments/blob/623dc555382cafeda8328f57e6d61ff3f71ffed3/Init-OmegaHardware.ps1",
+      "description": "Windows-specific host discovery source"
+    }
+  ],
+  "checks": [
+    { "id": "windows-runtime", "fact": "runtime.platform", "operator": "eq", "expected": "win32", "required": true },
+    { "id": "host-process-architecture", "fact": "runtime.arch", "operator": "eq", "expected": "x64", "required": true },
+    { "id": "cpu-model-marker", "fact": "cpu.model", "operator": "contains", "expected": "i5-12450HX", "required": true },
+    { "id": "gpu-unprobed", "fact": "gpu.renderer", "operator": "contains", "expected": "RTX 3050", "required": false }
+  ]
+}

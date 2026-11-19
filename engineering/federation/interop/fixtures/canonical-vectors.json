@@ -1,0 +1,15 @@
+[
+  {"name":"primitives","json":"[null,true,false,0,-0,1.0,1e3,-9007199254740991,9007199254740991]","canonical":"[null,true,false,0,0,1,1000,-9007199254740991,9007199254740991]"},
+  {"name":"utf16-key-order","json":"{\"\\ue000\":3,\"\\ud800\\udc00\":2,\"a\":1}","canonical":"{\"a\":1,\"𐀀\":2,\"\":3}"},
+  {"name":"lone-and-paired-surrogates","json":"{\"s\":\"\\ud800\",\"pair\":\"\\ud83d\\ude00\",\"low\":\"\\udc00\"}","canonical":"{\"low\":\"\\udc00\",\"pair\":\"😀\",\"s\":\"\\ud800\"}"},
+  {"name":"no-unicode-normalization","json":"{\"é\":1,\"é\":2}","canonical":"{\"é\":2,\"é\":1}"},
+  {"name":"numeric-looking-keys","json":"{\"2\":2,\"10\":10,\"01\":1,\"__proto__\":null}","canonical":"{\"01\":1,\"10\":10,\"2\":2,\"__proto__\":null}"},
+  {"name":"duplicate-json-keys-last-wins","json":"{\"a\":1,\"a\":2}","canonical":"{\"a\":2}"},
+  {"name":"line-separators-literal","json":"{\"x\":\"\\u2028\\u2029\"}","canonical":"{\"x\":\"  \"}"},
+  {"name":"fraction-rejected","json":"1.5","reject":true},
+  {"name":"unsafe-integer-rejected","json":"9007199254740992","reject":true},
+  {"name":"unsafe-negative-rejected","json":"-9007199254740992","reject":true},
+  {"name":"overflow-rejected","json":"1e400","reject":true},
+  {"name":"non-json-nan-rejected","json":"NaN","reject":true},
+  {"name":"non-json-infinity-rejected","json":"Infinity","reject":true}
+]
