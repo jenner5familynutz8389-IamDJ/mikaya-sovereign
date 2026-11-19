@@ -1,6 +1,6 @@
 # Owner-local mobile evidence and verified AHAVA resume
 
-**Source capabilities and rollout requirements; signed device acceptance remains pending and ACT admission remains HOLD.** This update builds on the existing MIKAYA node, signed ledger, verifier, thermal policy and AHAVA transport. Publishing or copying this source performs no installation or activation. Actual signed device acceptance will be recorded separately.
+**F110 and Motorola normal-mode observations now have verified signed gateway captures; ACT admission remains HOLD.** Motorola's separate initial observation is also captured. All three proofs exercised runtime source `78a363fd516634cd12331810dbde6a938b157e1b`. See [`NATIVE_ACCEPTANCE_20261118.md`](NATIVE_ACCEPTANCE_20261118.md) for exact proof files, capture times, preservation checks and acceptance limits. These are owner-signed local observations, not TEE/OEM hardware attestation or bilateral ACT acceptance. This update builds on the existing MIKAYA node, signed ledger, verifier, thermal policy and AHAVA transport; publishing or copying source does not activate it.
 
 ## What changed
 
@@ -47,7 +47,19 @@ The returned fields are counts, digests and timestamps. They describe signed loc
 
 ## Selected standalone rollout and optional node integration
 
-The current native rollout selects **standalone `serve` on `127.0.0.1:4188`**. Both phones' compute supervisors and the F110 publisher deliberately remain down. Starting the local evidence interface must preserve those service choices. This mode acquires the existing owner node's lease and adds no compute listener or publisher. Signed device acceptance is still pending.
+The verified native rollout uses **standalone `serve` on `127.0.0.1:4188`** on each phone. Both phones' compute supervisors and the F110 publisher remain deliberately down. Each evidence service runs through `sv once` with its default-down marker preserved; this does not enable automatic restart or cold-boot activation. The service acquires the existing owner node's lease and adds no compute listener or publisher.
+
+The installed owner command is `mikaya-local-evidence`:
+
+| Subcommand | Operation |
+| --- | --- |
+| `start` | Requests one run of the existing evidence service through `sv once`; preserves default-down. |
+| `stop` | Stops that service through `sv down`; graceful shutdown releases only its own lease. |
+| `status` | Reports supervisor state; a running listener alone does not prove fresh evidence. |
+| `read` | Verifies existing evidence without producing a new observation. |
+| `observe` | Performs one thermally admitted native observation and a signed read bound to it, using existing state. |
+
+The exact source and hashes of the installed launcher and native proof reader are retained in [`operations/README.md`](operations/README.md). They document this installation and are not a general installer.
 
 **Do not start a second process beside an active node using the same owner directory.** The existing writer lease prevents that. Do not clear a lock or initialize a replacement identity to force startup. A crash/SIGKILL still leaves HOLD for deliberate recovery.
 
@@ -95,7 +107,7 @@ Each phone's `127.0.0.1` refers to that phone. This repository workspace's loopb
 
 Use an already paired Android wireless-debugging connection on a trusted network, or an owner-approved private remote channel. Android wireless debugging requires device-side pairing approval; see [Android's ADB documentation](https://developer.android.com/tools/adb#connect-to-a-device-over-wi-fi). Execute the owner-local read client on the phone through that authorized channel, retaining its local keys. Do not expose an ADB server, legacy TCP debugging port, application listener or mesh token to the public Internet. No ADB setting or forwarding rule is changed by this package.
 
-Authorized Desktop Commander terminals now reach both phones. The observed ADB device lists remain empty; remote terminal access does not establish an ADB link. The terminal connection enables inspection and controlled local work, while signed gateway acceptance remains pending and will be reported separately. Neither access mechanism establishes ACT admission.
+Authorized Desktop Commander terminals reach both phones and were used for the controlled local rollout and signed captures. The observed ADB device lists remain empty; remote terminal access does not establish an ADB link or prove wireless-debugging continuity. Neither access mechanism establishes ACT admission.
 
 ## Measured transfer result and limits
 
@@ -103,7 +115,7 @@ The deterministic synthetic AHAVA fixture has 131,109 ciphertext bytes in three 
 
 Corrupt/unsafe cache files are preserved and rejected, not overwritten. Signer revocation, GCM authentication failure, altered cached bytes and a wrong full-object digest prevent acceptance. Valid partial chunks may remain as bounded resumable content; a manifest is not accepted before full verification.
 
-This establishes lower repeated ciphertext traffic for the tested retry workload. Phone-to-phone elapsed time, battery, temperature, CPU and real-link throughput have not been measured. No “zero-copy,” model-performance or ACT interoperability claim follows from the byte count.
+This establishes lower repeated ciphertext traffic for the tested retry workload. The installed evidence runtime does not include or activate an AHAVA mesh upgrade. Phone-to-phone elapsed time, battery, temperature, CPU and real-link throughput have not been measured. No “zero-copy,” model-performance or ACT interoperability claim follows from the byte count.
 
 ## ACT reference and remaining bilateral requirements
 
@@ -119,4 +131,4 @@ node --test engineering/federation/live/evidence-brief/tests/*.cjs
 node --test engineering/federation/mobile-edge/tests/*.cjs tests/test_ahava_resume.cjs
 ```
 
-Tests use synthetic identities/state, ephemeral loopback listeners and mocked AHAVA network responses. Native MTG adapter fixtures exercise wrapper execution and cooldown with synthetic status; they do not establish native thermal acceptance. No ACT code, APK or runtime endpoint is executed. [`VERIFICATION_20261118.md`](VERIFICATION_20261118.md) records the current source tests, including native-profile and Motorola-producer additions. Signed device results will be recorded separately.
+Tests use synthetic identities/state, ephemeral loopback listeners and mocked AHAVA network responses. Native MTG adapter fixtures exercise wrapper execution and cooldown with synthetic status; they are separate from physical-device acceptance. No ACT code, APK or runtime endpoint is executed. [`VERIFICATION_20261118.md`](VERIFICATION_20261118.md) records **209 passing source tests**. [`NATIVE_ACCEPTANCE_20261118.md`](NATIVE_ACCEPTANCE_20261118.md) records the actual signed device captures and the command for independently verifying their public-key signatures at the recorded capture times. An old capture does not establish current freshness; an idle listener may also HOLD until its native thermal gate has two fresh safe samples.
