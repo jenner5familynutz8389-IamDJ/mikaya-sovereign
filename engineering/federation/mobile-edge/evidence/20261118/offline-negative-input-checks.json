@@ -1,0 +1,19 @@
+{
+  "scope": "isolated_local_negative_input_checks",
+  "passed": 2,
+  "failed": 0,
+  "results": [
+    {
+      "case": "extra_top_level_field_rejected",
+      "passed": true,
+      "exitCode": 2,
+      "reason": "capture_contract"
+    },
+    {
+      "case": "fifo_rejected_without_blocking",
+      "passed": true,
+      "exitCode": 2,
+      "reason": "bounded_regular_file_required"
+    }
+  ]
+}

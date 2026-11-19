@@ -1,6 +1,6 @@
 # Verification of mobile-edge source changes
 
-Prepared November 18, 2026, America/New_York. Environment for the final tests below: isolated Linux workspace, **Node.js v24.22.3**. Target code remains Node.js 22+. This report separates source tests from native-device acceptance. No ACT hardware, external ACT runtime, installed ACT APK or wireless ADB test was performed.
+Prepared November 18, 2026, America/New_York. Environment for the source tests below: isolated Linux workspace, **Node.js v24.22.3**. Target code remains Node.js 22+. Final runtime source: `78a363fd516634cd12331810dbde6a938b157e1b`. This report separates source tests from the subsequently captured native-device results in [`NATIVE_ACCEPTANCE_20261118.md`](NATIVE_ACCEPTANCE_20261118.md). No ACT hardware, external ACT runtime, installed ACT APK or wireless ADB test was performed.
 
 Base: `jenner5familynutz8389-IamDJ/mikaya-sovereign` commit `81a0ff62c6e8f3a5963ae5b29b7d849346a6950a`. Review branch: `review/mobile-edge-gateway-hardening-20261118`.
 
@@ -36,16 +36,31 @@ Native-MTG tests exercise the exact four-field profile, pre-lease source validat
 
 Five additional loader cases exercise the sole optional `termuxExecSha256` field, exact fixed parent/child preload path, complete child-environment whitelist, library digest/permission changes, cooldown reset, and rejection of arbitrary environment/library/execution fields. Tests redirect the fixed production library path to a private fixture; they do not modify `/data` or load the phone's binary in the workspace.
 
-Twenty separate Motorola producer tests cover its fixed model/board/release and MOTOROLA/API34/aarch64 metadata, existing owner-key and journal preservation, genuine Ed25519 verification through the unchanged collector, owner-policy changes, clocks and rollback, idempotency, signed nonce replay, duplicate digest ambiguity, receipts, corruption, locks, append conflicts, durability recovery, limits and strict CLI bootstrap. Both dedicated first-install directories must be absent; normal operation never initializes missing history. Actual property reads on a phone are a separate acceptance step.
+Twenty separate Motorola producer tests cover its fixed model/board/release and MOTOROLA/API34/aarch64 metadata, existing owner-key and journal preservation, genuine Ed25519 verification through the unchanged collector, owner-policy changes, clocks and rollback, idempotency, signed nonce replay, duplicate digest ambiguity, receipts, corruption, locks, append conflicts, durability recovery, limits and strict CLI bootstrap. Both dedicated first-install directories must be absent; normal operation never initializes missing history. These fixtures remain distinct from the actual Motorola property reads and signed capture recorded in the native acceptance report.
 
 Sixteen observe-and-read tests exercise both fixed producer APIs and actual gateway signatures with explicitly synthetic property reads, refresh of a stale source without relaxing max age, separate helper/listener cooldowns, existing-state/config/owner binding, preserved locks, changed thermal/configuration/policy conditions, one-attempt timeout handling, retained evidence after a final HOLD, and rejection of an authentic same-owner response from another ledger. The helper has no initialization, recovery or arbitrary command interface.
 
 The existing 28 native verifier/producer tests independently confirm the preserved pinned-verifier, durability and observation contracts. The original F110 producer remains SHA-256 `6e48e74d0a1a448cd260e4d5383399668642000a7d8c39eb9f308fc45b4446d6`. Its probes and the vendored verifier sources/pins are unchanged; the Motorola implementation is a separate module and schema.
 
+## Captured native signatures
+
+The final-runtime F110 normal-mode operation passed with **875 → 876 ledger rows** and **875 recognized events**. Motorola's explicit first initialization passed with **0 → 2 rows**, including genesis, and **one recognized event**; its subsequent normal-mode `observe` passed with **2 → 3 rows** and **two recognized events**. These are actual owner-local native operations, separate from the 209 source tests. Their captured source ages were **5,411 ms**, **2,550 ms** and **1,326 ms**, respectively, under the unchanged 60-second limit. Both phones completed the bounded normal-mode observation and signed-read acceptance. The native acceptance report records exact timestamps, proof hashes and retained historical failures.
+
+From the repository root, the saved public-key proofs can be checked without contacting either phone:
+
+```sh
+node engineering/federation/mobile-edge/verify-native-capture.cjs \
+  engineering/federation/mobile-edge/evidence/20261118/f110-repeatable-proof.json \
+  engineering/federation/mobile-edge/evidence/20261118/motorola-initial-proof.json \
+  engineering/federation/mobile-edge/evidence/20261118/motorola-repeatable-proof.json
+```
+
+This command was executed successfully for all three captures, returning `SAVED_NATIVE_SIGNATURES_VERIFIED`. It pins the reviewed gateway and federation source, verifies the pinned public owner key and both Ed25519 signatures, and checks the reply contract at each saved capture time. It does not trust the saved `signatureVerified` flag alone. It does not establish present freshness, independently attest the physical hardware or rerun the complete private ledger audit. Signed userspace observations are local owner assertions; they are not TEE/OEM attestations. The exact native launcher/proof-reader sources and hashes are retained in [`operations/README.md`](operations/README.md).
+
 ## Signed-release and deployment status
 
 The existing `RELEASE-SOURCE-MANIFEST.json` and signature are retained verbatim as historical owner attestations. They **do not attest these new bytes**. Even at the base commit, the historical manifest's README digest already differed; this review additionally changes AHAVA core/sync. A signature-only success from the historical root verifier must not be reported as current-source acceptance. The separate review-source hash inventory is unsigned and supplies reproducibility, not owner authorization or a new release signature.
 
-No private signing key was requested or used to renew a release. Owner-controlled release attestation, actual device rollout, original supervisor configuration, current private routes, ADB continuity, physical thermal behavior, model performance and bilateral ACT admission remain separate acceptance steps. No payment, Lightning/L402 settlement, firmware/slot operation or external network admission is enabled.
+No private signing key was requested or used to renew a release. Native evidence signatures use each existing owner key locally; no private key was exported. The controlled evidence-service rollout and recorded native thermal admission are documented separately from release attestation, cold-boot persistence, current private routes, ADB continuity, thermal/battery benchmarks, model performance and bilateral ACT admission. No payment, Lightning/L402 settlement, firmware/slot operation or external network admission is enabled.
 
-Authorized Desktop Commander terminals now reach both phones; the observed ADB lists remain empty. Local passing tests do not establish signed gateway acceptance. The selected native rollout uses the standalone evidence interface while keeping both compute supervisors and the F110 publisher down. The combined launcher remains an optional explicit replacement of an existing process. Neither mode permits a duplicate runtime or automatic removal of a lease.
+Authorized Desktop Commander terminals reach both phones; the observed ADB lists remain empty. Both final-runtime evidence services use standalone loopback port 4188 and one-shot supervisor runs with default-down preserved. Both compute supervisors and the F110 publisher remain down. The combined launcher remains an optional explicit replacement of an existing process. Neither mode permits a duplicate runtime or automatic removal of a lease. The installed `read` command does not refresh an observation; idle thermal state or evidence older than 60 seconds can correctly produce HOLD. The separate `observe` command makes one bounded native observation and signed read, without granting ACT access.

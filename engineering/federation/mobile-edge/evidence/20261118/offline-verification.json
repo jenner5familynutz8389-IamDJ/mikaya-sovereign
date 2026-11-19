@@ -1,0 +1,62 @@
+{
+  "status": "SAVED_NATIVE_SIGNATURES_VERIFIED",
+  "results": [
+    {
+      "file": "f110-repeatable-proof.json",
+      "captureSha256": "c99a8f5393c9c22508641efa871c459bfbbb281f51b469660def86ddcea9f01e",
+      "device": "F110",
+      "sourceCommit": "78a363fd516634cd12331810dbde6a938b157e1b",
+      "requestSignatureVerified": true,
+      "responseSignatureVerified": true,
+      "capturedVerificationTime": "2026-11-19T03:17:17.052Z",
+      "sourceAgeAtCaptureMs": 5411,
+      "recognizedEventCount": 875,
+      "projectionSha256": "06242039f91c8fb0d922e16cb362e75c9b0330f0a7bbb31b558e69f8937f4191",
+      "freshnessScope": "CAPTURED_VERIFICATION_TIME_ONLY",
+      "hardwareAttested": false,
+      "actAdmission": "HOLD",
+      "computeAuthorized": false,
+      "fileTransferAuthorized": false,
+      "paymentAuthorized": false,
+      "deviceControlAuthorized": false
+    },
+    {
+      "file": "motorola-initial-proof.json",
+      "captureSha256": "fe2b318af7f61ebb6b5983f26fc584d34a606df6da744d555118e81ad296c871",
+      "device": "Motorola",
+      "sourceCommit": "78a363fd516634cd12331810dbde6a938b157e1b",
+      "requestSignatureVerified": true,
+      "responseSignatureVerified": true,
+      "capturedVerificationTime": "2026-11-19T03:17:41.199Z",
+      "sourceAgeAtCaptureMs": 2550,
+      "recognizedEventCount": 1,
+      "projectionSha256": "1c4d202a2d96b1c4ee3a794eae4b394af0ccbbd2c86767afd454484f14a65deb",
+      "freshnessScope": "CAPTURED_VERIFICATION_TIME_ONLY",
+      "hardwareAttested": false,
+      "actAdmission": "HOLD",
+      "computeAuthorized": false,
+      "fileTransferAuthorized": false,
+      "paymentAuthorized": false,
+      "deviceControlAuthorized": false
+    },
+    {
+      "file": "motorola-repeatable-proof.json",
+      "captureSha256": "9e481149eafa9019cbf9954c0a6891a617dd77ba38067d568cc015dbc95b9f2e",
+      "device": "Motorola",
+      "sourceCommit": "78a363fd516634cd12331810dbde6a938b157e1b",
+      "requestSignatureVerified": true,
+      "responseSignatureVerified": true,
+      "capturedVerificationTime": "2026-11-19T03:22:32.180Z",
+      "sourceAgeAtCaptureMs": 1326,
+      "recognizedEventCount": 2,
+      "projectionSha256": "c170baeffdfa1875a39443bd5904641aba69e6db4db9ec638f3405c026d1e260",
+      "freshnessScope": "CAPTURED_VERIFICATION_TIME_ONLY",
+      "hardwareAttested": false,
+      "actAdmission": "HOLD",
+      "computeAuthorized": false,
+      "fileTransferAuthorized": false,
+      "paymentAuthorized": false,
+      "deviceControlAuthorized": false
+    }
+  ]
+}
