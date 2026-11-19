@@ -143,3 +143,92 @@ test('correctly signed malformed jobs are rejected before capability reservation
   response.auth.signature = crypto.sign(null, Buffer.from('MIKAYA-INDEPENDENT-FEDERATION/1\nRES\n' + fed.canonical(reply)), f.worker.privateKey).toString('base64');
   assert.throws(() => session.verifyReceipt({ request, response, holderPublicKey: f.holder.publicKey, workerPublicKey: f.worker.publicKey, nowMs: f.nowMs }), /string/);
 });
+
+function clockFixture(t, signedDeltaMs) {
+  const f = fixture(t), workerNowMs = f.nowMs + signedDeltaMs;
+  // The actual worker grants using its own clock. No signed timestamp is
+  // rewritten to make another machine's clock appear synchronized.
+  const token = mac.mintTestCapability({ rootKey: f.rootKey, holderKeySha256: f.request.auth.from, audience: f.request.auth.to, profileSha256: session.profileDigest(f.profile), operation: f.job.capability, bodySha256: f.request.auth.bodySha256, issuedAtMs: workerNowMs, expiresAtMs: workerNowMs + 60000, maxUses: 1, maxBytes: 8192 });
+  const acceptedArgs = { ...f.args, token, nowMs: workerNowMs };
+  const out = session.acceptConformanceRequest(acceptedArgs);
+  const verifyArgs = { request: f.request, response: out.response, evidence: out.evidence, holderPublicKey: f.holder.publicKey, workerPublicKey: f.worker.publicKey, profileSha256: session.profileDigest(f.profile), nowMs: f.nowMs };
+  return { ...f, workerNowMs, out, verifyArgs, acceptedArgs };
+}
+function resignResponse(response, privateKey, kind = 'RES') {
+  const changed = structuredClone(response);
+  const { signature, ...unsigned } = changed.auth;
+  changed.auth.signature = crypto.sign(null, Buffer.from('MIKAYA-INDEPENDENT-FEDERATION/1\n' + kind + '\n' + fed.canonical(unsigned)), privateKey).toString('base64');
+  return changed;
+}
+test('observed earlier worker timestamp reproduces legacy refusal while bounded independent verifier retains actual signed times', t => {
+  const f = clockFixture(t, -8000);
+  const legacy = require('../../live/act-backend-compat.cjs');
+  assert.throws(() => legacy.verifyDeterministicReceipt({ request: f.request, response: f.out.response, ownerPublicKey: f.holder.publicKey, actPublicKey: f.worker.publicKey, expectedActFingerprint: fed.fp(f.worker.publicKey), nowMs: f.workerNowMs }), /response signature, origin or nonce invalid/);
+  const original = JSON.stringify({ request: f.request, response: f.out.response, evidence: f.out.evidence });
+  for (const nowMs of [f.nowMs, f.workerNowMs]) {
+    const verified = session.verifyConformanceReceipt({ ...f.verifyArgs, nowMs });
+    assert.equal(verified.evidenceVerified, true);
+    assert.deepEqual(verified.timestampPolicy, { maxSignedTimestampDeltaMs: 10000, maxLocalFreshnessMs: 60000, signedTimestampDeltaMs: -8000, clockOffsetVerified: false });
+  }
+  assert.equal(JSON.stringify({ request: f.request, response: f.out.response, evidence: f.out.evidence }), original);
+  assert.throws(() => session.acceptConformanceRequest(f.acceptedArgs), /replay/);
+});
+test('signed response timestamps behind and ahead are accepted only within the fixed 10000ms dispersion bound', t => {
+  for (const delta of [-10000,-8000,0,8000,10000]) {
+    const f = clockFixture(t, delta);
+    for (const nowMs of [f.nowMs, f.workerNowMs]) {
+      const verified = session.verifyConformanceReceipt({ ...f.verifyArgs, nowMs });
+      assert.equal(verified.timestampPolicy.signedTimestampDeltaMs, delta);
+      assert.equal(verified.result, 32);
+    }
+  }
+  for (const delta of [-10001,10001]) {
+    const f = clockFixture(t, delta);
+    assert.throws(() => session.verifyReceipt(f.verifyArgs), /timestamp dispersion/);
+    assert.throws(() => session.verifyConformanceReceipt(f.verifyArgs), /timestamp dispersion/);
+  }
+});
+test('bounded signed timestamp dispersion does not bypass independent request and response freshness', t => {
+  const ahead = clockFixture(t, 8000), behind = clockFixture(t, -8000);
+  // Request stale while the later response is still individually fresh.
+  assert.throws(() => session.verifyReceipt({ ...ahead.verifyArgs, nowMs: ahead.nowMs + 60001 }), /request expired/);
+  // Response stale while the later holder request is still individually fresh.
+  assert.throws(() => session.verifyReceipt({ ...behind.verifyArgs, nowMs: behind.nowMs + 52001 }), /response expired/);
+  // Likewise reject a response too far in the verifier's future.
+  assert.throws(() => session.verifyReceipt({ ...ahead.verifyArgs, nowMs: ahead.nowMs - 52001 }), /response expired/);
+  assert.throws(() => session.verifyConformanceReceipt({ ...behind.verifyArgs, nowMs: behind.nowMs + 52001 }), /evidence expired/);
+});
+test('independent response verification preserves exact schemas identities nonce digest domain and deterministic computation checks', t => {
+  const f = clockFixture(t, -8000);
+  const verify = response => session.verifyReceipt({ ...f.verifyArgs, response });
+  assert.equal(verify(f.out.response).verified, true);
+  assert.throws(() => verify({ ...f.out.response, extra: true }), /schema/);
+  for (const [field,value,pattern] of [
+    ['from','0'.repeat(64),/identity/],
+    ['to','0'.repeat(64),/identity/],
+    ['inReplyTo','0'.repeat(32),/nonce/],
+    ['bodySha256','0'.repeat(64),/digest/],
+    ['inReplyTo',[f.request.auth.nonce],/string/],
+    ['issuedAtMs',-1,/time/]
+  ]) {
+    const changed = structuredClone(f.out.response); changed.auth[field] = value;
+    assert.throws(() => verify(resignResponse(changed, f.worker.privateKey)), pattern);
+  }
+  const wrongResult = structuredClone(f.out.response); wrongResult.body.result++;
+  wrongResult.auth.bodySha256 = fed.sha(fed.canonical(wrongResult.body));
+  assert.throws(() => verify(resignResponse(wrongResult, f.worker.privateKey)), /computation result/);
+  const wrongBody = structuredClone(f.out.response); wrongBody.body.jobId = [wrongBody.body.jobId];
+  wrongBody.auth.bodySha256 = fed.sha(fed.canonical(wrongBody.body));
+  assert.throws(() => verify(resignResponse(wrongBody, f.worker.privateKey)), /string/);
+  assert.throws(() => verify(resignResponse(f.out.response, f.worker.privateKey, 'REQ')), /signature/);
+  assert.throws(() => verify(resignResponse(f.out.response, crypto.generateKeyPairSync('ed25519').privateKey)), /signature/);
+  const changedTime = structuredClone(f.out.response); changedTime.auth.issuedAtMs++;
+  assert.throws(() => verify(changedTime), /signature/);
+});
+test('signed conformance evidence still requires exact response timestamp equality under clock dispersion', t => {
+  const f = clockFixture(t, -8000), changed = structuredClone(f.out.evidence);
+  changed.issuedAtMs++;
+  const { signature, ...unsigned } = changed;
+  changed.signature = crypto.sign(null, Buffer.from('MIKAYA-INTEROP-CONFORMANCE/1\nEVIDENCE\n' + fed.canonical(unsigned)), f.worker.privateKey).toString('base64');
+  assert.throws(() => session.verifyConformanceReceipt({ ...f.verifyArgs, evidence: changed }), /request or response binding/);
+});

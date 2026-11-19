@@ -302,6 +302,7 @@ vary with the route, device load, storage and radio conditions.
 | Connection byte budget | At most 1 MiB in each direction |
 | Default idle/total session duration | 15 seconds idle; 120 seconds total |
 | Grant lifetime | 60 seconds; one permitted use |
+| Signed request/response timestamp dispersion | At most 10,000 ms in either direction; each timestamp must independently be within 60 seconds of the verifier's clock |
 | Capability replay journal | 10,000 records or 4 MiB; no automatic pruning |
 | Signed receipt ledger | 1,024 entries including genesis; no automatic successor creation |
 | Transport event ledger | 20,000 events or 8 MiB |
@@ -312,6 +313,17 @@ malformed, disabled or mismatched authority fails closed. Allowlist changes
 apply to the next operation; current connection limits are enforced by the
 message path and policy poll. Lowered time or connection-count limits may
 close existing sessions.
+
+The request/response timestamp bound is an explicit short-work protocol
+limit. Its signed delta includes clock disagreement and actual elapsed
+processing/transport time; it is not a verified estimate of clock offset or
+clock synchronization. The current verifier accepts either direction only
+within 10,000 ms, retains both independent 60-second freshness checks, and
+requires the signed evidence timestamp to equal the response timestamp.
+Signatures, identities, nonce, body/result binding, durable replay reservation
+and TLS channel binding remain required. Device clocks and signed timestamps
+are not rewritten to satisfy this check. An exchange outside the bound is
+refused rather than automatically widening the allowance.
 
 Capacity exhaustion requires an explicit reviewed lifecycle decision. The
 implementation deliberately retains evidence instead of deleting old records

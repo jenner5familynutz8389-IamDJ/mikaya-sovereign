@@ -7,7 +7,6 @@
  */
 const crypto = require('node:crypto');
 const fed = require('../live/federation-node.cjs');
-const receipts = require('../live/act-backend-compat.cjs');
 const macaroons = require('./capability-macaroons.cjs');
 const DOMAIN = 'MIKAYA-INDEPENDENT-FEDERATION/1\n';
 const EVIDENCE_DOMAIN = 'MIKAYA-INTEROP-CONFORMANCE/1\n';
@@ -16,6 +15,13 @@ const HASH = /^[a-f0-9]{64}$/;
 const NONCE = /^[a-f0-9]{32}$/;
 const CAPS = new Set(['compute.dot.v1', 'compute.sha256.v1']);
 const REQUEST_KEYS = ['schema', 'from', 'to', 'method', 'route', 'bodySha256', 'nonce', 'issuedAtMs', 'signature'];
+const RESPONSE_KEYS = ['schema', 'from', 'to', 'inReplyTo', 'bodySha256', 'issuedAtMs', 'signature'];
+const RESULT_KEYS = ['schema', 'jobId', 'capability', 'workerFingerprint', 'requestSha256', 'result'];
+// A bound on signed timestamp dispersion, NOT an inferred clock offset. It
+// includes both clock disagreement and elapsed request processing/transport.
+// The fixed short-work profile refuses either direction outside this bound.
+const MAX_SIGNED_TIMESTAMP_DELTA_MS = 10000;
+const MAX_LOCAL_FRESHNESS_MS = 60000;
 const EVIDENCE_KEYS = ['schema', 'mode', 'from', 'to', 'requestNonce', 'requestSha256', 'requestBodySha256', 'responseSha256', 'profileSha256', 'issuedAtMs', 'softwareSignatureVerified', 'hardwareAttested', 'productionAdmission', 'paymentAuthorized', 'firmwareAuthorized', 'signature'];
 function ensure(ok, message) { if (!ok) throw new Error(message); }
 function plain(v) { return v !== null && typeof v === 'object' && Object.getPrototypeOf(v) === Object.prototype; }
@@ -134,9 +140,26 @@ function acceptConformanceRequest({ request, token, rootKey, holderPublicKey, wo
   return { response, capability, evidence };
 }
 function verifyReceipt({ request, response, holderPublicKey, workerPublicKey, nowMs = Date.now() }) {
-  verifyRequest({ request, holderPublicKey, workerPublicKey, nowMs });
+  const context = verifyRequest({ request, holderPublicKey, workerPublicKey, nowMs });
   boundedCanonical(response);
-  return receipts.verifyDeterministicReceipt({ request, response, ownerPublicKey: holderPublicKey, actPublicKey: workerPublicKey, expectedActFingerprint: fed.fp(publicKey(workerPublicKey)), nowMs });
+  ensure(exact(response, ['auth', 'body']) && exact(response.auth, RESPONSE_KEYS) && exact(response.body, RESULT_KEYS), 'signed conformance response schema refused');
+  const reply = response.auth, body = response.body;
+  ensure(RESPONSE_KEYS.filter(field => field !== 'issuedAtMs').every(field => typeof reply[field] === 'string') && RESULT_KEYS.filter(field => field !== 'result').every(field => typeof body[field] === 'string'), 'response string fields refused');
+  const expected = validateJob(request.body);
+  ensure(body.schema === 'mikaya.federation.result.v1' && body.jobId === request.body.id && body.capability === context.operation && body.workerFingerprint === context.audience && body.requestSha256 === context.bodySha256 && body.result === expected, 'conformance computation result inconsistent');
+  ensure(reply.schema === 'mikaya.federation.response.v1' && reply.from === context.audience && reply.to === context.holderKeySha256, 'response identity binding refused');
+  ensure(reply.inReplyTo === request.auth.nonce, 'response request nonce binding refused');
+  ensure(reply.bodySha256 === fed.sha(boundedCanonical(body)), 'response body digest refused');
+  ensure(Number.isSafeInteger(reply.issuedAtMs) && reply.issuedAtMs >= 0 && Math.abs(nowMs - reply.issuedAtMs) <= MAX_LOCAL_FRESHNESS_MS, 'response expired or invalid time');
+  const signedTimestampDeltaMs = reply.issuedAtMs - request.auth.issuedAtMs;
+  ensure(Math.abs(signedTimestampDeltaMs) <= MAX_SIGNED_TIMESTAMP_DELTA_MS, 'signed request/response timestamp dispersion exceeds 10000 ms');
+  ensure(signatureOk('RES', reply, workerPublicKey), 'response signature refused');
+  // Signature+nonce+body bindings establish which request was answered.
+  // Wall-clock ordering alone is not a cross-device causality proof. Both
+  // signed timestamps still pass independent local freshness checks; durable
+  // capability/receipt journals, outside this stateless verifier, reject replay.
+  return Object.freeze({ verified: true, result: expected, capability: context.operation, workerFingerprint: context.audience, requestDigest: context.bodySha256, hardwareAttested: false, paymentSettled: false, executionAuthorized: false,
+    timestampPolicy: Object.freeze({ maxSignedTimestampDeltaMs: MAX_SIGNED_TIMESTAMP_DELTA_MS, maxLocalFreshnessMs: MAX_LOCAL_FRESHNESS_MS, signedTimestampDeltaMs, clockOffsetVerified: false }) });
 }
 function verifyConformanceReceipt({ request, response, evidence, holderPublicKey, workerPublicKey, profileSha256, nowMs = Date.now() }) {
   boundedCanonical(evidence);
@@ -151,4 +174,4 @@ function verifyConformanceReceipt({ request, response, evidence, holderPublicKey
   const result = verifyReceipt({ request, response, holderPublicKey, workerPublicKey, nowMs });
   return Object.freeze({ ...result, profileSha256, evidenceVerified: true });
 }
-module.exports = { boundedCanonical, profileDigest, conformancePolicy, makeRequest, verifyRequest, acceptConformanceRequest, verifyReceipt, verifyConformanceReceipt };
+module.exports = { boundedCanonical, profileDigest, conformancePolicy, makeRequest, verifyRequest, acceptConformanceRequest, verifyReceipt, verifyConformanceReceipt, MAX_SIGNED_TIMESTAMP_DELTA_MS, MAX_LOCAL_FRESHNESS_MS };
