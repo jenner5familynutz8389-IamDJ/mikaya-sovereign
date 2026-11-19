@@ -1,0 +1,19 @@
+{
+  "files": {
+    "engineering/federation/live/federation-node.cjs": "bdf5ea0c64ed1fea7333a62a822d9f76756bb0fca53b13a747087cbdced29b08",
+    "engineering/federation/live/mtg-policy.cjs": "31c9c39be19a09956e80d0d7af277f8379f4a79b4682c92259f126f5f40457cf",
+    "engineering/federation/live/security-tollbooth.cjs": "f5b6bc0602c0f7623844eae40694bfb3ea9db24462fc42d05e722b661c183c29",
+    "engineering/federation/mobile-edge/local-evidence-gateway.cjs": "ccba77b8e5089a29ecc4960bc3e2704720a373d42ca1696fd4a483d15123ca3c",
+    "engineering/federation/mobile-edge/motorola-observation-producer.cjs": "8ccb632273b8cf483f9d269a19f1db85dae7a4c49b7af3048f8240e092be2382",
+    "engineering/federation/mobile-edge/native-mtg.cjs": "4833835fcf14bba2cc203de70d5c08db43773b99d1d522ce396894c72a833235",
+    "engineering/federation/mobile-edge/observe-and-read.cjs": "236c610d6f6918974ac1755fe4501419a7fc4de23f49b2b6d37331b7c3bed75f",
+    "integrations/security-tollbooth/verified-events/device_observation_producer.cjs": "6e48e74d0a1a448cd260e4d5383399668642000a7d8c39eb9f308fc45b4446d6",
+    "integrations/security-tollbooth/verified-events/ledger_event_collector.cjs": "40994a07f4e116cf63a15d9ad2d4c4ae5efb4cffc714c6b87420f51481b7c6a8",
+    "integrations/security-tollbooth/verified-events/vendor/federation-node.cjs": "33ea94880c74c7392535ff443b467a7df79117f2bf42993956a5add4ee7f1827",
+    "integrations/security-tollbooth/verified-events/vendor/sovereign-event-ledger.cjs": "56c894c87d6d7d4bb57d90e520b80f968a72a683469defc0b5e7d36c49f13c65"
+  },
+  "ownerSignatureIncluded": false,
+  "schema": "mikaya.mobile-edge.runtime-source.v1",
+  "sourceCommit": "78a363fd516634cd12331810dbde6a938b157e1b",
+  "sourceTree": "3666ad8cab99386b1a7450ef93d5c8e849890bb2"
+}

@@ -143,8 +143,74 @@ function importPack(pack){
  safeWrite(path.join(MAN,id+'.json'),raw);
  return {ok:true,id,from:pack.manifest.node,bytes:reconstructed.length};
 }
+// Resume only authenticated encrypted content. A cache hit never replaces the
+// trusted manifest, GCM/plaintext checks, or final complete-object verification.
+function prepareDownload(id,manifest){
+ if(typeof id!=='string')throw Error('bad content identifier');safeId(id);
+ const raw=Buffer.from(stable(manifest));
+ if(raw.length>250000||sha(raw)!==id)throw Error('manifest transport hash mismatch or size');
+ const man=JSON.parse(raw);
+ verifySigned(man,true);
+ if(crypto.createPublicKey(man.publicKey).asymmetricKeyType!=='ed25519'||
+    !Number.isSafeInteger(man.length)||man.length<0||man.length>MAX_FILE||man.chunkSize!==CHUNK_SIZE||
+    !/^[a-f0-9]{64}$/.test(man.plainSha256)||man.chunks.length!==Math.ceil(man.length/CHUNK_SIZE))throw Error('invalid download manifest bounds');
+ for(let i=0;i<man.chunks.length;i++){
+  const ch=man.chunks[i],expected=Math.min(CHUNK_SIZE,man.length-i*CHUNK_SIZE);
+  if(typeof ch.id!=='string'||!Number.isSafeInteger(ch.length)||ch.length!==expected)throw Error('invalid download chunk bounds');
+ }
+ const key=sharedKey(),flags=fs.constants,uid=process.getuid?.();
+ const sameFile=s=>[s.dev,s.ino,s.size,s.mtimeNs,s.ctimeNs,s.nlink].map(String).join(':');
+ function privateStore(){
+  const s=fs.lstatSync(STORE);
+  if(!s.isDirectory()||s.isSymbolicLink()||(s.mode&0o077)||(uid!==undefined&&s.uid!==uid)||fs.realpathSync(STORE)!==path.resolve(STORE))throw Error('unsafe cache directory');
+ }
+ function authenticate(meta,binary){
+  if(binary.length!==meta.length||sha(binary)!==meta.id)throw Error('cached or downloaded ciphertext digest mismatch');
+  const plain=unseal(binary,key,meta);
+  if(plain.length!==meta.length||sha(plain)!==meta.plainSha256)throw Error('chunk authentication mismatch');
+  return binary;
+ }
+ function readCached(meta,durable=false){
+  privateStore();const file=path.join(STORE,meta.id+'.bin');let before;
+  try{before=fs.lstatSync(file,{bigint:true});}catch(e){if(e.code==='ENOENT')return null;throw e;}
+  if(!before.isFile()||before.isSymbolicLink()||before.nlink!==1n||before.size>BigInt(CHUNK_SIZE)||(Number(before.mode)&0o077)||
+     (uid!==undefined&&before.uid!==BigInt(uid)))throw Error('unsafe cached chunk file or size');
+  const fd=fs.openSync(file,flags.O_RDONLY|flags.O_NOFOLLOW|flags.O_NONBLOCK);
+  try{
+   if(sameFile(before)!==sameFile(fs.fstatSync(fd,{bigint:true})))throw Error('cached chunk changed');
+   const bytes=Buffer.alloc(CHUNK_SIZE+1);let count=0;
+   while(count<bytes.length){const n=fs.readSync(fd,bytes,count,bytes.length-count,null);if(!n)break;count+=n;}
+   if(count>CHUNK_SIZE||sameFile(before)!==sameFile(fs.fstatSync(fd,{bigint:true})))throw Error('cached chunk changed or oversized');
+   const verified=authenticate(meta,bytes.subarray(0,count));if(durable)fs.fsyncSync(fd);return verified;
+  }finally{fs.closeSync(fd);}
+ }
+ function syncStore(){const fd=fs.openSync(STORE,flags.O_RDONLY|flags.O_DIRECTORY|flags.O_NOFOLLOW);try{fs.fsyncSync(fd);}finally{fs.closeSync(fd);}}
+ // Preflight all existing files before fetching any missing content. Corruption
+ // is preserved for explicit recovery; it is never silently overwritten.
+ privateStore();
+ const cached=man.chunks.map(ch=>readCached(ch)),missing=Object.freeze(man.chunks.flatMap((ch,index)=>cached[index]?[]:[Object.freeze({index,id:ch.id,bytes:ch.length})]));
+ return Object.freeze({missing,
+  acceptChunk(index,base64){
+   if(!Number.isSafeInteger(index)||index<0||index>=man.chunks.length||cached[index])throw Error('unexpected download chunk');
+   verifySigned(man,true);privateStore();const meta=man.chunks[index];
+   if(typeof base64!=='string'||base64.length>Math.ceil(CHUNK_SIZE/3)*4)throw Error('invalid downloaded chunk encoding or size');
+   const binary=Buffer.from(base64,'base64');if(binary.toString('base64')!==base64)throw Error('noncanonical downloaded chunk encoding');
+   authenticate(meta,binary);const file=path.join(STORE,meta.id+'.bin');let fd;
+   try{fd=fs.openSync(file,flags.O_WRONLY|flags.O_CREAT|flags.O_EXCL|flags.O_NOFOLLOW,0o600);}
+   catch(e){if(e.code!=='EEXIST')throw e;const existing=readCached(meta,true);if(!existing||!existing.equals(binary))throw Error('content-address conflict');}
+   if(fd!==undefined){try{fs.writeFileSync(fd,binary);fs.fsyncSync(fd);}finally{fs.closeSync(fd);}}
+   syncStore();cached[index]=binary;
+  },
+  complete(){
+   if(cached.some(ch=>ch===null))throw Error('missing chunks');
+   verifySigned(man,true);
+   const chunks=man.chunks.map(meta=>{const binary=readCached(meta,true);if(!binary)throw Error('cached chunk disappeared');return {id:meta.id,base64:binary.toString('base64')};});
+   syncStore();return importPack({schema:'ahava.replication.v1',id,manifest:man,chunks});
+  }
+ });
+}
 function list(){init();return fs.readdirSync(MAN).filter(n=>/^[a-f0-9]{64}\.json$/.test(n)).map(n=>n.slice(0,-5));}
-module.exports={init,identity,trust,store,verify,restore,pack,importPack,list,MAX_BUNDLE,DIR,NODE,sha};
+module.exports={init,identity,trust,store,verify,restore,pack,importPack,prepareDownload,list,MAX_BUNDLE,DIR,NODE,sha};
 if(require.main===module){
  try{
   const a=process.argv,op=a[2];let result;

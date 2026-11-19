@@ -2,6 +2,8 @@
 
 Review-only public source. Independently owned Android/Linux nodes exchange bounded Ed25519-signed compute messages over authenticated TLS. Signing keys remain **on the owner’s own node**. An ACT peer may run this source with their own device identity and produce a signed reply to a short-lived invitation; neither step grants administrative access or shared wallet ownership.
 
+The [November 18 mobile-edge review](../mobile-edge/README.md) adds an owner-local signed evidence port and verified AHAVA resume. Direct `/v1/task` acceptance now refuses ACT identities; the existing broker v2 remains the reviewed ACT ingress and revalidates current owner/reviewer authorization immediately before forwarding. Existing MIKAYA–Motorola exchanges and independent ledgers are retained. The source update does not enroll ACT or install a phone service.
+
 The public source provides the local federation transport, independent one-hop test broker, ACT invitation and reply, independent attestation review, explicit owner-signed scoped grant, unsigned settlement-disabled service quote and **read-only Toybox Bitcoin mainnet anchor verification**.
 
 ## Human principal and device authority

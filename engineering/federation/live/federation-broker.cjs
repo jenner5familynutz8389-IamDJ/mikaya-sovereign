@@ -80,6 +80,16 @@ function validatePolicy(p,gateway,options={}){
  return p;
 }
 function policyFromFile(dir,file){const n=fed.loadNode(dir),p=JSON.parse(readFile(file));return validatePolicy(p,n,{dir});}
+function authorizeForwarding({dir,policyFile,expectedPolicy,peerFingerprint,capability}){
+ // Request bodies and signature checks take time: grants and owner policy must
+ // still be valid at the forwarding boundary, not only at request arrival.
+ const current=policyFromFile(dir,policyFile),node=fed.loadNode(dir),peer=node.peers[peerFingerprint];
+ if(!current.enabled||fed.canonical(current)!==fed.canonical(expectedPolicy))throw Error('broker policy changed or disabled');
+ if(!peer||peer.enabled!==true||!peer.capabilities.includes(capability)||
+    !node.policy.allowedCapabilities.includes(capability)||!current.allowedUpstream[peerFingerprint]?.includes(capability))
+  throw Error('current owner or peer capability denied');
+ return current;
+}
 function readLimited(req){return tollbooth.readLimited(req);}
 function signServiceResponse(dir,to,nonce,body){const n=fed.loadNode(dir);
  const msg={schema:'mikaya.federation.response.v1',from:n.meta.fingerprint,to,inReplyTo:nonce,bodySha256:fed.sha(fed.canonical(body)),issuedAtMs:Date.now()};
@@ -106,9 +116,9 @@ function verifyRelayedResult({proof,job,gatewayPublicKey,workerPublicKey,upstrea
 function startBroker({dir,policyFile,port,host='127.0.0.1',certPath=null,keyPath=null}){
  if(!Number.isSafeInteger(port)||port<1024||port>65535)throw Error('invalid broker port');
  const initialPolicy=policyFromFile(dir,policyFile);
- if(initialPolicy.enabled)tollbooth.assertExternalDownstream(initialPolicy.downstream.url,[{host,port}]);
  const loopback=host==='127.0.0.1'||host==='::1';
  if(!loopback&&(!certPath||!keyPath))throw Error('remote broker requires TLS');
+ if(initialPolicy.enabled)tollbooth.assertExternalDownstream(initialPolicy.downstream.url,[{host,port}]);
  if(keyPath){const st=fs.lstatSync(keyPath);if(st.isSymbolicLink()||!st.isFile()||(st.mode&0o077))throw Error('private TLS key permissions must be 0600');}
  let running=0;
  const handler=async(req,res)=>{
@@ -132,6 +142,8 @@ function startBroker({dir,policyFile,port,host='127.0.0.1',certPath=null,keyPath
    if(!allow||!allow.includes(envelope.body?.capability))return send(403,{error:'upstream_capability_denied'});
    try{fed.computeJob(envelope.body);}catch{return send(422,{error:'invalid_bounded_job'});}
    let work;
+   try{p=authorizeForwarding({dir,policyFile,expectedPolicy:p,peerFingerprint:peer.fingerprint,capability:envelope.body.capability});}
+   catch{return send(403,{error:'current_owner_authorization_required'});}
    try{tollbooth.assertExternalDownstream(p.downstream.url);}
    catch{return send(503,{error:'same_runtime_downstream_refused'});}
    try{work=await fed.clientCall({dir,url:p.downstream.url,expectedPeer:p.downstream.fingerprint,route:'/v1/task',body:envelope.body});}
@@ -162,7 +174,7 @@ async function callBroker({dir,url,expectedGateway,expectedWorkerPublicKey,job})
  const result=verifyRelayedResult({proof:received.json.body,job,gatewayPublicKey:readFile(path.join(dir,'trust',expectedGateway+'.pem')),workerPublicKey:workerKey,upstreamFingerprint:n.meta.fingerprint});
  return {...result,proof:received.json.body};
 }
-module.exports={validatePolicy,verifyRelayedResult,startBroker,callBroker};
+module.exports={validatePolicy,authorizeForwarding,verifyRelayedResult,startBroker,callBroker};
 
 if(require.main===module){
  const [command,dir,policyFile,port,host,certPath,keyPath]=process.argv.slice(2);

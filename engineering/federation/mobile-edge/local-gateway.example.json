@@ -1,0 +1,13 @@
+{
+  "schema": "mikaya.mobile-edge.local-gateway.v1",
+  "nodeDir": "/ABSOLUTE/PRIVATE/existing-owner-node",
+  "expectedFingerprint": "REPLACE_WITH_EXISTING_PUBLIC_ED25519_FINGERPRINT",
+  "collectorConfigFile": "/ABSOLUTE/PRIVATE/existing-verified-ledger.json",
+  "port": 4188,
+  "nativeMtg": {
+    "command": "/ABSOLUTE/PRIVATE/existing-mtg-wrapper",
+    "commandSha256": "REPLACE_WITH_64_LOWERCASE_HEX_SHA256_OF_EXISTING_WRAPPER",
+    "policyFile": "/ABSOLUTE/PRIVATE/existing-mtg-policy.py",
+    "policySha256": "REPLACE_WITH_64_LOWERCASE_HEX_SHA256_OF_EXISTING_POLICY"
+  }
+}

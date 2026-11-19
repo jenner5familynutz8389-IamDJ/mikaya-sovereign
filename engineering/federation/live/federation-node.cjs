@@ -177,9 +177,15 @@ function verifyLocalJournal(dir){
  return true;
 }
 function acceptJob(dir,peer,job){
- if(!verifyLocalJournal(dir))fail('local journal integrity corrupted');
  const n=loadNode(dir);
- if(!n.policy.allowedCapabilities.includes(job.capability)||!peer.capabilities.includes(job.capability))fail('local policy denies peer capability');
+ // Identity pinning is not ACT execution authority. The reviewed broker v2 is
+ // the sole ACT ingress; it checks the independent review and owner grant.
+ // Re-read the current pin so cached caller metadata cannot undo revocation.
+ const pinned=n.peers[peer?.fingerprint];
+ if(!pinned||pinned.enabled!==true)fail('current enabled peer pin required');
+ if(pinned.owner==='ACT-OMEGA')fail('ACT compute requires the owner-reviewed broker');
+ if(!n.policy.allowedCapabilities.includes(job?.capability)||!pinned.capabilities.includes(job?.capability))fail('local policy denies peer capability');
+ if(!verifyLocalJournal(dir))fail('local journal integrity corrupted');
  const result=computeJob(job);
  const record=path.join(dir,'jobs',sha(peer.fingerprint+':'+job.id)+'.job');
  try{writeNew(record,sha(canonical(job))+'\n');}catch(e){if(e.code==='EEXIST')fail('duplicate job replay refused');throw e;}
@@ -317,7 +323,16 @@ async function main(argv=process.argv.slice(2)){
  else if(cmd==='revoke')result=revokePeer(args[0],args[1]);
  else if(cmd==='health'){const n=loadNode(args[0]);result={owner:n.meta.owner,fingerprint:n.meta.fingerprint,enabledPeers:Object.values(n.peers).filter(x=>x.enabled).length,journalVerified:verifyLocalJournal(args[0])};}
  else if(cmd==='verify-evidence')result=verifyEvidence(JSON.parse(safeRead(args[0]).toString('utf8')));
- else if(cmd==='serve'){startServer(args[0],Number(args[1]),args[2]||'127.0.0.1',args[3]||null,args[4]||null);return;}
+ else if(cmd==='serve'){
+  const server=startServer(args[0],Number(args[1]),args[2]||'127.0.0.1',args[3]||null,args[4]||null);
+  // An ordinary service stop must release this process's own writer lease.
+  // Crashes and SIGKILL still leave a conservative HOLD for manual review.
+  let stopping=false;
+  const stop=()=>{if(!stopping){stopping=true;server.close();}};
+  process.once('SIGTERM',stop);process.once('SIGINT',stop);
+  server.once('close',()=>{process.removeListener('SIGTERM',stop);process.removeListener('SIGINT',stop);});
+  return;
+ }
  else if(cmd==='hello')result=await clientCall({dir:args[0],url:args[1],expectedPeer:args[2],route:'/v1/hello',body:makeHello(args[0])});
  else if(cmd==='compute'){const payload=JSON.parse(args[4]);const job={schema:'mikaya.federation.job.v1',id:crypto.randomBytes(16).toString('hex'),capability:args[3],payload};result=await clientCall({dir:args[0],url:args[1],expectedPeer:args[2],route:'/v1/task',body:job});}
  else fail('usage: init DIR OWNER NODE_ID | pin DIR PUBLIC_PEM OWNER NODE_ID FINGERPRINT | revoke DIR FINGERPRINT | health DIR | serve DIR PORT [BIND [TLS_CERT TLS_KEY]] | hello DIR PEER_URL PEER_FP | compute DIR PEER_URL PEER_FP CAPABILITY PAYLOAD_JSON');
