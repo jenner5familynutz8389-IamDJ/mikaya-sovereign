@@ -9,8 +9,8 @@
   "actAdmission": "HOLD",
   "paymentAuthorized": false,
   "verification": {
-    "node": "v24.22.1",
-    "mobileFederationTests": 160,
+    "node": "v24.22.3",
+    "mobileFederationTests": 181,
     "existingNativeVerifierTests": 28,
     "failed": 0,
     "skipped": 0
@@ -27,15 +27,17 @@
     "engineering/federation/live/tests/test_federation_broker.cjs": "0333fcc6083194b4e1e1864218aeca5bdff2fd2079298052716ca2b1a97e61f0",
     "engineering/federation/live/tests/test_owner_authorization.cjs": "d2f77a62a9f94b537fa2c0f020a0b34c200e29bb90cf0fcd56d81408262fd49e",
     "engineering/federation/mobile-edge/ACT_MOBILE_REFERENCE_20261118.md": "5fe5e4d0446eef8c3147b4219132293a4bda19cda4f18b074f1eb3954a8d9e1c",
-    "engineering/federation/mobile-edge/README.md": "8550a27de81324f87b2b28f7e09a5665c2292e8a5cc9fe1d3545b726c036d3f9",
-    "engineering/federation/mobile-edge/VERIFICATION_20261118.md": "6c469710983990ab8452ef7cbf13e33a68256252d37d7845efd147ecba7d256d",
+    "engineering/federation/mobile-edge/README.md": "a860ed8641fb2026bb20ce888029ada35f93011678bfb0065ed5c952d4c3c18d",
+    "engineering/federation/mobile-edge/VERIFICATION_20261118.md": "2932eb9022067a628e640530cffe43a7c4c854421d8b67b56a3ef33985e12a7c",
     "engineering/federation/mobile-edge/local-evidence-gateway.cjs": "ccba77b8e5089a29ecc4960bc3e2704720a373d42ca1696fd4a483d15123ca3c",
     "engineering/federation/mobile-edge/local-gateway.example.json": "e24bca6239a0fe06c755452977875a51aaa69a1335ab595f2d1487cd731486f3",
     "engineering/federation/mobile-edge/motorola-observation-producer.cjs": "8ccb632273b8cf483f9d269a19f1db85dae7a4c49b7af3048f8240e092be2382",
-    "engineering/federation/mobile-edge/native-mtg.cjs": "711135a96785615e2c939bdb36280944d06c7d051c057d29c59980ce720273c5",
+    "engineering/federation/mobile-edge/native-mtg.cjs": "4833835fcf14bba2cc203de70d5c08db43773b99d1d522ce396894c72a833235",
+    "engineering/federation/mobile-edge/observe-and-read.cjs": "236c610d6f6918974ac1755fe4501419a7fc4de23f49b2b6d37331b7c3bed75f",
     "engineering/federation/mobile-edge/tests/test_local_evidence_gateway.cjs": "d8afa3cf02c4c5b912279b6bc23e0f6aa710ae55109394f5f09e5eb5492d1fb2",
     "engineering/federation/mobile-edge/tests/test_motorola_observation_producer.cjs": "d6ef1a9d0bb762d4ad5658fd387ca591aa2948a534cce9e8812af0dae01b4162",
-    "engineering/federation/mobile-edge/tests/test_native_mtg.cjs": "41646a58f99b82574175596ed7dc08cc565e8fe04e495eba3dfbce9725045e10",
+    "engineering/federation/mobile-edge/tests/test_native_mtg.cjs": "594be4e675d79934ebc59489e368f83706c29fba44c89251791b09e3a0ce43a1",
+    "engineering/federation/mobile-edge/tests/test_observe_and_read.cjs": "fd0df8531a9be0cdb27ea308806f1b8c7d4c6771b1d249145a74aecde1c16de9",
     "tests/test_ahava_resume.cjs": "1a392378bd62b7036908f4f021832da19c0fc49edbf8c96a1f7686dc195c5041"
   }
 }
