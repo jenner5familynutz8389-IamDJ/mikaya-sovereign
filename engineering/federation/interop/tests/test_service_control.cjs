@@ -119,7 +119,7 @@ test('emergency kill loads and stops work even when the transport dependency has
 
 test('stale PID lock recovery never signals an unrelated live process', async t => {
   const f = await fixture(t);
-  fs.writeFileSync(path.join(f.dir, 'server.lock'), JSON.stringify({ pid: process.pid }), { mode: 0o600, flag: 'wx' });
+  fs.writeFileSync(path.join(f.dir, 'server.lock'), JSON.stringify({ schema: 'mikaya.interop.direct-server-lock.v1', pid: process.pid, startedAtMs: Date.now(), phase: 'READY', host: '127.0.0.1', port: f.port }), { mode: 0o600, flag: 'wx' });
   assert.equal(control.inspect(f.b).worker.state, 'OTHER_PROCESS');
   assert.equal((await control.start(f.b)).running, true);
   assert.equal(process.kill(process.pid, 0), true);
@@ -132,4 +132,88 @@ test('occupied network port cannot be reported as a ready service', async t => {
   t.after(() => new Promise(resolve => occupied.close(resolve)));
   await assert.rejects(control.start(f.b), /did not reach a running/);
   assert.equal(control.inspect(f.b).running, false);
+});
+
+test('empty, truncated and malformed process metadata stays UNKNOWN and cannot authorize duplicate start', async t => {
+  const f = await fixture(t);
+  direct.setEnabled(f.b, false);
+  const policyFile = path.join(f.dir, 'owner-policy.json'), originalPolicy = fs.readFileSync(policyFile, 'utf8');
+  for (const [file, name] of [['supervisor.json', 'supervisor'], ['server.lock', 'worker']]) {
+    const target = path.join(f.dir, file);
+    try {
+      for (const bytes of ['', '{"pid":', '{}', 'null', '[]', '{"schema":"wrong","pid":123}']) {
+        fs.writeFileSync(target, bytes, { mode: 0o600 });
+        const status = control.inspect(f.b);
+        assert.equal(status.running, false);
+        assert.equal(status[name].state, 'UNKNOWN');
+        assert.equal(typeof status[name].metadataError, 'string');
+        await assert.rejects(control.start(f.b), /metadata or process identity unknown/);
+        assert.equal(fs.readFileSync(policyFile, 'utf8'), originalPolicy);
+        assert.equal(fs.readFileSync(target, 'utf8'), bytes);
+      }
+    } finally { fs.unlinkSync(target); }
+  }
+  assert.equal(control.inspect(f.b).supervisor, null);
+  assert.equal(control.inspect(f.b).worker, null);
+});
+
+test('unknown process metadata retains emergency denial and cannot be claimed stopped or clear the kill marker', async t => {
+  const f = await fixture(t), target = path.join(f.dir, 'supervisor.json');
+  fs.writeFileSync(target, '', { mode: 0o600, flag: 'wx' });
+  try {
+    await assert.rejects(control.stop(f.b, true), /process stop could not be verified/);
+    const status = control.inspect(f.b);
+    assert.equal(status.running, false); assert.equal(status.enabled, false);
+    assert.equal(status.supervisor.state, 'UNKNOWN'); assert.equal(status.killSwitch, true);
+    assert.throws(() => control.clearKill(f.b), /verified stopped/);
+    assert.equal(fs.readFileSync(target, 'utf8'), '');
+    assert.equal(process.kill(process.pid, 0), true);
+  } finally { fs.unlinkSync(target); }
+});
+
+test('actual startup polls through an incomplete supervisor and worker metadata write before reporting READY', async t => {
+  const f = await fixture(t), preload = path.join(f.root, 'slow-metadata.cjs'), driver = path.join(f.root, 'startup-observer.cjs');
+  // Delay only the real supervisor/worker's first metadata write after its
+  // exclusive open. This deterministically exposes the actual empty-file race
+  // to the separate start observer; controller results are not mocked.
+  fs.writeFileSync(preload, `
+const fs = require('node:fs');
+const open = fs.openSync, write = fs.writeFileSync, pending = new Set();
+fs.openSync = function(file, flags, ...rest) {
+  const fd = open.call(fs, file, flags, ...rest);
+  if (typeof file === 'string' && (flags & fs.constants.O_EXCL) &&
+    ((process.argv[2] === '_run' && file.endsWith('/supervisor.json')) ||
+     (process.argv[2] === 'serve' && file.endsWith('/server.lock')))) pending.add(fd);
+  return fd;
+};
+fs.writeFileSync = function(fd, ...rest) {
+  if (pending.delete(fd)) Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 400);
+  return write.call(fs, fd, ...rest);
+};
+`, { mode: 0o600 });
+  fs.writeFileSync(driver, `
+const control = require(${JSON.stringify(require.resolve('../service-control.cjs'))});
+const state = process.argv[2];
+const seen = { supervisorUnknown: false, workerUnknown: false, unknownReportedRunning: false, inspectionErrors: [] };
+const poll = setInterval(() => {
+  try {
+    const status = control.inspect(state);
+    if (status.supervisor?.state === 'UNKNOWN') seen.supervisorUnknown = true;
+    if (status.worker?.state === 'UNKNOWN') seen.workerUnknown = true;
+    if ((status.supervisor?.state === 'UNKNOWN' || status.worker?.state === 'UNKNOWN') && status.running) seen.unknownReportedRunning = true;
+  } catch (e) { seen.inspectionErrors.push(e.message); }
+}, 20);
+(async () => {
+  try { const status = await control.start(state); console.log(JSON.stringify({ status, seen })); }
+  catch (e) { console.error(e.stack); process.exitCode = 1; }
+  finally { clearInterval(poll); await control.stop(state, true); }
+})();
+`, { mode: 0o600 });
+  const run = spawnSync(process.execPath, [driver, f.b], { encoding: 'utf8', timeout: 15000, maxBuffer: 16384, env: { ...process.env, NODE_OPTIONS: '--require=' + preload } });
+  assert.equal(run.status, 0, run.stderr);
+  const result = JSON.parse(run.stdout);
+  assert.equal(result.status.running, true); assert.equal(result.status.worker.phase, 'READY');
+  assert.equal(result.seen.supervisorUnknown, true); assert.equal(result.seen.workerUnknown, true);
+  assert.equal(result.seen.unknownReportedRunning, false);
+  assert.deepEqual(result.seen.inspectionErrors, []);
 });

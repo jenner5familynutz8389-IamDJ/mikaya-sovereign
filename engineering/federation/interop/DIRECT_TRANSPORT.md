@@ -13,18 +13,17 @@ the separate signed accounting records are in
 
 ## Execution evidence and its scope
 
-The direct transport's **22 focused tests were executed and passed locally**
-on November 19, 2026. They opened real loopback TLS sockets and exercised both
-roles, certificate and application identity refusals, channel binding,
-restart replay refusal, current owner controls, malformed frames, signed
-ledger integration, and a measured latency comparison. These local tests do
-not by themselves establish a connection between two physical phones.
+The transport tests open real loopback TLS sockets and exercise both roles,
+certificate and application identity refusals, channel binding, restart
+replay refusal, current owner controls, malformed frames, signed ledger
+integration, and a measured latency comparison. Per-device test execution
+and physical connections between two phones have separate evidence.
 
-The current physical execution, deployment, source inventory and measured
-results belong in [LIVE_DEPLOYMENT_20261119.md](LIVE_DEPLOYMENT_20261119.md).
-At this guide's initial preparation, that deployment verification was in
-progress. Use the completed execution report and its raw records for the
-actual final state; do not infer that a proposed command below has run.
+Use the completed [deployment report](LIVE_DEPLOYMENT_20261119.md) and its
+linked execution records for actual test counts, physical exchanges,
+source inventories, measured latency and timestamped service status.
+The commands in this guide describe operation; the report identifies the
+commands that were executed and their results.
 
 [EXECUTED_VALIDATION_20261119.md](EXECUTED_VALIDATION_20261119.md) is the earlier
 75-case baseline, identified by source-set digest
@@ -157,8 +156,12 @@ that history.
 
 Set `MIKAYA_BIND_IP` to this device's current explicit private address and
 `MIKAYA_PEER_IP` to the paired device's actual reachable private address.
-The completed deployment report records the addresses and route used for
-its execution. The guards below deliberately refuse unset addresses.
+Endpoint addresses remain in the owner's private installation state. The
+public deployment report identifies the route type and public identity pins.
+The installed pair now uses explicit private LAN addresses; earlier network
+and latency captures used the private overlay. Changing that route preserved
+the existing certificate/application-key pins and distribution policy.
+The guards below deliberately refuse unset addresses.
 
 For a foreground listener:
 
@@ -193,11 +196,47 @@ arguments before signalling them. It does not kill an unrelated process
 because that process reused an old PID. An inaccessible or ambiguous process
 identity remains a reported stop-verification problem.
 
+Startup metadata can be visible before its complete write. A partial,
+unreadable or invalid record is `UNKNOWN`, never evidence of ownership or
+readiness. The bounded startup poll can wait for a complete record and an
+exact process match; unknown identity prevents duplicate start, unsafe
+signalling and kill-marker clearance. `running` requires the enabled owner
+policy, no kill marker, matching supervisor and worker, and a `READY` worker.
+
 The controller does not itself register an Android boot receiver, install
 Termux:Boot, or change Android background-execution policy. An installed
 owner-controlled boot integration can invoke `resume`. A running detached
 process alone does not establish survival across an Android force-stop or
 reboot.
+
+### Commands on the already provisioned owner phones
+
+The installed `mikaya-interop` command selects that phone's existing state
+and explicitly configured peer route. Use these commands to inspect it and
+run the paired check:
+
+```sh
+mikaya-interop status
+mikaya-interop check
+```
+
+For an intentional emergency stop:
+
+```sh
+mikaya-interop kill
+```
+
+After the owner resolves the stop condition, clearance and startup are
+separate explicit actions:
+
+```sh
+mikaya-interop clear-kill
+mikaya-interop start
+```
+
+Installed login and boot resume hooks retain the same owner controls. A
+resume hook cannot clear a kill marker or reverse an intentional disabled
+state. The deployment report records the actual wrapper and hook checks.
 
 ### Stop, kill and resume
 

@@ -74,6 +74,28 @@ function processState(pid, expected) {
     return matchesProcessArguments(args, expected) ? 'MATCH' : 'OTHER_PROCESS';
   } catch (e) { return e.code === 'ENOENT' || e.code === 'ESRCH' ? 'ABSENT' : 'UNKNOWN'; }
 }
+function processRecord(dir, kind, stateDir, cfg) {
+  const supervisor = kind === 'supervisor';
+  try {
+    const row = read(path.join(dir, supervisor ? 'supervisor.json' : 'server.lock'));
+    ensure(row !== null && typeof row === 'object' && !Array.isArray(row) &&
+      row.schema === (supervisor ? 'mikaya.interop.supervisor.v1' : 'mikaya.interop.direct-server-lock.v1') &&
+      Number.isSafeInteger(row.pid) && row.pid > 1, kind + ' metadata schema or PID invalid');
+    if (supervisor) {
+      ensure(typeof row.startedAt === 'string' && Number.isFinite(Date.parse(row.startedAt)), 'supervisor metadata start time invalid');
+      return { pid: row.pid, state: processState(row.pid, [SELF, '_run', stateDir]), startedAt: row.startedAt };
+    }
+    ensure(Number.isSafeInteger(row.startedAtMs) && row.startedAtMs >= 0 && ['STARTING','READY'].includes(row.phase), 'worker metadata phase or time invalid');
+    if (row.phase === 'READY' && cfg) ensure(row.host === cfg.host && row.port === cfg.port, 'worker metadata listener differs from current configuration');
+    return { pid: row.pid, state: cfg ? processState(row.pid, [ENTRY, 'serve', stateDir, cfg.host, String(cfg.port)]) : 'UNKNOWN', phase: row.phase };
+  } catch (e) {
+    if (e.code === 'ENOENT') return null;
+    // Exclusive-create metadata is briefly visible before its complete write.
+    // Unknown is neither absence nor ownership: polling may wait for completion,
+    // but startup/stop must not infer permission to spawn or signal a process.
+    return { state: 'UNKNOWN', ...(supervisor ? {} : { phase: 'UNKNOWN' }), metadataError: String(e.message).slice(0,160) };
+  }
+}
 function inspect(stateDir) {
   const dir = directory(stateDir), cfg = loadConfig(stateDir, false);
   // Lifecycle inspection and emergency stop must remain usable after certificate
@@ -83,15 +105,8 @@ function inspect(stateDir) {
   try { policy = transport().validatePolicy(read(path.join(dir, 'owner-policy.json'))); }
   catch (e) { policyError = String(e.message).slice(0,160); }
   try { sourceCurrent = JSON.stringify(cfg.sources) === JSON.stringify(sources()); } catch {}
-  let supervisor = null, worker = null;
-  try {
-    const x = read(path.join(dir, 'supervisor.json'));
-    supervisor = { pid: x.pid, state: processState(x.pid, [SELF, '_run', stateDir]), startedAt: x.startedAt };
-  } catch (e) { if (e.code !== 'ENOENT') throw e; }
-  try {
-    const x = read(path.join(dir, 'server.lock'));
-    worker = { pid: x.pid, state: processState(x.pid, [ENTRY, 'serve', stateDir, cfg.host, String(cfg.port)]), phase: x.phase || 'UNKNOWN' };
-  } catch (e) { if (e.code !== 'ENOENT') throw e; }
+  const supervisor = processRecord(dir, 'supervisor', stateDir, cfg);
+  const worker = processRecord(dir, 'worker', stateDir, cfg);
   const killSwitch = fs.existsSync(path.join(dir, 'kill-switch'));
   return { schema: 'mikaya.interop.service-status.v1', checkedAt: new Date().toISOString(),
     enabled: policy?.enabled === true, killSwitch, supervisor, worker, sourceCurrent, policyError,
@@ -151,7 +166,10 @@ async function start(stateDir) {
   const cfg = loadConfig(stateDir), dir = directory(stateDir), previous = inspect(stateDir);
   if (previous.running) return previous;
   ensure(!previous.killSwitch, 'owner kill switch active; explicit clear-kill is required before start');
-  ensure(previous.supervisor?.state !== 'MATCH' && previous.supervisor?.state !== 'UNKNOWN', 'supervisor still active');
+  for (const [name, row] of [['supervisor', previous.supervisor], ['worker', previous.worker]]) {
+    ensure(row?.state !== 'UNKNOWN', name + ' metadata or process identity unknown; duplicate start refused');
+    ensure(row?.state !== 'MATCH', name + ' still active');
+  }
   transport().setEnabled(stateDir, true);
   const log = path.join(dir, 'supervisor-error.log');
   const fd = fs.openSync(log, fs.constants.O_WRONLY | fs.constants.O_CREAT | fs.constants.O_APPEND | fs.constants.O_NOFOLLOW, 0o600);
@@ -182,15 +200,7 @@ async function stop(stateDir, kill = false) {
   } catch { /* Preserve corrupt policy for diagnosis; the deny marker remains. */ }
   try { cfg = loadConfig(stateDir, false); } catch {}
   function records() {
-    const result = { supervisor: null, worker: null };
-    for (const [name, file] of [['supervisor','supervisor.json'], ['worker','server.lock']]) {
-      try {
-        const row = read(path.join(dir, file));
-        const expected = name === 'supervisor' ? [SELF, '_run', stateDir] : cfg ? [ENTRY, 'serve', stateDir, cfg.host, String(cfg.port)] : null;
-        result[name] = { pid: row.pid, state: expected ? processState(row.pid, expected) : 'UNKNOWN' };
-      } catch (e) { if (e.code !== 'ENOENT') result[name] = { state: 'UNKNOWN' }; }
-    }
-    return result;
+    return { supervisor: processRecord(dir, 'supervisor', stateDir, cfg), worker: processRecord(dir, 'worker', stateDir, cfg) };
   }
   const initial = records();
   for (const row of [initial.supervisor, initial.worker]) {
@@ -212,6 +222,7 @@ async function stop(stateDir, kill = false) {
 function clearKill(stateDir) {
   const dir = directory(stateDir), status = inspect(stateDir);
   ensure(!status.enabled && !status.running, 'disable service before clearing kill switch');
+  ensure(![status.supervisor?.state, status.worker?.state].some(s => s === 'MATCH' || s === 'UNKNOWN'), 'process state must be verified stopped before clearing kill switch');
   const file = path.join(dir, 'kill-switch');
   if (fs.existsSync(file)) {
     const s = fs.lstatSync(file);

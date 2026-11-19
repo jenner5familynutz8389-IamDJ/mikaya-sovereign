@@ -1,0 +1,42 @@
+{
+  "schema": "mikaya.interop.failure-history.v1",
+  "initialPhysicalRuns": [
+    {
+      "device": "f110",
+      "status": "FAIL",
+      "counts": {
+        "tests": 124,
+        "suites": 0,
+        "pass": 77,
+        "fail": 47,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "sourceSetSha256": "1053fd707736d729539b7efdfa58602a40e02cc88ad39a040d946b3d21479f7b",
+      "acceptanceSha256": "495fa47baeb5ae34e64e2945de601f9a009ec8a6034cc5faade8030ef5c82809",
+      "tapSha256": "1f43101cce8e530439bf016a5684825e0d9b1a45c926a73b58c4ef14df6daef7",
+      "observedCause": "Android EACCES for hard-link receipt commit; superseded after exclusive-create persistence correction",
+      "rawFilesRetainedPrivately": true
+    },
+    {
+      "device": "motorola",
+      "status": "FAIL",
+      "counts": {
+        "tests": 124,
+        "suites": 0,
+        "pass": 77,
+        "fail": 47,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "sourceSetSha256": "1053fd707736d729539b7efdfa58602a40e02cc88ad39a040d946b3d21479f7b",
+      "acceptanceSha256": "707dec53ddf52fb564fbe0ec3920caebc178245be1761bf5885783a5bf197e69",
+      "tapSha256": "8e19c1c1c1674422d8a27cc4570d5665cf1064c0834a2f029f02e49741d621b1",
+      "observedCause": "Android EACCES for hard-link receipt commit; superseded after exclusive-create persistence correction",
+      "rawFilesRetainedPrivately": true
+    }
+  ],
+  "countsIncludedInFinalPass": false
+}
