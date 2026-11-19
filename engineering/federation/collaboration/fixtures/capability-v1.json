@@ -1,0 +1,64 @@
+{
+  "warning": "Public deterministic test material only. Never use this issuer key or peer binding in deployment.",
+  "profile": "mikaya.act.capability.v1",
+  "nowMs": 1800000000000,
+  "rootKeyHex": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+  "claims": {
+    "schema": "mikaya.act.capability.v1",
+    "version": 1,
+    "issuer": "fixture-mikaya",
+    "issuerKeyId": "fixture-root-1",
+    "audience": "fixture-collaboration",
+    "peer": "fixture-act-peer",
+    "keyBinding": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "grantId": "fixture-grant-0001",
+    "issuerEpoch": 4,
+    "policyVersion": "fixture-policy-1",
+    "scopes": [
+      "evidence.ingest.v1",
+      "receipt.read.v1"
+    ],
+    "resources": [
+      "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    ],
+    "notBeforeMs": 1800000000000,
+    "expiresAtMs": 1800000120000,
+    "limits": {
+      "uses": 3,
+      "maxBytes": 8192,
+      "maxConcurrent": 1
+    }
+  },
+  "caveats": [
+    {
+      "field": "scopes",
+      "value": [
+        "receipt.read.v1"
+      ]
+    },
+    {
+      "field": "limits.uses",
+      "value": 1
+    },
+    {
+      "field": "limits.maxBytes",
+      "value": 1024
+    },
+    {
+      "field": "expiresAtMs",
+      "value": 1800000090000
+    }
+  ],
+  "baseToken": "mcap1.eyJjYXZlYXRzIjpbXSwiY2xhaW1zIjp7ImF1ZGllbmNlIjoiZml4dHVyZS1jb2xsYWJvcmF0aW9uIiwiZXhwaXJlc0F0TXMiOjE4MDAwMDAxMjAwMDAsImdyYW50SWQiOiJmaXh0dXJlLWdyYW50LTAwMDEiLCJpc3N1ZXIiOiJmaXh0dXJlLW1pa2F5YSIsImlzc3VlckVwb2NoIjo0LCJpc3N1ZXJLZXlJZCI6ImZpeHR1cmUtcm9vdC0xIiwia2V5QmluZGluZyI6InNoYTI1NjpiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiIiwibGltaXRzIjp7Im1heEJ5dGVzIjo4MTkyLCJtYXhDb25jdXJyZW50IjoxLCJ1c2VzIjozfSwibm90QmVmb3JlTXMiOjE4MDAwMDAwMDAwMDAsInBlZXIiOiJmaXh0dXJlLWFjdC1wZWVyIiwicG9saWN5VmVyc2lvbiI6ImZpeHR1cmUtcG9saWN5LTEiLCJyZXNvdXJjZXMiOlsic2hhMjU2OmFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWEiXSwic2NoZW1hIjoibWlrYXlhLmFjdC5jYXBhYmlsaXR5LnYxIiwic2NvcGVzIjpbImV2aWRlbmNlLmluZ2VzdC52MSIsInJlY2VpcHQucmVhZC52MSJdLCJ2ZXJzaW9uIjoxfSwibWFjIjoiNDYyNGRhNTIzYTBjNmFmNmU4MWRjMzQ0NmRlNjcwOTU0MTUwZjgxMTNkNDg1YmZhYmY3ZWU2ODMxYWI2OTUyMSJ9",
+  "attenuatedToken": "mcap1.eyJjYXZlYXRzIjpbeyJmaWVsZCI6InNjb3BlcyIsInZhbHVlIjpbInJlY2VpcHQucmVhZC52MSJdfSx7ImZpZWxkIjoibGltaXRzLnVzZXMiLCJ2YWx1ZSI6MX0seyJmaWVsZCI6ImxpbWl0cy5tYXhCeXRlcyIsInZhbHVlIjoxMDI0fSx7ImZpZWxkIjoiZXhwaXJlc0F0TXMiLCJ2YWx1ZSI6MTgwMDAwMDA5MDAwMH1dLCJjbGFpbXMiOnsiYXVkaWVuY2UiOiJmaXh0dXJlLWNvbGxhYm9yYXRpb24iLCJleHBpcmVzQXRNcyI6MTgwMDAwMDEyMDAwMCwiZ3JhbnRJZCI6ImZpeHR1cmUtZ3JhbnQtMDAwMSIsImlzc3VlciI6ImZpeHR1cmUtbWlrYXlhIiwiaXNzdWVyRXBvY2giOjQsImlzc3VlcktleUlkIjoiZml4dHVyZS1yb290LTEiLCJrZXlCaW5kaW5nIjoic2hhMjU2OmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmIiLCJsaW1pdHMiOnsibWF4Qnl0ZXMiOjgxOTIsIm1heENvbmN1cnJlbnQiOjEsInVzZXMiOjN9LCJub3RCZWZvcmVNcyI6MTgwMDAwMDAwMDAwMCwicGVlciI6ImZpeHR1cmUtYWN0LXBlZXIiLCJwb2xpY3lWZXJzaW9uIjoiZml4dHVyZS1wb2xpY3ktMSIsInJlc291cmNlcyI6WyJzaGEyNTY6YWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYSJdLCJzY2hlbWEiOiJtaWtheWEuYWN0LmNhcGFiaWxpdHkudjEiLCJzY29wZXMiOlsiZXZpZGVuY2UuaW5nZXN0LnYxIiwicmVjZWlwdC5yZWFkLnYxIl0sInZlcnNpb24iOjF9LCJtYWMiOiJmOGU2MWQ4ZDJkNTIwOTY3ZmJmY2VmZjg0ZjMwYTYxNDNjMTRkODIwNTZlNWU0Mjk4OGRjODc5NDZhOGU0YTkxIn0",
+  "expected": {
+    "grantId": "fixture-grant-0001",
+    "usageLimit": 1,
+    "grantUsageLimit": 3,
+    "expiresAtMs": 1800000090000,
+    "scopes": [
+      "receipt.read.v1"
+    ],
+    "maxBytes": 1024
+  }
+}
