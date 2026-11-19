@@ -1,6 +1,7 @@
 'use strict';
 const test=require('node:test'),assert=require('node:assert/strict');
 const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),http=require('node:http'),crypto=require('node:crypto');
+const net=require('node:net'),{spawn,spawnSync}=require('node:child_process');
 const fed=require('../../live/federation-node.cjs'),ledger=require('../../live/sovereign-event-ledger.cjs');
 const tollbooth=require('../../live/security-tollbooth.cjs');
 const collector=require('../../../../integrations/security-tollbooth/verified-events/ledger_event_collector.cjs');
@@ -35,6 +36,46 @@ async function auth(s,server,changes={}){
  return gateway.signRead({dir:s.dir,expectedFingerprint:s.identity.fingerprint,bootNonce:challenge.body.bootNonce,...changes});
 }
 function sourceBytes(s){return Object.fromEntries([...fs.readdirSync(s.events).map(n=>'events/'+n),...['identity-private.pem','identity-public.pem','node.json','policy.json','peers.json'].map(n=>'node/'+n)].map(n=>[n,fs.readFileSync(path.join(s.root,n)).toString('base64')]));}
+function nativeProfile(s){
+ const command=path.join(s.root,'native-mtg-wrapper'),policyFile=path.join(s.root,'native-mtg-policy.py');
+ const marker=path.join(s.root,'native-mtg-calls');
+ const status={android_thermal_severity:0,decision_for_optional_jobs:'ALLOW',nice_increase:15,poll_interval_seconds:10,
+  resume_requires:'two consecutive samples with severity 0 or 1',factory_throttling_modified:false,adb_required:false};
+ const quote=value=>"'"+value.replace(/'/g,"'\\''")+"'";
+ const commandBytes=Buffer.from('#!/bin/sh\nprintf "sample\\n" >> '+quote(marker)+'\nprintf "%s\\n" '+quote(JSON.stringify(status))+'\n');
+ const policyBytes=Buffer.from('# Synthetic native policy source; no Android calls.\n');
+ fs.writeFileSync(command,commandBytes,{mode:0o700});fs.writeFileSync(policyFile,policyBytes,{mode:0o600});
+ return {profile:{command,commandSha256:fed.sha(commandBytes),policyFile,policySha256:fed.sha(policyBytes)},
+  samples:()=>fs.existsSync(marker)?fs.readFileSync(marker,'utf8').trim().split('\n').length:0};
+}
+async function freePort(){
+ const reserve=net.createServer();reserve.listen(0,'127.0.0.1');
+ await new Promise((resolve,reject)=>{reserve.once('listening',resolve);reserve.once('error',reject);});
+ const port=reserve.address().port;await new Promise(resolve=>reserve.close(resolve));return port;
+}
+function connectLocal(port){return new Promise((resolve,reject)=>{
+ const socket=net.connect({host:'127.0.0.1',port});
+ socket.once('connect',()=>{socket.destroy();resolve();});socket.once('error',reject);
+ socket.setTimeout(500,()=>socket.destroy(Error('fixture connection timeout')));
+});}
+async function cliServer(t,mode,config,port){
+ const child=spawn(process.execPath,[path.resolve(__dirname,'../local-evidence-gateway.cjs'),mode,'--config',config],{stdio:['ignore','pipe','pipe']});
+ let output='',closed=false;child.stdout.on('data',data=>{output+=data;});child.stderr.on('data',data=>{output+=data;});
+ const completion=new Promise((resolve,reject)=>{child.once('error',reject);child.once('close',(code,signal)=>{closed=true;resolve({code,signal});});});
+ const stop=async()=>{
+  if(!closed){child.kill('SIGTERM');const timer=setTimeout(()=>child.kill('SIGKILL'),3000);
+   try{return await completion;}finally{clearTimeout(timer);}}
+  return completion;
+ };
+ t.after(stop);
+ const deadline=Date.now()+3000;
+ while(Date.now()<deadline){
+  if(closed)throw Error('fixture CLI exited before listening: '+output);
+  try{await connectLocal(port);return {stop,output:()=>output};}catch{}
+  await new Promise(resolve=>setTimeout(resolve,25));
+ }
+ throw Error('fixture CLI did not listen: '+output);
+}
 
 test('owner-local signed read reuses existing verifier and preserves each device identity and ledger',async t=>{
  for(const owner of ['MIKAYA','MOTOROLA']){
@@ -187,4 +228,47 @@ test('runtime startup never clears an existing writer lease or creates a replace
  fs.mkdirSync(lock,{mode:0o700});fs.writeFileSync(path.join(lock,'owner.json'),'existing owner lease\n',{mode:0o600});
  await assert.rejects(()=>gateway.startOwnedRuntime({dir:s.dir,expectedFingerprint:s.identity.fingerprint,collectorConfig:s.c,nodePort:43829,port:0,allowWork:()=>true}),/writer lease exists/);
  assert.equal(fs.readFileSync(path.join(lock,'owner.json'),'utf8'),'existing owner lease\n');assert.deepEqual(sourceBytes(s),before);
+});
+
+for(const mode of ['serve','serve-with-node'])test('CLI '+mode+' wires the pinned native profile into real owner-read admission',{timeout:20000},async t=>{
+ const s=fixture(t,{owner:mode==='serve'?'MIKAYA':'MOTOROLA'}),before=sourceBytes(s),native=nativeProfile(s);
+ const port=await freePort();let nodePort=await freePort();while(nodePort===port)nodePort=await freePort();
+ const collectorFile=path.join(s.root,'collector.json'),config=path.join(s.root,'gateway.json');
+ fs.writeFileSync(collectorFile,JSON.stringify(s.c),{mode:0o600});
+ fs.writeFileSync(config,JSON.stringify({schema:'mikaya.mobile-edge.local-gateway.v1',nodeDir:s.dir,
+  expectedFingerprint:s.identity.fingerprint,collectorConfigFile:collectorFile,port,nodePort,nativeMtg:native.profile}),{mode:0o600});
+ const cli=await cliServer(t,mode,config,port),lease=path.join(s.dir,tollbooth.LOCK_NAME);
+ assert.equal(fs.existsSync(lease),true);assert.equal(native.samples(),0,'startup must not seed native samples');
+ const read=()=>spawnSync(process.execPath,[path.resolve(__dirname,'../local-evidence-gateway.cjs'),'read','--config',config],{encoding:'utf8',timeout:5000});
+ const first=read();assert.equal(first.status,2,first.stderr);assert.equal(native.samples(),1);
+ // Exercise the actual legacy ten-second native cooldown in the server process.
+ await new Promise(resolve=>setTimeout(resolve,10200));
+ const second=read();assert.equal(second.status,0,second.stderr);
+ const body=JSON.parse(second.stdout);assert.equal(body.status,'VERIFIED_LOCAL_EVIDENCE');
+ assert.equal(body.ownerFingerprint,s.identity.fingerprint);assert.equal(body.actAdmission,'HOLD');
+ assert.equal(body.computeAuthorized,false);assert.equal(body.paymentAuthorized,false);
+ assert.equal(native.samples(),2,'the read CLI must not execute a separate native status command');
+ assert.deepEqual(sourceBytes(s),before);
+ if(mode==='serve')await assert.rejects(()=>connectLocal(nodePort),/ECONNREFUSED/);
+ else assert.equal((await request({address:()=>({port:nodePort})},'/v1/health')).status,200);
+ assert.deepEqual(await cli.stop(),{code:0,signal:null});assert.equal(fs.existsSync(lease),false);
+});
+
+test('CLI rejects malformed and mismatched native profiles before acquiring an owner lease',async t=>{
+ const s=fixture(t),before=sourceBytes(s),native=nativeProfile(s),port=await freePort();
+ const collectorFile=path.join(s.root,'collector.json'),config=path.join(s.root,'gateway.json');
+ fs.writeFileSync(collectorFile,JSON.stringify(s.c),{mode:0o600});
+ const {policySha256,...partial}=native.profile;
+ const profiles=[null,partial,{...native.profile,execute:true},{...native.profile,commandSha256:'0'.repeat(64)}];
+ const events=[],watcher=fs.watch(s.dir,(event,name)=>events.push(String(name)));t.after(()=>watcher.close());
+ for(const mode of ['serve','serve-with-node'])for(const profile of profiles){
+  fs.writeFileSync(config,JSON.stringify({schema:'mikaya.mobile-edge.local-gateway.v1',nodeDir:s.dir,
+   expectedFingerprint:s.identity.fingerprint,collectorConfigFile:collectorFile,port,nodePort:port+1,nativeMtg:profile}),{mode:0o600});
+  const result=spawnSync(process.execPath,[path.resolve(__dirname,'../local-evidence-gateway.cjs'),mode,'--config',config],{encoding:'utf8',timeout:3000});
+  assert.equal(result.status,2,result.stderr);assert.match(result.stderr,/MIKAYA_MOBILE_EDGE_HOLD/);
+  assert.equal(fs.existsSync(path.join(s.dir,tollbooth.LOCK_NAME)),false);
+ }
+ await new Promise(resolve=>setTimeout(resolve,25));
+ assert.equal(events.some(name=>name===tollbooth.LOCK_NAME),false,'invalid profile must not create even a transient owner lease');
+ assert.equal(native.samples(),0);assert.deepEqual(sourceBytes(s),before);
 });
