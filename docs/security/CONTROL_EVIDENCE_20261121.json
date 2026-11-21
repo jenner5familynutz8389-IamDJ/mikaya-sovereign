@@ -282,6 +282,22 @@
       "scope": "Remote health metadata now requires exact pinned client identity, but deployment is source-only.",
       "nextEvidence": "Physically test unauthorized clients against real proposed listener and monitor private audit logs without call tracing.",
       "certified": false
+    },
+    {
+      "id": "SIGNED_WITNESS_CHECKPOINT",
+      "status": "SOURCE_IMPLEMENTED",
+      "frameworks": [
+        "NIST-CSF-DE",
+        "NIST-CSF-RC",
+        "ISO-27001"
+      ],
+      "sourcePaths": [
+        "engineering/federation/interop/assurance/witness-checkpoints.cjs",
+        "engineering/federation/interop/assurance/test_witness_checkpoints.cjs"
+      ],
+      "scope": "Owner-ledger checkpoints are signed by a different cryptographic identity and may form a two-key quorum in the isolated source test; separate physical witness custody has not been demonstrated.",
+      "nextEvidence": "Independently enroll the Motorola or another approved node, verify fresh checkpoints physically over an authenticated route, retain a trusted high-water mark off-device and test witnessed rollback recovery.",
+      "certified": false
     }
   ]
 }

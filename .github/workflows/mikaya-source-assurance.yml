@@ -60,7 +60,7 @@ jobs:
           node --test engineering/federation/live/tests/*.cjs
       - name: Independent signed-key audit chain
         run: |
-          node --test engineering/federation/interop/assurance/test_rotating_audit.cjs
+          node --test engineering/federation/interop/assurance/test_rotating_audit.cjs engineering/federation/interop/assurance/test_witness_checkpoints.cjs
       - name: Government-readiness evidence classifications
         run: |
           node --test tests/test_control_evidence_register.cjs
