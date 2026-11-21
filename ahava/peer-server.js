@@ -1,16 +1,21 @@
 'use strict';
 /* AHAVA signed encrypted chunk transport. Requires a private overlay network. */
-const http=require('http'),fs=require('fs'),path=require('path'),crypto=require('crypto');
+const http=require('http'),https=require('https'),fs=require('fs'),path=require('path'),crypto=require('crypto');
+const transport=require('./transport-policy');
 const core=require('./core');
 const HOME=process.env.HOME,LEDGER=path.join(HOME,'sovereign_exec','ledger');
 const SECRET=fs.readFileSync(path.join(LEDGER,'.mesh_token'),'utf8').trim();
 if(!/^[0-9a-f]{64}$/i.test(SECRET))throw Error('Invalid mesh secret');
 const BIND=process.env.AHAVA_BIND||'127.0.0.1',PORT=Number(process.env.AHAVA_PORT||43824);
+const secure=transport.serverFor(BIND,process.env);
 const MAX_BODY=180000,MAX_CHUNK=65536,ROOT=core.DIR;
 const safeId=x=>{if(!/^[0-9a-f]{64}$/.test(x||''))throw Error('invalid content id');return x;};
 const output=(res,code,obj)=>{res.writeHead(code,{'content-type':'application/json','cache-control':'no-store'});res.end(JSON.stringify(obj));};
 const same=(a,b)=>{const x=Buffer.from(a),y=Buffer.from(b);return x.length===y.length&&crypto.timingSafeEqual(x,y);};
-const auth=req=>same(req.headers.authorization||'','Bearer '+SECRET);
+const auth=req=>{
+ if(!same(req.headers.authorization||'','Bearer '+SECRET))return false;
+ return secure.serverModule!=='https'||transport.clientIdentityOk(req.socket.getPeerCertificate(),secure.clientPin);
+};
 function readBody(req){
  return new Promise((resolve,reject)=>{
   let size=0,parts=[];
@@ -58,5 +63,6 @@ async function handler(req,res){
  }catch(e){return output(res,e.code==='ENOENT'?404:422,{error:'verification_failed',reason:e.message.slice(0,120)});}
 }
 core.init();
-http.createServer((req,res)=>{handler(req,res).catch(e=>output(res,500,{error:'handler_failed',detail:e.message.slice(0,80)}));})
- .listen(PORT,BIND,()=>console.log('AHAVA peer ready '+BIND+':'+PORT+'; node='+core.NODE));
+const onRequest=(req,res)=>{handler(req,res).catch(e=>output(res,500,{error:'handler_failed',detail:e.message.slice(0,80)}));};
+const server=secure.serverModule==='https'?https.createServer(secure.options,onRequest):http.createServer(onRequest);
+server.listen(PORT,BIND,()=>console.log('AHAVA peer ready '+secure.serverModule+' '+BIND+':'+PORT+'; node='+core.NODE));
