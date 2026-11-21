@@ -1,12 +1,15 @@
 'use strict';
-/* Offline verifier of FOSSiBOT-issued source attestation; requires only public information. */
-const fs=require('fs'),crypto=require('crypto'),path=require('path');
-const folder=process.argv[2]||__dirname;
-const raw=fs.readFileSync(path.join(folder,'RELEASE-SOURCE-MANIFEST.json'));
-const att=JSON.parse(fs.readFileSync(path.join(folder,'RELEASE-SOURCE-MANIFEST.sig.json'),'utf8'));
-const sha=x=>crypto.createHash('sha256').update(x).digest('hex');
-if(att.schema!=='sovereign.ed25519.manifest-attestation.v1'||att.algorithm!=='Ed25519'||
- sha(raw)!==att.sha256||sha(Buffer.from(att.publicKeyPem,'utf8'))!==att.signerFingerprint||
- !crypto.verify(null,raw,att.publicKeyPem,Buffer.from(att.signatureBase64,'base64'))){
- console.error('SOURCE_ATTESTATION_INVALID');process.exitCode=1;
-}else console.log(JSON.stringify({verified:true,manifestSha256:att.sha256,signerFingerprint:att.signerFingerprint}));
+/** MIKAYA strict owner-signed source verification.
+ * Historical signed manifests may be authentic but incomplete/stale.
+ * This command never grants OEM, wallet, ACT or government production authority.
+ */
+const path=require('node:path'),{verifyRelease}=require('./tools/verify-release-closure.cjs');
+try{
+ const args=process.argv.slice(2),root=path.resolve(args.find(x=>!x.startsWith('--'))||__dirname);
+ const result=verifyRelease({root,requireComplete:args.includes('--require-complete')});
+ console.log(JSON.stringify(result));
+ if(!result.complete)process.exitCode=2;
+}catch(error){
+ console.error('MIKAYA_RELEASE_HOLD:',error.code||error.message);
+ process.exitCode=2;
+}
