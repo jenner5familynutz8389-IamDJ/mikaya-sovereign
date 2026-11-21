@@ -14,7 +14,7 @@ const output=(res,code,obj)=>{res.writeHead(code,{'content-type':'application/js
 const same=(a,b)=>{const x=Buffer.from(a),y=Buffer.from(b);return x.length===y.length&&crypto.timingSafeEqual(x,y);};
 const auth=req=>{
  if(!same(req.headers.authorization||'','Bearer '+SECRET))return false;
- return secure.serverModule!=='https'||transport.clientIdentityOk(req.socket.getPeerCertificate(),secure.clientPin);
+ return transport.remoteClientAllowed(req.socket,secure);
 };
 function readBody(req){
  return new Promise((resolve,reject)=>{
@@ -30,7 +30,10 @@ function readChunks(man){
 async function handler(req,res){
  try{
   const u=new URL(req.url,'http://localhost'),parts=u.pathname.split('/').filter(Boolean);
-  if(req.method==='GET'&&u.pathname==='/health')return output(res,200,{status:'ok',service:'ahava-peer',node:core.NODE});
+  if(req.method==='GET'&&u.pathname==='/health'){
+   if(!transport.remoteClientAllowed(req.socket,secure))return output(res,401,{error:'unauthorized'});
+   return output(res,200,{status:'ok',service:'ahava-peer',node:core.NODE});
+  }
   if(!auth(req))return output(res,401,{error:'unauthorized'});
   if(parts[0]!=='ahava')return output(res,404,{error:'not_found'});
   if(req.method==='GET'&&parts[1]==='index')return output(res,200,{schema:'ahava.index.v1',node:core.NODE,ids:core.list().slice(0,2000)});

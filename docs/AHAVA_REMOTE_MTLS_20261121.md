@@ -23,3 +23,7 @@ node --test tests/test_ahava_transport_policy.cjs tests/test_ahava_mtls_loopback
 The unit suite includes wrong pins, remote plaintext refusal, credential file permissions, protected loopback, encrypted resumable content and explicit Android hard-link fixture limitations. The mTLS integration test uses disposable synthetic keys, opens only a short-lived loopback listener and rejects a mismatched server pin.
 
 Before changing the **installed** AHAVA service, record current source and state digests, independently issue and pin each certificate, check thermal admission, run two-way physical transfers with both phones, test revocation/replay/expired certs, and preserve the existing rollback procedure. The ACT-owned peer requires its own separate owner approval and hardware review.
+
+## Health metadata boundary
+
+For remote mTLS connections, even the `/health` response requires a successfully CA-authorized **and exactly pinned** client certificate. It does not export the node label to an arbitrary certificate holder. Existing loopback-only health behavior is preserved for local supervisors. The validation is a source and isolated TLS test, not a claim that every historical AHAVA installation has been migrated.

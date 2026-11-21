@@ -51,3 +51,14 @@ test('client certificate must match exact owner-pinned DER digest',t=>{
  assert.equal(policy.clientIdentityOk({raw:Buffer.from('unknown-peer')},pin),false);
  assert.equal(policy.clientIdentityOk({},pin),false);
 });
+test('remote health endpoint may not disclose node metadata to an unpinned mTLS client',t=>{
+ const env=sample(t),p=serverFor('100.64.7.3',env);
+ const {remoteClientAllowed}=require('../ahava/transport-policy');
+ const pinned={authorized:true,getPeerCertificate:()=>({raw:Buffer.from('client-der')})};
+ const unknown={authorized:true,getPeerCertificate:()=>({raw:Buffer.from('other-client')})};
+ assert.equal(remoteClientAllowed(pinned,p),true);
+ assert.equal(remoteClientAllowed(unknown,p),false);
+ assert.equal(remoteClientAllowed({...pinned,authorized:false},p),false);
+ assert.equal(remoteClientAllowed(null,p),false);
+ assert.equal(remoteClientAllowed(null,serverFor('127.0.0.1',{})),true);
+});

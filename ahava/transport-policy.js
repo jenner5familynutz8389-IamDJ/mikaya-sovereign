@@ -60,4 +60,10 @@ function clientIdentityOk(cert,pin){
  if(!cert||!Buffer.isBuffer(cert.raw)||!Buffer.isBuffer(pin)||pin.length!==32)return false;
  return crypto.timingSafeEqual(crypto.createHash('sha256').update(cert.raw).digest(),pin);
 }
-module.exports={clientFor,serverFor,clientIdentityOk};
+function remoteClientAllowed(socket,policy){
+ if(policy?.serverModule==='http')return true;
+ if(policy?.serverModule!=='https'||!socket||socket.authorized!==true||
+    typeof socket.getPeerCertificate!=='function')return false;
+ return clientIdentityOk(socket.getPeerCertificate(),policy.clientPin);
+}
+module.exports={clientFor,serverFor,clientIdentityOk,remoteClientAllowed};
