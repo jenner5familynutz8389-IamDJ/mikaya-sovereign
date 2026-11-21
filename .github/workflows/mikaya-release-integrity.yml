@@ -1,0 +1,41 @@
+name: MIKAYA independent release integrity (offline tests)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/mikaya-release-integrity.yml'
+      - 'tools/verify-release-closure.cjs'
+      - 'verify-release.js'
+      - 'tests/test_verify_release_closure.cjs'
+      - 'RELEASE-SOURCE-MANIFEST*'
+      - 'docs/RELEASE_TRUST_BOUNDARY_20261121.md'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-release:
+    name: Independent source-integrity denial tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24'
+      - name: Run signed-manifest closure and negative tests
+        run: |
+          node --test tests/test_verify_release_closure.cjs
+          node - <<'JS'
+          const cp=require('node:child_process');
+          const result=cp.spawnSync('node',['verify-release.js','--require-complete'],{encoding:'utf8',timeout:5000});
+          if(result.status!==2||!result.stderr.includes('MIKAYA_RELEASE_HOLD:')) {
+            console.error('Partial or invalid legacy manifest was unexpectedly accepted');
+            process.exit(1);
+          }
+          console.log('Expected HOLD: newer tracked source is not covered by the historical attestation');
+          JS
