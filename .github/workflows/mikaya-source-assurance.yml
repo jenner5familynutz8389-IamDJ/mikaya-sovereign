@@ -1,0 +1,69 @@
+name: MIKAYA source assurance (no device or wallet access)
+
+on:
+  pull_request:
+    paths:
+      - 'ahava/**'
+      - 'engineering/federation/**'
+      - 'tests/**'
+      - 'tools/verify-release-closure.cjs'
+      - 'verify-release.js'
+      - '.github/workflows/mikaya-source-assurance.yml'
+      - 'docs/security/CONTROL_EVIDENCE_20261121.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mikaya-assurance-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  offline-security-tests:
+    name: Bounded source-level checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Install pinned Node major
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24'
+          check-latest: false
+      - name: Toolchain and input readback
+        run: |
+          node --version
+          openssl version
+          git rev-parse HEAD
+          git diff --check
+      - name: Release verifier and denial-path tests
+        run: |
+          node --test tests/test_verify_release_closure.cjs
+          node - <<'JS'
+          const cp=require('node:child_process');
+          const output=cp.spawnSync('node',['verify-release.js','--require-complete'],{encoding:'utf8',timeout:5000});
+          if(output.status!==2 || !output.stderr.includes('MIKAYA_RELEASE_HOLD:')) {
+            console.error('Unreviewed release unexpectedly accepted or failed without HOLD');
+            process.exit(1);
+          }
+          console.log('Expected HOLD: historic signature does not certify this complete tree');
+          JS
+      - name: AHAVA TLS and encrypted resume
+        run: |
+          node --test tests/test_ahava_transport_policy.cjs tests/test_ahava_mtls_loopback.cjs tests/test_ahava_resume.cjs
+      - name: Signed federation and Toybox contract
+        run: |
+          node --test engineering/federation/live/tests/*.cjs
+      - name: Independent signed-key audit chain
+        run: |
+          node --test engineering/federation/interop/assurance/test_rotating_audit.cjs
+      - name: Government-readiness evidence classifications
+        run: |
+          node --test tests/test_control_evidence_register.cjs
+      - name: Source-matched interoperability acceptance
+        run: |
+          node engineering/federation/interop/run-acceptance.cjs --output "$RUNNER_TEMP/mikaya-interop-source-assurance"

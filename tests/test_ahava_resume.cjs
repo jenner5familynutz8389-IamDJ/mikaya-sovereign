@@ -85,7 +85,10 @@ for(const kind of ['symlink','hardlink','permissions','oversized'])test('unsafe 
  const f=fixture(t),original=Buffer.from(f.pack.chunks[0].base64,'base64'),foreign=path.join(f.dir,'foreign.bin');
  fs.writeFileSync(foreign,original,{mode:0o600});
  if(kind==='symlink')fs.symlinkSync(foreign,f.paths[0]);
- else if(kind==='hardlink')fs.linkSync(foreign,f.paths[0]);
+ else if(kind==='hardlink'){
+  try{fs.linkSync(foreign,f.paths[0]);}
+  catch(e){if(['EACCES','EPERM','ENOTSUP','EOPNOTSUPP'].includes(e.code)){t.skip('Android test filesystem denies hardlinks; no security pass inferred');return;}throw e;}
+ }
  else{cache(f,0);if(kind==='permissions')fs.chmodSync(f.paths[0],0o644);else fs.truncateSync(f.paths[0],CHUNK+1);}
  const before=fs.readFileSync(f.paths[0]),remote=transport(f);
  await assert.rejects(synchronizer(f,remote.request).pull(f.pack.id),/unsafe|cache|size/);
@@ -147,7 +150,7 @@ test('empty signed objects preserve original behavior without chunk traffic',asy
 test('private route validation rejects public URLs and lookalike hostnames before transport',t=>{
  const f=fixture(t);let called=false;
  for(const target of ['http://100.64.attacker.test','http://example.com','http://127.0.0.1/?secret=x','http://user:secret@127.0.0.1/'])
-  assert.throws(()=>require(syncPath).createSynchronizer({core:f.receiver,target,request:()=>{called=true;}}),/private tailnet or loopback/);
+  assert.throws(()=>require(syncPath).createSynchronizer({core:f.receiver,target,request:()=>{called=true;}}),/AHAVA_ROUTE_INVALID|AHAVA_REMOTE_TLS_REQUIRED/);
  assert.equal(called,false);
 });
 
