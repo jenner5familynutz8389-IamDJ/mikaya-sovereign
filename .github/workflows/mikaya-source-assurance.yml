@@ -9,6 +9,7 @@ on:
       - 'tools/verify-release-closure.cjs'
       - 'verify-release.js'
       - '.github/workflows/mikaya-source-assurance.yml'
+      - 'docs/security/CONTROL_EVIDENCE_20261121.json'
   workflow_dispatch:
 
 permissions:
@@ -60,6 +61,9 @@ jobs:
       - name: Independent signed-key audit chain
         run: |
           node --test engineering/federation/interop/assurance/test_rotating_audit.cjs
+      - name: Government-readiness evidence classifications
+        run: |
+          node --test tests/test_control_evidence_register.cjs
       - name: Source-matched interoperability acceptance
         run: |
           node engineering/federation/interop/run-acceptance.cjs --output "$RUNNER_TEMP/mikaya-interop-source-assurance"
