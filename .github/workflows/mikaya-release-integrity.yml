@@ -34,3 +34,7 @@ jobs:
           }
           console.log('Expected HOLD: newer tracked source is not covered by the historical attestation');
           JS
+
+      - name: Owner rotating witness evidence tests
+        run: |
+          node --test engineering/federation/interop/assurance/test_rotating_audit.cjs engineering/federation/interop/assurance/test_witness_checkpoints.cjs
