@@ -37,4 +37,4 @@ jobs:
 
       - name: Owner rotating witness evidence tests
         run: |
-          node --test engineering/federation/interop/assurance/test_rotating_audit.cjs engineering/federation/interop/assurance/test_witness_checkpoints.cjs
+          node --test engineering/federation/interop/assurance/test_rotating_audit.cjs engineering/federation/interop/assurance/test_witness_checkpoints.cjs engineering/federation/interop/assurance/test_persistent_witness.cjs
