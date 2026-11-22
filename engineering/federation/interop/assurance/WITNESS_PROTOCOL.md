@@ -22,3 +22,7 @@ node --test engineering/federation/interop/assurance/test_rotating_audit.cjs eng
 ```
 
 Next physical acceptance: run the same reviewed source digest on F110 and Motorola, exchange a current signed checkpoint over explicitly owner-authorized mTLS, persist the witness's trusted high-water digest independently, test recovery and conflicting checkpoints, then independently reverify the evidence. Never export secret keys into a public evidence package.
+
+## v2 durable witness store
+
+The opt-in persisted checkpoint module, crash/replay/rollback tests and Motorola acceptance procedure are documented in [PERSISTENT_WITNESS_V2.md](PERSISTENT_WITNESS_V2.md). It does not change the ACT-Omega wire format or enable a live witness service.
