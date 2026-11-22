@@ -38,3 +38,7 @@ jobs:
       - name: Owner rotating witness evidence tests
         run: |
           node --test engineering/federation/interop/assurance/test_rotating_audit.cjs engineering/federation/interop/assurance/test_witness_checkpoints.cjs engineering/federation/interop/assurance/test_persistent_witness.cjs
+
+      - name: Macaroon V2 work-to-revenue boundary
+        run: |
+          node --test engineering/federation/interop/tests/test_capability_macaroons.cjs engineering/federation/live/tests/test_work_revenue_bridge.cjs
