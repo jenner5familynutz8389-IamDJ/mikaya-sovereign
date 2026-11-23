@@ -1,0 +1,135 @@
+{
+  "schema": "mikaya.collaboration.source-manifest.v1",
+  "baselineCommit": "1da7fbdd79e63f857b07af0738278156c19a9966",
+  "entrypoint": "engineering/federation/collaboration/gateway-adapter.cjs",
+  "files": [
+    {
+      "path": "ahava/core.js",
+      "sha256": "c4b0fc391a3c308116eeb92fae6bb06bf5c632d4f4b114bbab6855a0db32c7ad"
+    },
+    {
+      "path": "engineering/federation/collaboration/CAPABILITY.md",
+      "sha256": "626c2f9057d51d5636570bcdd5ab525dc42be31ae83f1936561ae24d20fd0196"
+    },
+    {
+      "path": "engineering/federation/collaboration/DISTRIBUTION.md",
+      "sha256": "a767b9c65d18805b5ee8d01e7abb543b33e41915098c17485ab0592e2246f271"
+    },
+    {
+      "path": "engineering/federation/collaboration/OPERATIONS.md",
+      "sha256": "594d35a0e5fc0f8aacdd4350f89ffb1a783f8929c76bdeb0747615c0e33d7784"
+    },
+    {
+      "path": "engineering/federation/collaboration/README.md",
+      "sha256": "bda21e11fe1ab7c821f76c0543a27764d3f8dc4a95d5a74d43a642449cede826"
+    },
+    {
+      "path": "engineering/federation/collaboration/android-preflight.cjs",
+      "sha256": "d97d6f9df096fe5decadb390453a50869d45f42c00ac40b0b34354f91fa08a1c"
+    },
+    {
+      "path": "engineering/federation/collaboration/artifact-policy.cjs",
+      "sha256": "f47fdd5bc71873f763e33e90699f14e707cfc13c5847888c60df7fec609b14a6"
+    },
+    {
+      "path": "engineering/federation/collaboration/build-source-manifest.cjs",
+      "sha256": "bf591ba5551d5311c9d0ca56adbf7fc39efadf175b2daa6e484c2370d7e82042"
+    },
+    {
+      "path": "engineering/federation/collaboration/capability.cjs",
+      "sha256": "75dde66b3115dcd0ab0732f6bfaabd6cbc24068934d5899f0631be0c78bec62a"
+    },
+    {
+      "path": "engineering/federation/collaboration/demo.cjs",
+      "sha256": "6c3a967792b315d75c3ebb355df5ec00aec4314898314164f17abf479b70127a"
+    },
+    {
+      "path": "engineering/federation/collaboration/distribution.cjs",
+      "sha256": "c2356b5b6ad6e8c0244df4b89b72022937f6b5addc37bb0447867812369986a2"
+    },
+    {
+      "path": "engineering/federation/collaboration/fixtures/capability-cert-a.public-cert.txt",
+      "sha256": "ee9f5ccff738c5f2796fe24e9dd779a59e9f5ba0d7d04893bc1697d2a0c92d5e"
+    },
+    {
+      "path": "engineering/federation/collaboration/fixtures/capability-cert-b.public-cert.txt",
+      "sha256": "805a3da6d03e467165f9fbc0f70a4f25c07b53a11159643da74e79fb86261d51"
+    },
+    {
+      "path": "engineering/federation/collaboration/fixtures/capability-cert-spki.sha256",
+      "sha256": "b1e000767ad9bb0f37fc75ea4484f007e45af941bcdce6dae71b75448b1034fa"
+    },
+    {
+      "path": "engineering/federation/collaboration/fixtures/capability-v1.json",
+      "sha256": "cd14ee65dab07f1d88887c3ae4ceba6164f723b5fd0f8a101be4d8aea09ed0df"
+    },
+    {
+      "path": "engineering/federation/collaboration/fixtures/capability_oracle.py",
+      "sha256": "b4a0cb128f56748d165764e507f74d68460d7df2deca5a52a4adea6a186786d3"
+    },
+    {
+      "path": "engineering/federation/collaboration/gateway-adapter.cjs",
+      "sha256": "da3a5b76b809fdf1899ae3b303a01f7d09b0396b0ad1499389b0a6bdb339c988"
+    },
+    {
+      "path": "engineering/federation/collaboration/install-termux.sh",
+      "sha256": "7540b40c25652f9149a08781831d1e49bfaac661f81a987d665203ad9faed9e5"
+    },
+    {
+      "path": "engineering/federation/collaboration/protocol.cjs",
+      "sha256": "be0ec084422be590e977d92040602519c19e7b451e49e8a82639ba06aba69803"
+    },
+    {
+      "path": "engineering/federation/collaboration/runtime-state.cjs",
+      "sha256": "d1951e4acc07f6eb6bca9dc0625384bdab51a397878752dc7a4ef80b741fc17e"
+    },
+    {
+      "path": "engineering/federation/collaboration/session-clock.cjs",
+      "sha256": "532ef7816c01ac82969f22b93a18e49eaf5bf929e52d19613c4e1d15e99f8496"
+    },
+    {
+      "path": "engineering/federation/collaboration/tests/test_android_preflight.cjs",
+      "sha256": "64b6986b4cf6df07a9a6206b219b3f8d7690a066712268d3e16bee8894ec7243"
+    },
+    {
+      "path": "engineering/federation/collaboration/tests/test_artifact_policy.cjs",
+      "sha256": "95b4fdf05e43485031e3627d0f587125e1bc2e60b2d30a5dc5ca5da53904ba04"
+    },
+    {
+      "path": "engineering/federation/collaboration/tests/test_capability.cjs",
+      "sha256": "3aabf0ce3bfb3480b30815c6ea3deaa858927ecbb52f4ee603e328f6c96235f6"
+    },
+    {
+      "path": "engineering/federation/collaboration/tests/test_distribution.cjs",
+      "sha256": "d0de92734c256970890db3e91158b45e6ef5fba6c4a756baf9688fef716be395"
+    },
+    {
+      "path": "engineering/federation/collaboration/tests/test_gateway.cjs",
+      "sha256": "f2e45974b755cd4080b54b2b2908c5690fabc315daca5c26641f270e5512568f"
+    },
+    {
+      "path": "engineering/federation/collaboration/tests/test_protocol.cjs",
+      "sha256": "1231bf7dbb521bc6ed24ff044bfae75692faf82341c7c6f8c53c161c5ef6eec5"
+    },
+    {
+      "path": "engineering/federation/collaboration/tests/test_session_clock.cjs",
+      "sha256": "ea3842f25a98aaaa1495eefc9bc4081920adc92944797a57171fca8d1fa1425d"
+    },
+    {
+      "path": "engineering/federation/collaboration/tests/test_transaction_journal.cjs",
+      "sha256": "02e88da2d890b3e2e9534e6123f7e2d97499ac7230e19d5ace0477a6a122987d"
+    },
+    {
+      "path": "engineering/federation/collaboration/transaction-journal.cjs",
+      "sha256": "77cd56db21060529ebdf94fdd84c397af715bde0b8eac29dac34cbc4f06a26ce"
+    },
+    {
+      "path": "engineering/federation/live/federation-node.cjs",
+      "sha256": "bdf5ea0c64ed1fea7333a62a822d9f76756bb0fca53b13a747087cbdced29b08"
+    },
+    {
+      "path": "engineering/federation/live/security-tollbooth.cjs",
+      "sha256": "f5b6bc0602c0f7623844eae40694bfb3ea9db24462fc42d05e722b661c183c29"
+    }
+  ]
+}

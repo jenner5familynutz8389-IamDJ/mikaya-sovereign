@@ -4,7 +4,7 @@ Review-only public source. Independently owned Android/Linux nodes exchange boun
 
 The [November 18 mobile-edge review](../mobile-edge/README.md) adds an owner-local signed evidence port and verified AHAVA resume. Direct `/v1/task` acceptance now refuses ACT identities; the existing broker v2 remains the reviewed ACT ingress and revalidates current owner/reviewer authorization immediately before forwarding. Existing MIKAYA–Motorola exchanges and independent ledgers are retained. The source update does not enroll ACT or install a phone service.
 
-The public source provides the local federation transport, independent one-hop test broker, ACT invitation and reply, independent attestation review, explicit owner-signed scoped grant, unsigned settlement-disabled service quote and **read-only Toybox Bitcoin mainnet anchor verification**.
+The public source provides the local federation transport, independent one-hop test broker, ACT invitation and reply, independent attestation review, explicit owner-signed scoped grant, Ed25519-signed settlement-disabled service quote (`paymentStatus: UNPAID`, `authorizesExecution: false`) and **read-only Toybox Bitcoin mainnet anchor verification**.
 
 ## Human principal and device authority
 
@@ -24,7 +24,9 @@ ACT must independently pin MIKAYA's public fingerprint, verify the invitation, i
 
 See [Toybox public chain context](TOYBOX_PUBLIC_BRIDGE.md) and the source modules. The Toybox anchor is a **historical confirmed transaction**, not an unconfirmed mempool payment and not a proof of wallet ownership. ACT funds its own independent wallet and must never disclose seed phrases, macaroons or signing secrets.
 
-Public source published as [GitHub draft PR #2](https://github.com/jenner5familynutz8389-IamDJ/mikaya-sovereign/pull/2) for owner review; it does not contain private Termux state, private signing certificates, account tokens, identity backups or live mesh routing configuration.
+The initial public source was merged through [GitHub PR #2](https://github.com/jenner5familynutz8389-IamDJ/mikaya-sovereign/pull/2) on November 9, 2026. [PR #10](https://github.com/jenner5familynutz8389-IamDJ/mikaya-sovereign/pull/10) remains the draft prerequisite for the November 18 mobile-edge work as of November 19. Public source excludes private Termux state, private signing certificates, account tokens, identity backups and live mesh routing configuration.
+
+The [collaboration adapter](../collaboration/README.md) adds a separate TLS 1.3 mTLS HTTP/2 interface, attenuating capabilities, durable protocol receipts and resumable signed public artifacts. Its [acceptance record](../collaboration/ACCEPTANCE.md) distinguishes actual tests and device installation from the remaining bilateral ACT admission. The existing direct ACT compute refusal, broker gates, independent worker and owner-local evidence port remain in force.
 
 ## ACT onboarding, provenance and public assurance dashboard
 
@@ -33,4 +35,4 @@ Public source published as [GitHub draft PR #2](https://github.com/jenner5family
 - [Public evidence brief](evidence-brief/README.md): four original sections, dated evidence categories and a React TSX component.
 - [Signed event ledger](sovereign-event-ledger.cjs): private owner-managed journal; public source and tests only.
 
-The latest F110 clean-checkout test run passed 72 federation/Toybox/ledger tests and 9 dashboard validation tests (81 total); the source is review-only.
+The archived November 8 F110 clean-checkout run passed 72 federation/Toybox/ledger tests and 9 dashboard validation tests (81 total). See the mobile-edge and collaboration acceptance records for subsequent dated runs; these historical results do not establish current ACT admission.
