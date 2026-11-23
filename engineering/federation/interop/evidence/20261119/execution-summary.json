@@ -1,0 +1,283 @@
+{
+  "schema": "mikaya.interop.public-execution-summary.v1",
+  "date": "2026-11-19",
+  "status": "PASS",
+  "sourceSetSha256": "76310862197a799269ea6aa9a2c8374538eb0ecabfa2ee74b91742e310c7ed31",
+  "acceptance": [
+    {
+      "environment": "workspace",
+      "startedAt": "2026-11-19T18:50:56.400Z",
+      "finishedAt": "2026-11-19T18:51:24.012Z",
+      "durationMs": 27612,
+      "counts": {
+        "tests": 137,
+        "suites": 0,
+        "pass": 137,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "verifiedArtifactCount": 7,
+      "verifiedSourceFileCount": 27,
+      "sourceSetSha256": "76310862197a799269ea6aa9a2c8374538eb0ecabfa2ee74b91742e310c7ed31",
+      "runtime": {
+        "runtime.nodeVersion": "24.22.3",
+        "runtime.platform": "linux",
+        "runtime.arch": "x64"
+      },
+      "acceptanceRecordSha256": "8040aba28a6b5df2ddbead9e88424d6868d31cb390b38da035d5dceab0978a9e",
+      "tapSha256": "c0ca3e1e119f61513513270647c55b121fa004ef6308c7d5647c83bd6f8225ad",
+      "scope": {
+        "classification": "ISOLATED_LOCAL_INTEROPERABILITY_CONFORMANCE",
+        "identities": "NEW_SYNTHETIC_TEST_IDENTITIES_ONLY",
+        "communication": "LOCAL_SUBPROCESS_PIPES_LOOPBACK_MUTUAL_TLS_AND_OWNER_CARRIED_PACKET_FIXTURES",
+        "localServiceLifecycleExecuted": true,
+        "directPhysicalNetworkExchangeIncluded": false,
+        "actHardwareTested": false,
+        "actEndpointCalled": false,
+        "hardwareAttested": false,
+        "productionAdmission": false,
+        "paymentsAuthorized": false,
+        "firmwareOperations": false,
+        "distributedReplayProtectionProven": false
+      }
+    },
+    {
+      "environment": "f110",
+      "startedAt": "2026-11-19T18:51:39.296Z",
+      "finishedAt": "2026-11-19T18:53:47.850Z",
+      "durationMs": 128554,
+      "counts": {
+        "tests": 137,
+        "suites": 0,
+        "pass": 137,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "verifiedArtifactCount": 7,
+      "verifiedSourceFileCount": 27,
+      "sourceSetSha256": "76310862197a799269ea6aa9a2c8374538eb0ecabfa2ee74b91742e310c7ed31",
+      "runtime": {
+        "runtime.nodeVersion": "26.13.1",
+        "runtime.platform": "android",
+        "runtime.arch": "arm64"
+      },
+      "acceptanceRecordSha256": "014230d55c35b7b5346650ab55d1cafbcd3fb2278bd230c158c7fbd374166d42",
+      "tapSha256": "846b991d8ece12151e72af5e4574f44e86eda25c4ac4ab90107b8eb9a0c6fe06",
+      "scope": {
+        "classification": "ISOLATED_LOCAL_INTEROPERABILITY_CONFORMANCE",
+        "identities": "NEW_SYNTHETIC_TEST_IDENTITIES_ONLY",
+        "communication": "LOCAL_SUBPROCESS_PIPES_LOOPBACK_MUTUAL_TLS_AND_OWNER_CARRIED_PACKET_FIXTURES",
+        "localServiceLifecycleExecuted": true,
+        "directPhysicalNetworkExchangeIncluded": false,
+        "actHardwareTested": false,
+        "actEndpointCalled": false,
+        "hardwareAttested": false,
+        "productionAdmission": false,
+        "paymentsAuthorized": false,
+        "firmwareOperations": false,
+        "distributedReplayProtectionProven": false
+      }
+    },
+    {
+      "environment": "motorola",
+      "startedAt": "2026-11-19T18:51:43.199Z",
+      "finishedAt": "2026-11-19T18:53:20.270Z",
+      "durationMs": 97072,
+      "counts": {
+        "tests": 137,
+        "suites": 0,
+        "pass": 137,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "verifiedArtifactCount": 7,
+      "verifiedSourceFileCount": 27,
+      "sourceSetSha256": "76310862197a799269ea6aa9a2c8374538eb0ecabfa2ee74b91742e310c7ed31",
+      "runtime": {
+        "runtime.nodeVersion": "26.3.1",
+        "runtime.platform": "android",
+        "runtime.arch": "arm64"
+      },
+      "acceptanceRecordSha256": "5ac15a45481b0afd24510597794744308c765b355cdf66af891da6961edcef1e",
+      "tapSha256": "24d06f42d2cdcfc2a65bc0af08e59c1e8d06e18846f071aa9b0d888068599ecf",
+      "scope": {
+        "classification": "ISOLATED_LOCAL_INTEROPERABILITY_CONFORMANCE",
+        "identities": "NEW_SYNTHETIC_TEST_IDENTITIES_ONLY",
+        "communication": "LOCAL_SUBPROCESS_PIPES_LOOPBACK_MUTUAL_TLS_AND_OWNER_CARRIED_PACKET_FIXTURES",
+        "localServiceLifecycleExecuted": true,
+        "directPhysicalNetworkExchangeIncluded": false,
+        "actHardwareTested": false,
+        "actEndpointCalled": false,
+        "hardwareAttested": false,
+        "productionAdmission": false,
+        "paymentsAuthorized": false,
+        "firmwareOperations": false,
+        "distributedReplayProtectionProven": false
+      }
+    }
+  ],
+  "deployedIdentities": [
+    {
+      "device": "f110",
+      "fingerprint": "10e9691ab86b7f504d8e7f2920af3f67b826294ab57099a43be107a86050ddab",
+      "certificateSha256": "87b6e24e0c4ee7916049dfa470575c634cd1d9fc043a526aee5f0318b56b252f",
+      "profileSha256": "db1cd1e8b13741f02342509e8d1694326d29dadce7f8904511d8d43f5b815e4b",
+      "certificateValidFrom": "2026-11-19T18:08:30.000Z",
+      "certificateValidUntil": "2026-11-26T18:08:30.000Z",
+      "actualSavedProfileDigestMatched": true,
+      "peerManifestSignatureVerified": true,
+      "certificateSelfSignatureVerified": true,
+      "hardwareAttested": false
+    },
+    {
+      "device": "motorola",
+      "fingerprint": "2db9189925447844306b5546567fdc7e6f3dadbf397d3bfbdc015bfefcb11bc9",
+      "certificateSha256": "92fb9ba766e5c8a1f6dc4c2e2154070a806ab7e71676f2509ec3773e4d023106",
+      "profileSha256": "02f1fc529f2755942d496f583cba6bc8afe248fe76f4d126bf118d9753e303fc",
+      "certificateValidFrom": "2026-11-19T18:07:57.000Z",
+      "certificateValidUntil": "2026-11-26T18:07:57.000Z",
+      "actualSavedProfileDigestMatched": true,
+      "peerManifestSignatureVerified": true,
+      "certificateSelfSignatureVerified": true,
+      "hardwareAttested": false
+    }
+  ],
+  "directExchangeArtifacts": 4,
+  "uniqueNetworkProofReceipts": 128,
+  "uniqueSignedEnvelopesVerified": 1038,
+  "ledger": {
+    "entriesPerDevice": [
+      131,
+      131
+    ],
+    "matchedReceipts": 130,
+    "unmatchedRecords": 0,
+    "allocations": [
+      {
+        "fingerprint": "10e9691ab86b7f504d8e7f2920af3f67b826294ab57099a43be107a86050ddab",
+        "units": 65000
+      },
+      {
+        "fingerprint": "2db9189925447844306b5546567fdc7e6f3dadbf397d3bfbdc015bfefcb11bc9",
+        "units": 65000
+      }
+    ],
+    "unit": "NONMONETARY_COMPUTE_UNIT",
+    "paymentSettled": false
+  },
+  "benchmarks": [
+    {
+      "direction": "f110 -> motorola",
+      "operatorRouteLabel": "OWNER_LAN",
+      "artifact": "f110-ready-evidence/benchmark-lan.json",
+      "artifactSha256": "b8a62820df638457e3b9ba56fd93f32fe1944560bebd6ad32c49de6e7827d8a4",
+      "sampleCountPerCondition": 10,
+      "freshTlsEachJob": {
+        "minMs": 1134.2030770000001,
+        "medianMs": 1316.374538,
+        "maxMs": 1683.8895380000013,
+        "meanMs": 1326.1858999000003
+      },
+      "persistentTls": {
+        "minMs": 1068.5631539999995,
+        "medianMs": 1304.7583849999974,
+        "maxMs": 1536.1707689999967,
+        "meanMs": 1279.1480617999991
+      },
+      "freshOverPersistentMedianRatio": 1.008902915002154,
+      "persistentFasterInThisRun": true,
+      "signedReceiptsVerified": 20,
+      "bulkThroughputMeasured": false
+    },
+    {
+      "direction": "f110 -> motorola",
+      "operatorRouteLabel": "OWNER_OVERLAY",
+      "artifact": "f110-ready-evidence/benchmark-overlay.json",
+      "artifactSha256": "0b6bae8cdb173f9996a8c98851c7a179b33d256d45a09390dac1005287f1d25f",
+      "sampleCountPerCondition": 20,
+      "freshTlsEachJob": {
+        "minMs": 655.6470000000004,
+        "medianMs": 815.4322309999989,
+        "maxMs": 1107.211077,
+        "meanMs": 827.0869077499999
+      },
+      "persistentTls": {
+        "minMs": 655.7985389999999,
+        "medianMs": 745.8905379999997,
+        "maxMs": 977.8788459999996,
+        "meanMs": 768.4919462499998
+      },
+      "freshOverPersistentMedianRatio": 1.093233107885328,
+      "persistentFasterInThisRun": true,
+      "signedReceiptsVerified": 40,
+      "bulkThroughputMeasured": false
+    },
+    {
+      "direction": "motorola -> f110",
+      "operatorRouteLabel": "OWNER_LAN",
+      "artifact": "motorola-ready-evidence/benchmark-lan.json",
+      "artifactSha256": "d2d49dc4ffaefd54e98336e5e4d55230a0825bb7c18446fd055e7c4399a7cd31",
+      "sampleCountPerCondition": 10,
+      "freshTlsEachJob": {
+        "minMs": 1370.870538000001,
+        "medianMs": 1548.8256150000016,
+        "maxMs": 1787.9165379999977,
+        "meanMs": 1544.0628383
+      },
+      "persistentTls": {
+        "minMs": 1210.560308,
+        "medianMs": 1464.494537999999,
+        "maxMs": 2481.6860769999985,
+        "meanMs": 1562.3206307999997
+      },
+      "freshOverPersistentMedianRatio": 1.0575837429309707,
+      "persistentFasterInThisRun": true,
+      "signedReceiptsVerified": 20,
+      "bulkThroughputMeasured": false
+    },
+    {
+      "direction": "motorola -> f110",
+      "operatorRouteLabel": "OWNER_OVERLAY",
+      "artifact": "motorola-ready-evidence/benchmark-overlay.json",
+      "artifactSha256": "562f4d035308c93c23db3f45626504834b79a6604cc1fdd4111ff9f618ad779a",
+      "sampleCountPerCondition": 20,
+      "freshTlsEachJob": {
+        "minMs": 314.59630800000014,
+        "medianMs": 491.640308,
+        "maxMs": 736.6369230000018,
+        "meanMs": 468.8310653000002
+      },
+      "persistentTls": {
+        "minMs": 231.18676900000014,
+        "medianMs": 446.4013079999995,
+        "maxMs": 574.2679229999994,
+        "meanMs": 406.89429625000014
+      },
+      "freshOverPersistentMedianRatio": 1.1013415489365022,
+      "persistentFasterInThisRun": true,
+      "signedReceiptsVerified": 40,
+      "bulkThroughputMeasured": false
+    }
+  ],
+  "evidenceLimits": [
+    "Acceptance TAP, runtime observations, service lifecycle and latency timings are retained operator/device records, not manufacturer hardware attestation.",
+    "Independent Ed25519 verification establishes key possession and integrity of saved signed requests, results, profiles, transport statements and ledger checkpoints.",
+    "Saved transport evidence binds the recorded TLS exporter digest. An offline verifier cannot reconstruct a live TLS exporter or independently observe the original socket.",
+    "Replay refusals are captured authenticated-channel observations; the successful work receipt itself is not a separate signed refusal.",
+    "Benchmark comparison covers paired fixed32-byte SHA256 job latency including verification/accounting; it is not bulk bandwidth, a general hardware speed ranking or an ACT hardware benchmark.",
+    "Overlay/LAN are operator-supplied route labels. These captures occurred at different times and under different accumulated ledger state; the audit does not attribute differences between captures to route, hardware or optimization causality.",
+    "Installed login/boot hooks were recorded; no reboot was executed. Wrapper/CLI hashes are installation-record observations, not byte comparisons against separately supplied wrapper source.",
+    "Android ro.boot.veritymode describes dm-verity state; it is not an independently collected SELinux getenforce result.",
+    "Public ledger snapshots are copied byte-for-byte into private temporary verification directories; this does not independently attest original handset filesystem modes.",
+    "Joint nonmonetary accounting deduplicates matching receipts; payment settlement, mining reward, firmware changes and ACT production admission are not inferred."
+  ],
+  "hardwareAttested": false,
+  "actHardwareExecuted": false,
+  "sourceLink": "https://github.com/jenner5familynutz8389-IamDJ/mikaya-sovereign/pull/11"
+}

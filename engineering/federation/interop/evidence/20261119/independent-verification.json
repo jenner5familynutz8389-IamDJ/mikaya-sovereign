@@ -1,0 +1,1594 @@
+{
+  "schema": "mikaya.interop.final-independent-verification.v1",
+  "verifiedAt": "2026-11-19T19:03:43.310Z",
+  "status": "PASS",
+  "testedSourceSetSha256": "76310862197a799269ea6aa9a2c8374538eb0ecabfa2ee74b91742e310c7ed31",
+  "method": "Independent artifact/TAP/source hashing, independent node:crypto signature checks, source contract/ledger verification and deduplicated reconciliation. No test suites or device commands rerun.",
+  "acceptance": [
+    {
+      "environment": "workspace",
+      "startedAt": "2026-11-19T18:50:56.400Z",
+      "finishedAt": "2026-11-19T18:51:24.012Z",
+      "durationMs": 27612,
+      "counts": {
+        "tests": 137,
+        "suites": 0,
+        "pass": 137,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "verifiedArtifactCount": 7,
+      "verifiedSourceFileCount": 27,
+      "sourceSetSha256": "76310862197a799269ea6aa9a2c8374538eb0ecabfa2ee74b91742e310c7ed31",
+      "runtime": {
+        "runtime.nodeVersion": "24.22.3",
+        "runtime.platform": "linux",
+        "runtime.arch": "x64"
+      },
+      "acceptanceRecordSha256": "8040aba28a6b5df2ddbead9e88424d6868d31cb390b38da035d5dceab0978a9e",
+      "tapSha256": "c0ca3e1e119f61513513270647c55b121fa004ef6308c7d5647c83bd6f8225ad",
+      "scope": {
+        "classification": "ISOLATED_LOCAL_INTEROPERABILITY_CONFORMANCE",
+        "identities": "NEW_SYNTHETIC_TEST_IDENTITIES_ONLY",
+        "communication": "LOCAL_SUBPROCESS_PIPES_LOOPBACK_MUTUAL_TLS_AND_OWNER_CARRIED_PACKET_FIXTURES",
+        "localServiceLifecycleExecuted": true,
+        "directPhysicalNetworkExchangeIncluded": false,
+        "actHardwareTested": false,
+        "actEndpointCalled": false,
+        "hardwareAttested": false,
+        "productionAdmission": false,
+        "paymentsAuthorized": false,
+        "firmwareOperations": false,
+        "distributedReplayProtectionProven": false
+      }
+    },
+    {
+      "environment": "f110",
+      "startedAt": "2026-11-19T18:51:39.296Z",
+      "finishedAt": "2026-11-19T18:53:47.850Z",
+      "durationMs": 128554,
+      "counts": {
+        "tests": 137,
+        "suites": 0,
+        "pass": 137,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "verifiedArtifactCount": 7,
+      "verifiedSourceFileCount": 27,
+      "sourceSetSha256": "76310862197a799269ea6aa9a2c8374538eb0ecabfa2ee74b91742e310c7ed31",
+      "runtime": {
+        "runtime.nodeVersion": "26.13.1",
+        "runtime.platform": "android",
+        "runtime.arch": "arm64"
+      },
+      "acceptanceRecordSha256": "014230d55c35b7b5346650ab55d1cafbcd3fb2278bd230c158c7fbd374166d42",
+      "tapSha256": "846b991d8ece12151e72af5e4574f44e86eda25c4ac4ab90107b8eb9a0c6fe06",
+      "scope": {
+        "classification": "ISOLATED_LOCAL_INTEROPERABILITY_CONFORMANCE",
+        "identities": "NEW_SYNTHETIC_TEST_IDENTITIES_ONLY",
+        "communication": "LOCAL_SUBPROCESS_PIPES_LOOPBACK_MUTUAL_TLS_AND_OWNER_CARRIED_PACKET_FIXTURES",
+        "localServiceLifecycleExecuted": true,
+        "directPhysicalNetworkExchangeIncluded": false,
+        "actHardwareTested": false,
+        "actEndpointCalled": false,
+        "hardwareAttested": false,
+        "productionAdmission": false,
+        "paymentsAuthorized": false,
+        "firmwareOperations": false,
+        "distributedReplayProtectionProven": false
+      }
+    },
+    {
+      "environment": "motorola",
+      "startedAt": "2026-11-19T18:51:43.199Z",
+      "finishedAt": "2026-11-19T18:53:20.270Z",
+      "durationMs": 97072,
+      "counts": {
+        "tests": 137,
+        "suites": 0,
+        "pass": 137,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "verifiedArtifactCount": 7,
+      "verifiedSourceFileCount": 27,
+      "sourceSetSha256": "76310862197a799269ea6aa9a2c8374538eb0ecabfa2ee74b91742e310c7ed31",
+      "runtime": {
+        "runtime.nodeVersion": "26.3.1",
+        "runtime.platform": "android",
+        "runtime.arch": "arm64"
+      },
+      "acceptanceRecordSha256": "5ac15a45481b0afd24510597794744308c765b355cdf66af891da6961edcef1e",
+      "tapSha256": "24d06f42d2cdcfc2a65bc0af08e59c1e8d06e18846f071aa9b0d888068599ecf",
+      "scope": {
+        "classification": "ISOLATED_LOCAL_INTEROPERABILITY_CONFORMANCE",
+        "identities": "NEW_SYNTHETIC_TEST_IDENTITIES_ONLY",
+        "communication": "LOCAL_SUBPROCESS_PIPES_LOOPBACK_MUTUAL_TLS_AND_OWNER_CARRIED_PACKET_FIXTURES",
+        "localServiceLifecycleExecuted": true,
+        "directPhysicalNetworkExchangeIncluded": false,
+        "actHardwareTested": false,
+        "actEndpointCalled": false,
+        "hardwareAttested": false,
+        "productionAdmission": false,
+        "paymentsAuthorized": false,
+        "firmwareOperations": false,
+        "distributedReplayProtectionProven": false
+      }
+    }
+  ],
+  "deployedIdentities": [
+    {
+      "device": "f110",
+      "fingerprint": "10e9691ab86b7f504d8e7f2920af3f67b826294ab57099a43be107a86050ddab",
+      "certificateSha256": "87b6e24e0c4ee7916049dfa470575c634cd1d9fc043a526aee5f0318b56b252f",
+      "profileSha256": "db1cd1e8b13741f02342509e8d1694326d29dadce7f8904511d8d43f5b815e4b",
+      "certificateValidFrom": "2026-11-19T18:08:30.000Z",
+      "certificateValidUntil": "2026-11-26T18:08:30.000Z",
+      "actualSavedProfileDigestMatched": true,
+      "peerManifestSignatureVerified": true,
+      "certificateSelfSignatureVerified": true,
+      "hardwareAttested": false
+    },
+    {
+      "device": "motorola",
+      "fingerprint": "2db9189925447844306b5546567fdc7e6f3dadbf397d3bfbdc015bfefcb11bc9",
+      "certificateSha256": "92fb9ba766e5c8a1f6dc4c2e2154070a806ab7e71676f2509ec3773e4d023106",
+      "profileSha256": "02f1fc529f2755942d496f583cba6bc8afe248fe76f4d126bf118d9753e303fc",
+      "certificateValidFrom": "2026-11-19T18:07:57.000Z",
+      "certificateValidUntil": "2026-11-26T18:07:57.000Z",
+      "actualSavedProfileDigestMatched": true,
+      "peerManifestSignatureVerified": true,
+      "certificateSelfSignatureVerified": true,
+      "hardwareAttested": false
+    }
+  ],
+  "directExchanges": [
+    {
+      "direction": "f110 -> motorola -> f110",
+      "operatorRouteLabel": "OWNER_LAN",
+      "artifact": "f110-ready-evidence/network-lan.json",
+      "artifactSha256": "1c193282aa236330dfaada09aea3c6fa32d38930073c37ba640a5ce6ed8b1058",
+      "transport": "TLSv1.3_MUTUAL_PINNED",
+      "cipher": "TLS_AES_256_GCM_SHA384",
+      "capturedReplayRefusal": true,
+      "exchanges": [
+        {
+          "capability": "compute.dot.v1",
+          "result": 32,
+          "signedTimestampDeltaMs": -4962,
+          "recordedVerificationAt": "2026-11-19T18:55:29.730Z",
+          "requestKey": "9fdb388da357eaf9e4ce67d6fc29a2996c5bc70947b21266d37ea6b63108f71e",
+          "channelBindingSha256": "74cf64bdd2c09e95b186a93992c6659c9cbf612e5e92f2470f3e8893ade2883b",
+          "profileBindingVerified": true,
+          "signedWorkerAndHolderCheckpointsVerified": true,
+          "bothActualLedgerEntriesMatched": true
+        },
+        {
+          "capability": "compute.sha256.v1",
+          "result": "fc8b64001c5fdd0f2f40fb67dae4a865a2c5bd17836676d6d5b58b7917e33717",
+          "signedTimestampDeltaMs": -5015,
+          "recordedVerificationAt": "2026-11-19T18:55:30.853Z",
+          "requestKey": "dc7c5e998396320fa842eb57622fde1729f50cc4a59b58df73619229a7f956db",
+          "channelBindingSha256": "74cf64bdd2c09e95b186a93992c6659c9cbf612e5e92f2470f3e8893ade2883b",
+          "profileBindingVerified": true,
+          "signedWorkerAndHolderCheckpointsVerified": true,
+          "bothActualLedgerEntriesMatched": true
+        }
+      ]
+    },
+    {
+      "direction": "f110 -> motorola -> f110",
+      "operatorRouteLabel": "OWNER_OVERLAY",
+      "artifact": "f110-ready-evidence/network-overlay.json",
+      "artifactSha256": "1e488eec19773d0b02c6451402276175b7f11f27039287da57da60b82439c7ee",
+      "transport": "TLSv1.3_MUTUAL_PINNED",
+      "cipher": "TLS_AES_256_GCM_SHA384",
+      "capturedReplayRefusal": true,
+      "exchanges": [
+        {
+          "capability": "compute.dot.v1",
+          "result": 32,
+          "signedTimestampDeltaMs": -4935,
+          "recordedVerificationAt": "2026-11-19T18:29:27.442Z",
+          "requestKey": "47da78cf0bc0e954136c383838a946e4be4b1feeb812b83d5a470b6559b02adc",
+          "channelBindingSha256": "15657b2b77a4ccaf4a9ac013728ccfd68efb8a73cb94e0a947bb6c809333bb2a",
+          "profileBindingVerified": true,
+          "signedWorkerAndHolderCheckpointsVerified": true,
+          "bothActualLedgerEntriesMatched": true
+        },
+        {
+          "capability": "compute.sha256.v1",
+          "result": "fc8b64001c5fdd0f2f40fb67dae4a865a2c5bd17836676d6d5b58b7917e33717",
+          "signedTimestampDeltaMs": -5007,
+          "recordedVerificationAt": "2026-11-19T18:29:27.699Z",
+          "requestKey": "a603afd19ef7def5b7dfe09e842f30accd490b0eef650be716129992b91969b7",
+          "channelBindingSha256": "15657b2b77a4ccaf4a9ac013728ccfd68efb8a73cb94e0a947bb6c809333bb2a",
+          "profileBindingVerified": true,
+          "signedWorkerAndHolderCheckpointsVerified": true,
+          "bothActualLedgerEntriesMatched": true
+        }
+      ]
+    },
+    {
+      "direction": "motorola -> f110 -> motorola",
+      "operatorRouteLabel": "OWNER_LAN",
+      "artifact": "motorola-ready-evidence/network-lan.json",
+      "artifactSha256": "ddc678a15d273a9c467be40831e56e3e66dda1c659b9ccb81fb0d68d94fdde98",
+      "transport": "TLSv1.3_MUTUAL_PINNED",
+      "cipher": "TLS_AES_256_GCM_SHA384",
+      "capturedReplayRefusal": true,
+      "exchanges": [
+        {
+          "capability": "compute.dot.v1",
+          "result": 32,
+          "signedTimestampDeltaMs": 5157,
+          "recordedVerificationAt": "2026-11-19T18:57:32.885Z",
+          "requestKey": "0d3061d2bdb7e4df05dd34d343c38d37e30f53833aca4f0fb4f5dd1a35969236",
+          "channelBindingSha256": "791add1ddb4d717c87845796c6a9a404fb998f00035687f8f841a7d1041f0c6b",
+          "profileBindingVerified": true,
+          "signedWorkerAndHolderCheckpointsVerified": true,
+          "bothActualLedgerEntriesMatched": true
+        },
+        {
+          "capability": "compute.sha256.v1",
+          "result": "fc8b64001c5fdd0f2f40fb67dae4a865a2c5bd17836676d6d5b58b7917e33717",
+          "signedTimestampDeltaMs": 5112,
+          "recordedVerificationAt": "2026-11-19T18:57:34.117Z",
+          "requestKey": "57cd7e78ca4d80ecb654855cde6e0ea61d6fd5fb9e4deb2886fad959f68826a6",
+          "channelBindingSha256": "791add1ddb4d717c87845796c6a9a404fb998f00035687f8f841a7d1041f0c6b",
+          "profileBindingVerified": true,
+          "signedWorkerAndHolderCheckpointsVerified": true,
+          "bothActualLedgerEntriesMatched": true
+        }
+      ]
+    },
+    {
+      "direction": "motorola -> f110 -> motorola",
+      "operatorRouteLabel": "OWNER_OVERLAY",
+      "artifact": "motorola-ready-evidence/network-overlay.json",
+      "artifactSha256": "63c9f5e076bb82570f11415ee8e82507ad1591e2f4a2ae0d15a63ffd454870b6",
+      "transport": "TLSv1.3_MUTUAL_PINNED",
+      "cipher": "TLS_AES_256_GCM_SHA384",
+      "capturedReplayRefusal": true,
+      "exchanges": [
+        {
+          "capability": "compute.dot.v1",
+          "result": 32,
+          "signedTimestampDeltaMs": 5143,
+          "recordedVerificationAt": "2026-11-19T18:30:02.353Z",
+          "requestKey": "aab29acf3c594e380d848bb41d6885880f8da2c4b478ad8a67af4ccb2e4057b0",
+          "channelBindingSha256": "37d3a0f00a688b230cdeac99322e6a6001e3201c403548a9fe009e98d3484c71",
+          "profileBindingVerified": true,
+          "signedWorkerAndHolderCheckpointsVerified": true,
+          "bothActualLedgerEntriesMatched": true
+        },
+        {
+          "capability": "compute.sha256.v1",
+          "result": "fc8b64001c5fdd0f2f40fb67dae4a865a2c5bd17836676d6d5b58b7917e33717",
+          "signedTimestampDeltaMs": 5114,
+          "recordedVerificationAt": "2026-11-19T18:30:02.601Z",
+          "requestKey": "dd145b4bf583a8d40a4cebc5ed93106bd9fd4bf5dfab67d250c8f91da0d1c340",
+          "channelBindingSha256": "37d3a0f00a688b230cdeac99322e6a6001e3201c403548a9fe009e98d3484c71",
+          "profileBindingVerified": true,
+          "signedWorkerAndHolderCheckpointsVerified": true,
+          "bothActualLedgerEntriesMatched": true
+        }
+      ]
+    }
+  ],
+  "benchmarks": [
+    {
+      "direction": "f110 -> motorola",
+      "operatorRouteLabel": "OWNER_LAN",
+      "artifact": "f110-ready-evidence/benchmark-lan.json",
+      "artifactSha256": "b8a62820df638457e3b9ba56fd93f32fe1944560bebd6ad32c49de6e7827d8a4",
+      "sampleCountPerCondition": 10,
+      "freshTlsEachJob": {
+        "minMs": 1134.2030770000001,
+        "medianMs": 1316.374538,
+        "maxMs": 1683.8895380000013,
+        "meanMs": 1326.1858999000003
+      },
+      "persistentTls": {
+        "minMs": 1068.5631539999995,
+        "medianMs": 1304.7583849999974,
+        "maxMs": 1536.1707689999967,
+        "meanMs": 1279.1480617999991
+      },
+      "freshOverPersistentMedianRatio": 1.008902915002154,
+      "persistentFasterInThisRun": true,
+      "signedReceiptsVerified": 20,
+      "bulkThroughputMeasured": false
+    },
+    {
+      "direction": "f110 -> motorola",
+      "operatorRouteLabel": "OWNER_OVERLAY",
+      "artifact": "f110-ready-evidence/benchmark-overlay.json",
+      "artifactSha256": "0b6bae8cdb173f9996a8c98851c7a179b33d256d45a09390dac1005287f1d25f",
+      "sampleCountPerCondition": 20,
+      "freshTlsEachJob": {
+        "minMs": 655.6470000000004,
+        "medianMs": 815.4322309999989,
+        "maxMs": 1107.211077,
+        "meanMs": 827.0869077499999
+      },
+      "persistentTls": {
+        "minMs": 655.7985389999999,
+        "medianMs": 745.8905379999997,
+        "maxMs": 977.8788459999996,
+        "meanMs": 768.4919462499998
+      },
+      "freshOverPersistentMedianRatio": 1.093233107885328,
+      "persistentFasterInThisRun": true,
+      "signedReceiptsVerified": 40,
+      "bulkThroughputMeasured": false
+    },
+    {
+      "direction": "motorola -> f110",
+      "operatorRouteLabel": "OWNER_LAN",
+      "artifact": "motorola-ready-evidence/benchmark-lan.json",
+      "artifactSha256": "d2d49dc4ffaefd54e98336e5e4d55230a0825bb7c18446fd055e7c4399a7cd31",
+      "sampleCountPerCondition": 10,
+      "freshTlsEachJob": {
+        "minMs": 1370.870538000001,
+        "medianMs": 1548.8256150000016,
+        "maxMs": 1787.9165379999977,
+        "meanMs": 1544.0628383
+      },
+      "persistentTls": {
+        "minMs": 1210.560308,
+        "medianMs": 1464.494537999999,
+        "maxMs": 2481.6860769999985,
+        "meanMs": 1562.3206307999997
+      },
+      "freshOverPersistentMedianRatio": 1.0575837429309707,
+      "persistentFasterInThisRun": true,
+      "signedReceiptsVerified": 20,
+      "bulkThroughputMeasured": false
+    },
+    {
+      "direction": "motorola -> f110",
+      "operatorRouteLabel": "OWNER_OVERLAY",
+      "artifact": "motorola-ready-evidence/benchmark-overlay.json",
+      "artifactSha256": "562f4d035308c93c23db3f45626504834b79a6604cc1fdd4111ff9f618ad779a",
+      "sampleCountPerCondition": 20,
+      "freshTlsEachJob": {
+        "minMs": 314.59630800000014,
+        "medianMs": 491.640308,
+        "maxMs": 736.6369230000018,
+        "meanMs": 468.8310653000002
+      },
+      "persistentTls": {
+        "minMs": 231.18676900000014,
+        "medianMs": 446.4013079999995,
+        "maxMs": 574.2679229999994,
+        "meanMs": 406.89429625000014
+      },
+      "freshOverPersistentMedianRatio": 1.1013415489365022,
+      "persistentFasterInThisRun": true,
+      "signedReceiptsVerified": 40,
+      "bulkThroughputMeasured": false
+    }
+  ],
+  "ledgerVerification": [
+    {
+      "device": "f110",
+      "schema": "mikaya.interop.receipt-ledger-verification.v1",
+      "verified": true,
+      "ledgerId": "623a94df282aced8cfc6b16ae808d9d7667d487c6262e47c92a8aa41de691b76",
+      "ownerFingerprint": "10e9691ab86b7f504d8e7f2920af3f67b826294ab57099a43be107a86050ddab",
+      "entries": 131,
+      "receipts": 130,
+      "latestHash": "6f8a9a265aa712a750b94b58c00712aa1e8d1b7ad3e736a93c6a172ca14935ac",
+      "latestAtMs": 1795114689079,
+      "policySha256": "520a59ee55701715a568353a6bcad5394877735d52320835ffd4c57f8188ee97",
+      "totals": [
+        {
+          "fingerprint": "10e9691ab86b7f504d8e7f2920af3f67b826294ab57099a43be107a86050ddab",
+          "units": 65000
+        },
+        {
+          "fingerprint": "2db9189925447844306b5546567fdc7e6f3dadbf397d3bfbdc015bfefcb11bc9",
+          "units": 65000
+        }
+      ],
+      "unit": "NONMONETARY_COMPUTE_UNIT",
+      "rollbackAnchored": true,
+      "paymentSettled": false,
+      "bitcoinTransaction": false,
+      "miningReward": false,
+      "hardwareAttested": false,
+      "executionAuthorized": false,
+      "counterpartyRetainedCheckpointEntries": 131
+    },
+    {
+      "device": "motorola",
+      "schema": "mikaya.interop.receipt-ledger-verification.v1",
+      "verified": true,
+      "ledgerId": "db6566f6c680905cd8c45dce9dc21687463736dc6d05cff915bcde7457f8e144",
+      "ownerFingerprint": "2db9189925447844306b5546567fdc7e6f3dadbf397d3bfbdc015bfefcb11bc9",
+      "entries": 131,
+      "receipts": 130,
+      "latestHash": "8462dc0a5e9f4b26926566efeef19290f301613da663bd27fdd4ffc9d10f9c05",
+      "latestAtMs": 1795114685253,
+      "policySha256": "520a59ee55701715a568353a6bcad5394877735d52320835ffd4c57f8188ee97",
+      "totals": [
+        {
+          "fingerprint": "10e9691ab86b7f504d8e7f2920af3f67b826294ab57099a43be107a86050ddab",
+          "units": 65000
+        },
+        {
+          "fingerprint": "2db9189925447844306b5546567fdc7e6f3dadbf397d3bfbdc015bfefcb11bc9",
+          "units": 65000
+        }
+      ],
+      "unit": "NONMONETARY_COMPUTE_UNIT",
+      "rollbackAnchored": true,
+      "paymentSettled": false,
+      "bitcoinTransaction": false,
+      "miningReward": false,
+      "hardwareAttested": false,
+      "executionAuthorized": false,
+      "counterpartyRetainedCheckpointEntries": 109
+    }
+  ],
+  "serviceObservations": [
+    {
+      "device": "f110",
+      "artifact": "f110-ready-evidence/final-ready-status.json",
+      "artifactSha256": "dcf420c47bfb31a1c0fc54d9d623e298a66f733c104f5b11ecd10dcc43427dd0",
+      "classification": "RETAINED_OPERATOR_PROCESS_OBSERVATIONS_NOT_CRYPTOGRAPHIC_PROCESS_ATTESTATION",
+      "snapshots": [
+        {
+          "checkedAt": "2026-11-19T18:55:58.241Z",
+          "recordedRunning": true,
+          "recordedEnabled": true,
+          "recordedKillSwitch": false,
+          "recordedWorkerPhase": "READY",
+          "recordedSourceCurrent": true,
+          "metadataErrorPresent": false
+        }
+      ]
+    },
+    {
+      "device": "motorola",
+      "artifact": "motorola-ready-evidence/final-ready-status.json",
+      "artifactSha256": "9679cffc5a33cb6a8c5ec19ba173922be5e814bdea10365aead796b2b4caa5e6",
+      "classification": "RETAINED_OPERATOR_PROCESS_OBSERVATIONS_NOT_CRYPTOGRAPHIC_PROCESS_ATTESTATION",
+      "snapshots": [
+        {
+          "checkedAt": "2026-11-19T18:58:06.095Z",
+          "recordedRunning": true,
+          "recordedEnabled": true,
+          "recordedKillSwitch": false,
+          "recordedWorkerPhase": "READY",
+          "recordedSourceCurrent": true,
+          "metadataErrorPresent": false
+        }
+      ]
+    }
+  ],
+  "ownerLifecycle": [
+    {
+      "device": "f110",
+      "status": "PASS",
+      "artifact": "f110-ready-evidence/owner-control-live-final.json",
+      "artifactSha256": "90f6aae435ce6339fad202a39c52cc41d05d44921e745bb8e1b13ef9a84f3f4a",
+      "startedAt": "2026-11-19T18:54:33.088243+00:00",
+      "finishedAt": "2026-11-19T18:54:39.500342+00:00",
+      "testedSourceSetSha256": "76310862197a799269ea6aa9a2c8374538eb0ecabfa2ee74b91742e310c7ed31",
+      "listenerClosureAfterKillRecorded": true,
+      "steps": [
+        {
+          "command": "status",
+          "exitCode": 0,
+          "recordedRunning": true,
+          "recordedEnabled": true,
+          "recordedKillSwitch": false,
+          "recordedWorkerReady": true
+        },
+        {
+          "command": "kill",
+          "exitCode": 0,
+          "recordedRunning": false,
+          "recordedEnabled": false,
+          "recordedKillSwitch": true,
+          "recordedWorkerReady": false
+        },
+        {
+          "command": "resume-while-killed",
+          "exitCode": 0,
+          "recordedRunning": false,
+          "recordedEnabled": false,
+          "recordedKillSwitch": true,
+          "recordedWorkerReady": false
+        },
+        {
+          "command": "start-while-killed",
+          "exitCode": 1,
+          "killEnforcementRefusalVerified": true
+        },
+        {
+          "command": "clear-kill",
+          "exitCode": 0,
+          "recordedRunning": false,
+          "recordedEnabled": false,
+          "recordedKillSwitch": false,
+          "recordedWorkerReady": false
+        },
+        {
+          "command": "resume-while-disabled",
+          "exitCode": 0,
+          "recordedRunning": false,
+          "recordedEnabled": false,
+          "recordedKillSwitch": false,
+          "recordedWorkerReady": false
+        },
+        {
+          "command": "explicit-owner-start",
+          "exitCode": 0,
+          "recordedRunning": true,
+          "recordedEnabled": true,
+          "recordedKillSwitch": false,
+          "recordedWorkerReady": true
+        }
+      ],
+      "finalReady": {
+        "checkedAt": "2026-11-19T18:55:58.241Z",
+        "running": true,
+        "workerPhase": "READY",
+        "postOwnerRestartTrafficRecorded": true,
+        "serviceInventoryMatchesFrozenSource": true,
+        "artifactSha256": "dcf420c47bfb31a1c0fc54d9d623e298a66f733c104f5b11ecd10dcc43427dd0"
+      },
+      "installedControls": {
+        "command": "mikaya-interop",
+        "loginHookInstalled": true,
+        "bootHookInstalled": true,
+        "rebootExecuted": false,
+        "wrapperSha256AsRecorded": "31371cb33b0490f06256b5df07ac00359ad64dd17a6596c5d51474ecccf4b64b",
+        "cliSha256AsRecorded": "83fa775695462ba6631bc3e12d2a2ce0689abb4a70921fbbea6bab6f3d35155e",
+        "artifactSha256": "38599e73be93d0880c3d5e1ec55b3207e52b267021c704c77a80ff3b81543b19"
+      },
+      "evidenceClass": "RETAINED_OPERATOR_DEVICE_CONTROL_RECORDS_NOT_HARDWARE_ATTESTATION"
+    },
+    {
+      "device": "motorola",
+      "status": "PASS",
+      "artifact": "motorola-ready-evidence/owner-control-live-final.json",
+      "artifactSha256": "650b3ec4c23425d51297174511076b50b3de195585bcf11160b8c9c7bc6e3d55",
+      "startedAt": "2026-11-19T18:54:33.584376+00:00",
+      "finishedAt": "2026-11-19T18:54:37.981357+00:00",
+      "testedSourceSetSha256": "76310862197a799269ea6aa9a2c8374538eb0ecabfa2ee74b91742e310c7ed31",
+      "listenerClosureAfterKillRecorded": true,
+      "steps": [
+        {
+          "command": "status",
+          "exitCode": 0,
+          "recordedRunning": true,
+          "recordedEnabled": true,
+          "recordedKillSwitch": false,
+          "recordedWorkerReady": true
+        },
+        {
+          "command": "kill",
+          "exitCode": 0,
+          "recordedRunning": false,
+          "recordedEnabled": false,
+          "recordedKillSwitch": true,
+          "recordedWorkerReady": false
+        },
+        {
+          "command": "resume-while-killed",
+          "exitCode": 0,
+          "recordedRunning": false,
+          "recordedEnabled": false,
+          "recordedKillSwitch": true,
+          "recordedWorkerReady": false
+        },
+        {
+          "command": "start-while-killed",
+          "exitCode": 1,
+          "killEnforcementRefusalVerified": true
+        },
+        {
+          "command": "clear-kill",
+          "exitCode": 0,
+          "recordedRunning": false,
+          "recordedEnabled": false,
+          "recordedKillSwitch": false,
+          "recordedWorkerReady": false
+        },
+        {
+          "command": "resume-while-disabled",
+          "exitCode": 0,
+          "recordedRunning": false,
+          "recordedEnabled": false,
+          "recordedKillSwitch": false,
+          "recordedWorkerReady": false
+        },
+        {
+          "command": "explicit-owner-start",
+          "exitCode": 0,
+          "recordedRunning": true,
+          "recordedEnabled": true,
+          "recordedKillSwitch": false,
+          "recordedWorkerReady": true
+        }
+      ],
+      "finalReady": {
+        "checkedAt": "2026-11-19T18:58:06.095Z",
+        "running": true,
+        "workerPhase": "READY",
+        "postOwnerRestartTrafficRecorded": true,
+        "serviceInventoryMatchesFrozenSource": true,
+        "artifactSha256": "9679cffc5a33cb6a8c5ec19ba173922be5e814bdea10365aead796b2b4caa5e6"
+      },
+      "installedControls": {
+        "command": "mikaya-interop",
+        "loginHookInstalled": true,
+        "bootHookInstalled": false,
+        "rebootExecuted": false,
+        "wrapperSha256AsRecorded": "31371cb33b0490f06256b5df07ac00359ad64dd17a6596c5d51474ecccf4b64b",
+        "cliSha256AsRecorded": "83fa775695462ba6631bc3e12d2a2ce0689abb4a70921fbbea6bab6f3d35155e",
+        "artifactSha256": "214ef712dbc9fe862568deba4464e2d2241fcb83e4a089f84b1000d968a5138a"
+      },
+      "evidenceClass": "RETAINED_OPERATOR_DEVICE_CONTROL_RECORDS_NOT_HARDWARE_ATTESTATION"
+    }
+  ],
+  "hardwareObservations": [
+    {
+      "device": "f110",
+      "observedAt": "2026-11-19T18:51:38.903884+00:00",
+      "artifactSha256": "76ec12fc2fb33f4fbec1e5c1475aaeec39df65ec93bece6380fc17ce52d7cd36",
+      "evidenceClass": "UNSIGNED_ANDROID_GETPROP_SOFTWARE_OBSERVATION",
+      "properties": {
+        "ro.product.model": {
+          "status": "observed",
+          "value": "F110 Pro"
+        },
+        "ro.product.manufacturer": {
+          "status": "observed",
+          "value": "wheatek"
+        },
+        "ro.product.board": {
+          "status": "observed",
+          "value": "e393_qc_f10_w_6835_v0"
+        },
+        "ro.soc.model": {
+          "status": "observed",
+          "value": "MT6835"
+        },
+        "ro.build.version.release": {
+          "status": "observed",
+          "value": "15"
+        },
+        "ro.build.version.sdk": {
+          "status": "observed",
+          "value": "35"
+        },
+        "ro.build.version.security_patch": {
+          "status": "observed",
+          "value": "2026-05-05"
+        },
+        "ro.boot.verifiedbootstate": {
+          "status": "observed",
+          "value": "green"
+        },
+        "ro.boot.vbmeta.device_state": {
+          "status": "observed",
+          "value": "locked"
+        },
+        "ro.boot.flash.locked": {
+          "status": "observed",
+          "value": "1"
+        },
+        "ro.boot.veritymode": {
+          "status": "observed",
+          "value": "enforcing"
+        }
+      },
+      "overlappingFactsMatchSignedRuntimeProfile": true,
+      "hardwareAttestationVerified": false,
+      "identifiesHuman": false,
+      "provesWalletAuthority": false
+    },
+    {
+      "device": "motorola",
+      "observedAt": "2026-11-19T18:51:42.883570+00:00",
+      "artifactSha256": "ed31af528145ad9a30aa47248bedf04b19584c45e90030969a1ae9372d1b2ac5",
+      "evidenceClass": "UNSIGNED_ANDROID_GETPROP_SOFTWARE_OBSERVATION",
+      "properties": {
+        "ro.product.model": {
+          "status": "observed",
+          "value": "moto g power 5G - 2023"
+        },
+        "ro.product.manufacturer": {
+          "status": "observed",
+          "value": "motorola"
+        },
+        "ro.product.board": {
+          "status": "observed",
+          "value": "devonn"
+        },
+        "ro.soc.model": {
+          "status": "observed",
+          "value": "MT6855V/AZA"
+        },
+        "ro.build.version.release": {
+          "status": "observed",
+          "value": "14"
+        },
+        "ro.build.version.sdk": {
+          "status": "observed",
+          "value": "34"
+        },
+        "ro.build.version.security_patch": {
+          "status": "observed",
+          "value": "2026-02-01"
+        },
+        "ro.boot.verifiedbootstate": {
+          "status": "observed",
+          "value": "green"
+        },
+        "ro.boot.vbmeta.device_state": {
+          "status": "observed",
+          "value": "locked"
+        },
+        "ro.boot.flash.locked": {
+          "status": "observed",
+          "value": "1"
+        },
+        "ro.boot.veritymode": {
+          "status": "observed",
+          "value": "enforcing"
+        }
+      },
+      "overlappingFactsMatchSignedRuntimeProfile": true,
+      "hardwareAttestationVerified": false,
+      "identifiesHuman": false,
+      "provesWalletAuthority": false
+    }
+  ],
+  "reconciliation": {
+    "schema": "mikaya.interop.receipt-ledger-reconciliation.v1",
+    "verified": true,
+    "unit": "NONMONETARY_COMPUTE_UNIT",
+    "policySha256": "520a59ee55701715a568353a6bcad5394877735d52320835ffd4c57f8188ee97",
+    "ledgerHeads": [
+      {
+        "ownerFingerprint": "10e9691ab86b7f504d8e7f2920af3f67b826294ab57099a43be107a86050ddab",
+        "ledgerId": "623a94df282aced8cfc6b16ae808d9d7667d487c6262e47c92a8aa41de691b76",
+        "entries": 131,
+        "latestHash": "6f8a9a265aa712a750b94b58c00712aa1e8d1b7ad3e736a93c6a172ca14935ac"
+      },
+      {
+        "ownerFingerprint": "2db9189925447844306b5546567fdc7e6f3dadbf397d3bfbdc015bfefcb11bc9",
+        "ledgerId": "db6566f6c680905cd8c45dce9dc21687463736dc6d05cff915bcde7457f8e144",
+        "entries": 131,
+        "latestHash": "8462dc0a5e9f4b26926566efeef19290f301613da663bd27fdd4ffc9d10f9c05"
+      }
+    ],
+    "matchedReceipts": 130,
+    "matchedRequestKeys": [
+      "0229187f0c1b5cb17efe39b5f332ff418ddce25d3dca77ddba1146baa03a5206",
+      "025f8e455168d11c2b3008211c2ac69a7b8e4623b3c04775eeb0cfeeba655236",
+      "072b043905ca5349147ec03fa8706788efd7d653603611e242e0a72e0d755359",
+      "07f2a83137e85e1f5b6624f5965aa8dfe367303944e22bf95c72d1707ab91d70",
+      "07fca7ca4423bb5b721ef53f0a503418208d411149f2bd8380aa278e46ba59ce",
+      "0d3061d2bdb7e4df05dd34d343c38d37e30f53833aca4f0fb4f5dd1a35969236",
+      "0ed677de892fe067cde9b74e9d1d8c5cdc9ad8643c15e6ecd2898209e04a7697",
+      "0fa158b20ba0716cefa8a0584409126d02026c720f1cbaabf24388e412e380f3",
+      "10a17a7b12f82d257d491da43481997365e146482167546db018106dfa9afb4c",
+      "1690be00eb9241224c1aff821f7a7369dea31a6a263188fd768aa1349c8c29c1",
+      "176c0ab0fcede755b0af178bdecbf95d461006dfc63d1aae7884ae4e570ef4a2",
+      "20159331dd556e29b918827f2459199b06b7bd9466988031eda81a9599245b3d",
+      "23528eb48c491c88387724eecebe8ebb1545e2200759d428d9e4f95ba2ca2324",
+      "26077b8b0d4421c78a7ee10c113f3996e8592ae988525ba1e7411e86109c1fb1",
+      "28d117f893487afaa29b00021ea3d2e2a6c8c71a70947a3c4d2f4fe864efa5a8",
+      "2ad22f734961cc87916e8028fbf83a7256ce3ee8eba79c20353cf39ea967109e",
+      "2e2a7af840841553b85263ccb964f49917caa4a7c96c1f1439b3953b2fc4e7e4",
+      "2fa1c22966fd0d343a7bdc4f69d8a983449dcbb676cf0cb0462e47de9707a0d3",
+      "30cc03362231212f1aa17d02830407fc133baa220f1c0e0ad37fcbd439ab6e90",
+      "328503d4ae7ed8f5ec3ae6547311374d9e4c1ca3bccfdca323f9a1116f8b9154",
+      "344166873c4de13b750db9c0e3ad17b4afb5fa9d22720670a1d75be75031fd76",
+      "34fd012ad0831ddbb43a9629673e5c7ab989cfc302bed0468d3f666d3eb04889",
+      "395b092995430d0ed1b6f158a4317994daf7924b3d75249ec53ca038776631e2",
+      "3b6c713f0960beef28d69bd782965c9a75e3d9deed81c5b9c3764744ea857bbc",
+      "3c54f7c5338796e9ae31c9dc307af273c783f62966171552b47959c427922722",
+      "3c7d609e229aefb3ac4559b24fe282cb8f3415c73b4f2750428d77d6a63c40bd",
+      "3c854a903a9c274ba5d91501aa6c180dff6adcd6d0a957c9999b8176c9e2367e",
+      "3eaeaacd42b45bdbea18c0028a837c71f3b0dabfcdff81691ef9591fdd099d2a",
+      "3f76271db13b46aab7616ac7e8b6ef440f8c2a9acb8512f563376eb0bf230236",
+      "415fd859d63b29ebd92eddd9b750eb7c866a890eb5c02457fcfa0b5c7d55c236",
+      "41c84ce8d8f7cfa8a31fb3a45eab539f6f6b9972a7d6280dc968713e124d1274",
+      "41d8dd81ba47084f7f14079ea6ef92225f7c22cdc78a05df5544f1c319c120d7",
+      "4202af8208deeaf82d393f9d7b52fddaf20cb78c71c950e7ef85c782d8a643fc",
+      "42ea67eb428583451a0f4a20c57426b6703bb4cf9b7a77c625d2e80126654b12",
+      "44def20ef07a38902a7a1f257fbae74257191874b0284fdb126b8a22e2ce0a76",
+      "4685dfbff1ccbc8637b1f5245e5700382c022425cf556b03289a278026a1acd5",
+      "47da78cf0bc0e954136c383838a946e4be4b1feeb812b83d5a470b6559b02adc",
+      "49b7e1cfa653acc6914f46d9addf9478db974a7dcfbe2f3e3bbd39171a8c6836",
+      "4b424b43f27b3250b523976a48c456e3b17539db680e504a2b26c1c014ee2c65",
+      "4d6170b40c731bc2023160e33e75f929e433065f0739433a1ea6d47a9fa326f2",
+      "4df30b465909d065bfc012740e1ce2e40a1f6165aed186876e05e451a5910220",
+      "4f1afa3bf2750fc7f7a33e42c5a624477be5c8268e145aff0afa4b7237e31204",
+      "4f4ce2c28f479429663c115492e5b661ced34c2466b6a2bb7e7f63c905d536df",
+      "5533a9c7f6eeb4ee1b8e4b060b54bf6a27b0713d340eae34435e2213c56cced2",
+      "57cd7e78ca4d80ecb654855cde6e0ea61d6fd5fb9e4deb2886fad959f68826a6",
+      "5996374d33387ecbe36fe3c0ce4fee08c68ff8ee59753817455e6a579350449d",
+      "5b3450868684da6c10442c6c3bf40ca473a09733b0f3bb371c934cad9af04096",
+      "5cd9ded931b17c437f94e6ac0e98e3a49c93bf7de76920bddd858e004f368e73",
+      "607f9e60b4a5fc35a340242cd9ed7d1e22aee02b8fc7550979660d8e26d2ccbc",
+      "63f66af7f2087f45c0c8d52657d4e9d76a51a2824e0aa851a4d7abaee7b11d5c",
+      "648adad11f22c234ed572096f540ab47f663db0f40d92f6bd587b8077ef618b5",
+      "6497ec5f4a3d4ad9a9549dadaee4ac8be3511e2511b7e3500c6964bc7d098e3b",
+      "668730e49a8cadf4f809734db53769c5cf67aac3ffe03b633a430c2a96c39b7e",
+      "66c25be01c9c6c3c668cc9b79495af96df26f376d910bc393ca85a802f3bbd1c",
+      "6855afac6cd18bf1c4eb025353581e8b04af49fc78b5d34978605c50d16cc9ec",
+      "6c5f1eca4eff41bc58f71595b15a46a09f7112f08e602939b847e5632be58477",
+      "6d026f1938b3ab6151549b3c8fd63bbd5ed2fe726f500ba48ab8efebe43146ad",
+      "6eb62cefca1c3d8e6df1dbfb9ac8f3f2817027cde9e91f4f30dfd4350f4ef915",
+      "7346b10ca5adcdd2c94d4c3a39164826c0980bda976cc427421ba4437a7b5ab1",
+      "739201924c9898ea3f3a147fe3cbce3df25845fb4b49c2ed73b37b0cbe43065d",
+      "7399dc0941c28dc3f6b214e3366be7b8ac484400b6c791665e202443ee9160c3",
+      "7609b17bb3909502936fbe4d8d8bf1d3991340070f0d9eef7f9a31c55412ffbf",
+      "773150ffd9f0514ced9c75025f8b81285a8e13eb2909841130aa88830fda0c8c",
+      "7936f71d70585d4fa60436fa7310988e5fd0c807cc7920904d8df7623da7360c",
+      "79c550ab77666a6e02aeb55a368fa9feb381579ba7c3268b97a8ed6672154b85",
+      "7aa56ade69a031156a9e16e0e6ceab511394176597e165e15be04a137a5f94ae",
+      "7b700947dcaa9a692730104a8dfdd7bd0598462ad9e5a347a4ccbc2102a0abf0",
+      "7e12bbd0df8dcfc5d723923fe500fd707e4dc61842bac8f4b066149f3839886c",
+      "7e58ce5365ac8d74ece6f8927b2ccb9940f4aa0338dc87190d7a724109f6d7e4",
+      "80df48b903c2113dbd25733581ad75f709d7e9d2842b99ea183288b0cca21b08",
+      "84461d7f2d96f1cd58c40a8ae7b33e8082bc2b82ddc72f314409802ce74b14d2",
+      "857132706deef3639a88471558e9e868c069ab4e7ffde36b30b6252f848fd8e9",
+      "881e0817b4b5ac4aa14c04e9755446e5ab2e9d0a43162162ae3ef677992c8f32",
+      "8e5d7d187eab8d29984c74522c21dc5a9255ab5182fbd12daa734ace41a4636a",
+      "90ce0ead77e2ccc699351f437a65e5765351346721c97840a31e64b79e251b08",
+      "91eb03b14ab74f83e67923007484b266ee3c9d91b4815a22321551789789784d",
+      "93aa7bed6c0c523f1349ca2b7980921c887e35331bbf75e56649e464af82ad4a",
+      "93e962c1050ad6578bacf919f8e92bfdf530fd15d048118b10432b768734baf9",
+      "9636f270b1cfbc64fc27357684f3d275423ef6e941a21e7a60de1aa24d615c72",
+      "98aa99e1d0c2e7a39a837723587237665d4f0f2e1e4975ae4fa99e7496f13ab1",
+      "99023a51c5b3d64240b07f259422bf739a7189a5c5fa1c5a342323c12c8e649f",
+      "9a7e84088cf368a3424fe94711be145b62b9bdf9c079d242ccea2d33da4fdd69",
+      "9c1966ba0ec3af782a3fb40f4940c6e42dd8ad53841e8a17d90cfa28be8000be",
+      "9fdb388da357eaf9e4ce67d6fc29a2996c5bc70947b21266d37ea6b63108f71e",
+      "a09581d74153dea16429d1a1a43fc9b15d4c2663347657518d1e0d8d60bb5eab",
+      "a3a7b01776b4591d8087bfb46a909da0f28cbe8fa5332b613454579e126f0763",
+      "a472aaf34681b0d69c53a64aa4652530569cfc492d0eb29e1dd9ba738a850ca3",
+      "a5093048d7b08c3e790623e401e603f5bc89c3c7d668fd9dd53e28010d6d5838",
+      "a53e56b32715c8244b1e09bb63270f318740efba6c4672fdb7a6ce0dceba4c6b",
+      "a603afd19ef7def5b7dfe09e842f30accd490b0eef650be716129992b91969b7",
+      "a653dd4e78f850ed9c083003b24680391493de84404ced38f201ddb7aba7ec15",
+      "a7b4c45d9458106270d4fc6cedbbd4e58b415f0d56af52401a61b5e251b74d97",
+      "aab29acf3c594e380d848bb41d6885880f8da2c4b478ad8a67af4ccb2e4057b0",
+      "ab25fb740a4d2e34ff1c95dcc9401508c3528b5e5bca5683ede1483d75a4a7d7",
+      "abc2443f598e49ec23193a954e7e97ba8d36c672348fe8c7129be4ae48213d17",
+      "ad58d27bd0c22d7ec6a850f1c3737af1cbbb37514bfb4a8c877f7f16cbb6f0b8",
+      "b074a6945d649f9cd6d725e9929419ac12bd48f8a334053817a551be1c66b012",
+      "b3ae1d47bd3b6877d433a6ccbddb367c041dc19a6e46e7940b565db6e869e703",
+      "b540cb5cf18dc3fbb38f84a4d48ff05148b088ac7d70c03a5f8ac20a6bc9b902",
+      "b68c4bf1cb0b10c220354fab5e1120cb3f92e3f435196cc96f97ea99ea9a042d",
+      "b9982ae1d8835e8db2eee1924bd865601059cba4c3eb953249a9b455b3cf07a2",
+      "c19a6447d1e781297543e3ce542e30136cbfd6fa693c536a1249df85f5f437c7",
+      "c518251e70cfb156d40a625bf42d954187c61d2a3d54490cda04a671e448af46",
+      "c52cd8eeb30aa3514327d0bc22fb3de7a1b053516c78b53d810184630d63d3bb",
+      "c699df504bfbc884e8a09551562d3a4cbfddd38b29ef9f9299576fba1b3a07e5",
+      "c82d760fde51a64056ecbcea71e8c4c3c167ae434793ee59dcd801f2246950bf",
+      "c893b9fb4d499e056b753342f5a6112a63fdce2d33b6e403f13417dab0490f66",
+      "c99b422a715244ca05aff4d5c4403d1a713a1da60264bb789b99d2252c393635",
+      "ca51eeda3c4ee9f722d844bd945620eff4699c359c350fdad107e45c65b9f03f",
+      "cb6d029fb4b9281a541ae0ac15ecea4ceef1ff0efe9ef4440de8935b337b1582",
+      "d04f9f1b8a6b791241dbd054c349d2cfb70b6d1997977a9e5a44546b849c51ba",
+      "d2f8ebad2f41a2eb93947200445ee18693c6c878b41963129d06133e0d0e6f2d",
+      "d40827cca00964662878e7c5479acd16c5dede8ef0d79854b5c0dc56fcb60a50",
+      "d64066e2f5464222e1753d757cc4a8dcaa991dfd179715562a319f4c4e595f7d",
+      "dbd087445764be75f9f5cf841307bf83daa396e245db5eaa14aa1bc9d13fc542",
+      "dc7c5e998396320fa842eb57622fde1729f50cc4a59b58df73619229a7f956db",
+      "dcced9aff6abb221fa24339e62de3dc595bbef9b3d97964794b0b192e248b83e",
+      "dcdefa16378559d61cfc2335ce25e272c3e3941486d62301d044071fe2e91ee1",
+      "dd145b4bf583a8d40a4cebc5ed93106bd9fd4bf5dfab67d250c8f91da0d1c340",
+      "dee0ac6cb2a27c11c619fc137e6cf9b4321c047ba34f4f65e5bec4bf5f36d5cd",
+      "e278baaf121f056b7dee288dac0dd9a4e1d65ccf857bd74e9b8d8f9d2faa565f",
+      "ec7813cbfbed468df6be2ef54ee38df2dcfb54ffdeb09f8071611fbe113c06bb",
+      "ec846c517fef466de3f64c112bf52cfc5a10b479b9dba4c14e473708a17ff752",
+      "ef9c7c405b46f199ac83ba5e0c98f2c09f31c4c50d791c4eacc095809767e8b8",
+      "f1bc7384a6f35f26f2236d59abcf5bb71b9e475ac80bca6b557510b0bda5f8c3",
+      "f3f745c35998d485b5249bea40a3c3d16120541727ca8c33a96a6cb48d2fd419",
+      "f550cd6f8905b29b79e62b3ccf4f422dedbd7e90b32f53de37542153aa713c03",
+      "f6dab844da0e09fb6805dd00b7bb3bd3b3c5831713ffa63c099e45c255c347d4",
+      "f82a2c56f27212be3253bda4140b4877427cbdb0778eeeb58f522de4a45f181a",
+      "fb6b532ca8bc9f16a117ca805f244093545b6cb19d30df3637dbe07806b285df"
+    ],
+    "unmatchedRecords": [],
+    "allReceiptsAgreed": true,
+    "allocations": [
+      {
+        "fingerprint": "10e9691ab86b7f504d8e7f2920af3f67b826294ab57099a43be107a86050ddab",
+        "units": 65000
+      },
+      {
+        "fingerprint": "2db9189925447844306b5546567fdc7e6f3dadbf397d3bfbdc015bfefcb11bc9",
+        "units": 65000
+      }
+    ],
+    "paymentSettled": false,
+    "bitcoinTransaction": false,
+    "miningReward": false,
+    "executionAuthorized": false
+  },
+  "uniqueProofWorkReceipts": 128,
+  "uniqueSignedEnvelopesIndependentlyVerified": 1038,
+  "additionalLedgerOnlyWorkReceipts": 2,
+  "timestampPolicy": {
+    "maxSignedTimestampDeltaMs": 10000,
+    "maxLocalFreshnessMs": 60000,
+    "observed": [
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -4962
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -5015
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -4935
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -5007
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -5000
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -5017
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -4663
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -4999
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -5014
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -4908
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -4991
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -5002
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -5019
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -5011
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -4879
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -4415
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -5017
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -4999
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -4927
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -5022
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -5020
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -4913
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -4736
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -5016
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -4994
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -5011
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -5000
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -5011
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -5000
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -5020
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -5005
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -5015
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -5006
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -5026
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -5010
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -5016
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -4996
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -5018
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -4990
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -5015
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -5009
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -5004
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -5019
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -5018
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -5018
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -4981
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -5006
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -4991
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -4990
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -5017
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -5005
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -5013
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -5006
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -5015
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -5016
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -4996
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -5014
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -5005
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -5022
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -5014
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -4994
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -5015
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -4961
+      },
+      {
+        "holder": "f110",
+        "worker": "motorola",
+        "signedDeltaMs": -4998
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5157
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5112
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5143
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5114
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5134
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5124
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5115
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5122
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5119
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5143
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5116
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5116
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5122
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5292
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5174
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5113
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5120
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5773
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5417
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5431
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5130
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5851
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5110
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5124
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5152
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5118
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5120
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5127
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5130
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5112
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5112
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5123
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5118
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5105
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5117
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5110
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5117
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5116
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5129
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5118
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5113
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5116
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5128
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5125
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5123
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5114
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5116
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5127
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5114
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5116
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5114
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5125
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5134
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5119
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5116
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5162
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5125
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5117
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5115
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5134
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5110
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5118
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5116
+      },
+      {
+        "holder": "motorola",
+        "worker": "f110",
+        "signedDeltaMs": 5131
+      }
+    ],
+    "minimumSignedDeltaMs": -5026,
+    "maximumSignedDeltaMs": 5851,
+    "clockOffsetVerified": false,
+    "explanation": "Signed response minus signed request includes device clock disagreement and processing/transport elapsed time. These deltas are not an independently attested clock offset. Archival verification uses original captured holder or signed ledger-record timestamps and does not renew expired requests."
+  },
+  "evidenceLimits": [
+    "Acceptance TAP, runtime observations, service lifecycle and latency timings are retained operator/device records, not manufacturer hardware attestation.",
+    "Independent Ed25519 verification establishes key possession and integrity of saved signed requests, results, profiles, transport statements and ledger checkpoints.",
+    "Saved transport evidence binds the recorded TLS exporter digest. An offline verifier cannot reconstruct a live TLS exporter or independently observe the original socket.",
+    "Replay refusals are captured authenticated-channel observations; the successful work receipt itself is not a separate signed refusal.",
+    "Benchmark comparison covers paired fixed32-byte SHA256 job latency including verification/accounting; it is not bulk bandwidth, a general hardware speed ranking or an ACT hardware benchmark.",
+    "Overlay/LAN are operator-supplied route labels. These captures occurred at different times and under different accumulated ledger state; the audit does not attribute differences between captures to route, hardware or optimization causality.",
+    "Installed login/boot hooks were recorded; no reboot was executed. Wrapper/CLI hashes are installation-record observations, not byte comparisons against separately supplied wrapper source.",
+    "Android ro.boot.veritymode describes dm-verity state; it is not an independently collected SELinux getenforce result.",
+    "Public ledger snapshots are copied byte-for-byte into private temporary verification directories; this does not independently attest original handset filesystem modes.",
+    "Joint nonmonetary accounting deduplicates matching receipts; payment settlement, mining reward, firmware changes and ACT production admission are not inferred."
+  ]
+}
