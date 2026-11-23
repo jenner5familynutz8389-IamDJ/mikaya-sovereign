@@ -1,0 +1,303 @@
+{
+  "schema": "mikaya.control-evidence-register.v1",
+  "snapshotDate": "2026-11-21",
+  "sourceBranch": "review/source-release-assurance-20261121",
+  "scope": "Candidate public GitHub source and dated independent physical evidence; not all private GitLab records or live installed services",
+  "governmentCertified": false,
+  "fedrampAuthorized": false,
+  "actAdmission": false,
+  "paymentSettlementVerified": false,
+  "controls": [
+    {
+      "id": "GOVERN_OWNER_AUTH",
+      "status": "SOURCE_IMPLEMENTED",
+      "frameworks": [
+        "NIST-CSF-GV",
+        "NIST-SSDF",
+        "ISO-27001"
+      ],
+      "sourcePaths": [
+        "engineering/federation/live/owner-authorization.cjs"
+      ],
+      "scope": "Owner-signed bounded policy gates exist in source; organization-wide governance is not certified.",
+      "nextEvidence": "Independent owner delegation, reviewer assignment and two-person change authorization audit.",
+      "certified": false
+    },
+    {
+      "id": "INVENTORY_PROVENANCE",
+      "status": "SOURCE_IMPLEMENTED",
+      "frameworks": [
+        "NIST-CSF-ID",
+        "NIST-SSDF",
+        "ISO-27001"
+      ],
+      "sourcePaths": [
+        "tools/verify-release-closure.cjs"
+      ],
+      "scope": "Per-file source closure verifier refuses stale hashes, but original release remains HOLD.",
+      "nextEvidence": "Produce owner-signed complete source manifest for exact release commit and independent auditor readback.",
+      "certified": false
+    },
+    {
+      "id": "CRYPTO_LINK_CONTINUITY",
+      "status": "SOURCE_IMPLEMENTED",
+      "frameworks": [
+        "NIST-CSF-PR",
+        "ISO-27001"
+      ],
+      "sourcePaths": [
+        "engineering/federation/interop/assurance/rotating-audit.cjs"
+      ],
+      "scope": "Optional per-record Ed25519 key and full predecessor hash source with owner-delegation tests.",
+      "nextEvidence": "Independent witness, protected root key, rotation and rollback-resistant retention drill.",
+      "certified": false
+    },
+    {
+      "id": "MUTUAL_TRANSPORT",
+      "status": "SOURCE_IMPLEMENTED",
+      "frameworks": [
+        "NIST-CSF-PR",
+        "ISO-27001",
+        "GDPR"
+      ],
+      "sourcePaths": [
+        "ahava/transport-policy.js",
+        "ahava/peer-server.js"
+      ],
+      "scope": "Candidate AHAVA mutual TLS 1.3 and exact leaf pins; installed remote peer migration not claimed.",
+      "nextEvidence": "Two-owner Android peer certificate enrollment, physical connection acceptance and certificate revocation drill.",
+      "certified": false
+    },
+    {
+      "id": "BOUNDED_ADMISSION",
+      "status": "SOURCE_IMPLEMENTED",
+      "frameworks": [
+        "NIST-CSF-PR",
+        "NIST-CSF-DE",
+        "ISO-27001"
+      ],
+      "sourcePaths": [
+        "engineering/federation/live/security-tollbooth.cjs"
+      ],
+      "scope": "Source-level work budget and fail-closed admission, separate from installed node state.",
+      "nextEvidence": "Load-test under thermal policy on both actual devices and capture signed denial evidence.",
+      "certified": false
+    },
+    {
+      "id": "SIGNED_EVIDENCE",
+      "status": "SOURCE_IMPLEMENTED",
+      "frameworks": [
+        "NIST-CSF-DE",
+        "ISO-27001"
+      ],
+      "sourcePaths": [
+        "engineering/federation/live/sovereign-event-ledger.cjs"
+      ],
+      "scope": "Signed event journal and checks exist in source; not independently witnessed.",
+      "nextEvidence": "Read-only verifier against fresh physical signed event ledgers and off-device replay protection.",
+      "certified": false
+    },
+    {
+      "id": "INCIDENT_RESPONSE",
+      "status": "REQUIRED_EXTERNAL",
+      "frameworks": [
+        "NIST-CSF-RS",
+        "ISO-27001"
+      ],
+      "sourcePaths": [
+        "docs/SECURITY.md"
+      ],
+      "scope": "Published security boundaries are not an independently tested incident response plan.",
+      "nextEvidence": "Create incident classification, accountable contacts, timed revoke/isolation exercise and signed response log.",
+      "certified": false
+    },
+    {
+      "id": "DISASTER_RECOVERY",
+      "status": "REQUIRED_EXTERNAL",
+      "frameworks": [
+        "NIST-CSF-RC",
+        "ISO-27001"
+      ],
+      "sourcePaths": [
+        "docs/RELEASE_TRUST_BOUNDARY_20261121.md"
+      ],
+      "scope": "Restore and replacement-node acceptance is not independently proven for 228-year continuity.",
+      "nextEvidence": "Perform witnessed restore from encrypted backup on a fresh authorized device; preserve rollback checkpoint.",
+      "certified": false
+    },
+    {
+      "id": "SUPPLY_CHAIN_RELEASE",
+      "status": "SOURCE_IMPLEMENTED",
+      "frameworks": [
+        "NIST-SSDF",
+        "NIST-CSF-GV",
+        "ISO-27001"
+      ],
+      "sourcePaths": [
+        ".github/workflows/mikaya-source-assurance.yml",
+        "verify-release.js"
+      ],
+      "scope": "Least-privilege source tests and fail-closed release signature checks are implemented in review branch.",
+      "nextEvidence": "Full source SBOM, license inventory, signed build attestation, dependency CVE review, enforced protected merge checks.",
+      "certified": false
+    },
+    {
+      "id": "AI_DECISION_GOVERNANCE",
+      "status": "REQUIRED_EXTERNAL",
+      "frameworks": [
+        "NIST-AI-RMF",
+        "ISO-42001"
+      ],
+      "sourcePaths": [
+        "cortex/qri_orchestrator.py"
+      ],
+      "scope": "Research or agentic upgrade planning is not demonstrated as autonomous production self-change.",
+      "nextEvidence": "Document AI use-case inventory, model evaluations, misuse tests and independent human upgrade approval.",
+      "certified": false
+    },
+    {
+      "id": "PERSONAL_DATA_PROCESSING",
+      "status": "REQUIRED_EXTERNAL",
+      "frameworks": [
+        "GDPR",
+        "ISO-27001"
+      ],
+      "sourcePaths": [
+        "engineering/federation/mobile-edge/local-evidence-gateway.cjs"
+      ],
+      "scope": "Source reduces exposure of raw telemetry; no complete purpose/basis/retention or impact review exists.",
+      "nextEvidence": "Create data-flow map, lawful basis, retention and deletion procedure, controller roles, and DPIA when required.",
+      "certified": false
+    },
+    {
+      "id": "HARDWARE_ATTESTATION",
+      "status": "REQUIRED_EXTERNAL",
+      "frameworks": [
+        "NIST-CSF-PR",
+        "US-FEDERAL-SCOPE"
+      ],
+      "sourcePaths": [
+        "engineering/federation/live/attestation-gate.cjs"
+      ],
+      "scope": "Manufacturer-attested hardware identity is not established by software signature reports.",
+      "nextEvidence": "Fresh KeyMint/manufacturer proof challenge, revocation checks and independent reviewer signature.",
+      "certified": false
+    },
+    {
+      "id": "PHYSICAL_TWO_DEVICE_EVIDENCE",
+      "status": "HISTORICAL_EVIDENCE",
+      "frameworks": [
+        "NIST-CSF-DE",
+        "NIST-SSDF"
+      ],
+      "sourcePaths": [
+        "engineering/federation/interop/evidence/20261119/execution-summary.json"
+      ],
+      "scope": "Prior source-matched physical F110 and Motorola records exist; these are historical and not current bilateral ACT runs.",
+      "nextEvidence": "Re-run full physical two-device acceptance on intended release revision and verify result digests independently.",
+      "certified": false
+    },
+    {
+      "id": "ACT_PARTNER_ADMISSION",
+      "status": "REQUIRED_EXTERNAL",
+      "frameworks": [
+        "NIST-CSF-GV",
+        "NIST-CSF-PR"
+      ],
+      "sourcePaths": [
+        "engineering/federation/live/ACT_HANDOFF_REQUIREMENTS_20261115.json"
+      ],
+      "scope": "ACT peer signatures, hardware attestation and bilateral owner grants remain unissued.",
+      "nextEvidence": "ACT-controlled worker fingerprint, bounded API, independent review, explicit bilateral owner authorization and revoke tests.",
+      "certified": false
+    },
+    {
+      "id": "FINANCIAL_SETTLEMENT_SCOPE",
+      "status": "REQUIRED_EXTERNAL",
+      "frameworks": [
+        "NIST-CSF-GV",
+        "ISO-27001"
+      ],
+      "sourcePaths": [
+        "engineering/federation/live/mesh-economy.cjs",
+        "engineering/federation/live/TOYBOX_PUBLIC_BRIDGE.md"
+      ],
+      "scope": "Historical Toybox observation and nonmonetary work are not settlement. One shared 5% pool requires new independently verified settled revenue.",
+      "nextEvidence": "Legal classification, funded source, approved participant eligibility, owner-approved reserve and audited seller settlement.",
+      "certified": false
+    },
+    {
+      "id": "EU_CYBER_RESILIENCE",
+      "status": "REQUIRED_EXTERNAL",
+      "frameworks": [
+        "EU-CRA",
+        "NIST-SSDF"
+      ],
+      "sourcePaths": [
+        "docs/RELEASE_TRUST_BOUNDARY_20261121.md"
+      ],
+      "scope": "Applicability depends on EU product marketing and economic-operator status; no conformity determination exists.",
+      "nextEvidence": "Product category, vulnerability-handling process, technical file, market scope and reporting obligations.",
+      "certified": false
+    },
+    {
+      "id": "US_FEDERAL_AUTHORIZATION",
+      "status": "REQUIRED_EXTERNAL",
+      "frameworks": [
+        "US-FEDERAL-SCOPE",
+        "ISO-27001"
+      ],
+      "sourcePaths": [
+        "docs/SECURITY.md"
+      ],
+      "scope": "No agency system boundary or FedRAMP/FISMA authorization is established.",
+      "nextEvidence": "Determine whether federal deployment is in scope, then independent assessment, ATO and continuous monitoring.",
+      "certified": false
+    },
+    {
+      "id": "CRYPTO_MIGRATION",
+      "status": "REQUIRED_EXTERNAL",
+      "frameworks": [
+        "NIST-CSF-RC",
+        "ISO-27001"
+      ],
+      "sourcePaths": [
+        "engineering/federation/interop/assurance/README.md"
+      ],
+      "scope": "Per-event Ed25519 keys do not address eventual post-quantum algorithm migration.",
+      "nextEvidence": "Review FIPS 203/204/205 profiles, dual-sign transition, hardware support, signed root rollover and disaster-recovery rehearsal.",
+      "certified": false
+    },
+    {
+      "id": "REMOTE_PRIVACY_BOUNDARY",
+      "status": "SOURCE_IMPLEMENTED",
+      "frameworks": [
+        "NIST-CSF-PR",
+        "GDPR"
+      ],
+      "sourcePaths": [
+        "ahava/peer-server.js",
+        "tests/test_ahava_transport_policy.cjs"
+      ],
+      "scope": "Remote health metadata now requires exact pinned client identity, but deployment is source-only.",
+      "nextEvidence": "Physically test unauthorized clients against real proposed listener and monitor private audit logs without call tracing.",
+      "certified": false
+    },
+    {
+      "id": "SIGNED_WITNESS_CHECKPOINT",
+      "status": "SOURCE_IMPLEMENTED",
+      "frameworks": [
+        "NIST-CSF-DE",
+        "NIST-CSF-RC",
+        "ISO-27001"
+      ],
+      "sourcePaths": [
+        "engineering/federation/interop/assurance/witness-checkpoints.cjs",
+        "engineering/federation/interop/assurance/test_witness_checkpoints.cjs"
+      ],
+      "scope": "Owner-ledger checkpoints are signed by a different cryptographic identity and may form a two-key quorum in the isolated source test; separate physical witness custody has not been demonstrated.",
+      "nextEvidence": "Independently enroll the Motorola or another approved node, verify fresh checkpoints physically over an authenticated route, retain a trusted high-water mark off-device and test witnessed rollback recovery.",
+      "certified": false
+    }
+  ]
+}

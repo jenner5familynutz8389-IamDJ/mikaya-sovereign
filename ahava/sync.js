@@ -1,6 +1,7 @@
 'use strict';
 /* AHAVA peer reconciliation: signed encrypted content only, idempotent retry. */
-const fs=require('fs'),path=require('path'),http=require('http'),net=require('net');
+const fs=require('fs'),path=require('path'),http=require('http'),https=require('https');
+const transport=require('./transport-policy');
 const defaultCore=require('./core');
 const MAX_RESPONSE=250000;
 // Import is inert. Credentials, timers and network work begin only when the
@@ -8,10 +9,8 @@ const MAX_RESPONSE=250000;
 function createSynchronizer({core=defaultCore,target=process.env.AHAVA_PEER_URL,request:customRequest,log=console.log,logError=console.error}={}){
 const ROOT=core.DIR,STATE=path.join(ROOT,'sync-state.json');
 if(!target)throw Error('AHAVA_PEER_URL required for synchronization');
-const peer=new URL(target),host=peer.hostname;
-const a=host.split('.').map(Number);
-const tailnet=net.isIP(host)===4&&a[0]===100&&a[1]>=64&&a[1]<=127;
-if(peer.protocol!=='http:'||peer.username||peer.password||peer.search||peer.hash||!(tailnet||host==='127.0.0.1'||host==='localhost'))throw Error('Peer must be on private tailnet or loopback');
+const route=transport.clientFor(target,process.env);
+const peer=route.peer,host=peer.hostname;
 if(customRequest!==undefined&&typeof customRequest!=='function')throw Error('Invalid transport');
 let token;
 if(!customRequest){token=fs.readFileSync(path.join(path.dirname(ROOT),'ledger','.mesh_token'),'utf8').trim();if(!/^[a-f0-9]{64}$/i.test(token))throw Error('Missing mesh key');}
@@ -19,7 +18,8 @@ const save=x=>{const tmp=STATE+'.tmp';fs.writeFileSync(tmp,JSON.stringify(x)+'\n
 function httpRequest(method,endpoint,data){
  return new Promise((resolve,reject)=>{
   const payload=data===undefined?null:JSON.stringify(data);
-  const req=http.request({hostname:peer.hostname,port:Number(peer.port||43824),
+  const req=(route.requestModule==='https'?https:http).request({hostname:peer.hostname,port:Number(peer.port||(route.requestModule==='https'?443:43824)),
+   ...(route.options||{}),
    path:(peer.pathname.replace(/\/$/,'')+endpoint),method,timeout:15000,
    headers:{authorization:'Bearer '+token,...(payload?{'content-type':'application/json','content-length':Buffer.byteLength(payload)}:{})}},
    res=>{let size=0,chunks=[];res.on('data',b=>{size+=b.length;if(size>MAX_RESPONSE){req.destroy(Error('response too large'));return;}chunks.push(b);});

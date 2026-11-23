@@ -23,3 +23,10 @@ integrity/*.bundle.json
 .env*
 node_modules/
 __pycache__/
+
+# Local backup exports must not be published as new source
+*.gsbak
+
+# Local certificate enrollment intermediates
+*.csr
+*.srl
