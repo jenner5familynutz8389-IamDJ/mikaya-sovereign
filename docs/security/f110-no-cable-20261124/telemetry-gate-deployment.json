@@ -1,0 +1,31 @@
+{
+  "schema": "mikaya.telemetry.gate-correction.v1",
+  "at": "2026-11-25T04:26:19.835052+00:00",
+  "before": {
+    "metrics.cjs": "89385b28305d850ef89b3c3407f954ef96627596e32f7ae071b4bd18bcfec0f8",
+    "cli.cjs": "9d85633df324a335737df6b001a545590578a5553f12e727d8e1be7d4c4e4ced"
+  },
+  "after": {
+    "metrics.cjs": "43b74b2907932a918a90e9fa368cfccffcb62b8a2c2fbdf9501e1880996a46a6",
+    "cli.cjs": "d5d54623cb174ce83dd0fd7acf734c9efcbd857a2b72858d05f3e249d857c58c"
+  },
+  "testsPassed": 17,
+  "diagnostic": {
+    "schema": "mikaya.telemetry.gate-diagnostic.v1",
+    "checkedAt": "2026-11-25T04:26:08.558Z",
+    "thermalSeverity": 3,
+    "batteryPct": null,
+    "batteryTempDeciC": null,
+    "storageUsePct": 99,
+    "decision": "HOLD",
+    "reasons": [
+      "THERMAL_HOLD",
+      "BATTERY_UNAVAILABLE",
+      "STORAGE_HIGH"
+    ],
+    "signedEventEmitted": false,
+    "peerContacted": false
+  },
+  "exchangeRestarted": false,
+  "thresholdsChanged": false
+}

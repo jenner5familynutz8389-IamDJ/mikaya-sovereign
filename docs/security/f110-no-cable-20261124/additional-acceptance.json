@@ -1,0 +1,32 @@
+{
+  "schema": "mikaya.no-cable.additional-acceptance.v1",
+  "rotationTests": {
+    "pass": 3,
+    "fail": 0,
+    "skip": 0
+  },
+  "witnessTests": {
+    "pass": 33,
+    "fail": 0,
+    "skip": 0
+  },
+  "telemetryTests": {
+    "pass": 17,
+    "fail": 0,
+    "skip": 0
+  },
+  "combinedTransportWitnessRegression": {
+    "status": "TIMEOUT",
+    "timeoutSeconds": 150,
+    "passCountNotClaimed": true
+  },
+  "ownerHandoff": {
+    "sha256": "2d99ff15876588880c69545c229dab5e6c0179fa1b3df042b22ce55826cde6dd",
+    "checkpointsVerified": 10,
+    "receiptsVerified": 130,
+    "independentWitnessVerified": false
+  },
+  "stagedRotationActivated": false,
+  "telemetryGateChanged": false,
+  "physicalMotorolaContacted": false
+}
