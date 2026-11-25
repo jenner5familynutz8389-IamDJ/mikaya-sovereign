@@ -1,0 +1,22 @@
+{
+  "schema": "mikaya.interop.expected-runtime-profile.v1",
+  "id": "portable-node22",
+  "label": "Portable federation verifier runtime requirements",
+  "purpose": "protocol-runtime",
+  "sourceDeclaredOnly": true,
+  "sources": [
+    {
+      "url": "https://github.com/jenner5familynutz8389-IamDJ/mikaya-sovereign/blob/81a0ff62c6e8f3a5963ae5b29b7d849346a6950a/engineering/federation/live/ACT_PUBLIC_ONBOARDING.md",
+      "description": "Published Node 22 or newer source contract"
+    },
+    {
+      "url": "https://github.com/jenner5familynutz8389-IamDJ/mikaya-sovereign/blob/81a0ff62c6e8f3a5963ae5b29b7d849346a6950a/engineering/federation/live/federation-node.cjs",
+      "description": "Ed25519 and SHA256 signed bounded JSON implementation"
+    }
+  ],
+  "checks": [
+    { "id": "node22", "fact": "runtime.nodeMajor", "operator": "gte", "expected": 22, "required": true },
+    { "id": "ed25519", "fact": "crypto.ed25519", "operator": "eq", "expected": true, "required": true },
+    { "id": "sha256", "fact": "crypto.sha256", "operator": "eq", "expected": true, "required": true }
+  ]
+}
