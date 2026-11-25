@@ -85,14 +85,22 @@ test('any source pin failure immediately cancels cached ALLOW and restoration re
  }
 });
 
-test('missing, linked, oversized, nonprivate or unowned native sources fail before execution',t=>{
- for(const kind of ['missing','symlink','hardlink','oversized','empty','group-readable','not-executable','unowned']){
+for(const kind of ['missing','symlink','hardlink','oversized','empty','group-readable','not-executable','unowned'])test('native source refuses '+kind,t=>{
   const f=fixture(t);
   if(kind==='missing')fs.unlinkSync(f.policyFile);
   if(kind==='symlink'){
    const target=f.policyFile+'.target';fs.renameSync(f.policyFile,target);fs.symlinkSync(target,f.policyFile);
   }
-  if(kind==='hardlink')fs.linkSync(f.policyFile,f.policyFile+'.link');
+  if(kind==='hardlink'){
+   const link=f.policyFile+'.link',original=fs.readFileSync(f.policyFile);
+   try{fs.linkSync(f.policyFile,link);}catch(e){
+    if((process.platform==='android'||process.execPath.startsWith('/data/data/com.termux/files/usr/bin/')) && ['EACCES','EPERM','ENOTSUP','EOPNOTSUPP'].includes(e.code)){
+     assert.equal(fs.existsSync(link),false);assert.equal(fs.statSync(f.policyFile).nlink,1);
+     assert.deepEqual(fs.readFileSync(f.policyFile),original);assert.equal(f.samples(),0);
+     t.skip('Android refused hard-link fixture; application rejection not exercised');return;
+    }throw e;
+   }assert.equal(fs.statSync(f.policyFile).nlink,2);
+  }
   if(kind==='oversized')fs.writeFileSync(f.policyFile,Buffer.alloc(262145,32));
   if(kind==='empty')fs.truncateSync(f.policyFile,0);
   if(kind==='group-readable')fs.chmodSync(f.policyFile,0o640);
@@ -101,7 +109,6 @@ test('missing, linked, oversized, nonprivate or unowned native sources fail befo
   assert.throws(()=>createNativeMtgPolicy(f.profile),/native_mtg_source_hold/,kind);
   if(kind==='unowned')t.mock.restoreAll();
   assert.equal(f.samples(),0,kind);
- }
 });
 
 test('a native source that changes during bounded reading cannot preserve permission',t=>{

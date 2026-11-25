@@ -243,16 +243,23 @@ test('receipt count exhaustion is rejected before receipt reads or native probes
  assert.equal(x.calls.length,0);assert.equal(fs.readdirSync(x.config.ledger_dir).length,2);
 });
 
-test('symlinked, hardlinked and oversized signed rows are refused without following or changing them',t=>{
- for(const kind of ['symlink','hardlink','oversized']){
+for(const kind of ['symlink','hardlink','oversized'])test('signed row refuses '+kind,t=>{
   const x=fixture(t);start(x);x.calls.length=0;const row=path.join(x.config.ledger_dir,'000001.json'),other=path.join(x.root,'preserved-row');
   if(kind==='symlink'){fs.renameSync(row,other);fs.symlinkSync(other,row);}
-  if(kind==='hardlink')fs.linkSync(row,other);
+  if(kind==='hardlink'){
+   const original=fs.readFileSync(row);
+   try{fs.linkSync(row,other);}catch(e){
+    if((process.platform==='android'||process.execPath.startsWith('/data/data/com.termux/files/usr/bin/')) && ['EACCES','EPERM','ENOTSUP','EOPNOTSUPP'].includes(e.code)){
+     assert.equal(fs.existsSync(other),false);assert.equal(fs.statSync(row).nlink,1);
+     assert.deepEqual(fs.readFileSync(row),original);assert.equal(x.calls.length,0);
+     t.skip('Android refused hard-link fixture; application rejection not exercised');return;
+    }throw e;
+   }assert.equal(fs.statSync(row).nlink,2);
+  }
   if(kind==='oversized')fs.writeFileSync(row,Buffer.alloc(LIMITS.rowBytes+1));
   const before=fs.readFileSync(row);
   assert.throws(()=>produce(x.config,{nowMs:x.now+1,runner:x.runner}),/unsafe_input/);
   assert.equal(x.calls.length,0);assert.deepEqual(fs.readFileSync(row),before);
- }
 });
 
 test('CLI missing-state HOLD and strict arguments cannot bootstrap or override the fixed native profile',t=>{
