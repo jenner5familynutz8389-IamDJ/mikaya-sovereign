@@ -87,7 +87,16 @@ for(const kind of ['symlink','hardlink','permissions','oversized'])test('unsafe 
  if(kind==='symlink')fs.symlinkSync(foreign,f.paths[0]);
  else if(kind==='hardlink'){
   try{fs.linkSync(foreign,f.paths[0]);}
-  catch(e){if(['EACCES','EPERM','ENOTSUP','EOPNOTSUPP'].includes(e.code)){t.skip('Android test filesystem denies hardlinks; no security pass inferred');return;}throw e;}
+  catch(e){
+   if((process.platform==='android'||process.execPath.startsWith('/data/data/com.termux/files/usr/bin/')) && ['EACCES','EPERM','ENOTSUP','EOPNOTSUPP'].includes(e.code)){
+    assert.equal(fs.existsSync(f.paths[0]),false);
+    assert.equal(fs.statSync(foreign).nlink,1);
+    assert.deepEqual(fs.readFileSync(foreign),original);
+    t.skip('Android refused hard-link fixture; application rejection not exercised');return;
+   }
+   throw e;
+  }
+  assert.equal(fs.statSync(foreign).nlink,2);
  }
  else{cache(f,0);if(kind==='permissions')fs.chmodSync(f.paths[0],0o644);else fs.truncateSync(f.paths[0],CHUNK+1);}
  const before=fs.readFileSync(f.paths[0]),remote=transport(f);

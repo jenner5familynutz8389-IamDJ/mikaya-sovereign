@@ -1,0 +1,47 @@
+{
+  "schema": "mikaya.integrated-fixture-correction.v2",
+  "baseline_commit": "8ea48a3882fdd1d006a2a1fc0d65f0160b96714d",
+  "baseline_tree": "febf372102992326d276cbf4e870814482ae8a1b",
+  "historical_confirmed_passes_excluding_mobile_edge": 456,
+  "original_mobile_failure": "EACCES creating hard-linked configuration; subsequent cases not reached",
+  "first_patch_attempt": "Assertion failed before edit (incorrect indentation assumption)",
+  "first_correction": {
+    "mobile": {
+      "tests": 69,
+      "pass": 66,
+      "fail": 2,
+      "cancelled": 0,
+      "skipped": 1,
+      "todo": 0,
+      "sha256": "1e593952e0365858d645737182e0bc525b5bab00ac4ad703ed19960fd4415b3c"
+    },
+    "ahava": {
+      "tests": 29,
+      "pass": 28,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 1,
+      "todo": 0,
+      "sha256": "4dd396cca6d88556341c23cd7397bc669db4afcaae4569708b9bf631aad82771"
+    },
+    "remaining_failures": [
+      "EACCES creating hard-linked signed row in test_motorola_observation_producer.cjs:250",
+      "EACCES creating hard-linked policy in test_native_mtg.cjs:95"
+    ]
+  },
+  "targeted_followup": {
+    "tests": 41,
+    "pass": 39,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 2,
+    "todo": 0,
+    "sha256": "3824941a7d81addc1c9cb352f0f031a5573a2f5f58637e33df65ee96f6c71d4b"
+  },
+  "scope": "F110 local test fixtures; distinct executions, do not add overlapping pass counts",
+  "change": "Separate negative cases; record only Android-specific hard-link creation refusal as skipped. Existing application rejection unchanged.",
+  "release_signed": false,
+  "production_deployed": false,
+  "act_admitted": false,
+  "release_status": "HOLD_PENDING_FULL_RELEASE_ACCEPTANCE"
+}

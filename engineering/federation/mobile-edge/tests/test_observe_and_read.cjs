@@ -143,18 +143,30 @@ test('closed configs, owner/profile mismatch and collector redirection refuse be
  }
 });
 
-test('config reads refuse symlinks, hardlinks, public permissions, noncanonical paths and oversize inputs',async t=>{
- for(const kind of ['symlink','hardlink','mode','relative','parent-traversal','oversize','invalid-utf8']){
+for(const kind of ['symlink','hardlink','mode','relative','parent-traversal','oversize','invalid-utf8'])test('config reads refuse '+kind,async t=>{
   const x=fixture(t),before=source(x),h=harness(x);let input={...x.input};
   if(kind==='symlink'){const target=path.join(x.root,'linked-config');fs.symlinkSync(x.input.gatewayConfigFile,target);input.gatewayConfigFile=target;}
-  if(kind==='hardlink')fs.linkSync(x.input.gatewayConfigFile,path.join(x.root,'other-link'));
+  if(kind==='hardlink'){
+   const link=path.join(x.root,'other-link');
+   try{fs.linkSync(x.input.gatewayConfigFile,link);}
+   catch(e){
+    if((process.platform==='android'||process.execPath.startsWith('/data/data/com.termux/files/usr/bin/')) && ['EACCES','EPERM','ENOTSUP','EOPNOTSUPP'].includes(e.code)){
+     assert.equal(fs.existsSync(link),false);
+     assert.equal(fs.statSync(x.input.gatewayConfigFile).nlink,1);
+     assert.deepEqual(source(x),before);
+     assert.equal(h.calls.length,0);assert.equal(h.samples(),0);
+     t.skip('Android refused hard-link fixture; application rejection not exercised');return;
+    }
+    throw e;
+   }
+   assert.equal(fs.statSync(x.input.gatewayConfigFile).nlink,2);
+  }
   if(kind==='mode')fs.chmodSync(x.input.gatewayConfigFile,0o644);
   if(kind==='relative')input.gatewayConfigFile=path.relative(process.cwd(),x.input.gatewayConfigFile);
   if(kind==='parent-traversal')input.gatewayConfigFile=path.join(x.root,'missing')+'/../gateway.json';
   if(kind==='oversize')fs.writeFileSync(x.input.gatewayConfigFile,Buffer.alloc(8193,32));
   if(kind==='invalid-utf8')fs.writeFileSync(x.input.gatewayConfigFile,Buffer.from([0xff]));
   const out=await h.run(input);denied(out,'configuration');assert.equal(h.calls.length,0);assert.equal(h.samples(),0);assert.deepEqual(source(x),before);
- }
 });
 
 test('missing checkpoint, receipt or source and mismatched initialization cannot be repaired by this helper',async t=>{
