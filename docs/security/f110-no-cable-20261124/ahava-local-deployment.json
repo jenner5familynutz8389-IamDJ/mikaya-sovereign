@@ -1,0 +1,31 @@
+{
+  "schema": "mikaya.ahava.local-migration.v1",
+  "at": "2026-11-25T04:19:03.639831+00:00",
+  "base_commit": "4c06a3c3810657c53eb0c4fe4afe43f07a06613d",
+  "prior": {
+    "core.js": "8b8046fee8d93a64d408dc93081b33876ee208fa076cfa8daf2b6329f7647922",
+    "peer-server.js": "6bf8d436ec98d288144d9548e64e9e095cad8428c291f41d3c302c93120284ee",
+    "sync.js": "3ddd25393813d0978ea2c0b94e5ceabfc6133e7dcb1965de1b8e263b5a4fcc37"
+  },
+  "deployed": {
+    "core.js": "c4b0fc391a3c308116eeb92fae6bb06bf5c632d4f4b114bbab6855a0db32c7ad",
+    "peer-server.js": "21f7ae1d4fdbaa2cc2c009466ca631858facbe80361e9179619068232fe03a46",
+    "sync.js": "322a6de766f80deb5490615776295967b2c72f11324d530f3198804972c5236f",
+    "transport-policy.js": "2e8e7d91b33474755e35681da2c78217305a7b1b2f793bc79c785376ba16b1c4"
+  },
+  "tests_passed": 30,
+  "health": {
+    "/health": {
+      "http": 200,
+      "status": "ok",
+      "service": "ahava-peer"
+    },
+    "/ahava/index": {
+      "http": 401
+    }
+  },
+  "bind": "loopback_only",
+  "legacy_watchdog_preserved": true,
+  "peer_credentials_modified": false,
+  "remote_peer_tested": false
+}

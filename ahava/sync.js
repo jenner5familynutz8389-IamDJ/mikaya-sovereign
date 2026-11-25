@@ -80,10 +80,19 @@ async function once(){
 }
 return {push,pull,cycle,once};
 }
-module.exports={createSynchronizer};
+function governedSyncMs(state,now=Date.now()){
+ if(!state||typeof state.at!=='string'||!Number.isFinite(Date.parse(state.at))||Math.abs(now-Date.parse(state.at))>180000)return 180000;
+ const ms=Number(state.syncMs);
+ return Number.isFinite(ms)?Math.min(600000,Math.max(60000,ms)):180000;
+}
+function readGovernedSyncMs(){
+ try{return governedSyncMs(JSON.parse(fs.readFileSync(path.join(process.env.HOME,'sovereign_exec','ledger','thermal-governor-state.json'),'utf8')));}
+ catch{return 180000;}
+}
+module.exports={createSynchronizer,governedSyncMs};
 if(require.main===module){
  try{const sync=createSynchronizer();
   if(process.argv.includes('--once'))sync.once().then(ok=>{if(!ok)process.exitCode=2;});
-  else{async function loop(){await sync.once();setTimeout(loop,60000);}loop();}
+  else{async function loop(){await sync.once();setTimeout(loop,readGovernedSyncMs());}loop();}
  }catch(e){console.error('AHAVA_SYNC_HOLD',e.message);process.exitCode=2;}
 }

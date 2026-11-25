@@ -1,0 +1,14 @@
+{
+  "schema": "mikaya.interop.certificate-renewal-stage.v1",
+  "status": "STAGED_NOT_ACTIVATED",
+  "applicationIdentityPreserved": true,
+  "tlsKeyPreserved": true,
+  "oldCertificateSha256": "87b6e24e0c4ee7916049dfa470575c634cd1d9fc043a526aee5f0318b56b252f",
+  "newCertificateSha256": "cee619b6efe60355e5cf507e57cddc6e79b08fde61760a6f528c3b0b1a38d4b4",
+  "validFrom": "Nov 25 04:01:54 2026 GMT",
+  "validTo": "Dec  2 04:01:54 2026 GMT",
+  "peerSignatureVerified": true,
+  "activeConfigUnchanged": true,
+  "privateKeyExported": false,
+  "motorolaRepinRequired": true
+}

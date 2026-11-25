@@ -1,0 +1,43 @@
+--- a/server.py
++++ b/server.py
+@@ -57,0 +58,26 @@
++
++MTG_SOURCE_SHA256 = '6d41877fa3e288cf17cfab8b7b323090a001eacc0770108404aa3e7c18cad933'
++
++def native_thermal_result(rc, data):
++ result={'mode':'unavailable','source':'android_ndk_thermal_api','at':None,
++         'optional_work_allowed':False,'verified_healthy':False,
++         'native_optional_decision':'HOLD','android_thermal_severity':None}
++ if not isinstance(data,dict):return result
++ severity=data.get('android_thermal_severity')
++ if type(severity) is not int or not 0<=severity<=6 or data.get('factory_throttling_modified') is not False:return result
++ allowed=severity in (0,1)
++ if (rc,data.get('decision_for_optional_jobs')) != ((0,'ALLOW') if allowed else (75,'HOLD')):return result
++ result.update(mode='normal' if allowed else 'hold',at=iso(),verified_healthy=allowed,
++               native_optional_decision='ALLOW' if allowed else 'HOLD',android_thermal_severity=severity)
++ return result
++
++def native_thermal(home,prefix):
++ try:
++  p=home/'.local/share/mikaya/mtg_policy.py'
++  st=p.lstat()
++  if not stat.S_ISREG(st.st_mode) or st.st_nlink!=1 or st.st_uid!=os.getuid() or st.st_mode&0o022 or st.st_size>65536:return native_thermal_result(-1,{})
++  if hashlib.sha256(p.read_bytes()).hexdigest()!=MTG_SOURCE_SHA256:return native_thermal_result(-1,{})
++  r=subprocess.run([str(prefix/'bin/python3'),'-I','-B',str(p),'status'],capture_output=True,text=True,timeout=3,check=False)
++  if len(r.stdout)>4096:return native_thermal_result(-1,{})
++  return native_thermal_result(r.returncode,json.loads(r.stdout))
++ except (OSError,ValueError,subprocess.SubprocessError):return native_thermal_result(-1,{})
+@@ -259,10 +285,3 @@
+-  guard={'mode':clean_short(governor.get('mode'),40) if governor else None,
+-         'source':clean_short(governor.get('androidThermalSource'),50) if governor else None,
+-         'at':clean_short(governor.get('at'),40) if governor else None,
+-         'optional_work_allowed':governor.get('optionalJob') is True and governor.get('nextOptionalLaunchAllowed') is True if governor else False,
+-         'verified_healthy':False}
+-  if governor and guard['mode']=='normal' and governor.get('confidence')=='observed' and guard['optional_work_allowed']:
+-   try:
+-    age=(datetime.now(timezone.utc)-datetime.fromisoformat(guard['at'].replace('Z','+00:00'))).total_seconds()
+-    guard['verified_healthy']=0<=age<=120
+-   except (ValueError,AttributeError,TypeError):pass
++  guard=native_thermal(self.home,self.prefix)
++  guard['legacy_observation_at']=clean_short(governor.get('at'),40) if governor else None
++  # A native sample is not a scheduler lease or permission to start work.

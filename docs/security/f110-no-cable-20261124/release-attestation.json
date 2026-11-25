@@ -1,0 +1,7 @@
+{
+  "algorithm": "Ed25519",
+  "manifestSha256": "430d0bb9adb590fc6909de52c3143cde7ac25aa8e049126fc8633a229bd9a4ed",
+  "publicKeyPem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAmKbQE5vRPRzNsWSTvSjl+i2wkAXICI3YaTm20Ea7muI=\n-----END PUBLIC KEY-----\n",
+  "signerFingerprint": "9270d9fe0490a497e223f39318209939a8739b6b5a39e5eeef3577477a6057a3",
+  "signatureBase64": "RAnWF/+oA6ogkfI0Rk1ABFgUwsf23oE2S0/HYVM0s5J3xd0b4sojqLN6RRNLhsoezZxdyrjvcI987ls4MK10BQ=="
+}

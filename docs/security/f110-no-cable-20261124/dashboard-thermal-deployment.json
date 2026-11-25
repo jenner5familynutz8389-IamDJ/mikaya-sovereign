@@ -1,0 +1,52 @@
+{
+  "schema": "mikaya.dashboard.thermal-correction.v1",
+  "at": "2026-11-25T04:01:32.959518+00:00",
+  "old": "4c4cfbb259fb",
+  "new": "thermal-412a31605939",
+  "source_inventory_sha256": "412a316059395326219254d9a40855cd5bf48b3f64ad469563770f7180aed050",
+  "files": {
+    "auth.py": "cea078d49cce4ab9aedf880e33a19e5fb98a53fd898b444479e0b0f147453e88",
+    "capability.py": "6f9bb897748a89292215862c702dc82c165a6e3fef9833bcf469df6a9031cb56",
+    "handoff.py": "33377d7051dfcd84b86225d73a76b80b42e965d66942e9b4a869d975b93af454",
+    "hardware.py": "b6f540b97462aa2615e04e784661c99e8002167851940a2a1260fcb966644321",
+    "legacy_watch.py": "364bacb333da879b5ec92d355b35c04b76d474513c7be7861296401a6039ca6b",
+    "server.py": "8f088e696468fe64b7568bdf0898e8470122949adab05f16f8a490607c788869",
+    "web/app.js": "c96e35303d03b4b7d7568e4cf9ea6c642f713e516ab3337a0c62b33342e26c69",
+    "web/favicon.png": "79d0b81b08e4f9b81365eef548da5ab29b1e733a40139b4a4873b53470dc6999",
+    "web/icons/icon-192.png": "6dd27b8f9c5139a6a9af22ae1daae9a5e9d6c8f206b1e1449c2721d6921ccba6",
+    "web/icons/icon-512.png": "8f40706c6ce93d09a8998719e274f417065041244c692d89a19917d907cdd2c1",
+    "web/icons/icon-maskable.png": "8f40706c6ce93d09a8998719e274f417065041244c692d89a19917d907cdd2c1",
+    "web/index.html": "2d53a92cf24a201d9ce8a7b44aa91a540fa6167d8442b01876efab1ee6adc446",
+    "web/manifest.webmanifest": "3d3d50997c209722cb188b665ab29bb4c51a26c39e0ad4ff79cbefbefa72f12c",
+    "web/styles.css": "8f5e94e0e00c96dbbb62e1b9f3b6c516e2d68cf1baa77cd4ad65e2666aacc77f",
+    "web/sw.js": "c00c8e072cb007b783fbde04dc5b970df4d411fe04b5ef6718bbdee8856fc202"
+  },
+  "new_tests_passed": 3,
+  "existing_tests_passed": 45,
+  "auth": {
+    "/api/health": {
+      "code": 200,
+      "status": "serving"
+    },
+    "/api/auth/status": {
+      "code": 200,
+      "configured": true,
+      "authenticated": false
+    },
+    "/api/status": {
+      "code": 401
+    }
+  },
+  "governor": {
+    "mode": "normal",
+    "source": "android_ndk_thermal_api",
+    "at": "2026-11-25T04:01:31+00:00",
+    "optional_work_allowed": false,
+    "verified_healthy": true,
+    "native_optional_decision": "ALLOW",
+    "android_thermal_severity": 0,
+    "legacy_observation_at": "2026-10-30T18:36:17.966948+00:00"
+  },
+  "legacy_record_modified": false,
+  "optional_work_authorized": false
+}
